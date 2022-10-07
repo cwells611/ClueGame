@@ -15,6 +15,7 @@ public class TestBoardCell {
 		this.row = row;
 		this.col = col;
 		this.occupiedSpace = false;
+		this.adjList = new TreeSet<TestBoardCell>();
 	}
 	
 	//setter setter to add a cell to this cells adjacency list
