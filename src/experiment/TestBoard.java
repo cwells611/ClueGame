@@ -3,14 +3,16 @@ package experiment;
 import java.util.Set;
 
 public class TestBoard {
-
 	private Set<TestBoardCell> targets;
+	private Set<TestBoardCell> board; 
+	
 	public TestBoard() {
 		super();
+		//constructor build board and adds each cell to the board 
 	}
 	
 	public void calcTargets(TestBoardCell startCell, int pathLength) {
-		targets = new Set<TestBoardCell>();
+		
 	}
 	
 	public Set<TestBoardCell> getTargets(){
@@ -18,6 +20,7 @@ public class TestBoard {
 	}
 	
 	public TestBoardCell getCell(int row, int col) {
-		return TestBoardCell(row, col);
+		TestBoardCell returnCell = new TestBoardCell(row, col); 
+		return returnCell;
 	}
 }
