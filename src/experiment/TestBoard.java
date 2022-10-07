@@ -11,8 +11,6 @@ public class TestBoard {
 		//constructor build board and adds each cell to the board 
 		this.targets = new TreeSet<TestBoardCell>();
 		this.board = new TreeSet<TestBoardCell>();
-		
-		
 	}
 	
 	public void calcTargets(TestBoardCell startCell, int pathLength) {
@@ -27,4 +25,5 @@ public class TestBoard {
 		TestBoardCell returnCell = new TestBoardCell(row, col); 
 		return returnCell;
 	}
+	
 }

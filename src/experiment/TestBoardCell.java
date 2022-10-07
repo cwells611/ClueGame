@@ -25,7 +25,7 @@ public class TestBoardCell {
 	
 	//getter that returns adjacency list for current sell
 	public Set<TestBoardCell> getAdjList() {
-		return this.adjList;
+		return adjList;
 	}
 	
 	//setter to indicate if a cell is occupied by another player 
