@@ -9,6 +9,7 @@ import static org.junit.Assert.*;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
+import experiment.TestBoard;
 import experiment.TestBoardCell;
 
 class BoardTestsExp {
@@ -25,6 +26,11 @@ class BoardTestsExp {
 	void test() {
 		fail("Not yet implemented");
 	}
+	
+	
+	/*
+	 * ADJACENCY TESTS
+	 */
 	
 	public void adjacentTopLeft() {
 		TestBoardCell cell = board.getCell(0,0);
@@ -70,4 +76,21 @@ class BoardTestsExp {
 		Assert.assertEquals(3, testList.size());
 	}
 
+	
+	/*
+	 * CALC TARGET
+	 */
+	
+	
+	//test empty board, roll 3
+	//test empty board, roll 6
+	
+	
+	
+	//test occupied, roll 3
+	//test occupied, roll 4
+	
+	//test room, roll 3
+	//test room, roll 4
+	
 }
