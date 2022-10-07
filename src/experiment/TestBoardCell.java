@@ -13,7 +13,8 @@ public class TestBoardCell {
 	
 	public TestBoardCell(int row, int col) {
 		this.row = row;
-		this.col = col; 
+		this.col = col;
+		this.occupiedSpace = false;
 	}
 	
 	//setter setter to add a cell to this cells adjacency list
