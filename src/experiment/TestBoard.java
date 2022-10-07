@@ -12,6 +12,7 @@ public class TestBoard {
 		this.targets = new TreeSet<TestBoardCell>();
 		this.board = new TreeSet<TestBoardCell>();
 		
+		
 	}
 	
 	public void calcTargets(TestBoardCell startCell, int pathLength) {
