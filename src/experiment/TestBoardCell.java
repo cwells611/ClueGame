@@ -10,11 +10,14 @@ public class TestBoardCell {
 	private Set<TestBoardCell> adjList;
 	//boolean that determines says if a cell is occupied by another player
 	private boolean occupiedSpace;
+	//boolean to determine is there is a room next to the player 
+	private boolean isRoom; 
 	
 	public TestBoardCell(int row, int col) {
 		this.row = row;
 		this.col = col;
 		this.occupiedSpace = false;
+		this.isRoom = false; 
 		this.adjList = new TreeSet<TestBoardCell>();
 	}
 	
@@ -37,5 +40,11 @@ public class TestBoardCell {
 	public boolean getOccupied() {
 		return this.occupiedSpace;
 	}
+	
+	//setter to indicate if there is a room next to the player
+	public void setIsRoom (boolean isRoom) {
+			
+	}
+	
 	
 }
