@@ -146,6 +146,22 @@ class BoardTestsExp {
 		Assert.assertTrue(targets.contains(board.getCell(3, 1)));
 	}
 	
+	//Test roll of 4 with occupied space starting from (3,3)
+	@Test 
+	public void testRoll4OccupiedBoardStartingBottomRightCorner() {
+		board.getCell(0, 1).setOccupied(true);
+		TestBoardCell cell = board.getCell(3, 3);
+		board.calcTargets(cell, 3);
+		Set<TestBoardCell> targets = board.getTargets();
+		Assert.assertEquals(6, targets.size());
+		Assert.assertTrue(targets.contains(board.getCell(0, 2)));
+		Assert.assertTrue(targets.contains(board.getCell(1, 1)));
+		Assert.assertTrue(targets.contains(board.getCell(1, 3)));
+		Assert.assertTrue(targets.contains(board.getCell(2, 0)));
+		Assert.assertTrue(targets.contains(board.getCell(2, 2)));
+		Assert.assertTrue(targets.contains(board.getCell(3, 1)));
+	}
+	
 	//test room, roll 3
 	//test room, roll 4
 	
