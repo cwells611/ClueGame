@@ -179,4 +179,23 @@ class BoardTestsExp {
 		Assert.assertTrue(targets.contains(board.getCell(0, 1)));
 	}
 	
+	//test room, occupied spot that is reachable from roll, roll 4
+	@Test
+	public void testRoll4RoomAndReachableOccupiedSpace() {
+		TestBoardCell cell = board.getCell(0, 0);
+		board.getCell(0, 1).setIsRoom(true);
+		board.getCell(2, 0).setOccupied(true);
+		board.calcTargets(cell, 3);
+		Set<TestBoardCell> targets = board.getTargets();
+		Assert.assertEquals(7, targets.size());
+		Assert.assertTrue(targets.contains(board.getCell(0, 2)));
+		Assert.assertTrue(targets.contains(board.getCell(1, 1)));
+		Assert.assertTrue(targets.contains(board.getCell(1, 3)));
+		Assert.assertFalse(targets.contains(board.getCell(2, 0)));
+		Assert.assertTrue(targets.contains(board.getCell(2, 2)));
+		Assert.assertTrue(targets.contains(board.getCell(3, 1)));
+		Assert.assertTrue(targets.contains(board.getCell(0, 1)));
+	}
+	
+	
 }

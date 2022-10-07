@@ -13,14 +13,17 @@ public class TestBoard {
 		this.board = new TreeSet<TestBoardCell>();
 	}
 	
+	//method that will determine the possible targets from a certain roll
 	public void calcTargets(TestBoardCell startCell, int pathLength) {
 		
 	}
 	
+	//returns list of possible targets
 	public Set<TestBoardCell> getTargets(){
 		return targets;
 	}
 	
+	//returns specific cell within board
 	public TestBoardCell getCell(int row, int col) {
 		TestBoardCell returnCell = new TestBoardCell(row, col); 
 		return returnCell;
