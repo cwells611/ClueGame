@@ -15,7 +15,18 @@ public class TestBoard {
 		super();
 		//constructor build board and adds each cell to the board 
 		this.targets = new TreeSet<TestBoardCell>();
-		//this.board = new TreeSet<TestBoardCell>();
+		//initializes grid to a board of size 4x4 for testing
+		this.grid = new TestBoardCell[4][4]; 
+	}
+	
+	//method to populate grid with cells 
+	public void populateGrid() {
+		for(int col = 0; col < 4; col++) {
+			for(int row = 0; row < 4; row++) {
+				TestBoardCell cell = new TestBoardCell(row, col); 
+				grid[row][col] = cell; 
+			}
+		}
 	}
 	
 	//method that will determine the possible targets from a certain roll
