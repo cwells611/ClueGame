@@ -20,7 +20,9 @@ class BoardTestsExp {
 	@BeforeEach 
 	//Before each tests runs, creates new board object with will create a new adjacency lust
 	public void createBoard() {
+		//creates new board and then populates it with cells 
 		board = new TestBoard(); 
+		board.populateGrid();
 	}
 	
 	

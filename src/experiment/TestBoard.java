@@ -41,8 +41,8 @@ public class TestBoard {
 	
 	//returns specific cell within board
 	public TestBoardCell getCell(int row, int col) {
-		TestBoardCell returnCell = new TestBoardCell(row, col); 
-		return returnCell;
+		//returns cell at the specified row and col within grid 
+		return grid[row][col]; 
 	}
 	
 	public void calcAdjacencies(TestBoardCell cell) {
