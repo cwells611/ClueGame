@@ -4,13 +4,18 @@ import java.util.*;
 
 public class TestBoard {
 	private Set<TestBoardCell> targets;
-	private Set<TestBoardCell> board; 
+	private TestBoardCell grid[][];
+	private Set<TestBoardCell> visited;
+	
+	final static int COLS = 4;
+	final static int ROWS = 4;
+	
 	
 	public TestBoard() {
 		super();
 		//constructor build board and adds each cell to the board 
 		this.targets = new TreeSet<TestBoardCell>();
-		this.board = new TreeSet<TestBoardCell>();
+		//this.board = new TreeSet<TestBoardCell>();
 	}
 	
 	//method that will determine the possible targets from a certain roll
