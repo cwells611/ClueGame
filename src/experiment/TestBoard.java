@@ -35,6 +35,8 @@ public class TestBoard {
 	}
 	
 	public void calcAdjacencies(TestBoardCell cell) {
+		System.out.println(cell.getCol());
+		System.out.println(cell.getRow());
 		//testing left edge
 		if(cell.getCol() != 0) {
 			TestBoardCell leftCell = new TestBoardCell(cell.getRow(), cell.getCol()-1);

@@ -23,6 +23,7 @@ public class TestBoardCell {
 	
 	//setter setter to add a cell to this cells adjacency list
 	public void addAdjacency(TestBoardCell cell) {
+		System.out.println("added adjacency");
 		adjList.add(cell);
 	}
 	
