@@ -23,7 +23,7 @@ public class TestBoardCell {
 	
 	//setter setter to add a cell to this cells adjacency list
 	public void addAdjacency(TestBoardCell cell) {
-		
+		adjList.add(cell);
 	}
 	
 	//getter that returns adjacency list for current sell
@@ -45,6 +45,13 @@ public class TestBoardCell {
 	public void setIsRoom (boolean isRoom) {
 			
 	}
+	//getter for the row of a cell
+	public int getRow() {
+		return this.row;
+	}
 	
-	
+	//getter for the column of a cell
+	public int getCol() {
+		return this.col;
+	}
 }

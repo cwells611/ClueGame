@@ -34,4 +34,23 @@ public class TestBoard {
 		return returnCell;
 	}
 	
+	public void calcAdjacencies(TestBoardCell cell) {
+		//testing left edge
+		if(cell.getCol() != 0) {
+			
+		}
+		//testing right edge
+		if(cell.getCol() != COLS-1) {
+			
+		}
+		//testing top edge
+		if(cell.getRow() != 0) {
+			
+		}
+		//testing top edge
+		if(cell.getRow() != ROWS-1) {
+			
+		}
+	}
+	
 }
