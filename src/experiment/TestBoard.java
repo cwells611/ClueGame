@@ -37,19 +37,23 @@ public class TestBoard {
 	public void calcAdjacencies(TestBoardCell cell) {
 		//testing left edge
 		if(cell.getCol() != 0) {
-			
+			TestBoardCell leftCell = new TestBoardCell(cell.getRow(), cell.getCol()-1);
+			cell.addAdjacency(leftCell);
 		}
 		//testing right edge
 		if(cell.getCol() != COLS-1) {
-			
+			TestBoardCell rightCell = new TestBoardCell(cell.getRow(), cell.getCol()+1);
+			cell.addAdjacency(rightCell);
 		}
 		//testing top edge
 		if(cell.getRow() != 0) {
-			
+			TestBoardCell upperCell = new TestBoardCell(cell.getRow()-1, cell.getCol());
+			cell.addAdjacency(upperCell);
 		}
 		//testing top edge
 		if(cell.getRow() != ROWS-1) {
-			
+			TestBoardCell lowerCell = new TestBoardCell(cell.getRow()+1, cell.getCol());
+			cell.addAdjacency(lowerCell);
 		}
 	}
 	
