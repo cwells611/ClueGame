@@ -39,6 +39,11 @@ public class TestBoard {
 		for(TestBoardCell testAdjList : startCell.getAdjList()) {
 			System.out.println("Adjencency List: [" + testAdjList.getRow() + ", " + testAdjList.getCol() + "]");
 		}
+		System.out.print("Visited List: ");
+		for(TestBoardCell testVisitedList : startCell.getAdjList()) {
+			System.out.print("[" + testVisitedList.getRow() + ", " + testVisitedList.getCol() + "]");
+		}
+		System.out.println();
 		for( TestBoardCell adjCell : startCell.getAdjList()) {
 			if(visited.contains(adjCell)) {
 				return;
