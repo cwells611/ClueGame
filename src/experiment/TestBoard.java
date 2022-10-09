@@ -30,7 +30,16 @@ public class TestBoard {
 
 	// method that will determine the possible targets from a certain roll
 	public void calcTargets(TestBoardCell startCell, int pathLength) {
-
+		//for each adjacent cell
+		//if cell is in visited list
+			//skip
+		//else
+			//add current adjacent cell to visitied list
+			//if num steps == 1
+				//add adjacent cell to target list
+			//else
+				//recursively call calc targets (adjCell, numSteps-1)
+			//remove adjacent cell from visited list
 	}
 
 	// returns list of possible targets
