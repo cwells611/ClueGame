@@ -2,7 +2,7 @@ package experiment;
 
 import java.util.*;
 
-public class TestBoardCell {
+public class TestBoardCell  {
 	//attributes that define the row and column of the current board cell
 	private int row;
 	private int col;
@@ -18,7 +18,7 @@ public class TestBoardCell {
 		this.col = col;
 		this.occupiedSpace = false;
 		this.isRoom = false; 
-		this.adjList = new TreeSet<TestBoardCell>();
+		this.adjList = new HashSet<TestBoardCell>();
 	}
 	
 	//setter setter to add a cell to this cells adjacency list
