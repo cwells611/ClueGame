@@ -67,6 +67,7 @@ public class TestBoard {
 			TestBoardCell lowerCell = grid[cell.getRow() + 1][cell.getCol()];
 			cell.addAdjacency(lowerCell);
 		}
+		
 	}
 
 	public static void main(String[] args) { TestBoard board = new TestBoard();
