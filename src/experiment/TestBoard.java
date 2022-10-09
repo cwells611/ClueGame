@@ -44,6 +44,9 @@ public class TestBoard {
 			if(visited.contains(adjCell)) {
 				continue;
 			}else {
+				if(adjCell.getIsRoom()) {
+					targets.add(adjCell);
+				}
 				if(!adjCell.getOccupied()) {
 					visited.add(adjCell);
 					if(pathLength == 1) {

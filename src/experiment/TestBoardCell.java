@@ -44,7 +44,11 @@ public class TestBoardCell  {
 	
 	//setter to indicate if there is a room next to the player
 	public void setIsRoom (boolean isRoom) {
-			
+		this.isRoom = isRoom; 
+	}
+	
+	public boolean getIsRoom() {
+		return this.isRoom;
 	}
 	//getter for the row of a cell
 	public int getRow() {
