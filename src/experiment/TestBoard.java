@@ -13,9 +13,12 @@ public class TestBoard {
 	public TestBoard() {
 		super();
 		// constructor build board and adds each cell to the board
-		this.targets = new TreeSet<TestBoardCell>();
+		this.targets = new HashSet<TestBoardCell>();
 		// initializes grid to a board of size 4x4 for testing
 		this.grid = new TestBoardCell[4][4];
+		//initialize visited list
+		this.visited = new HashSet<TestBoardCell>();
+		
 	}
 
 	// method to populate grid with cells
@@ -30,7 +33,25 @@ public class TestBoard {
 
 	// method that will determine the possible targets from a certain roll
 	public void calcTargets(TestBoardCell startCell, int pathLength) {
-		//for each adjacent cell
+		
+		//for each adjacent cellp
+		for( TestBoardCell adjCell : startCell.getAdjList()) {
+			if(visited.contains(adjCell)) {
+				return;
+			}else {
+				visited.add(adjCell);
+				System.out.println("Test visited add " + adjCell.getRow() + ", " + adjCell.getCol());
+				System.out.println(pathLength);
+				if(pathLength == 1) {
+					targets.add(adjCell);
+					System.out.println("Test targets add");
+				}else {
+					System.out.println("Test recursive");
+					calcTargets(adjCell, pathLength-1);
+				}
+				visited.remove(adjCell);
+			}
+		}
 		//if cell is in visited list
 			//skip
 		//else
@@ -40,6 +61,8 @@ public class TestBoard {
 			//else
 				//recursively call calc targets (adjCell, numSteps-1)
 			//remove adjacent cell from visited list
+		
+		//print visited list
 	}
 
 	// returns list of possible targets

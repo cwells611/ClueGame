@@ -30,7 +30,7 @@ class BoardTestsExp {
 	 * ADJACENCY TESTS
 	 */
 	
-	@Test
+	//@Test
 	public void adjacentTopLeft() {
 		TestBoardCell cell = board.getCell(0,0);
 		board.calcAdjacencies(cell);
@@ -40,7 +40,7 @@ class BoardTestsExp {
 		Assert.assertTrue(testList.contains(board.getCell(1,0)));
 	}
 	
-	@Test
+	//@Test
 	public void adjacentBottomRight() {
 		TestBoardCell cell = board.getCell(3,3);
 		board.calcAdjacencies(cell);
@@ -50,7 +50,7 @@ class BoardTestsExp {
 		Assert.assertTrue(testList.contains(board.getCell(3,2)));
 	}
 	
-	@Test
+	//@Test
 	public void adjacentRightEdge() {
 		TestBoardCell cell = board.getCell(1,3);
 		board.calcAdjacencies(cell);
@@ -61,7 +61,7 @@ class BoardTestsExp {
 		Assert.assertTrue(testList.contains(board.getCell(1,2)));
 	}
 	
-	@Test
+	//@Test
 	public void adjacentLeftEdge() {
 		TestBoardCell cell = board.getCell(2,0);
 		board.calcAdjacencies(cell);
@@ -72,7 +72,7 @@ class BoardTestsExp {
 		Assert.assertTrue(testList.contains(board.getCell(2,1)));
 	}
 	
-	@Test
+	//@Test
 	public void adjacentCenter() {
 		TestBoardCell cell = board.getCell(2,2);
 		board.calcAdjacencies(cell);
@@ -91,11 +91,14 @@ class BoardTestsExp {
 	
 	
 	//test empty board, roll 3
-	//@Test
+	@Test
 	public void testRoll3EmptyBoard() {
 		TestBoardCell cell = board.getCell(0, 0);
+		board.calcAdjacencies(cell);
+		//we know this works ^^
 		board.calcTargets(cell, 3);
 		Set<TestBoardCell> targets = board.getTargets();
+		System.out.println("TARGETS SIZE  " + targets.size());
 		Assert.assertEquals(6, targets.size());
 		Assert.assertTrue(targets.contains(board.getCell(3, 0)));
 		Assert.assertTrue(targets.contains(board.getCell(2, 1)));
