@@ -55,17 +55,6 @@ public class TestBoard {
 				}
 			}
 		}
-		//if cell is in visited list
-			//skip
-		//else
-			//add current adjacent cell to visitied list
-			//if num steps == 1
-				//add adjacent cell to target list
-			//else
-				//recursively call calc targets (adjCell, numSteps-1)
-			//remove adjacent cell from visited list
-		
-		//print visited list
 	}
 
 	// returns list of possible targets
