@@ -70,4 +70,12 @@ public class TestBoard {
 		}
 	}
 	
+	public static void main(String[] args) {
+		TestBoard board = new TestBoard();
+		board.populateGrid();
+		TestBoardCell cell = board.getCell(0,0);
+		board.calcAdjacencies(cell);
+		System.out.println(cell.getAdjList());
+	}
+	
 }

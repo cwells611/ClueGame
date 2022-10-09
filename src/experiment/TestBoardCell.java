@@ -34,7 +34,7 @@ public class TestBoardCell {
 	
 	//setter to indicate if a cell is occupied by another player 
 	public void setOccupied(boolean occupied) {
-		
+		this.occupiedSpace = occupied; 
 	}
 	
 	//getter that returns boolean based on if a cell is occupied by another player 
