@@ -94,14 +94,8 @@ class BoardTestsExp {
 	@Test
 	public void testRoll3EmptyBoard() {
 		TestBoardCell cell = board.getCell(0, 0);
-		//board.calcAdjacencies(cell);
-		//we know this works ^^
 		board.calcTargets(cell, 3);
 		Set<TestBoardCell> targets = board.getTargets();
-		for(TestBoardCell targetCell : targets) {
-			System.out.println(targetCell.getRow() + " " + targetCell.getCol());
-		}
-		System.out.println("TARGETS SIZE  " + targets.size());
 		Assert.assertEquals(6, targets.size());
 		Assert.assertTrue(targets.contains(board.getCell(3, 0)));
 		Assert.assertTrue(targets.contains(board.getCell(2, 1)));
@@ -111,7 +105,7 @@ class BoardTestsExp {
 		Assert.assertTrue(targets.contains(board.getCell(1, 0)));
 	}
 	
-	//@Test
+	@Test
 	//test empty board, roll 6
 	public void testRoll6EmptyBoard() {
 		TestBoardCell cell = board.getCell(0, 0);
@@ -129,26 +123,24 @@ class BoardTestsExp {
 	
 	
 	//test occupied, roll 3
-	//@Test
+	@Test
 	public void testRoll3OccupiedBoard() {
 		board.getCell(0, 1).setOccupied(true);
 		TestBoardCell cell = board.getCell(0, 0);
 		board.calcTargets(cell, 3);
 		Set<TestBoardCell> targets = board.getTargets();
-		Assert.assertEquals(5, targets.size());
+		Assert.assertEquals(3, targets.size());
 		Assert.assertTrue(targets.contains(board.getCell(3, 0)));
 		Assert.assertTrue(targets.contains(board.getCell(2, 1)));
 		Assert.assertTrue(targets.contains(board.getCell(1, 2)));
-		Assert.assertTrue(targets.contains(board.getCell(0, 3)));
-		Assert.assertTrue(targets.contains(board.getCell(1, 0)));
 	}
 	
 	//test occupied, roll 4
-	//@Test 
+	@Test 
 	public void testRoll4OccupiedBoard() {
 		board.getCell(0, 1).setOccupied(true);
 		TestBoardCell cell = board.getCell(0, 0);
-		board.calcTargets(cell, 3);
+		board.calcTargets(cell, 4)\
 		Set<TestBoardCell> targets = board.getTargets();
 		Assert.assertEquals(6, targets.size());
 		Assert.assertTrue(targets.contains(board.getCell(0, 2)));

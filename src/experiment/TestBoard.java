@@ -30,34 +30,29 @@ public class TestBoard {
 			}
 		}
 	}
-
-	// method that will determine the possible targets from a certain roll
+	
 	public void calcTargets(TestBoardCell startCell, int pathLength) {
+		visited.add(startCell); 
+		recursiveCalcTargets(startCell, pathLength);
+	}
+	
+	// method that will determine the possible targets from a certain roll
+	public void recursiveCalcTargets(TestBoardCell startCell, int pathLength) {
 		//calculates adjacency list for cell we are currently looking at 
 		calcAdjacencies(startCell); 
-		//prints adjacency list for current cell we are looking at 
-		for(TestBoardCell testAdjList : startCell.getAdjList()) {
-			System.out.println("Adjencency List: [" + testAdjList.getRow() + ", " + testAdjList.getCol() + "]");
-		}
-		System.out.print("Visited List: ");
-		for(TestBoardCell testVisitedList : startCell.getAdjList()) {
-			System.out.print("[" + testVisitedList.getRow() + ", " + testVisitedList.getCol() + "]");
-		}
-		System.out.println();
 		for( TestBoardCell adjCell : startCell.getAdjList()) {
 			if(visited.contains(adjCell)) {
-				return;
+				continue;
 			}else {
-				visited.add(adjCell);
-				System.out.println("Adding cell to visited: [" + adjCell.getRow() + ", " + adjCell.getCol() + "]");
-				if(pathLength == 1) {
-					targets.add(adjCell);
-					System.out.println("Adding cell to targets: [" + adjCell.getRow() + ", " + adjCell.getCol() + "]");
-				}else {
-					calcTargets(adjCell, pathLength - 1);
+				if(!adjCell.getOccupied()) {
+					visited.add(adjCell);
+					if(pathLength == 1) {
+						targets.add(adjCell);
+					}else {
+						recursiveCalcTargets(adjCell, pathLength - 1);
+					}
+					visited.remove(adjCell);
 				}
-				visited.remove(adjCell);
-				System.out.println("Removing cell to visited: [" + adjCell.getRow() + ", " + adjCell.getCol() + "]");
 			}
 		}
 		//if cell is in visited list
