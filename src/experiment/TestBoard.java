@@ -33,25 +33,26 @@ public class TestBoard {
 
 	// method that will determine the possible targets from a certain roll
 	public void calcTargets(TestBoardCell startCell, int pathLength) {
-		//for each adjacent cell
-		//TODO build adjacent list here
+		//calculates adjacency list for cell we are currently looking at 
 		calcAdjacencies(startCell); 
+		//prints adjacency list for current cell we are looking at 
+		for(TestBoardCell testAdjList : startCell.getAdjList()) {
+			System.out.println("Adjencency List: [" + testAdjList.getRow() + ", " + testAdjList.getCol() + "]");
+		}
 		for( TestBoardCell adjCell : startCell.getAdjList()) {
 			if(visited.contains(adjCell)) {
 				return;
 			}else {
 				visited.add(adjCell);
-				//System.out.println(visited.contains(adjCell));
-				//System.out.println("Test visited add " + adjCell.getRow() + ", " + adjCell.getCol());
-				//System.out.println(pathLength);
+				System.out.println("Adding cell to visited: [" + adjCell.getRow() + ", " + adjCell.getCol() + "]");
 				if(pathLength == 1) {
 					targets.add(adjCell);
+					System.out.println("Adding cell to targets: [" + adjCell.getRow() + ", " + adjCell.getCol() + "]");
 				}else {
-					System.out.println("Test recursive");
-					calcTargets(adjCell, pathLength-1);
+					calcTargets(adjCell, pathLength - 1);
 				}
 				visited.remove(adjCell);
-				//System.out.println(visited.contains(adjCell));
+				System.out.println("Removing cell to visited: [" + adjCell.getRow() + ", " + adjCell.getCol() + "]");
 			}
 		}
 		//if cell is in visited list
@@ -79,8 +80,7 @@ public class TestBoard {
 	}
 
 	public void calcAdjacencies(TestBoardCell cell) {
-		System.out.println(cell.getCol());
-		System.out.println(cell.getRow());
+		//System.out.println("[" + cell.getRow() + ", " + cell.getCol() + "]");
 		// testing left edge
 		if (cell.getCol() != 0) {
 			TestBoardCell leftCell = grid[cell.getRow()][cell.getCol() - 1];
