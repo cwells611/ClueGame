@@ -94,10 +94,13 @@ class BoardTestsExp {
 	@Test
 	public void testRoll3EmptyBoard() {
 		TestBoardCell cell = board.getCell(0, 0);
-		board.calcAdjacencies(cell);
+		//board.calcAdjacencies(cell);
 		//we know this works ^^
 		board.calcTargets(cell, 3);
 		Set<TestBoardCell> targets = board.getTargets();
+		for(TestBoardCell targetCell : targets) {
+			System.out.println(targetCell.getRow() + " " + targetCell.getCol());
+		}
 		System.out.println("TARGETS SIZE  " + targets.size());
 		Assert.assertEquals(6, targets.size());
 		Assert.assertTrue(targets.contains(board.getCell(3, 0)));

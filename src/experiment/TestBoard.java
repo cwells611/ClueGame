@@ -33,23 +33,25 @@ public class TestBoard {
 
 	// method that will determine the possible targets from a certain roll
 	public void calcTargets(TestBoardCell startCell, int pathLength) {
-		
-		//for each adjacent cellp
+		//for each adjacent cell
+		//TODO build adjacent list here
+		calcAdjacencies(startCell); 
 		for( TestBoardCell adjCell : startCell.getAdjList()) {
 			if(visited.contains(adjCell)) {
 				return;
 			}else {
 				visited.add(adjCell);
-				System.out.println("Test visited add " + adjCell.getRow() + ", " + adjCell.getCol());
-				System.out.println(pathLength);
+				//System.out.println(visited.contains(adjCell));
+				//System.out.println("Test visited add " + adjCell.getRow() + ", " + adjCell.getCol());
+				//System.out.println(pathLength);
 				if(pathLength == 1) {
 					targets.add(adjCell);
-					System.out.println("Test targets add");
 				}else {
 					System.out.println("Test recursive");
 					calcTargets(adjCell, pathLength-1);
 				}
 				visited.remove(adjCell);
+				//System.out.println(visited.contains(adjCell));
 			}
 		}
 		//if cell is in visited list
