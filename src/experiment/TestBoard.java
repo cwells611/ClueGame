@@ -30,7 +30,16 @@ public class TestBoard {
 
 	// method that will determine the possible targets from a certain roll
 	public void calcTargets(TestBoardCell startCell, int pathLength) {
-
+		//for each adjacent cell
+		//if cell is in visited list
+			//skip
+		//else
+			//add current adjacent cell to visitied list
+			//if num steps == 1
+				//add adjacent cell to target list
+			//else
+				//recursively call calc targets (adjCell, numSteps-1)
+			//remove adjacent cell from visited list
 	}
 
 	// returns list of possible targets
@@ -70,13 +79,6 @@ public class TestBoard {
 		
 	}
 
-	public static void main(String[] args) { TestBoard board = new TestBoard();
-		board.populateGrid(); 
-		TestBoardCell cell = board.getCell(0,0);
-		board.calcAdjacencies(cell);
-		for(TestBoardCell adjCell: cell.getAdjList()) {
-			System.out.println("[" + adjCell.getRow() + ", " + adjCell.getCol() + "]");
-		}
-	}
+
 
 }
