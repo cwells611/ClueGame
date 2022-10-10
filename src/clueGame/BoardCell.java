@@ -9,6 +9,7 @@ public class BoardCell{
 	private DoorDirection doorDirection;
 	private boolean roomLabel;
 	private boolean roomCenter;
+	private boolean doorway;
 	private char secretPassage;
 	private Set<BoardCell> adjList;
 	
@@ -22,7 +23,7 @@ public class BoardCell{
 	
 	public boolean isDoorway() {
 		//TODO change this to not be just false
-		return false;
+		return doorway;
 	}
 	
 	public DoorDirection getDoorDirection() {
@@ -39,6 +40,10 @@ public class BoardCell{
 	
 	public char getSecretPassage() {
 		return this.secretPassage;
+	}
+	
+	public char getCharacter() {
+		return this.initial;
 	}
 	
 }
