@@ -3,6 +3,7 @@ package tests;
 import clueGame.Board;
 import clueGame.BoardCell;
 import clueGame.DoorDirection;
+import clueGame.Room;
 
 import static org.junit.Assert.*;
 
@@ -28,7 +29,7 @@ public class FileInitTest {
 	
 //	ensure your layout and setup files are loaded correctly (correct number of rooms, test several entries including first and last in file)
 	@Test 
-	void testNumRooms() {
+	public void testNumRooms() {
 		//test to make sure that the correct number of rooms and the correct room names got loaded from files 
 		int numRooms = 0;
 		//loop through each cell, if that cell is the label cell, then add one to numRooms
@@ -39,11 +40,12 @@ public class FileInitTest {
 				}
 			}
 		}
-		//check to make sure the correct number of rooms has been found 
+		//check to make sure the correct number of rooms has been loaded
 		assertEquals(9, numRooms); 
 	}
 	
-	void testRoomNames() {
+	@Test
+	public void testRoomNames() {
 		//test to make sure that the correct room names were loaded in based on the labels 
 		assertEquals("Chapter", theBoard.getRoom('C').getName()); 
 		assertEquals("Game Room", theBoard.getRoom('G').getName());
@@ -54,6 +56,38 @@ public class FileInitTest {
 		assertEquals("Atrium", theBoard.getRoom('A').getName());
 		assertEquals("Roof", theBoard.getRoom('R').getName());
 		assertEquals("Deck", theBoard.getRoom('D').getName());
+	}
+	
+	@Test
+	public void testRoomCharacteristicts() {
+		//picks some cells in certain rooms, tests to make sure those cells are associated with those rooms 
+		BoardCell cell = theBoard.getCell(6, 1); 
+		Room room = theBoard.getRoom(cell); 
+		//checks to make sure that the room name is correct 
+		assertEquals("Roof", room.getName()); 
+		//checks to make sure cell is not doorway 
+		assertFalse(cell.isDoorway());
+		//checks to make sure that the room is an actual room 
+		assertTrue(room != null); 
+		
+		//picks a cell that is not a room 
+		cell = theBoard.getCell(3, 0); 
+		room = theBoard.getRoom(cell);
+		//makes sure that the current cell is not a room 
+		assertTrue(room == null); 
+		
+		//picks a cell that is the center of a room 
+		cell = theBoard.getCell(10, 10);
+		room = theBoard.getRoom(cell);
+		//tests to make sure the center of the room is cell 
+		assertTrue(cell.isRoomCenter()); 
+		
+		//picks a cell that is a doorway 
+		cell = theBoard.getCell(1, 10); 
+		//tests to make sure that isDoorway is treu 
+		assertTrue(cell.isDoorway()); 
+		//tests to make sure that the cell is a room 
+		assertTrue(room == null); 
 	}
 	
 //	ensure the correct number of rows/columns have been read
