@@ -25,6 +25,10 @@ public class FileInitTest {
 	}
 	
 //	ensure your layout and setup files are loaded correctly (correct number of rooms, test several entries including first and last in file)
+	@Test 
+	void testLayout() {
+		
+	}
 //	ensure the correct number of rows/columns have been read
 	@Test
 	public void checkRowsCols() {
@@ -64,6 +68,7 @@ public class FileInitTest {
 		for(int row = 0; row < ROWS; row++) {
 			for(int col = 0; col < COLS; col++) {
 				if(theBoard.getCell(row, col).isDoorway()) {
+					//if cell is a doorway, add one to doors
 					doors++; 
 				}
 			}
@@ -77,5 +82,5 @@ public class FileInitTest {
 	}
 	
 //	check that rooms have the proper center cell and label cell.
-//	implement @BeforeEach method or @BeforeAll
+
 }
