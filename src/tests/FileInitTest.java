@@ -7,7 +7,8 @@ import clueGame.Room;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
+import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
 
 public class FileInitTest {
 	//constant variables to hold board size 
@@ -167,6 +168,7 @@ public class FileInitTest {
 		assertEquals('R', cell.getCharacter());
 	}
 	
+	@Test
 //	check that rooms have the proper center cell and label cell.
 	public void testCenterLabel() {
 		BoardCell cell;
