@@ -1,0 +1,22 @@
+To make sure our room labels are all tested, we made a test TestRoomNames(),
+that tests all of the rooms on our board. These include the following
+	Chapter
+	Game Room
+	Bedroom
+	Lavatory
+	Sauna
+	Theater
+	Atrium
+	Roof
+	Deck
+	
+We made a test called testRoomCharacteristics
+^FILL THIS OUT CADEN^
+
+We made a test called checkRowsCols(), which tests that the dimensions of the board are 25 x 25.
+
+We also made a test to test the 4 door directions. This tested the following
+	A left doorway pointing to the Roof
+	A right doorway pointing to the Atrium
+	A upwards doorway pointing to the Sauna
+	A downwards doorway pointing to the Theater
