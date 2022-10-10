@@ -43,9 +43,10 @@ public class Board {
 		return roomMap.get(Room);
 	}
 	
-//	public Room getRoom(BoardCell cell) {
-//		
-//	}
+	public Room getRoom(BoardCell cell) {
+		Room room = new Room(); 
+		return room; 
+	}
 	
 	public int getNumRows() {
 		return numRows;
