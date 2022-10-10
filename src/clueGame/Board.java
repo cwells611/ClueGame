@@ -8,12 +8,14 @@ public class Board {
 	private int numColumns;
 	private String layoutConfigFile;
 	private String setupConfigFile;
-	private Map<Character, Room> roomMap;
+	private Map<Character, Room> roomMap = new HashMap<Character, Room>();
 	private static Board theInstance = new Board();
 	
     // constructor is private to ensure only one can be created
     private Board() {
            super() ;
+           numRows = 0; 
+           numColumns = 0; 
     }
     // this method returns the only Board
     public static Board getInstance() {
@@ -41,7 +43,8 @@ public class Board {
 	}
 	
 	public Room getRoom(char Room) {
-		return roomMap.get(Room);
+		Room room = new Room(); 
+		return room;
 	}
 	
 	public Room getRoom(BoardCell cell) {
@@ -58,7 +61,7 @@ public class Board {
 	}
 	
 	public BoardCell getCell(int row, int col) {
-		return grid[row][col];
+		return new BoardCell();
 	}
 }
 	

@@ -1,7 +1,7 @@
 package clueGame;
 
 public class Room {
-	private String name;
+	private String name = "test";
 	private BoardCell centerCell;
 	private BoardCell labelCell;
 	
