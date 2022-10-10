@@ -34,5 +34,29 @@ public class Board {
 	public void loadLayoutConfig() {
 		
 	}
+	
+	public void setConfigFiles(String csvFile, String txtFile) {
+		
+	}
+	
+	public Room getRoom(char Room) {
+		return roomMap.get(Room);
+	}
+	
+//	public Room getRoom(BoardCell cell) {
+//		
+//	}
+	
+	public int getNumRows() {
+		return numRows;
+	}
+	
+	public int getNumColumns() {
+		return numColumns;
+	}
+	
+	public BoardCell getCell(int row, int col) {
+		return grid[row][col];
+	}
 }
 	
