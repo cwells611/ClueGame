@@ -20,11 +20,11 @@ public class FileInitTest {
 	//method to be run before each test, will create a board, set up the config files, and initialize the board 
 	@BeforeAll
 	public static void setBoard() {
-		//since we are only using one instatce of this board 
-		theBoard.getInstance(); 
+		//since we are only using one instance of this board 
+		theBoard = Board.getInstance(); 
 		//has the board read in the config files and setup board based on files 
 		theBoard.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
-		//loads both files even tho we are only using one instance of board 
+		//loads both files even though we are only using one instance of board 
 		theBoard.initialize();
 	}
 	

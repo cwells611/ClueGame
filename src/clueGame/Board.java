@@ -36,7 +36,8 @@ public class Board {
 	}
 	
 	public void setConfigFiles(String csvFile, String txtFile) {
-		
+		this.layoutConfigFile = csvFile; 
+		this.setupConfigFile = txtFile; 
 	}
 	
 	public Room getRoom(char Room) {
