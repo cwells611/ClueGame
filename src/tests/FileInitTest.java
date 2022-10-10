@@ -102,5 +102,62 @@ public class FileInitTest {
 	}
 	
 //	check that rooms have the proper center cell and label cell.
+	public void testCenterLabel() {
+		BoardCell cell;
+		//sauna test
+		cell = theBoard.getCell(1, 1);
+		assertTrue(cell.isRoomCenter());
+		cell = theBoard.getCell(0, 0);
+		assertTrue(cell.isLabel());
+		
+		//game room test
+		cell = theBoard.getCell(2, 7);
+		assertTrue(cell.isRoomCenter());
+		cell = theBoard.getCell(1, 6);
+		assertTrue(cell.isLabel());
+		
+		//lavatory test
+		cell = theBoard.getCell(2, 13);
+		assertTrue(cell.isRoomCenter());
+		cell = theBoard.getCell(1, 11);
+		assertTrue(cell.isLabel());
+		
+		//deck test
+		cell = theBoard.getCell(5, 21);
+		assertTrue(cell.isRoomCenter());
+		cell = theBoard.getCell(3, 19);
+		assertTrue(cell.isLabel());
+		
+		//roof test
+		cell = theBoard.getCell(10, 2);
+		assertTrue(cell.isRoomCenter());
+		cell = theBoard.getCell(8, 1);
+		assertTrue(cell.isLabel());
+		
+		//theater test
+		cell = theBoard.getCell(10, 10);
+		assertTrue(cell.isRoomCenter());
+		cell = theBoard.getCell(8, 8);
+		assertTrue(cell.isLabel());
+		
+		//chapter test
+		cell = theBoard.getCell(20, 3);
+		assertTrue(cell.isRoomCenter());
+		cell = theBoard.getCell(19, 2);
+		assertTrue(cell.isLabel());
+		
+		//bedroom test
+		cell = theBoard.getCell(20, 11);
+		assertTrue(cell.isRoomCenter());
+		cell = theBoard.getCell(19, 8);
+		assertTrue(cell.isLabel());
+		
+		//bedroom test
+		cell = theBoard.getCell(19, 21);
+		assertTrue(cell.isRoomCenter());
+		cell = theBoard.getCell(17, 20);
+		assertTrue(cell.isLabel());
+	}
+	
 //	implement @BeforeEach method or @BeforeAll
 }
