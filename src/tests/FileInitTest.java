@@ -74,6 +74,31 @@ public class FileInitTest {
 //	check some of the cells to ensure they have the correct initial
 	public void initialTest() {
 		//testing 8 random cells to ensure they have the correct initial
+		BoardCell cell;
+		
+		cell = theBoard.getCell(8, 3);
+		assertEquals('R', cell.getCharacter());
+		
+		cell = theBoard.getCell(15, 12);
+		assertEquals('W', cell.getCharacter());
+		
+		cell = theBoard.getCell(9, 15);
+		assertEquals('X', cell.getCharacter());
+		
+		cell = theBoard.getCell(8, 20);
+		assertEquals('D', cell.getCharacter());
+		
+		cell = theBoard.getCell(18, 23);
+		assertEquals('A', cell.getCharacter());
+		
+		cell = theBoard.getCell(1, 12);
+		assertEquals('L', cell.getCharacter());
+		
+		cell = theBoard.getCell(11, 12);
+		assertEquals('R', cell.getCharacter());
+		
+		cell = theBoard.getCell(23, 10);
+		assertEquals('R', cell.getCharacter());
 	}
 	
 //	check that rooms have the proper center cell and label cell.
