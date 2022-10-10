@@ -41,8 +41,21 @@ public class FileInitTest {
 		}
 		//check to make sure the correct number of rooms has been found 
 		assertEquals(9, numRooms); 
-		
 	}
+	
+	void testRoomNames() {
+		//test to make sure that the correct room names were loaded in based on the labels 
+		assertEquals("Chapter", theBoard.getRoom('C').getName()); 
+		assertEquals("Game Room", theBoard.getRoom('G').getName());
+		assertEquals("Bedroom", theBoard.getRoom('B').getName());
+		assertEquals("Lavatory", theBoard.getRoom('L').getName());
+		assertEquals("Sauna", theBoard.getRoom('S').getName());
+		assertEquals("Theater", theBoard.getRoom('T').getName());
+		assertEquals("Atrium", theBoard.getRoom('A').getName());
+		assertEquals("Roof", theBoard.getRoom('R').getName());
+		assertEquals("Deck", theBoard.getRoom('D').getName());
+	}
+	
 //	ensure the correct number of rows/columns have been read
 	@Test
 	public void checkRowsCols() {
