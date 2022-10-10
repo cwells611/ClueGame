@@ -6,6 +6,8 @@ import clueGame.DoorDirection;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 public class FileInitTest {
 	//constant variables to hold board size 
 	public static final int ROWS = 25; 
@@ -26,7 +28,19 @@ public class FileInitTest {
 	
 //	ensure your layout and setup files are loaded correctly (correct number of rooms, test several entries including first and last in file)
 	@Test 
-	void testLayout() {
+	void testNumRooms() {
+		//test to make sure that the correct number of rooms and the correct room names got loaded from files 
+		int numRooms = 0;
+		//loop through each cell, if that cell is the label cell, then add one to numRooms
+		for(int row = 0; row < ROWS; row++) {
+			for(int col = 0; col < COLS; col++) {
+				if(theBoard.getCell(row, col).isLabel()) {
+					numRooms++; 
+				}
+			}
+		}
+		//check to make sure the correct number of rooms has been found 
+		assertEquals(9, numRooms); 
 		
 	}
 //	ensure the correct number of rows/columns have been read
