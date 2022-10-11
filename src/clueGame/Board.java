@@ -29,21 +29,21 @@ public class Board {
      * initialize the board (since we are using singleton pattern)
      */
     public void initialize(){
-     
+    	try {
+    		loadSetupConfig(); 
+    		loadLayoutConfig(); 
+    	}catch(FileNotFoundException e) {
+    		System.out.println("File not found.");
+    	}
     }
      
 	
-	public void loadSetupConfig() {
+	public void loadSetupConfig() throws FileNotFoundException{
 		//load in ClueSetup.txt and then add the room character and room name to the map 
-		//exception handling 
-		try {
-			//assign file object to setup file 
-			configFiles = new File(setupConfigFile); 
-			//setup scanner
-			configScanner = new Scanner(configFiles); 
-		}catch(FileNotFoundException e) {
-			System.out.println("File not found");
-		}
+		//assign file object to setup file 
+		configFiles = new File(setupConfigFile); 
+		//setup scanner
+		configScanner = new Scanner(configFiles); 
 		//loop to read in file data 
 		while(configScanner.hasNextLine()) {
 			//reads in line of file  
@@ -64,17 +64,12 @@ public class Board {
 		}
 	}
 	
-	public void loadLayoutConfig() {
+	public void loadLayoutConfig() throws FileNotFoundException {
 		//load in ClueLayout.txt and then add the room character and room name to the map 
-		//exception handling 
-		try {
-			//assign file object to setup file 
-			configFiles = new File(layoutConfigFile); 
-			//setup scanner
-			configScanner = new Scanner(configFiles); 
-		}catch(FileNotFoundException e) {
-			System.out.println("File not found");
-		}
+		//assign file object to setup file 
+		configFiles = new File(layoutConfigFile); 
+		//setup scanner
+		configScanner = new Scanner(configFiles); 
 		int row = 0;
 		while(configScanner.hasNextLine()) {
 			//create a board cell for each char
