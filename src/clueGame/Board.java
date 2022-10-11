@@ -65,7 +65,53 @@ public class Board {
 	}
 	
 	public void loadLayoutConfig() {
-		
+		//load in ClueLayout.txt and then add the room character and room name to the map 
+		//exception handling 
+		try {
+			//assign file object to setup file 
+			configFiles = new File(layoutConfigFile); 
+			//setup scanner
+			configScanner = new Scanner(configFiles); 
+		}catch(FileNotFoundException e) {
+			System.out.println("File not found");
+		}
+		int row = 0;
+		while(configScanner.hasNextLine()) {
+			//create a board cell for each char
+			String currentLine = configScanner.nextLine(); 
+			String[] splitLine = currentLine.split(",");
+			int column = 0;
+			for(String cell : splitLine) {
+				//create a new board cell
+				char initial = cell.charAt(0);
+				BoardCell currentCell = new BoardCell(row, column, initial);
+				
+				if(cell.length() == 2) {
+					switch(cell.charAt(1)) {
+					case '#':
+						currentCell.setRoomLabel(true);
+						break;
+					case '*':
+						currentCell.setRoomCenter(true);
+						break;
+					case '^':
+					case 'v':
+					case '>':
+					case '<':
+						currentCell.setDoorway(true);
+						break;
+					default:
+						currentCell.setSecretPassage(cell.charAt(1));
+					}
+					
+					grid[row][column] = currentCell;
+				}
+				column++;
+				numColumns++;
+			}
+			row++;
+			numRows++;
+		}
 	}
 	
 	public void setConfigFiles(String csvFile, String txtFile) {

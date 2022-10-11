@@ -13,6 +13,17 @@ public class BoardCell{
 	private char secretPassage;
 	private Set<BoardCell> adjList;
 	
+	public BoardCell(int row, int col, char initial) {
+		this.row = row;
+		this.col = col;
+		this.initial = initial;
+		roomLabel = false;
+		roomCenter = false;
+		doorway = false;
+	}
+	
+	
+	
 	public void addAdj(BoardCell adj) {
 		
 	}
@@ -46,4 +57,19 @@ public class BoardCell{
 		return this.initial;
 	}
 	
+	public void setRoomLabel(boolean label) {
+		this.roomLabel = label;
+	}
+	
+	public void setRoomCenter(boolean center) {
+		this.roomCenter = center;
+	}
+	
+	public void setDoorway(boolean doorway) {
+		this.doorway = doorway;
+	}
+	
+	public void setSecretPassage(char passage) {
+		this.secretPassage = passage;
+	}
 }
