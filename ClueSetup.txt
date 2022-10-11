@@ -8,7 +8,6 @@ Room, Theater, T
 Room, Atrium, A
 Room, Roof, R
 Room, Deck, D
-
 //other spaces on board
 Space, Walkway, W
 Space, Unused, X 
