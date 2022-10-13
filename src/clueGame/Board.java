@@ -115,13 +115,15 @@ public class Board {
 	}
 	
 	public Room getRoom(char Room) {
-		Room room = new Room(); 
-		return room;
+		//returns room from map that is associated with the char passed as the parameter 
+		return roomMap.get(Room); 
 	}
 	
 	public Room getRoom(BoardCell cell) {
-		Room room = new Room(); 
-		return room; 
+		//gets the label that is associated with the cell passed as the parameter 
+		char roomLabel = cell.getCharacter(); 
+		//returns room that is associated with the char in the map 
+		return roomMap.get(roomLabel); 
 	}
 	
 	public int getNumRows() {
@@ -133,7 +135,8 @@ public class Board {
 	}
 	
 	public BoardCell getCell(int row, int col) {
-		return new BoardCell();
+		//returns cell that in grid at row, col 
+		return grid[row][col]; 
 	}
 }
 	
