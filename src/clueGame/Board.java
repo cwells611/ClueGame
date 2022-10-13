@@ -69,9 +69,12 @@ public class Board {
 		FileReader layoutReader = new FileReader(layoutConfigFile);  
 		//setup scanner
 		Scanner layoutScanner = new Scanner(layoutReader); 
-		//need to first find the number of rows and cols to as to initialize the grid before we add anything to it 
-		while(layoutScanner.hasNextLine()) {
-			String currentLine = layoutScanner.nextLine(); 
+		//need to first find the number of rows and cols to as to initialize the grid before we add anything to it
+		//creates new reader and scanner for loop that determines numRows and numColumns 
+		FileReader numsReader = new FileReader(layoutConfigFile); 
+		Scanner numsScanner = new Scanner(numsReader); 
+		while(numsScanner.hasNextLine()) {
+			String currentLine = numsScanner.nextLine(); 
 			numRows++;
 			//since the board is a square, we only need to set the numColumns once because each 
 			//subsequent line will have the same number of columns 
@@ -83,8 +86,6 @@ public class Board {
 		}
 		//initialize grid 
 		this.grid = new BoardCell[numRows][numColumns]; 
-		//resets scanner so it can read file again
-		layoutScanner.reset(); 
 		int row = 0;
 		while(layoutScanner.hasNextLine()) {
 			//create a board cell for each char
