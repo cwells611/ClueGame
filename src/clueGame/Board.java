@@ -33,7 +33,9 @@ public class Board {
     		loadLayoutConfig(); 
     	}catch(FileNotFoundException e) {
     		System.out.println("File not found.");
-    	}
+    	} catch (BadConfigFormatException e) {
+			e.getMessage(); 
+		}
     }
      
 	
@@ -78,10 +80,17 @@ public class Board {
 			numRows++;
 			//since the board is a square, we only need to set the numColumns once because each 
 			//subsequent line will have the same number of columns 
+			//determines the number of columns by seeing how many labels are on each line 
+			String[] splitLine = currentLine.split(","); 
 			if(numColumns == 0) {
-				//determines the number of columns by seeing how many labels are on each line 
-				String[] splitLine = currentLine.split(","); 
+				//since a proper board will have the same number of labels on each row, we only 
+				//need to set numColumns once 
 				numColumns = splitLine.length; 
+			}
+			//after numColumns has been set initially in above if-statement, if the length of the 
+			//current line is not equal to numColumns, throw an error 
+			if(splitLine.length != numColumns) {
+				throw new BadConfigFormatException(); 
 			}
 		}
 		//initialize grid 
