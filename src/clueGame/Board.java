@@ -114,9 +114,8 @@ public class Board {
 					default:
 						currentCell.setSecretPassage(cell.charAt(1));
 					}
-					
-					grid[row][column] = currentCell;
 				}
+				grid[row][column] = currentCell;
 				column++;
 			}
 			row++;
@@ -157,8 +156,7 @@ public class Board {
 		Board test = new Board(); 
 		test.setConfigFiles("ClueLayout.csv", "ClueSetup.txt"); 
 		test.initialize();
-		System.out.println(test.getNumColumns());
-		System.out.println(test.getNumRows());
+		System.out.println(test.getCell(20, 20).getCharacter());
 	}
 }
 	
