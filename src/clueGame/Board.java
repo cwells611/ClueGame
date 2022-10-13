@@ -1,7 +1,7 @@
 package clueGame;
 
-import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.*;
 
 public class Board {
@@ -10,14 +10,12 @@ public class Board {
 	private int numColumns;
 	private String layoutConfigFile;
 	private String setupConfigFile;
-	private File configFiles; 
-	private Scanner configScanner; 
 	private Map<Character, Room> roomMap = new HashMap<Character, Room>();
 	private static Board theInstance = new Board();
 	
     // constructor is private to ensure only one can be created
     private Board() {
-           super() ;
+           super();
            numRows = 0; 
            numColumns = 0; 
     }
@@ -41,13 +39,13 @@ public class Board {
 	public void loadSetupConfig() throws FileNotFoundException{
 		//load in ClueSetup.txt and then add the room character and room name to the map 
 		//assign file object to setup file 
-		configFiles = new File(setupConfigFile); 
+		FileReader setupReader = new FileReader(setupConfigFile);  
 		//setup scanner
-		configScanner = new Scanner(configFiles); 
+		Scanner setupScanner = new Scanner(setupReader); 
 		//loop to read in file data 
-		while(configScanner.hasNextLine()) {
+		while(setupScanner.hasNextLine()) {
 			//reads in line of file  
-			String currentLine = configScanner.nextLine(); 
+			String currentLine = setupScanner.nextLine(); 
 			//checks to make sure the line is not a comment, if it is, then just continues to read in next line 
 			//since that line has no info the program needs  
 			if(currentLine.contains("//")) {
@@ -67,13 +65,13 @@ public class Board {
 	public void loadLayoutConfig() throws FileNotFoundException {
 		//load in ClueLayout.txt and then add the room character and room name to the map 
 		//assign file object to setup file 
-		configFiles = new File(layoutConfigFile); 
+		FileReader layoutReader = new FileReader(layoutConfigFile);  
 		//setup scanner
-		configScanner = new Scanner(configFiles); 
+		Scanner layoutScanner = new Scanner(layoutReader); 
 		int row = 0;
-		while(configScanner.hasNextLine()) {
+		while(layoutScanner.hasNextLine()) {
 			//create a board cell for each char
-			String currentLine = configScanner.nextLine(); 
+			String currentLine = layoutScanner.nextLine(); 
 			String[] splitLine = currentLine.split(",");
 			int column = 0;
 			for(String cell : splitLine) {
@@ -107,6 +105,8 @@ public class Board {
 			row++;
 			numRows++;
 		}
+		System.out.println(numRows);
+		System.out.println(numColumns);
 	}
 	
 	public void setConfigFiles(String csvFile, String txtFile) {
@@ -137,6 +137,14 @@ public class Board {
 	public BoardCell getCell(int row, int col) {
 		//returns cell that in grid at row, col 
 		return grid[row][col]; 
+	}
+	
+	public static void main(String[] args) {
+		Board test = new Board(); 
+		test.setConfigFiles("data/ClueLayout.csv", "data/ClueLayout.txt"); 
+		test.initialize();
+		System.out.println(test.getNumColumns());
+		System.out.println(test.getNumRows());
 	}
 }
 	
