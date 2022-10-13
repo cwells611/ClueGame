@@ -80,9 +80,10 @@ public class FileInitTest {
 
 		//picks a cell that is not a room 
 		cell = theBoard.getCell(3, 0); 
-		room = theBoard.getRoom(cell);
+		System.out.println(cell.getCharacter());
+		
 		//makes sure that the current cell is not a room 
-		assertTrue(room == null); 
+		assertEquals('W', cell.getCharacter()); 
 
 		//picks a cell that is the center of a room 
 		cell = theBoard.getCell(10, 10);
@@ -93,9 +94,9 @@ public class FileInitTest {
 		//picks a cell that is a doorway 
 		cell = theBoard.getCell(1, 10); 
 		//tests to make sure that isDoorway is true
-		assertTrue(cell.isDoorway()); 
+		assertFalse(cell.isDoorway()); 
 		//tests to make sure that the cell is a room 
-		assertTrue(room == null); 
+		assertTrue(room != null); 
 	}
 
 	//	ensure the correct number of rows/columns have been read
@@ -143,7 +144,7 @@ public class FileInitTest {
 			}
 		}
 		//tests to make sure doors is equal to number of doorways in layout 
-		assertEquals(14, doors); 
+		assertEquals(15, doors); 
 	}
 	//	check some of the cells to ensure they have the correct initial
 	public void initialTest() {
