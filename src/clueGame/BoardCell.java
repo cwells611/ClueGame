@@ -23,13 +23,8 @@ public class BoardCell{
 	}
 	
 	
-	
 	public void addAdj(BoardCell adj) {
-		
-	}
-	
-	public BoardCell getCell(int row, int col) {
-		return this;
+		adjList.add(adj); 
 	}
 	
 	public boolean isDoorway() {
