@@ -100,9 +100,11 @@ public class Board {
 				if(cell.length() == 2) {
 					switch(cell.charAt(1)) {
 					case '#':
+						roomMap.get(initial).setLabelCell(currentCell);
 						currentCell.setRoomLabel(true);
 						break;
 					case '*':
+						roomMap.get(initial).setCenterCell(currentCell);
 						currentCell.setRoomCenter(true);
 						break;
 					case '^':
