@@ -37,7 +37,7 @@ public class Board {
     }
      
 	
-	public void loadSetupConfig() throws FileNotFoundException{
+	public void loadSetupConfig() throws FileNotFoundException, BadConfigFormatException{
 		//load in ClueSetup.txt and then add the room character and room name to the map 
 		//assign file object to setup file 
 		FileReader setupReader = new FileReader(setupConfigFile);  
@@ -63,7 +63,7 @@ public class Board {
 		}
 	}
 	
-	public void loadLayoutConfig() throws FileNotFoundException {
+	public void loadLayoutConfig() throws FileNotFoundException, BadConfigFormatException {
 		//load in ClueLayout.txt and then add the room character and room name to the map 
 		//assign file object to setup file 
 		FileReader layoutReader = new FileReader(layoutConfigFile);  
