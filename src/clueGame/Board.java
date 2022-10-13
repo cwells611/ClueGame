@@ -2,6 +2,7 @@ package clueGame;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.PrintWriter;
 import java.util.*;
 
 public class Board {
@@ -68,6 +69,22 @@ public class Board {
 		FileReader layoutReader = new FileReader(layoutConfigFile);  
 		//setup scanner
 		Scanner layoutScanner = new Scanner(layoutReader); 
+		//need to first find the number of rows and cols to as to initialize the grid before we add anything to it 
+		while(layoutScanner.hasNextLine()) {
+			String currentLine = layoutScanner.nextLine(); 
+			numRows++;
+			//since the board is a square, we only need to set the numColumns once because each 
+			//subsequent line will have the same number of columns 
+			if(numColumns == 0) {
+				//determines the number of columns by seeing how many labels are on each line 
+				String[] splitLine = currentLine.split(","); 
+				numColumns = splitLine.length; 
+			}
+		}
+		//initialize grid 
+		this.grid = new BoardCell[numRows][numColumns]; 
+		//resets scanner so it can read file again
+		layoutScanner.reset(); 
 		int row = 0;
 		while(layoutScanner.hasNextLine()) {
 			//create a board cell for each char
@@ -100,13 +117,9 @@ public class Board {
 					grid[row][column] = currentCell;
 				}
 				column++;
-				numColumns++;
 			}
 			row++;
-			numRows++;
 		}
-		System.out.println(numRows);
-		System.out.println(numColumns);
 	}
 	
 	public void setConfigFiles(String csvFile, String txtFile) {
@@ -141,7 +154,7 @@ public class Board {
 	
 	public static void main(String[] args) {
 		Board test = new Board(); 
-		test.setConfigFiles("data/ClueLayout.csv", "data/ClueLayout.txt"); 
+		test.setConfigFiles("ClueLayout.csv", "ClueSetup.txt"); 
 		test.initialize();
 		System.out.println(test.getNumColumns());
 		System.out.println(test.getNumRows());
