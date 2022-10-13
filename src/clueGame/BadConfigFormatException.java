@@ -6,7 +6,7 @@ public class BadConfigFormatException extends Exception{
 	}
 	
 	public BadConfigFormatException(String message) {
-		System.out.println(message);
+		super(message);
 	}
 
 }
