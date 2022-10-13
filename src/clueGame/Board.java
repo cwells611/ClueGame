@@ -106,9 +106,19 @@ public class Board {
 						currentCell.setRoomCenter(true);
 						break;
 					case '^':
+						currentCell.setDoorDirection(DoorDirection.UP);
+						currentCell.setDoorway(true);
+						break;
 					case 'v':
+						currentCell.setDoorDirection(DoorDirection.DOWN);
+						currentCell.setDoorway(true);
+						break;
 					case '>':
+						currentCell.setDoorDirection(DoorDirection.RIGHT);
+						currentCell.setDoorway(true);
+						break;
 					case '<':
+						currentCell.setDoorDirection(DoorDirection.LEFT);
 						currentCell.setDoorway(true);
 						break;
 					default:

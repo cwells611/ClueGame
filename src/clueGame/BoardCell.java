@@ -23,6 +23,10 @@ public class BoardCell{
 	}
 	
 	
+	public void setDoorDirection(DoorDirection d) {
+		this.doorDirection = d;
+	}
+	
 	public void addAdj(BoardCell adj) {
 		adjList.add(adj); 
 	}
