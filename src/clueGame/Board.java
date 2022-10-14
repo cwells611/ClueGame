@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.*;
 
+import experiment.TestBoardCell;
+
 public class Board {
 	private BoardCell[][] grid;
 	private int numRows;
@@ -12,6 +14,8 @@ public class Board {
 	private String layoutConfigFile;
 	private String setupConfigFile;
 	private Map<Character, Room> roomMap = new HashMap<Character, Room>();
+	private Set<BoardCell> visited;
+	private Set<BoardCell> targets;
 	private static Board theInstance = new Board();
 	
     // constructor is private to ensure only one can be created
@@ -182,6 +186,65 @@ public class Board {
 	public BoardCell getCell(int row, int col) {
 		//returns cell that in grid at row, col 
 		return grid[row][col]; 
+	}
+	public Set<BoardCell> getAdjList(int i, int j) {
+		return grid[i][j].getAdjList();
+	}
+	public void calcTargets(BoardCell startCell, int pathLength) {
+		visited.add(startCell); 
+		recursiveCalcTargets(startCell, pathLength);
+	}
+	
+	// method that will determine the possible targets from a certain roll
+	public void recursiveCalcTargets(BoardCell startCell, int pathLength) {
+		//calculates adjacency list for cell we are currently looking at 
+		calcAdjacencies(startCell); 
+		for( BoardCell adjCell : startCell.getAdjList()) {
+			if(visited.contains(adjCell)) {
+				continue;
+			}else {
+				if(adjCell.getIsRoom()) {
+					targets.add(adjCell);
+				}
+				if(!adjCell.getOccupied()) {
+					visited.add(adjCell);
+					if(pathLength == 1) {
+						targets.add(adjCell);
+					}else {
+						recursiveCalcTargets(adjCell, pathLength - 1);
+					}
+					visited.remove(adjCell);
+				}
+			}
+		}
+	}
+	
+	public void calcAdjacencies(BoardCell cell) {
+		//System.out.println("[" + cell.getRow() + ", " + cell.getCol() + "]");
+		// testing left edge
+		if (cell.getCol() != 0) {
+			BoardCell leftCell = grid[cell.getRow()][cell.getCol() - 1];
+			cell.addAdj(leftCell);
+		}
+		// testing right edge
+		if (cell.getCol() != numColumns - 1) {
+			BoardCell rightCell = grid[cell.getRow()][cell.getCol() + 1];
+			cell.addAdj(rightCell);
+		}
+		// testing top edge
+		if (cell.getRow() != 0) {
+			BoardCell upperCell = grid[cell.getRow() - 1][cell.getCol()];
+			cell.addAdj(upperCell);
+		}
+		// testing top edge
+		if (cell.getRow() != numRows - 1) {
+			BoardCell lowerCell = grid[cell.getRow() + 1][cell.getCol()];
+			cell.addAdj(lowerCell);
+		}
+		
+	}
+	public Set<BoardCell> getTargets() {
+		return this.targets;
 	}
 }
 	

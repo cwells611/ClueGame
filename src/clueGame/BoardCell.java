@@ -10,6 +10,8 @@ public class BoardCell{
 	private boolean roomLabel;
 	private boolean roomCenter;
 	private boolean doorway;
+	private boolean isRoom;
+	private boolean isOccupied;
 	private char secretPassage;
 	private Set<BoardCell> adjList;
 	
@@ -17,6 +19,7 @@ public class BoardCell{
 		this.row = row;
 		this.col = col;
 		this.initial = initial;
+		isOccupied = false;
 		roomLabel = false;
 		roomCenter = false;
 		doorway = false;
@@ -56,6 +59,10 @@ public class BoardCell{
 		return this.initial;
 	}
 	
+	public Set<BoardCell> getAdjList(){
+		return this.adjList;
+	}
+	
 	public void setRoomLabel(boolean label) {
 		this.roomLabel = label;
 	}
@@ -70,5 +77,30 @@ public class BoardCell{
 	
 	public void setSecretPassage(char passage) {
 		this.secretPassage = passage;
+	}
+
+	public int getCol() {
+		return this.col;
+	}
+	
+	public int getRow() {
+		return this.row;
+	}
+
+
+	public boolean getIsRoom() {
+		// TODO Auto-generated method stub
+		return this.isRoom;
+	}
+
+
+	public void setOccupied(boolean occupied) {
+		this.isOccupied = occupied;	
+	}
+
+
+	public boolean getOccupied() {
+		// TODO Auto-generated method stub
+		return this.isOccupied;
 	}
 }
