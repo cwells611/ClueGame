@@ -23,6 +23,7 @@ public class BoardCell{
 		roomLabel = false;
 		roomCenter = false;
 		doorway = false;
+		adjList = new HashSet<BoardCell>(); 
 	}
 	
 	
