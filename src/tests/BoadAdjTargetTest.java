@@ -29,5 +29,73 @@ public class BoadAdjTargetTest {
 		theBoard.initialize();
 	}
 	
+
+/*
+ * ADJACENCY TESTS
+ */
 	
+//	Locations with only walkways as adjacent locations
+	//@Test
+	public void testWalkwayAdjacencies(){
+		
+	}
+//	Locations within rooms not center (should have empty adjacency list)
+	//@Test
+	public void testNotCenterRoomAdjacencies() {
+		
+	}
+//	Locations that are at each edge of the board
+	//@Test
+	public void testEdgeAdjacencies(){
+		
+	}
+//	Locations that are beside a room cell that is not a doorway	
+	//@Test
+	public void testBesideRoomAdjacency() {
+		
+	}
+//	Locations that are doorways
+	//@Test
+	public void testDoorwayAdjacency() {
+		
+	}
+//	Locations that are connected by secret passage	
+	//@Test
+	public void testSecretPassage() {
+		
+	}
+	
+/*
+ * TARGET TESTS
+ */
+	
+//	Targets along walkways, at various distances
+	//@Test
+	public void testWalkwayTargets(){
+		
+	}
+	
+//	Targets that allow the user to enter a room
+	//@Test
+	public void testEnterTargets() {
+		
+	}
+	
+//	Targets calculated when leaving a room without secret passage
+	//@Test
+	public void testLeavingNoPassage() {
+		
+	}
+	
+//	Targets calculated when leaving a room with secret passage
+	//@Test
+	public void testLeavingPassage() {
+		
+	}
+	
+//	Targets that reflect blocking by other players
+	//@Test
+	public void testPlayerBlock() {
+		
+	}
 }
