@@ -141,7 +141,11 @@ public class Board {
 					default:
 						currentCell.setSecretPassage(cell.charAt(1));
 					}
-					
+				}
+				//check to see if the set of keys in the map of rooms contains the initial of the current
+				//cell, if not throw and error 
+				if(!roomMap.containsKey(initial)) {
+					throw new BadConfigFormatException(); 
 				}
 				grid[row][column] = currentCell;
 				column++;
