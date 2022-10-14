@@ -37,32 +37,32 @@ public class BoadAdjTargetTest {
 //	Locations with only walkways as adjacent locations
 	//@Test
 	public void testWalkwayAdjacencies(){
-		
+		//test spot (4,2)
 	}
 //	Locations within rooms not center (should have empty adjacency list)
 	//@Test
 	public void testNotCenterRoomAdjacencies() {
-		
+		//test spot (0,10)
 	}
 //	Locations that are at each edge of the board
 	//@Test
 	public void testEdgeAdjacencies(){
-		
+		//test spot (1,24)
 	}
 //	Locations that are beside a room cell that is not a doorway	
 	//@Test
 	public void testBesideRoomAdjacency() {
-		
+		//test spot (24, 8)
 	}
 //	Locations that are doorways
 	//@Test
 	public void testDoorwayAdjacency() {
-		
+		//test spot (7,5)
 	}
 //	Locations that are connected by secret passage	
 	//@Test
 	public void testSecretPassage() {
-		
+		//test spot (21, 23)
 	}
 	
 /*
