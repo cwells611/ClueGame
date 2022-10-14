@@ -179,5 +179,9 @@ public class Board {
 		//returns cell that in grid at row, col 
 		return grid[row][col]; 
 	}
+	public Set<BoardCell> getAdjList(int i, int j) {
+		// TODO Auto-generated method stub
+		return grid[i][j].getAdjList();
+	}
 }
 	

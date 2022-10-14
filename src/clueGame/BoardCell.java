@@ -56,6 +56,10 @@ public class BoardCell{
 		return this.initial;
 	}
 	
+	public Set<BoardCell> getAdjList(){
+		return this.adjList;
+	}
+	
 	public void setRoomLabel(boolean label) {
 		this.roomLabel = label;
 	}
