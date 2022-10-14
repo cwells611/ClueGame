@@ -23,6 +23,8 @@ public class Board {
            super();
            numRows = 0; 
            numColumns = 0; 
+           visited = new HashSet<BoardCell>();
+           targets = new HashSet<BoardCell>(); 
     }
     // this method returns the only Board
     public static Board getInstance() {
