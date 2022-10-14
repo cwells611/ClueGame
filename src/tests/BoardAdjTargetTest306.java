@@ -35,7 +35,6 @@ public class BoardAdjTargetTest306 {
 		// we want to test a couple of different rooms.
 		// First, the study that only has a single door but a secret room
 		Set<BoardCell> testList = board.getAdjList(2, 2);
-		System.out.println(testList.size());
 		assertEquals(2, testList.size());
 		assertTrue(testList.contains(board.getCell(4, 6)));
 		assertTrue(testList.contains(board.getCell(20, 19)));
