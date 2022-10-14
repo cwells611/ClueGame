@@ -32,7 +32,9 @@ public class Board {
     		loadSetupConfig(); 
     		loadLayoutConfig(); 
     	}catch(FileNotFoundException e) {
-    		System.out.println("File not found.");
+    		System.out.println(e);
+    	}catch(BadConfigFormatException e) {
+    		System.out.println(e);
     	}
     }
      
@@ -54,12 +56,18 @@ public class Board {
 			}
 			//takes each line and splits up line by comma then space
 			String[] lineInfo = currentLine.split(", "); 
-			//converts the string containing the label to a char 
-			char label = lineInfo[2].charAt(0); 
-			//creates a room out of the room name string contained in lineInfo 
-			Room room = new Room(lineInfo[1]); 
-			//adds label and room to the map 
-			roomMap.put(label, room); 
+			//checks to make sure that the first string in the array is either Room or Space, if not, throws error
+			if(lineInfo[0].equals("Room") || lineInfo[0].equals("Space")) {
+				//converts the string containing the label to a char 
+				char label = lineInfo[2].charAt(0); 
+				//creates a room out of the room name string contained in lineInfo 
+				Room room = new Room(lineInfo[1]); 
+				//adds label and room to the map 
+				roomMap.put(label, room); 
+			}
+			else {
+				throw new BadConfigFormatException("Setup text file not written properly, check spelling and spaces"); 
+			}
 		}
 	}
 	
@@ -78,10 +86,17 @@ public class Board {
 			numRows++;
 			//since the board is a square, we only need to set the numColumns once because each 
 			//subsequent line will have the same number of columns 
+			//determines the number of columns by seeing how many labels are on each line 
+			String[] splitLine = currentLine.split(","); 
 			if(numColumns == 0) {
-				//determines the number of columns by seeing how many labels are on each line 
-				String[] splitLine = currentLine.split(","); 
+				//since a proper board will have the same number of labels on each row, we only 
+				//need to set numColumns once 
 				numColumns = splitLine.length; 
+			}
+			//after numColumns has been set initially in above if-statement, if the length of the 
+			//current line is not equal to numColumns, throw an error 
+			if(splitLine.length != numColumns) {
+				throw new BadConfigFormatException(); 
 			}
 		}
 		//initialize grid 
@@ -126,6 +141,7 @@ public class Board {
 					default:
 						currentCell.setSecretPassage(cell.charAt(1));
 					}
+					
 				}
 				grid[row][column] = currentCell;
 				column++;
@@ -162,13 +178,6 @@ public class Board {
 	public BoardCell getCell(int row, int col) {
 		//returns cell that in grid at row, col 
 		return grid[row][col]; 
-	}
-	
-	public static void main(String[] args) {
-		Board test = new Board(); 
-		test.setConfigFiles("ClueLayout.csv", "ClueSetup.txt"); 
-		test.initialize();
-		System.out.println(test.getCell(20, 20).getCharacter());
 	}
 }
 	
