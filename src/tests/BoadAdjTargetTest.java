@@ -50,8 +50,8 @@ public class BoadAdjTargetTest {
 //	Locations within rooms not center (should have empty adjacency list)
 	@Test
 	public void testNotCenterRoomAdjacencies() {
-		//test spot (0,10)
-		Set<BoardCell> adjList = theBoard.getAdjList(0, 10); 
+		//test spot (10, 0)
+		Set<BoardCell> adjList = theBoard.getAdjList(10, 0); 
 		assertEquals(0, adjList.size()); 
 	}
 //	Locations that are at each edge of the board
@@ -76,13 +76,13 @@ public class BoadAdjTargetTest {
 //	Locations that are doorways
 	@Test
 	public void testDoorwayAdjacency() {
-		//test spot (7,5)
-		Set<BoardCell> adjList = theBoard.getAdjList(7, 5); 
+		//test spot (10, 19)
+		Set<BoardCell> adjList = theBoard.getAdjList(10, 19); 
 		assertEquals(4, adjList.size()); 
-		assertTrue(adjList.contains(theBoard.getCell(10, 2)));
-		assertTrue(adjList.contains(theBoard.getCell(6, 5))); 
- 		assertTrue(adjList.contains(theBoard.getCell(8, 5))); 
- 		assertTrue(adjList.contains(theBoard.getCell(7, 6))); 
+		assertTrue(adjList.contains(theBoard.getCell(10, 18)));
+		assertTrue(adjList.contains(theBoard.getCell(10, 20))); 
+ 		assertTrue(adjList.contains(theBoard.getCell(11, 19))); 
+ 		assertTrue(adjList.contains(theBoard.getCell(5, 21))); 
 	}
 //	Locations that are connected by secret passage	
 	@Test
@@ -223,6 +223,7 @@ public class BoadAdjTargetTest {
 		assertTrue(targets.contains(theBoard.getCell(11, 18)));
 		assertTrue(targets.contains(theBoard.getCell(13, 18)));
 		assertTrue(targets.contains(theBoard.getCell(14, 17)));
+		assertFalse(targets.contains(theBoard.getCell(12, 18)));
 		
 		
 		//roll 3
@@ -236,6 +237,7 @@ public class BoadAdjTargetTest {
 		assertTrue(targets.contains(theBoard.getCell(13, 19)));
 		assertTrue(targets.contains(theBoard.getCell(14, 18)));
 		assertTrue(targets.contains(theBoard.getCell(15, 17)));
+		assertFalse(targets.contains(theBoard.getCell(12, 18)));
 		
 		//test cell (5, 7) with roll 3 and cell (7, 6) occupied 
 		theBoard.getCell(7, 6).setOccupied(true);
@@ -252,5 +254,6 @@ public class BoadAdjTargetTest {
 		assertTrue(targets.contains(theBoard.getCell(6, 7)));  
 		assertTrue(targets.contains(theBoard.getCell(6, 8)));  
 		assertTrue(targets.contains(theBoard.getCell(5, 6)));  
+		assertFalse(targets.contains(theBoard.getCell(7, 6)));
 	}
 }
