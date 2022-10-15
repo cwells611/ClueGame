@@ -99,7 +99,7 @@ public class BoadAdjTargetTest {
  */
 	
 //	Targets along walkways, at various distances
-	//@Test
+	@Test
 	public void testWalkwayTargets(){
 		//roll of 1
 		theBoard.calcTargets(theBoard.getCell(24, 0), 1);
@@ -128,7 +128,7 @@ public class BoadAdjTargetTest {
 	}
 	
 //	Targets that allow the user to enter a room
-	//@Test
+	@Test
 	public void testEnterTargets() {
 		//test cell with different rolls that will allow player to enter a room 
 		//test cell (8,5) with roll 2
@@ -160,7 +160,7 @@ public class BoadAdjTargetTest {
 	}
 	
 //	Targets calculated when leaving a room without secret passage
-	//@Test
+	@Test
 	public void testLeavingNoPassage() {
 		//testing Chapter
 		
@@ -188,7 +188,7 @@ public class BoadAdjTargetTest {
 	}
 	
 //	Targets calculated when leaving a room with secret passage
-	//@Test
+	@Test
 	public void testLeavingPassage() {
 		//test cell (10, 2) with roll 2
 		theBoard.calcTargets(theBoard.getCell(10, 2), 2);
