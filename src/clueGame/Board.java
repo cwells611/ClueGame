@@ -13,7 +13,7 @@ public class Board {
 	private int numColumns;
 	private String layoutConfigFile;
 	private String setupConfigFile;
-	private Map<Character, Room> roomMap = new HashMap<Character, Room>();
+	private Map<Character, Room> roomMap;
 	private Set<BoardCell> visited;
 	private Set<BoardCell> targets;
 	private static Board theInstance = new Board();
@@ -21,10 +21,6 @@ public class Board {
     // constructor is private to ensure only one can be created
     private Board() {
            super();
-           numRows = 0; 
-           numColumns = 0; 
-           visited = new HashSet<BoardCell>();
-           targets = new HashSet<BoardCell>(); 
     }
     // this method returns the only Board
     public static Board getInstance() {
@@ -35,6 +31,10 @@ public class Board {
      */
     public void initialize(){
     	try {
+    		numRows = 0; 
+            numColumns = 0; 
+    		visited = new HashSet<BoardCell>();
+            targets = new HashSet<BoardCell>(); 
     		loadSetupConfig(); 
     		loadLayoutConfig(); 
     	}catch(FileNotFoundException e) {
@@ -47,6 +47,8 @@ public class Board {
 	
 	public void loadSetupConfig() throws FileNotFoundException, BadConfigFormatException{
 		//load in ClueSetup.txt and then add the room character and room name to the map 
+		//initialize roomMap
+		roomMap = new HashMap<Character, Room>(); 
 		//assign file object to setup file 
 		FileReader setupReader = new FileReader(setupConfigFile);  
 		//setup scanner

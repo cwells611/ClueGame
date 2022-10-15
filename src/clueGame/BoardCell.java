@@ -22,8 +22,8 @@ public class BoardCell{
 		isOccupied = false;
 		roomLabel = false;
 		roomCenter = false;
-		doorway = false;
-		adjList = new HashSet<BoardCell>(); 
+		doorway = false; 
+		adjList = new HashSet<BoardCell>();
 	}
 	
 	
