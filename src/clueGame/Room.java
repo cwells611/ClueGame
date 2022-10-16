@@ -2,12 +2,14 @@ package clueGame;
 
 public class Room {
 	private String name;
+	private char label;
 	private BoardCell centerCell;
 	private BoardCell labelCell;
+	private BoardCell secretPassage;
 	
-	
-	public Room(String name) {
+	public Room(String name, char label) {
 		this.name = name; 
+		this.label = label;
 	}
 	
 	public String getName() {

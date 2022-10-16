@@ -14,6 +14,7 @@ public class Board {
 	private String layoutConfigFile;
 	private String setupConfigFile;
 	private Map<Character, Room> roomMap = new HashMap<Character, Room>();
+	private Map<Character, Character> secretPassages = new HashMap<Character, Character>();
 	private Set<BoardCell> visited;
 	private Set<BoardCell> targets;
 	private static Board theInstance = new Board();
@@ -67,7 +68,7 @@ public class Board {
 				//converts the string containing the label to a char 
 				char label = lineInfo[2].charAt(0); 
 				//creates a room out of the room name string contained in lineInfo 
-				Room room = new Room(lineInfo[1]); 
+				Room room = new Room(lineInfo[1], label); 
 				//adds label and room to the map 
 				roomMap.put(label, room); 
 			}
@@ -145,6 +146,7 @@ public class Board {
 						currentCell.setDoorway(true);
 						break;
 					default:
+						secretPassages.put(initial, cell.charAt(1));
 						currentCell.setSecretPassage(cell.charAt(1));
 					}
 				}
@@ -223,6 +225,15 @@ public class Board {
 	
 	public void calcAdjacencies(BoardCell cell) {
 		//System.out.println("[" + cell.getRow() + ", " + cell.getCol() + "]");
+		//checking if the cell is a room
+		if(cell.isRoomCenter()) {
+			if(cell.hasSecretPassage()) {
+				//add center cell of connecting room
+				char passage = cell.getSecretPassage();
+				Room passageRoom = roomMap.get(passage);
+				cell.addAdj(passageRoom.getCenterCell());
+			}
+		}
 		// testing left edge
 		if (cell.getCol() != 0) {
 			BoardCell leftCell = grid[cell.getRow()][cell.getCol() - 1];
