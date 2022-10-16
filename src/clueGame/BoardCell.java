@@ -94,6 +94,9 @@ public class BoardCell{
 		return this.row;
 	}
 
+	public char getInitial() {
+		return this.initial;
+	}
 
 	public boolean getIsRoom() {
 		// TODO Auto-generated method stub

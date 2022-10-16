@@ -17,6 +17,7 @@ public class Board {
 	private Map<Character, Character> secretPassages = new HashMap<Character, Character>();
 	private Set<BoardCell> visited;
 	private Set<BoardCell> targets;
+	private Set<BoardCell> doors;
 	private static Board theInstance = new Board();
 	
     // constructor is private to ensure only one can be created
@@ -114,6 +115,7 @@ public class Board {
 			String currentLine = layoutScanner.nextLine(); 
 			String[] splitLine = currentLine.split(",");
 			int column = 0;
+			//used for door setup
 			for(String cell : splitLine) {
 				//create a new board cell
 				char initial = cell.charAt(0);
@@ -132,18 +134,22 @@ public class Board {
 					case '^':
 						currentCell.setDoorDirection(DoorDirection.UP);
 						currentCell.setDoorway(true);
+						doors.add(currentCell);
 						break;
 					case 'v':
 						currentCell.setDoorDirection(DoorDirection.DOWN);
 						currentCell.setDoorway(true);
+						doors.add(currentCell);
 						break;
 					case '>':
 						currentCell.setDoorDirection(DoorDirection.RIGHT);
 						currentCell.setDoorway(true);
+						doors.add(currentCell);
 						break;
 					case '<':
 						currentCell.setDoorDirection(DoorDirection.LEFT);
 						currentCell.setDoorway(true);
+						doors.add(currentCell);
 						break;
 					default:
 						secretPassages.put(initial, cell.charAt(1));
@@ -159,6 +165,30 @@ public class Board {
 				column++;
 			}
 			row++;
+		}
+		
+		for(BoardCell door : doors) {
+			char adjChar;
+			Room adjRoom;
+			switch(door.getDoorDirection()) {
+			case UP:
+				adjChar = grid[door.getRow()-1][door.getCol()].getInitial();
+				adjRoom = roomMap.get(adjChar);
+				adjRoom.addDoor(grid[door.getRow()][door.getCol()]);
+			case DOWN:
+				adjChar = grid[door.getRow()+1][door.getCol()].getInitial();
+				adjRoom = roomMap.get(adjChar);
+				adjRoom.addDoor(grid[door.getRow()][door.getCol()]);
+			case LEFT:
+				adjChar = grid[door.getRow()][door.getCol()-1].getInitial();
+				adjRoom = roomMap.get(adjChar);
+				adjRoom.addDoor(grid[door.getRow()][door.getCol()]);
+			case RIGHT:
+				adjChar = grid[door.getRow()][door.getCol()+1].getInitial();
+				adjRoom = roomMap.get(adjChar);
+				adjRoom.addDoor(grid[door.getRow()][door.getCol()]);
+			}
+				
 		}
 	}
 	

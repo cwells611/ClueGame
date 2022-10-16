@@ -1,15 +1,23 @@
 package clueGame;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Room {
 	private String name;
 	private char label;
 	private BoardCell centerCell;
 	private BoardCell labelCell;
 	private BoardCell secretPassage;
+	private Set<BoardCell> doors = new HashSet<BoardCell>();
 	
 	public Room(String name, char label) {
 		this.name = name; 
 		this.label = label;
+	}
+	
+	public void addDoor(BoardCell door) {
+		doors.add(door);
 	}
 	
 	public String getName() {
