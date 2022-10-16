@@ -20,6 +20,10 @@ public class Room {
 		doors.add(door);
 	}
 	
+	public Set<BoardCell> getDoors(){
+		return this.doors;
+	}
+	
 	public String getName() {
 		return this.name;
 	}

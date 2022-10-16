@@ -17,7 +17,7 @@ public class Board {
 	private Map<Character, Character> secretPassages = new HashMap<Character, Character>();
 	private Set<BoardCell> visited;
 	private Set<BoardCell> targets;
-	private Set<BoardCell> doors;
+	private Set<BoardCell> doors = new HashSet<BoardCell>();
 	private static Board theInstance = new Board();
 	
     // constructor is private to ensure only one can be created
@@ -262,6 +262,11 @@ public class Board {
 				char passage = cell.getSecretPassage();
 				Room passageRoom = roomMap.get(passage);
 				cell.addAdj(passageRoom.getCenterCell());
+			}
+			Room room  = roomMap.get(cell.getInitial());
+			Set<BoardCell> roomDoors = room.getDoors();
+			for( BoardCell door : roomDoors) {
+				cell.addAdj(door);
 			}
 		}
 		// testing left edge
