@@ -12,6 +12,7 @@ public class BoardCell{
 	private boolean doorway;
 	private boolean isRoom;
 	private boolean isOccupied;
+	private char secretPassage;
 	private Set<BoardCell> adjList;
 	
 	public BoardCell(int row, int col, char initial) {
@@ -51,6 +52,10 @@ public class BoardCell{
 		return roomCenter;
 	}
 	
+	public char getSecretPassage() {
+		return this.secretPassage;
+	}
+	
 	public char getCharacter() {
 		return this.initial;
 	}
@@ -59,8 +64,20 @@ public class BoardCell{
 		return this.adjList;
 	}
 	
+	public void setRoomLabel(boolean label) {
+		this.roomLabel = label;
+	}
+	
+	public void setRoomCenter(boolean center) {
+		this.roomCenter = center;
+	}
+	
 	public void setDoorway(boolean doorway) {
 		this.doorway = doorway;
+	}
+	
+	public void setSecretPassage(char passage) {
+		this.secretPassage = passage;
 	}
 
 	public int getCol() {

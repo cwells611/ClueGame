@@ -190,7 +190,6 @@ public class Board {
 		return grid[row][col]; 
 	}
 	public Set<BoardCell> getAdjList(int i, int j) {
-		calcAdjacencies(grid[i][j]);
 		return grid[i][j].getAdjList();
 	}
 	public void calcTargets(BoardCell startCell, int pathLength) {
@@ -224,15 +223,6 @@ public class Board {
 	
 	public void calcAdjacencies(BoardCell cell) {
 		//System.out.println("[" + cell.getRow() + ", " + cell.getCol() + "]");
-		if(cell.getIsRoom()) {
-			if(cell.hasSecretPassage()) {
-				
-			}
-		}
-		//if space is a room center
-		
-		
-		//if space is a walkway
 		// testing left edge
 		if (cell.getCol() != 0) {
 			BoardCell leftCell = grid[cell.getRow()][cell.getCol() - 1];

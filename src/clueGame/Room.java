@@ -1,15 +1,12 @@
 package clueGame;
 
-public class Room extends BoardCell{
+public class Room {
 	private String name;
 	private BoardCell centerCell;
 	private BoardCell labelCell;
-	private boolean hasSecretPassage;
-	private char secretPassage;
 	
 	
-	public Room(int row, int col, char initial, String name) {
-		super(row, col, initial);
+	public Room(String name) {
 		this.name = name; 
 	}
 	
@@ -31,18 +28,6 @@ public class Room extends BoardCell{
 	
 	public BoardCell getCenterCell() {
 		return this.centerCell;
-	}
-	
-	public void setSecretPassage(char passage) {
-		this.secretPassage = passage;
-	}
-	
-	public boolean hasSecretPassage() {
-		return this.hasSecretPassage;
-	}
-	
-	public char getSecretPassage() {
-		return this.secretPassage;
 	}
 	
 }
