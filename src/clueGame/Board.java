@@ -13,20 +13,16 @@ public class Board {
 	private int numColumns;
 	private String layoutConfigFile;
 	private String setupConfigFile;
-	private Map<Character, Room> roomMap = new HashMap<Character, Room>();
-	private Map<Character, Character> secretPassages = new HashMap<Character, Character>();
+	private Map<Character, Room> roomMap;
+	private Map<Character, Character> secretPassages; 
 	private Set<BoardCell> visited;
 	private Set<BoardCell> targets;
-	private Set<BoardCell> doors = new HashSet<BoardCell>();
+	private Set<BoardCell> doors;
 	private static Board theInstance = new Board();
 	
     // constructor is private to ensure only one can be created
     private Board() {
            super();
-           numRows = 0; 
-           numColumns = 0; 
-           visited = new HashSet<BoardCell>();
-           targets = new HashSet<BoardCell>(); 
     }
     // this method returns the only Board
     public static Board getInstance() {
@@ -37,6 +33,13 @@ public class Board {
      */
     public void initialize(){
     	try {
+    		numRows = 0; 
+            numColumns = 0; 
+            visited = new HashSet<BoardCell>();
+            targets = new HashSet<BoardCell>(); 
+            roomMap = new HashMap<Character, Room>();
+            secretPassages = new HashMap<Character, Character>();
+            doors = new HashSet<BoardCell>();
     		loadSetupConfig(); 
     		loadLayoutConfig(); 
     	}catch(FileNotFoundException e) {
@@ -176,7 +179,7 @@ public class Board {
 				adjRoom = roomMap.get(adjChar);
 				adjRoom.addDoor(grid[door.getRow()][door.getCol()]);
 			case DOWN:
-				adjChar = grid[door.getRow()+1][door.getCol()].getInitial();
+				adjChar = grid[door.getRow()][door.getCol()].getInitial();
 				adjRoom = roomMap.get(adjChar);
 				adjRoom.addDoor(grid[door.getRow()][door.getCol()]);
 			case LEFT:
@@ -184,7 +187,7 @@ public class Board {
 				adjRoom = roomMap.get(adjChar);
 				adjRoom.addDoor(grid[door.getRow()][door.getCol()]);
 			case RIGHT:
-				adjChar = grid[door.getRow()][door.getCol()+1].getInitial();
+				adjChar = grid[door.getRow()][door.getCol()].getInitial();
 				adjRoom = roomMap.get(adjChar);
 				adjRoom.addDoor(grid[door.getRow()][door.getCol()]);
 			}
