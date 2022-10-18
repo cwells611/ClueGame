@@ -62,9 +62,6 @@ public class BoadAdjTargetTest {
 		theBoard.calcAdjacencies(theBoard.getCell(10, 24));
 		Set<BoardCell> adjList = theBoard.getAdjList(10, 24); 
 		assertEquals(3, adjList.size()); 
-		for(BoardCell cell : adjList) {
-			System.out.println(cell.getRow() + ", " + cell.getCol());
-		}
 		assertTrue(adjList.contains(theBoard.getCell(5, 21))); 
 		assertTrue(adjList.contains(theBoard.getCell(11, 24))); 
 		assertTrue(adjList.contains(theBoard.getCell(10, 23))); 
