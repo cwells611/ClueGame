@@ -178,18 +178,22 @@ public class Board {
 				adjChar = grid[door.getRow()-1][door.getCol()].getInitial();
 				adjRoom = roomMap.get(adjChar);
 				adjRoom.addDoor(grid[door.getRow()][door.getCol()]);
+				break;
 			case DOWN:
-				adjChar = grid[door.getRow()][door.getCol()].getInitial();
+				adjChar = grid[door.getRow()+1][door.getCol()].getInitial();
 				adjRoom = roomMap.get(adjChar);
 				adjRoom.addDoor(grid[door.getRow()][door.getCol()]);
+				break;
 			case LEFT:
 				adjChar = grid[door.getRow()][door.getCol()-1].getInitial();
 				adjRoom = roomMap.get(adjChar);
 				adjRoom.addDoor(grid[door.getRow()][door.getCol()]);
+				break;
 			case RIGHT:
-				adjChar = grid[door.getRow()][door.getCol()].getInitial();
+				adjChar = grid[door.getRow()][door.getCol()+1].getInitial();
 				adjRoom = roomMap.get(adjChar);
 				adjRoom.addDoor(grid[door.getRow()][door.getCol()]);
+				break;
 			}
 				
 		}
