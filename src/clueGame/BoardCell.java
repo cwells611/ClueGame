@@ -5,7 +5,7 @@ import java.util.*;
 public class BoardCell{
 	private int row;
 	private int col;
-	private char initial;
+	private char character;
 	private DoorDirection doorDirection;
 	private boolean roomLabel;
 	private boolean roomCenter;
@@ -19,7 +19,7 @@ public class BoardCell{
 	public BoardCell(int row, int col, char initial) {
 		this.row = row;
 		this.col = col;
-		this.initial = initial;
+		this.character = initial;
 		isOccupied = false;
 		roomLabel = false;
 		roomCenter = false;
@@ -62,7 +62,7 @@ public class BoardCell{
 	}
 	
 	public char getCharacter() {
-		return this.initial;
+		return this.character;
 	}
 	
 	public Set<BoardCell> getAdjList(){
@@ -94,12 +94,7 @@ public class BoardCell{
 		return this.row;
 	}
 
-	public char getInitial() {
-		return this.initial;
-	}
-
 	public boolean getIsRoom() {
-		// TODO Auto-generated method stub
 		return this.isRoom;
 	}
 
@@ -110,7 +105,6 @@ public class BoardCell{
 
 
 	public boolean getOccupied() {
-		// TODO Auto-generated method stub
 		return this.isOccupied;
 	}
 }

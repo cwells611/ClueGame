@@ -1,5 +1,7 @@
 package clueGame;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
@@ -175,22 +177,22 @@ public class Board {
 			Room adjRoom;
 			switch(door.getDoorDirection()) {
 			case UP:
-				adjChar = grid[door.getRow()-1][door.getCol()].getInitial();
+				adjChar = grid[door.getRow()-1][door.getCol()].getCharacter();
 				adjRoom = roomMap.get(adjChar);
 				adjRoom.addDoor(grid[door.getRow()][door.getCol()]);
 				break;
 			case DOWN:
-				adjChar = grid[door.getRow()+1][door.getCol()].getInitial();
+				adjChar = grid[door.getRow()+1][door.getCol()].getCharacter();
 				adjRoom = roomMap.get(adjChar);
 				adjRoom.addDoor(grid[door.getRow()][door.getCol()]);
 				break;
 			case LEFT:
-				adjChar = grid[door.getRow()][door.getCol()-1].getInitial();
+				adjChar = grid[door.getRow()][door.getCol()-1].getCharacter();
 				adjRoom = roomMap.get(adjChar);
 				adjRoom.addDoor(grid[door.getRow()][door.getCol()]);
 				break;
 			case RIGHT:
-				adjChar = grid[door.getRow()][door.getCol()+1].getInitial();
+				adjChar = grid[door.getRow()][door.getCol()+1].getCharacter();
 				adjRoom = roomMap.get(adjChar);
 				adjRoom.addDoor(grid[door.getRow()][door.getCol()]);
 				break;
@@ -270,36 +272,88 @@ public class Board {
 				Room passageRoom = roomMap.get(passage);
 				cell.addAdj(passageRoom.getCenterCell());
 			}
-			Room room  = roomMap.get(cell.getInitial());
+			Room room  = roomMap.get(cell.getCharacter());
 			Set<BoardCell> roomDoors = room.getDoors();
 			for( BoardCell door : roomDoors) {
 				cell.addAdj(door);
 			}
 		}
+		
 		// testing left edge
 		if (cell.getCol() != 0) {
 			BoardCell leftCell = grid[cell.getRow()][cell.getCol() - 1];
-			cell.addAdj(leftCell);
+			//if the cell to the left is not a walkway or unused, then it must be a room so we create
+			//a new room and then get the center cell of that room and add that center cell to adjList
+			if(leftCell.getCharacter() == 'W' || leftCell.getCharacter() == 'X') {
+				cell.addAdj(leftCell);
+			}
+			else {
+				Room adjRoom = roomMap.get(leftCell.getCharacter()); 
+				BoardCell roomCenter = adjRoom.getCenterCell(); 
+				cell.addAdj(roomCenter);
+			}
 		}
 		// testing right edge
 		if (cell.getCol() != numColumns - 1) {
 			BoardCell rightCell = grid[cell.getRow()][cell.getCol() + 1];
-			cell.addAdj(rightCell);
+			//if the cell to the right is not a walkway or unused, then it must be a room so we create
+			//a new room and then get the center cell of that room and add that center cell to adjList
+			if(rightCell.getCharacter() == 'W' || rightCell.getCharacter() == 'X') {
+				cell.addAdj(rightCell);
+			}
+			else {
+				Room adjRoom = roomMap.get(rightCell.getCharacter()); 
+				BoardCell roomCenter = adjRoom.getCenterCell(); 
+				cell.addAdj(roomCenter);
+			}
 		}
 		// testing top edge
 		if (cell.getRow() != 0) {
 			BoardCell upperCell = grid[cell.getRow() - 1][cell.getCol()];
-			cell.addAdj(upperCell);
+			//if the cell above is not a walkway or unused, then it must be a room so we create
+			//a new room and then get the center cell of that room and add that center cell to adjList
+			if(upperCell.getCharacter() == 'W' || upperCell.getCharacter() == 'X') {
+				cell.addAdj(upperCell);
+			}
+			else {
+				Room adjRoom = roomMap.get(upperCell.getCharacter()); 
+				BoardCell roomCenter = adjRoom.getCenterCell(); 
+				cell.addAdj(roomCenter);
+			}
 		}
 		// testing top edge
 		if (cell.getRow() != numRows - 1) {
 			BoardCell lowerCell = grid[cell.getRow() + 1][cell.getCol()];
-			cell.addAdj(lowerCell);
+			//if the cell below is not a walkway or unused, then it must be a room so we create
+			//a new room and then get the center cell of that room and add that center cell to adjList
+			if(lowerCell.getCharacter() == 'W' || lowerCell.getCharacter() == 'X') {
+				cell.addAdj(lowerCell);
+			}
+			else {
+				Room adjRoom = roomMap.get(lowerCell.getCharacter()); 
+				BoardCell roomCenter = adjRoom.getCenterCell(); 
+				cell.addAdj(roomCenter);
+			}
 		}
 		
 	}
 	public Set<BoardCell> getTargets() {
 		return this.targets;
 	}
+	
+//	public static void main(String[] args) {
+//		Board theBoard = new Board(); 
+//		theBoard = Board.getInstance(); 
+//		//has the board read in the config files and setup board based on files 
+//		theBoard.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
+//		//loads both files even though we are only using one instance of board 
+//		theBoard.initialize();
+//		
+//		theBoard.calcAdjacencies(theBoard.getCell(10, 24));
+//		Set<BoardCell> adjList = theBoard.getAdjList(10, 24);  
+//		for(BoardCell cell : adjList) {
+//			System.out.println(cell.getRow() + ", " + cell.getCol());
+//		}
+//	}
 }
 	
