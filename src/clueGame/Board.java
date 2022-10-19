@@ -292,7 +292,6 @@ public class Board {
 				cell.addAdj(door);
 			}
 		}
-		
 		// testing left edge
 		if (cell.getCol() != 0) {
 			BoardCell leftCell = grid[cell.getRow()][cell.getCol() - 1];
@@ -302,7 +301,7 @@ public class Board {
 			}
 			//if the cell is not a walkway or unused space, then it must be a room, if that cell is 
 			//a doorway, then we get the center cell of that room and add it to adjList
-			else if(leftCell.isDoorway()) {
+			else if(cell.isDoorway() == true) {
 				Room adjRoom = roomMap.get(leftCell.getCharacter()); 
 				BoardCell roomCenter = adjRoom.getCenterCell(); 
 				cell.addAdj(roomCenter);
@@ -318,7 +317,7 @@ public class Board {
 			}
 			//if the cell is not a walkway or unused space, then it must be a room, if that cell is 
 			//a doorway, then we get the center cell of that room and add it to adjList
-			else if(rightCell.isDoorway()) {
+			else if(cell.isDoorway() == true) {
 				Room adjRoom = roomMap.get(rightCell.getCharacter()); 
 				BoardCell roomCenter = adjRoom.getCenterCell(); 
 				cell.addAdj(roomCenter);
@@ -334,7 +333,7 @@ public class Board {
 			}
 			//if the cell is not a walkway or unused space, then it must be a room, if that cell is 
 			//a doorway, then we get the center cell of that room and add it to adjList
-			else if(upperCell.isDoorway()) {
+			else if(cell.isDoorway() == true) {
 				Room adjRoom = roomMap.get(upperCell.getCharacter()); 
 				BoardCell roomCenter = adjRoom.getCenterCell(); 
 				cell.addAdj(roomCenter);
@@ -350,7 +349,7 @@ public class Board {
 			}
 			//if the cell is not a walkway or unused space, then it must be a room, if that cell is 
 			//a doorway, then we get the center cell of that room and add it to adjList
-			else if(lowerCell.isDoorway()) {
+			else if(cell.isDoorway() == true) {
 				Room adjRoom = roomMap.get(lowerCell.getCharacter()); 
 				BoardCell roomCenter = adjRoom.getCenterCell(); 
 				cell.addAdj(roomCenter);
