@@ -256,7 +256,7 @@ public class Board {
 				if(adjCell.getIsRoom()) {
 					targets.add(adjCell);
 				}
-				if(!adjCell.getOccupied()) {
+				if(!adjCell.getOccupied() && adjCell.getCharacter() != 'X') {
 					visited.add(adjCell);
 					if(pathLength == 1) {
 						targets.add(adjCell);

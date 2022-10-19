@@ -141,23 +141,27 @@ public class BoadAdjTargetTest {
 	}
 	
 //	Targets that allow the user to enter a room
-	//@Test
+	@Test
 	public void testEnterTargets() {
 		//test cell with different rolls that will allow player to enter a room 
 		//test cell (8,5) with roll 2
+		
+		Set<BoardCell> targets;
+		
 		theBoard.calcTargets(theBoard.getCell(8, 5), 2);
-		Set<BoardCell> targets = theBoard.getTargets(); 
+		targets = theBoard.getTargets(); 
 		assertEquals(5, targets.size()); 
 		assertTrue(targets.contains(theBoard.getCell(10, 2))); 
 		assertTrue(targets.contains(theBoard.getCell(10, 5))); 
 		assertTrue(targets.contains(theBoard.getCell(6, 5))); 
 		assertTrue(targets.contains(theBoard.getCell(9, 6))); 
 		assertTrue(targets.contains(theBoard.getCell(7, 6)));
+		targets.clear();
 		
 		//test cell (15, 11) with roll 4
 		theBoard.calcTargets(theBoard.getCell(15, 11), 4);
 		targets = theBoard.getTargets(); 
-		assertEquals(12, targets.size()); 
+		assertEquals(13, targets.size()); 
 		assertTrue(targets.contains(theBoard.getCell(10, 10))); 
 		assertTrue(targets.contains(theBoard.getCell(20, 11))); 
 		assertTrue(targets.contains(theBoard.getCell(15, 7))); 
@@ -167,9 +171,11 @@ public class BoadAdjTargetTest {
 		assertTrue(targets.contains(theBoard.getCell(16, 12)));
 		assertTrue(targets.contains(theBoard.getCell(14, 8)));
 		assertTrue(targets.contains(theBoard.getCell(14, 14)));
-		assertTrue(targets.contains(theBoard.getCell(16, 9)));
 		assertTrue(targets.contains(theBoard.getCell(14, 12)));
 		assertTrue(targets.contains(theBoard.getCell(15, 13)));
+		assertTrue(targets.contains(theBoard.getCell(14, 10)));
+		assertTrue(targets.contains(theBoard.getCell(15, 9)));
+		targets.clear();
 	}
 	
 //	Targets calculated when leaving a room without secret passage
