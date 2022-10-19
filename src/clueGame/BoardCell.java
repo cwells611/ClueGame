@@ -29,18 +29,6 @@ public class BoardCell{
 		adjList = new HashSet<BoardCell>(); 
 	}
 	
-	public BoardCell(int row, int col) {
-		this.row = row;
-		this.col = col;
-		this.isOccupied = false;
-		this.roomLabel = false;
-		this.roomCenter = false;
-		this.doorway = false;
-		this.isRoom = false; 
-		this.hasSecretPassage = false; 
-		adjList = new HashSet<BoardCell>(); 
-	}
-	
 	
 	public void setDoorDirection(DoorDirection d) {
 		this.doorDirection = d;

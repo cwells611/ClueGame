@@ -47,7 +47,7 @@ public class Board {
     		//loop through grid and calc adjacencies 
     		for(int row = 0; row < numRows; row++) {
     			for(int col = 0; col < numColumns; col++) {
-    				BoardCell cell = new BoardCell(row, col); 
+    				BoardCell cell = grid[row][col]; 
     				calcAdjacencies(cell); 
     			}
     		}
@@ -381,19 +381,5 @@ public class Board {
 		return this.targets;
 	}
 	
-//	public static void main(String[] args) {
-//		Board theBoard = new Board(); 
-//		theBoard = Board.getInstance(); 
-//		//has the board read in the config files and setup board based on files 
-//		theBoard.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
-//		//loads both files even though we are only using one instance of board 
-//		theBoard.initialize();
-//		
-//		theBoard.calcAdjacencies(theBoard.getCell(10, 19));
-//		Set<BoardCell> adjList = theBoard.getAdjList(10, 19); 
-//		for(BoardCell cell : adjList) {
-//			System.out.println(cell.getRow() + ", " + cell.getCol());
-//		}
-//	}
 }
 	
