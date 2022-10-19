@@ -20,10 +20,11 @@ public class BoardCell{
 		this.row = row;
 		this.col = col;
 		this.character = initial;
-		isOccupied = false;
-		roomLabel = false;
-		roomCenter = false;
-		doorway = false;
+		this.isOccupied = false;
+		this.roomLabel = false;
+		this.roomCenter = false;
+		this.doorway = false;
+		this.hasSecretPassage = false; 
 		adjList = new HashSet<BoardCell>(); 
 	}
 	

@@ -61,8 +61,7 @@ public class BoadAdjTargetTest {
 		//test spot (10,24)
 		theBoard.calcAdjacencies(theBoard.getCell(10, 24));
 		Set<BoardCell> adjList = theBoard.getAdjList(10, 24); 
-		assertEquals(3, adjList.size()); 
-		assertTrue(adjList.contains(theBoard.getCell(5, 21))); 
+		assertEquals(2, adjList.size()); 
 		assertTrue(adjList.contains(theBoard.getCell(11, 24))); 
 		assertTrue(adjList.contains(theBoard.getCell(10, 23))); 
 	}
@@ -82,6 +81,9 @@ public class BoadAdjTargetTest {
 		//test spot (10, 19)
 		theBoard.calcAdjacencies(theBoard.getCell(10, 19));
 		Set<BoardCell> adjList = theBoard.getAdjList(10, 19); 
+		for(BoardCell cell : adjList) {
+			System.out.println(cell.getRow() + ", " + cell.getCol());
+		}
 		assertEquals(4, adjList.size()); 
 		assertTrue(adjList.contains(theBoard.getCell(10, 18)));
 		assertTrue(adjList.contains(theBoard.getCell(10, 20))); 
@@ -91,15 +93,18 @@ public class BoadAdjTargetTest {
 //	Locations that are connected by secret passage	
 	@Test
 	public void testSecretPassage() {
-		//test spot (21, 23)
-		theBoard.calcAdjacencies(theBoard.getCell(21, 23));
-		Set<BoardCell> adjList = theBoard.getAdjList(21, 23); 
-		for(BoardCell cell : adjList) {
-			System.out.println(cell.getRow() + ", " + cell.getCol());
-		}
-		assertEquals(2, adjList.size());
-		assertTrue(adjList.contains(theBoard.getCell(20, 22)));
-		assertTrue(adjList.contains(theBoard.getCell(3, 8)));
+		//test being in a room with a secret passage
+		//test being at the center cell of the atrium (19, 21)
+		theBoard.calcAdjacencies(theBoard.getCell(19, 21));
+		Set<BoardCell> adjList = theBoard.getAdjList(19, 21);
+		assertEquals(5, adjList.size());
+		//the only adjacent cells would be the center cell of the room you are in, the center cell of the 
+		//room that the secret passage connects to, and the doors of the room you are currently in 
+		assertTrue(adjList.contains(theBoard.getCell(19, 21)));
+		assertTrue(adjList.contains(theBoard.getCell(2, 7)));
+		assertTrue(adjList.contains(theBoard.getCell(14, 22)));
+		assertTrue(adjList.contains(theBoard.getCell(21, 17)));
+		assertTrue(adjList.contains(theBoard.getCell(24, 24)));
 	}
 	
 /*

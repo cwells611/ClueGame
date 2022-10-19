@@ -16,7 +16,7 @@ public class Board {
 	private String layoutConfigFile;
 	private String setupConfigFile;
 	private Map<Character, Room> roomMap;
-	private Map<Character, Character> secretPassages; 
+	//private Map<Character, Character> secretPassages; 
 	private Set<BoardCell> visited;
 	private Set<BoardCell> targets;
 	private Set<BoardCell> doors;
@@ -40,7 +40,7 @@ public class Board {
             visited = new HashSet<BoardCell>();
             targets = new HashSet<BoardCell>(); 
             roomMap = new HashMap<Character, Room>();
-            secretPassages = new HashMap<Character, Character>();
+            //secretPassages = new HashMap<Character, Character>();
             doors = new HashSet<BoardCell>();
     		loadSetupConfig(); 
     		loadLayoutConfig(); 
@@ -157,8 +157,15 @@ public class Board {
 						doors.add(currentCell);
 						break;
 					default:
-						secretPassages.put(initial, cell.charAt(1));
-						currentCell.setSecretPassage(cell.charAt(1));
+						//if a room has a secret passage, then we want to set the hasSecretPassage boolean 
+						//to true for the center cell of that room since when we are in a room we will be 
+						//on the center cell and want to know if the room has a secret passage based on the center cell
+						//get the current room we are in 
+						Room currentRoom = roomMap.get(cell.charAt(0)); 
+						//get center cell of the room we are in 
+						BoardCell currentCenterCell = currentRoom.getCenterCell(); 
+						//setSecretPassage of center cell 
+						currentCenterCell.setSecretPassage(cell.charAt(1));
 					}
 				}
 				//check to see if the set of keys in the map of rooms contains the initial of the current
@@ -267,12 +274,19 @@ public class Board {
 		//checking if the cell is a room
 		if(cell.isRoomCenter()) {
 			if(cell.hasSecretPassage()) {
-				//add center cell of connecting room
-				char passage = cell.getSecretPassage();
-				Room passageRoom = roomMap.get(passage);
-				cell.addAdj(passageRoom.getCenterCell());
+				//adds current cell we are on, which is center of one of the rooms that the secret passsage
+				//connects 
+				cell.addAdj(cell);
+				//gets the other room that the secret passage connects 
+				Room otherSecretPassageRoom = roomMap.get(cell.getSecretPassage()); 
+				//gets center cell of that other room 
+				BoardCell otherCenterCell = otherSecretPassageRoom.getCenterCell(); 
+				//adds that cell to the adjList
+				cell.addAdj(otherCenterCell);
 			}
+			//gets the room that we are in 
 			Room room  = roomMap.get(cell.getCharacter());
+			//gets all the doors that are in that room and adds them to the adjList 
 			Set<BoardCell> roomDoors = room.getDoors();
 			for( BoardCell door : roomDoors) {
 				cell.addAdj(door);
@@ -282,58 +296,66 @@ public class Board {
 		// testing left edge
 		if (cell.getCol() != 0) {
 			BoardCell leftCell = grid[cell.getRow()][cell.getCol() - 1];
-			//if the cell to the left is not a walkway or unused, then it must be a room so we create
-			//a new room and then get the center cell of that room and add that center cell to adjList
+			//if the cell to the left is just a walkway or an unused space, then just add to adjList
 			if(leftCell.getCharacter() == 'W' || leftCell.getCharacter() == 'X') {
 				cell.addAdj(leftCell);
 			}
-			else {
+			//if the cell is not a walkway or unused space, then it must be a room, if that cell is 
+			//a doorway, then we get the center cell of that room and add it to adjList
+			else if(leftCell.isDoorway()) {
 				Room adjRoom = roomMap.get(leftCell.getCharacter()); 
 				BoardCell roomCenter = adjRoom.getCenterCell(); 
 				cell.addAdj(roomCenter);
 			}
+			//if the above cell is a room, but not a doorway, then it does not go in adjList 
 		}
 		// testing right edge
 		if (cell.getCol() != numColumns - 1) {
 			BoardCell rightCell = grid[cell.getRow()][cell.getCol() + 1];
-			//if the cell to the right is not a walkway or unused, then it must be a room so we create
-			//a new room and then get the center cell of that room and add that center cell to adjList
+			//if the cell to the right is just a walkway or an unused space, then just add to adjList
 			if(rightCell.getCharacter() == 'W' || rightCell.getCharacter() == 'X') {
 				cell.addAdj(rightCell);
 			}
-			else {
+			//if the cell is not a walkway or unused space, then it must be a room, if that cell is 
+			//a doorway, then we get the center cell of that room and add it to adjList
+			else if(rightCell.isDoorway()) {
 				Room adjRoom = roomMap.get(rightCell.getCharacter()); 
 				BoardCell roomCenter = adjRoom.getCenterCell(); 
 				cell.addAdj(roomCenter);
 			}
+			//if the above cell is a room, but not a doorway, then it does not go in adjList 
 		}
 		// testing top edge
 		if (cell.getRow() != 0) {
 			BoardCell upperCell = grid[cell.getRow() - 1][cell.getCol()];
-			//if the cell above is not a walkway or unused, then it must be a room so we create
-			//a new room and then get the center cell of that room and add that center cell to adjList
+			//if the cell above is just a walkway or an unused space, then just add to adjList
 			if(upperCell.getCharacter() == 'W' || upperCell.getCharacter() == 'X') {
 				cell.addAdj(upperCell);
 			}
-			else {
+			//if the cell is not a walkway or unused space, then it must be a room, if that cell is 
+			//a doorway, then we get the center cell of that room and add it to adjList
+			else if(upperCell.isDoorway()) {
 				Room adjRoom = roomMap.get(upperCell.getCharacter()); 
 				BoardCell roomCenter = adjRoom.getCenterCell(); 
 				cell.addAdj(roomCenter);
 			}
+			//if the above cell is a room, but not a doorway, then it does not go in adjList 
 		}
 		// testing top edge
 		if (cell.getRow() != numRows - 1) {
 			BoardCell lowerCell = grid[cell.getRow() + 1][cell.getCol()];
-			//if the cell below is not a walkway or unused, then it must be a room so we create
-			//a new room and then get the center cell of that room and add that center cell to adjList
+			//if the cell below is just a walkway or an unused space, then just add to adjList
 			if(lowerCell.getCharacter() == 'W' || lowerCell.getCharacter() == 'X') {
 				cell.addAdj(lowerCell);
 			}
-			else {
+			//if the cell is not a walkway or unused space, then it must be a room, if that cell is 
+			//a doorway, then we get the center cell of that room and add it to adjList
+			else if(lowerCell.isDoorway()) {
 				Room adjRoom = roomMap.get(lowerCell.getCharacter()); 
 				BoardCell roomCenter = adjRoom.getCenterCell(); 
 				cell.addAdj(roomCenter);
 			}
+			//if the above cell is a room, but not a doorway, then it does not go in adjList 
 		}
 		
 	}
@@ -341,19 +363,19 @@ public class Board {
 		return this.targets;
 	}
 	
-//	public static void main(String[] args) {
-//		Board theBoard = new Board(); 
-//		theBoard = Board.getInstance(); 
-//		//has the board read in the config files and setup board based on files 
-//		theBoard.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
-//		//loads both files even though we are only using one instance of board 
-//		theBoard.initialize();
-//		
-//		theBoard.calcAdjacencies(theBoard.getCell(10, 24));
-//		Set<BoardCell> adjList = theBoard.getAdjList(10, 24);  
-//		for(BoardCell cell : adjList) {
-//			System.out.println(cell.getRow() + ", " + cell.getCol());
-//		}
-//	}
+	public static void main(String[] args) {
+		Board theBoard = new Board(); 
+		theBoard = Board.getInstance(); 
+		//has the board read in the config files and setup board based on files 
+		theBoard.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
+		//loads both files even though we are only using one instance of board 
+		theBoard.initialize();
+		
+		theBoard.calcAdjacencies(theBoard.getCell(10, 19));
+		Set<BoardCell> adjList = theBoard.getAdjList(10, 19); 
+		for(BoardCell cell : adjList) {
+			System.out.println(cell.getRow() + ", " + cell.getCol());
+		}
+	}
 }
 	
