@@ -94,10 +94,9 @@ public class BoadAdjTargetTest {
 		//test being at the center cell of the atrium (19, 21)
 		theBoard.calcAdjacencies(theBoard.getCell(19, 21));
 		Set<BoardCell> adjList = theBoard.getAdjList(19, 21);
-		assertEquals(5, adjList.size());
+		assertEquals(4, adjList.size());
 		//the only adjacent cells would be the center cell of the 
 		//room that the secret passage connects to, and the doors of the room you are currently in 
-		assertTrue(adjList.contains(theBoard.getCell(19, 21)));
 		assertTrue(adjList.contains(theBoard.getCell(2, 7)));
 		assertTrue(adjList.contains(theBoard.getCell(14, 22)));
 		assertTrue(adjList.contains(theBoard.getCell(21, 17)));

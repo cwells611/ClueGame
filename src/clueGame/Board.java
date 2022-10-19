@@ -274,9 +274,6 @@ public class Board {
 		//checking if the cell is a room
 		if(cell.isRoomCenter()) {
 			if(cell.hasSecretPassage()) {
-				//adds current cell we are on, which is center of one of the rooms that the secret passsage
-				//connects 
-				cell.addAdj(cell);
 				//gets the other room that the secret passage connects 
 				Room otherSecretPassageRoom = roomMap.get(cell.getSecretPassage()); 
 				//gets center cell of that other room 
@@ -362,19 +359,19 @@ public class Board {
 		return this.targets;
 	}
 	
-	public static void main(String[] args) {
-		Board theBoard = new Board(); 
-		theBoard = Board.getInstance(); 
-		//has the board read in the config files and setup board based on files 
-		theBoard.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
-		//loads both files even though we are only using one instance of board 
-		theBoard.initialize();
-		
-		theBoard.calcAdjacencies(theBoard.getCell(10, 19));
-		Set<BoardCell> adjList = theBoard.getAdjList(10, 19); 
-		for(BoardCell cell : adjList) {
-			System.out.println(cell.getRow() + ", " + cell.getCol());
-		}
-	}
+//	public static void main(String[] args) {
+//		Board theBoard = new Board(); 
+//		theBoard = Board.getInstance(); 
+//		//has the board read in the config files and setup board based on files 
+//		theBoard.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
+//		//loads both files even though we are only using one instance of board 
+//		theBoard.initialize();
+//		
+//		theBoard.calcAdjacencies(theBoard.getCell(10, 19));
+//		Set<BoardCell> adjList = theBoard.getAdjList(10, 19); 
+//		for(BoardCell cell : adjList) {
+//			System.out.println(cell.getRow() + ", " + cell.getCol());
+//		}
+//	}
 }
 	
