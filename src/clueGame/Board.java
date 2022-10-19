@@ -125,6 +125,10 @@ public class Board {
 				//create a new board cell
 				char initial = cell.charAt(0);
 				BoardCell currentCell = new BoardCell(row, column, initial);
+				//if the initial is not a W or an X, the set getIsRoom to true so we know the cell is a room
+//				if(initial != 'W' && initial != 'X') {
+//					currentCell.setIsRoom(true);
+//				}
 				
 				if(cell.length() == 2) {
 					switch(cell.charAt(1)) {
@@ -253,6 +257,7 @@ public class Board {
 			if(visited.contains(adjCell)) {
 				continue;
 			}else {
+				//if the adjCell is a room, then add the center cell of that room to targets 
 				if(adjCell.getIsRoom()) {
 					targets.add(adjCell);
 				}

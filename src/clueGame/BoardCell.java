@@ -24,6 +24,7 @@ public class BoardCell{
 		this.roomLabel = false;
 		this.roomCenter = false;
 		this.doorway = false;
+		this.isRoom = false; 
 		this.hasSecretPassage = false; 
 		adjList = new HashSet<BoardCell>(); 
 	}
@@ -94,6 +95,10 @@ public class BoardCell{
 	public int getRow() {
 		return this.row;
 	}
+	
+//	public void setIsRoom(boolean room) {
+//		this.isRoom = room; 
+//	}
 
 	public boolean getIsRoom() {
 		return this.isRoom;

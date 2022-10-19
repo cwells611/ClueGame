@@ -37,7 +37,7 @@ public class BoadAdjTargetTest {
  */
 	
 //	Locations with only walkways as adjacent locations
-	//@Test
+	@Test
 	public void testWalkwayAdjacencies(){
 		//test spot (4,2)
 		theBoard.calcAdjacencies(theBoard.getCell(4, 2));
@@ -49,14 +49,14 @@ public class BoadAdjTargetTest {
 		assertTrue(adjList.contains(theBoard.getCell(5, 2)));
 	}
 //	Locations within rooms not center (should have empty adjacency list)
-	//@Test
+	@Test
 	public void testNotCenterRoomAdjacencies() {
 		//test spot (10, 0)
 		Set<BoardCell> adjList = theBoard.getAdjList(10, 0); 
 		assertEquals(0, adjList.size()); 
 	}
 //	Locations that are at each edge of the board
-	//@Test
+	@Test
 	public void testEdgeAdjacencies(){
 		//test spot (10,24)
 		theBoard.calcAdjacencies(theBoard.getCell(10, 24));
@@ -66,7 +66,7 @@ public class BoadAdjTargetTest {
 		assertTrue(adjList.contains(theBoard.getCell(10, 23))); 
 	}
 //	Locations that are beside a room cell that is not a doorway	
-	//@Test
+	@Test
 	public void testBesideRoomAdjacency() {
 		//test spot (24, 8)
 		theBoard.calcAdjacencies(theBoard.getCell(24, 8));
@@ -76,7 +76,7 @@ public class BoadAdjTargetTest {
 		assertTrue(adjList.contains(theBoard.getCell(24, 9)));
 	}
 //	Locations that are doorways
-	//@Test
+	@Test
 	public void testDoorwayAdjacency() {
 		//test spot (10, 19)
 		theBoard.calcAdjacencies(theBoard.getCell(10, 19));
@@ -88,7 +88,7 @@ public class BoadAdjTargetTest {
  		assertTrue(adjList.contains(theBoard.getCell(5, 21))); 
 	}
 //	Locations that are connected by secret passage	
-	//@Test
+	@Test
 	public void testSecretPassage() {
 		//test being in a room with a secret passage
 		//test being at the center cell of the atrium (19, 21)
@@ -108,7 +108,7 @@ public class BoadAdjTargetTest {
  */
 	
 //	Targets along walkways, at various distances
-	//@Test
+	@Test
 	public void testWalkwayTargets(){
 		Set<BoardCell> targets;
 		//roll of 1
@@ -141,7 +141,7 @@ public class BoadAdjTargetTest {
 	}
 	
 //	Targets that allow the user to enter a room
-	//@Test
+	@Test
 	public void testEnterTargets() {
 		//test cell with different rolls that will allow player to enter a room 
 		//test cell (8,5) with roll 2
@@ -150,6 +150,9 @@ public class BoadAdjTargetTest {
 		
 		theBoard.calcTargets(theBoard.getCell(8, 5), 2);
 		targets = theBoard.getTargets(); 
+		for(BoardCell target : targets) {
+			System.out.println(target.getRow() + ", " + target.getCol());
+		}
 		assertEquals(5, targets.size()); 
 		assertTrue(targets.contains(theBoard.getCell(10, 2))); 
 		assertTrue(targets.contains(theBoard.getCell(10, 5))); 
@@ -210,7 +213,7 @@ public class BoadAdjTargetTest {
 	}
 	
 //	Targets calculated when leaving a room with secret passage
-	//@Test
+	@Test
 	public void testLeavingPassage() {
 		Set<BoardCell> targets;
 		//test cell (10, 2) with roll 2
@@ -241,7 +244,7 @@ public class BoadAdjTargetTest {
 	}
 	
 //	Targets that reflect blocking by other players
-	//@Test
+	@Test
 	public void testPlayerBlock() {
 		//test cell (12, 17) with occupied cell: (12,18)
 		//roll 2
