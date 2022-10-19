@@ -179,15 +179,16 @@ public class BoadAdjTargetTest {
 	}
 	
 //	Targets calculated when leaving a room without secret passage
-	//@Test
+	@Test
 	public void testLeavingNoPassage() {
 		//testing Chapter
-		
+		Set<BoardCell> targets;
 		//roll of 1
 		theBoard.calcTargets(theBoard.getCell(20, 3), 1);
-		Set<BoardCell> targets = theBoard.getTargets();
+		targets = theBoard.getTargets();
 		assertEquals(1, targets.size());
 		assertTrue(targets.contains(theBoard.getCell(21, 6)));
+		targets.clear();
 		
 		//roll of 3
 		theBoard.calcTargets(theBoard.getCell(20, 3), 3);
@@ -195,6 +196,7 @@ public class BoadAdjTargetTest {
 		assertEquals(2, targets.size());
 		assertTrue(targets.contains(theBoard.getCell(19, 6)));
 		assertTrue(targets.contains(theBoard.getCell(23, 6)));
+		targets.clear();
 		
 		//roll of 5
 		theBoard.calcTargets(theBoard.getCell(20, 3), 5);
@@ -204,6 +206,7 @@ public class BoadAdjTargetTest {
 		assertTrue(targets.contains(theBoard.getCell(23, 4)));
 		assertTrue(targets.contains(theBoard.getCell(24, 5)));
 		assertTrue(targets.contains(theBoard.getCell(24, 7)));
+		targets.clear();
 	}
 	
 //	Targets calculated when leaving a room with secret passage
