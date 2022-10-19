@@ -239,17 +239,19 @@ public class BoadAdjTargetTest {
 //	Targets that reflect blocking by other players
 	@Test
 	public void testPlayerBlock() {
+		Set<BoardCell> targets;
 		//test cell (12, 17) with occupied cell: (12,18)
 		//roll 2
 		theBoard.getCell(12, 18).setOccupied(true);
 		theBoard.calcTargets(theBoard.getCell(12, 17), 2);
-		Set<BoardCell> targets = theBoard.getTargets();
+		targets = theBoard.getTargets();
 		assertEquals(4, targets.size());
 		assertTrue(targets.contains(theBoard.getCell(10, 17))); 
 		assertTrue(targets.contains(theBoard.getCell(11, 18)));
 		assertTrue(targets.contains(theBoard.getCell(13, 18)));
 		assertTrue(targets.contains(theBoard.getCell(14, 17)));
 		assertFalse(targets.contains(theBoard.getCell(12, 18)));
+		targets.clear();
 		
 		
 		//roll 3
@@ -264,22 +266,23 @@ public class BoadAdjTargetTest {
 		assertTrue(targets.contains(theBoard.getCell(14, 18)));
 		assertTrue(targets.contains(theBoard.getCell(15, 17)));
 		assertFalse(targets.contains(theBoard.getCell(12, 18)));
+		targets.clear();
 		
 		//test cell (5, 7) with roll 3 and cell (7, 6) occupied 
 		theBoard.getCell(7, 6).setOccupied(true);
 		theBoard.calcTargets(theBoard.getCell(5, 7), 3);
 		targets = theBoard.getTargets();
-		assertEquals(10, targets.size()); 
+		assertEquals(9, targets.size()); 
 		assertTrue(targets.contains(theBoard.getCell(5, 10)));
 		assertTrue(targets.contains(theBoard.getCell(5, 4)));
 		assertTrue(targets.contains(theBoard.getCell(4, 5)));    
 		assertTrue(targets.contains(theBoard.getCell(4, 9)));
 		assertTrue(targets.contains(theBoard.getCell(6, 9)));
 		assertTrue(targets.contains(theBoard.getCell(5, 8)));  
-		assertTrue(targets.contains(theBoard.getCell(6, 6)));  
 		assertTrue(targets.contains(theBoard.getCell(6, 7)));  
-		assertTrue(targets.contains(theBoard.getCell(6, 8)));  
+		assertTrue(targets.contains(theBoard.getCell(6, 5)));  
 		assertTrue(targets.contains(theBoard.getCell(5, 6)));  
 		assertFalse(targets.contains(theBoard.getCell(7, 6)));
+		targets.clear();
 	}
 }
