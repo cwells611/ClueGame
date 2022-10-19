@@ -108,25 +108,28 @@ public class BoadAdjTargetTest {
  */
 	
 //	Targets along walkways, at various distances
-	//@Test
+	@Test
 	public void testWalkwayTargets(){
+		Set<BoardCell> targets;
 		//roll of 1
 		theBoard.calcTargets(theBoard.getCell(24, 0), 1);
-		Set<BoardCell> targets = theBoard.getTargets();
+		targets = theBoard.getTargets();
 		assertEquals(2, targets.size());
 		assertTrue(targets.contains(theBoard.getCell(23, 0)));
 		assertTrue(targets.contains(theBoard.getCell(24, 1)));
+		targets.clear();
 		
 		//roll of 2
-		theBoard.calcTargets(theBoard.getCell(24, 0), 1);
+		theBoard.calcTargets(theBoard.getCell(24, 0), 2);
 		targets = theBoard.getTargets();
 		assertEquals(3, targets.size());
 		assertTrue(targets.contains(theBoard.getCell(22, 0)));
 		assertTrue(targets.contains(theBoard.getCell(23, 1)));
 		assertTrue(targets.contains(theBoard.getCell(24, 2)));
+		targets.clear();
 		
 		//roll of 3
-		theBoard.calcTargets(theBoard.getCell(24, 0), 1);
+		theBoard.calcTargets(theBoard.getCell(24, 0), 3);
 		targets = theBoard.getTargets();
 		assertEquals(5, targets.size());
 		assertTrue(targets.contains(theBoard.getCell(21, 0)));
@@ -134,6 +137,7 @@ public class BoadAdjTargetTest {
 		assertTrue(targets.contains(theBoard.getCell(24, 1)));
 		assertTrue(targets.contains(theBoard.getCell(24, 3)));
 		assertTrue(targets.contains(theBoard.getCell(23, 2)));
+		targets.clear();
 	}
 	
 //	Targets that allow the user to enter a room
