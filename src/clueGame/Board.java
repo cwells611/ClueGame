@@ -381,5 +381,8 @@ public class Board {
 		return this.targets;
 	}
 	
+	public void clearTargets() {
+		this.targets = null;
+	}
 }
 	
