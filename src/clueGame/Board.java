@@ -44,6 +44,13 @@ public class Board {
             doors = new HashSet<BoardCell>();
     		loadSetupConfig(); 
     		loadLayoutConfig(); 
+    		//loop through grid and calc adjacencies 
+    		for(int row = 0; row < numRows; row++) {
+    			for(int col = 0; col < numColumns; col++) {
+    				BoardCell cell = new BoardCell(row, col); 
+    				calcAdjacencies(cell); 
+    			}
+    		}
     	}catch(FileNotFoundException e) {
     		System.out.println(e);
     	}catch(BadConfigFormatException e) {

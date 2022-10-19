@@ -40,7 +40,7 @@ public class BoadAdjTargetTest {
 	@Test
 	public void testWalkwayAdjacencies(){
 		//test spot (4,2)
-		theBoard.calcAdjacencies(theBoard.getCell(4, 2));
+		//theBoard.calcAdjacencies(theBoard.getCell(4, 2));
 		Set<BoardCell> adjList = theBoard.getAdjList(4,2);
 		assertEquals(4, adjList.size());
 		assertTrue(adjList.contains(theBoard.getCell(4, 1)));
@@ -59,7 +59,7 @@ public class BoadAdjTargetTest {
 	@Test
 	public void testEdgeAdjacencies(){
 		//test spot (10,24)
-		theBoard.calcAdjacencies(theBoard.getCell(10, 24));
+		//theBoard.calcAdjacencies(theBoard.getCell(10, 24));
 		Set<BoardCell> adjList = theBoard.getAdjList(10, 24); 
 		assertEquals(2, adjList.size()); 
 		assertTrue(adjList.contains(theBoard.getCell(11, 24))); 
@@ -69,7 +69,7 @@ public class BoadAdjTargetTest {
 	@Test
 	public void testBesideRoomAdjacency() {
 		//test spot (24, 8)
-		theBoard.calcAdjacencies(theBoard.getCell(24, 8));
+		//theBoard.calcAdjacencies(theBoard.getCell(24, 8));
 		Set<BoardCell> adjList = theBoard.getAdjList(24, 8); 
 		assertEquals(2, adjList.size());
 		assertTrue(adjList.contains(theBoard.getCell(24, 7))); 
@@ -79,7 +79,7 @@ public class BoadAdjTargetTest {
 	@Test
 	public void testDoorwayAdjacency() {
 		//test spot (10, 19)
-		theBoard.calcAdjacencies(theBoard.getCell(10, 19));
+		//theBoard.calcAdjacencies(theBoard.getCell(10, 19));
 		Set<BoardCell> adjList = theBoard.getAdjList(10, 19); 
 		assertEquals(4, adjList.size()); 
 		assertTrue(adjList.contains(theBoard.getCell(10, 18)));
@@ -92,7 +92,7 @@ public class BoadAdjTargetTest {
 	public void testSecretPassage() {
 		//test being in a room with a secret passage
 		//test being at the center cell of the atrium (19, 21)
-		theBoard.calcAdjacencies(theBoard.getCell(19, 21));
+		//theBoard.calcAdjacencies(theBoard.getCell(19, 21));
 		Set<BoardCell> adjList = theBoard.getAdjList(19, 21);
 		assertEquals(4, adjList.size());
 		//the only adjacent cells would be the center cell of the 
