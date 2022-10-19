@@ -315,7 +315,7 @@ public class Board {
 		if (cell.getCol() != 0) {
 			BoardCell leftCell = grid[cell.getRow()][cell.getCol() - 1];
 			//if the cell to the left is just a walkway or an unused space, then just add to adjList
-			if(leftCell.getCharacter() == 'W' || leftCell.getCharacter() == 'X') {
+			if(leftCell.getCharacter() == 'W') {
 				cell.addAdj(leftCell);
 			}
 			//if the cell is not a walkway or unused space, then it must be a room, if that cell is 
@@ -331,7 +331,7 @@ public class Board {
 		if (cell.getCol() != numColumns - 1) {
 			BoardCell rightCell = grid[cell.getRow()][cell.getCol() + 1];
 			//if the cell to the right is just a walkway or an unused space, then just add to adjList
-			if(rightCell.getCharacter() == 'W' || rightCell.getCharacter() == 'X') {
+			if(rightCell.getCharacter() == 'W') {
 				cell.addAdj(rightCell);
 			}
 			//if the cell is not a walkway or unused space, then it must be a room, if that cell is 
@@ -347,7 +347,7 @@ public class Board {
 		if (cell.getRow() != 0) {
 			BoardCell upperCell = grid[cell.getRow() - 1][cell.getCol()];
 			//if the cell above is just a walkway or an unused space, then just add to adjList
-			if(upperCell.getCharacter() == 'W' || upperCell.getCharacter() == 'X') {
+			if(upperCell.getCharacter() == 'W') {
 				cell.addAdj(upperCell);
 			}
 			//if the cell is not a walkway or unused space, then it must be a room, if that cell is 
@@ -363,7 +363,7 @@ public class Board {
 		if (cell.getRow() != numRows - 1) {
 			BoardCell lowerCell = grid[cell.getRow() + 1][cell.getCol()];
 			//if the cell below is just a walkway or an unused space, then just add to adjList
-			if(lowerCell.getCharacter() == 'W' || lowerCell.getCharacter() == 'X') {
+			if(lowerCell.getCharacter() == 'W') {
 				cell.addAdj(lowerCell);
 			}
 			//if the cell is not a walkway or unused space, then it must be a room, if that cell is 
