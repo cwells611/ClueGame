@@ -96,9 +96,9 @@ public class BoardCell{
 		return this.row;
 	}
 	
-//	public void setIsRoom(boolean room) {
-//		this.isRoom = room; 
-//	}
+	public void setIsRoom(boolean room) {
+		this.isRoom = room; 
+	}
 
 	public boolean getIsRoom() {
 		return this.isRoom;

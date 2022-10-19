@@ -5,10 +5,11 @@ import java.util.Set;
 
 public class Room {
 	private String name;
-	private char label;
+	private char label; 
 	private BoardCell centerCell;
 	private BoardCell labelCell;
-	private BoardCell secretPassage;
+	private BoardCell secretPassageConnection;
+	private boolean hasSecretPassage; 
 	private Set<BoardCell> doors = new HashSet<BoardCell>();
 	
 	public Room(String name, char label) {
@@ -42,6 +43,16 @@ public class Room {
 	
 	public BoardCell getCenterCell() {
 		return this.centerCell;
+	}
+	public boolean hasSecretPassage() {
+		return this.hasSecretPassage; 
+	}
+	public void setSecretPassage(BoardCell centerOfConnectingRoom) {
+		this.hasSecretPassage = true; 
+		this.secretPassageConnection = centerOfConnectingRoom; 
+	}
+	public BoardCell getCenterOfConnectingRoom() {
+		return this.secretPassageConnection; 
 	}
 	
 }

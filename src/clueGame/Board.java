@@ -139,6 +139,12 @@ public class Board {
 					case '*':
 						roomMap.get(initial).setCenterCell(currentCell);
 						currentCell.setRoomCenter(true);
+						if(roomMap.get(initial).hasSecretPassage()) {
+							//gets the center cell of the room that the secret passage connects
+							BoardCell connectingCenter = roomMap.get(initial).getCenterOfConnectingRoom(); 
+							//tell the center cell of the room we are in about the secret passage
+							currentCell.setSecretPassage(connectingCenter.getCharacter());
+						}
 						break;
 					case '^':
 						currentCell.setDoorDirection(DoorDirection.UP);
@@ -161,15 +167,19 @@ public class Board {
 						doors.add(currentCell);
 						break;
 					default:
-						//if a room has a secret passage, then we want to set the hasSecretPassage boolean 
-						//to true for the center cell of that room since when we are in a room we will be 
-						//on the center cell and want to know if the room has a secret passage based on the center cell
-						//get the current room we are in 
+						//if a room has a secret passage, then we want to get the center cell of that room 
+						//as tell that center cell it was a secret passage 
 						Room currentRoom = roomMap.get(cell.charAt(0)); 
-						//get center cell of the room we are in 
-						BoardCell currentCenterCell = currentRoom.getCenterCell(); 
-						//setSecretPassage of center cell 
-						currentCenterCell.setSecretPassage(cell.charAt(1));
+						BoardCell currentCenter = currentRoom.getCenterCell(); 
+						//if that center cell has been found then just tell that center cell it was a secret passage
+						if(currentCenter != null) {
+							currentCenter.setSecretPassage(cell.charAt(1));
+						}
+						//if not then we tell the room that if has a secret passage 
+						//and tell it the center cell of the room its secret passage connects to 
+						else {
+							currentRoom.setSecretPassage(roomMap.get(cell.charAt(1)).getCenterCell());
+						}
 					}
 				}
 				//check to see if the set of keys in the map of rooms contains the initial of the current
