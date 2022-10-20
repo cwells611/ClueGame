@@ -132,10 +132,6 @@ public class Board {
 				//create a new board cell
 				char initial = cell.charAt(0);
 				BoardCell currentCell = new BoardCell(row, column, initial);
-				//if the initial is not a W or an X, the set getIsRoom to true so we know the cell is a room
-//				if(initial != 'W' && initial != 'X') {
-//					currentCell.setIsRoom(true);
-//				}
 				
 				if(cell.length() == 2) {
 					switch(cell.charAt(1)) {
@@ -180,7 +176,7 @@ public class Board {
 						BoardCell currentCenter = currentRoom.getCenterCell(); 
 						//if that center cell has been found then just tell that center cell it was a secret passage
 						if(currentCenter != null) {
-							currentCenter.setSecretPassage(cell.charAt(1));
+							currentCell.setSecretPassage(cell.charAt(1));
 						}
 						//if not then we tell the room that if has a secret passage 
 						//and tell it the center cell of the room its secret passage connects to 

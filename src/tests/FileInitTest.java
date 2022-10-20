@@ -80,7 +80,6 @@ public class FileInitTest {
 
 		//picks a cell that is not a room 
 		cell = theBoard.getCell(3, 0); 
-		System.out.println(cell.getCharacter());
 		
 		//makes sure that the current cell is not a room 
 		assertEquals('W', cell.getCharacter()); 
