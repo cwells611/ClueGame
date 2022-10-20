@@ -132,6 +132,8 @@ public class Board {
 				//create a new board cell
 				char initial = cell.charAt(0);
 				BoardCell currentCell = new BoardCell(row, column, initial);
+				//when we get the cell, we add it to the set of cells that corresponds with the room it's in
+				roomMap.get(initial).addRoomCell(currentCell);
 				
 				if(cell.length() == 2) {
 					switch(cell.charAt(1)) {
@@ -176,15 +178,18 @@ public class Board {
 						BoardCell currentCenter = currentRoom.getCenterCell(); 
 						//if that center cell has been found then just tell that center cell it was a secret passage
 						if(currentCenter != null) {
-							currentCell.setSecretPassage(cell.charAt(1));
+							//even if the center cell has already been found, we still want to tell the room it has a secret passage
+							currentRoom.setSecretPassage(roomMap.get(cell.charAt(1)).getCenterCell(), cell.charAt(1));
+							currentCenter.setSecretPassage(cell.charAt(1));
 						}
 						//if not then we tell the room that if has a secret passage 
 						//and tell it the center cell of the room its secret passage connects to 
 						else {
-							currentRoom.setSecretPassage(roomMap.get(cell.charAt(1)).getCenterCell());
+							currentRoom.setSecretPassage(roomMap.get(cell.charAt(1)).getCenterCell(), cell.charAt(1));
 						}
 					}
 				}
+				
 				//check to see if the set of keys in the map of rooms contains the initial of the current
 				//cell, if not throw and error 
 				if(!roomMap.containsKey(initial)) {
@@ -194,6 +199,19 @@ public class Board {
 				column++;
 			}
 			row++;
+		}
+		//after every cell has been loaded, we are going to loop through each room then if that has a secret
+		//passage, then we loop through every cell in that room and set the hasSecretPassage boolean to true
+		for(Room room : roomMap.values()) {
+			if(room.getName().equals("Walkway") || room.getName().equals("Unused")) {
+				continue;
+			}
+			if(room.getCenterCell().hasSecretPassage()) {
+				for(BoardCell roomCell : room.getRoomCells()) {
+					roomCell.setSecretPassage(room.getSecretPassage()); 
+					System.out.println(roomCell.getSecretPassage());
+				}
+			}
 		}
 		
 		for(BoardCell door : doors) {

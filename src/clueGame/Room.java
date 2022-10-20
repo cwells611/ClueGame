@@ -10,7 +10,9 @@ public class Room {
 	private BoardCell labelCell;
 	private BoardCell secretPassageConnection;
 	private boolean hasSecretPassage; 
+	private char secretPassage; 
 	private Set<BoardCell> doors = new HashSet<BoardCell>();
+	private Set<BoardCell> roomCells = new HashSet<BoardCell>(); 
 	
 	public Room(String name, char label) {
 		this.name = name; 
@@ -47,12 +49,22 @@ public class Room {
 	public boolean hasSecretPassage() {
 		return this.hasSecretPassage; 
 	}
-	public void setSecretPassage(BoardCell centerOfConnectingRoom) {
+	public void setSecretPassage(BoardCell centerOfConnectingRoom, char passage) {
 		this.hasSecretPassage = true; 
+		this.secretPassage = passage; 
 		this.secretPassageConnection = centerOfConnectingRoom; 
+	}
+	public char getSecretPassage() {
+		return this.secretPassage; 
 	}
 	public BoardCell getCenterOfConnectingRoom() {
 		return this.secretPassageConnection; 
+	}
+	public void addRoomCell(BoardCell cell) {
+		roomCells.add(cell); 
+	}
+	public Set<BoardCell> getRoomCells() {
+		return this.roomCells; 
 	}
 	
 }
