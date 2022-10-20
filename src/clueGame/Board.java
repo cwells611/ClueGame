@@ -262,6 +262,7 @@ public class Board {
 		return grid[i][j].getAdjList();
 	}
 	public void calcTargets(BoardCell startCell, int pathLength) {
+		targets.clear();
 		visited.add(startCell); 
 		recursiveCalcTargets(startCell, pathLength);
 	}
@@ -282,6 +283,8 @@ public class Board {
 					visited.add(adjCell);
 					if(pathLength == 1) {
 						targets.add(adjCell);
+					}else if(adjCell.isRoomCenter()) {
+						targets.add(adjCell);	
 					}else {
 						recursiveCalcTargets(adjCell, pathLength - 1);
 					}
@@ -381,5 +384,8 @@ public class Board {
 		return this.targets;
 	}
 	
+	public void clearTargets() {
+		this.targets = null;
+	}
 }
 	
