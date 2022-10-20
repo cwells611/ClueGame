@@ -270,7 +270,6 @@ public class Board {
 	// method that will determine the possible targets from a certain roll
 	public void recursiveCalcTargets(BoardCell startCell, int pathLength) {
 		//calculates adjacency list for cell we are currently looking at 
-		calcAdjacencies(startCell); 
 		for( BoardCell adjCell : startCell.getAdjList()) {
 			if(visited.contains(adjCell)) {
 				continue;

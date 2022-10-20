@@ -113,7 +113,6 @@ public class BoadAdjTargetTest {
 		assertEquals(2, targets.size());
 		assertTrue(targets.contains(theBoard.getCell(23, 0)));
 		assertTrue(targets.contains(theBoard.getCell(24, 1)));
-		targets.clear();
 		
 		//roll of 2
 		theBoard.calcTargets(theBoard.getCell(24, 0), 2);
@@ -122,7 +121,6 @@ public class BoadAdjTargetTest {
 		assertTrue(targets.contains(theBoard.getCell(22, 0)));
 		assertTrue(targets.contains(theBoard.getCell(23, 1)));
 		assertTrue(targets.contains(theBoard.getCell(24, 2)));
-		targets.clear();
 		
 		//roll of 3
 		theBoard.calcTargets(theBoard.getCell(24, 0), 3);
@@ -133,7 +131,6 @@ public class BoadAdjTargetTest {
 		assertTrue(targets.contains(theBoard.getCell(24, 1)));
 		assertTrue(targets.contains(theBoard.getCell(24, 3)));
 		assertTrue(targets.contains(theBoard.getCell(23, 2)));
-		targets.clear();
 	}
 	
 //	Targets that allow the user to enter a room
@@ -152,7 +149,6 @@ public class BoadAdjTargetTest {
 		assertTrue(targets.contains(theBoard.getCell(6, 5))); 
 		assertTrue(targets.contains(theBoard.getCell(9, 6))); 
 		assertTrue(targets.contains(theBoard.getCell(7, 6)));
-		targets.clear();
 		
 		//test cell (15, 11) with roll 4
 		theBoard.calcTargets(theBoard.getCell(15, 11), 4);
@@ -171,7 +167,6 @@ public class BoadAdjTargetTest {
 		assertTrue(targets.contains(theBoard.getCell(15, 13)));
 		assertTrue(targets.contains(theBoard.getCell(14, 10)));
 		assertTrue(targets.contains(theBoard.getCell(15, 9)));
-		targets.clear();
 	}
 	
 //	Targets calculated when leaving a room without secret passage
@@ -184,7 +179,6 @@ public class BoadAdjTargetTest {
 		targets = theBoard.getTargets();
 		assertEquals(1, targets.size());
 		assertTrue(targets.contains(theBoard.getCell(21, 6)));
-		targets.clear();
 		
 		//roll of 3
 		theBoard.calcTargets(theBoard.getCell(20, 3), 3);
@@ -192,7 +186,6 @@ public class BoadAdjTargetTest {
 		assertEquals(2, targets.size());
 		assertTrue(targets.contains(theBoard.getCell(19, 6)));
 		assertTrue(targets.contains(theBoard.getCell(23, 6)));
-		targets.clear();
 		
 		//roll of 5
 		theBoard.calcTargets(theBoard.getCell(20, 3), 5);
@@ -202,23 +195,20 @@ public class BoadAdjTargetTest {
 		assertTrue(targets.contains(theBoard.getCell(23, 4)));
 		assertTrue(targets.contains(theBoard.getCell(24, 5)));
 		assertTrue(targets.contains(theBoard.getCell(24, 7)));
-		targets.clear();
 	}
 	
 //	Targets calculated when leaving a room with secret passage
-	//@Test
+	@Test
 	public void testLeavingPassage() {
 		Set<BoardCell> targets;
 		//test cell (10, 2) with roll 2
 		theBoard.calcTargets(theBoard.getCell(10, 2), 2);
 		targets = theBoard.getTargets(); 
-		assertEquals(5, targets.size()); 
+		assertEquals(4, targets.size()); 
 		assertTrue(targets.contains(theBoard.getCell(7, 6))); 
 		assertTrue(targets.contains(theBoard.getCell(6, 5))); 
 		assertTrue(targets.contains(theBoard.getCell(8, 5))); 
-		assertTrue(targets.contains(theBoard.getCell(6, 9))); 
-		assertTrue(targets.contains(theBoard.getCell(14, 9))); 
-		targets.clear();
+		assertTrue(targets.contains(theBoard.getCell(10, 10))); 
 		
 		//test cell (2, 13) with roll 3
 		theBoard.calcTargets(theBoard.getCell(2, 13), 3);
@@ -233,7 +223,6 @@ public class BoadAdjTargetTest {
 		assertTrue(targets.contains(theBoard.getCell(16, 14)));  
 		assertTrue(targets.contains(theBoard.getCell(24, 10)));  
 		assertTrue(targets.contains(theBoard.getCell(24, 12)));  
-		targets.clear();
 	}
 	
 //	Targets that reflect blocking by other players
@@ -251,7 +240,6 @@ public class BoadAdjTargetTest {
 		assertTrue(targets.contains(theBoard.getCell(13, 18)));
 		assertTrue(targets.contains(theBoard.getCell(14, 17)));
 		assertFalse(targets.contains(theBoard.getCell(12, 18)));
-		targets.clear();
 		
 		
 		//roll 3
@@ -266,7 +254,6 @@ public class BoadAdjTargetTest {
 		assertTrue(targets.contains(theBoard.getCell(14, 18)));
 		assertTrue(targets.contains(theBoard.getCell(15, 17)));
 		assertFalse(targets.contains(theBoard.getCell(12, 18)));
-		targets.clear();
 		
 		//test cell (5, 7) with roll 3 and cell (7, 6) occupied 
 		theBoard.getCell(7, 6).setOccupied(true);
@@ -283,6 +270,5 @@ public class BoadAdjTargetTest {
 		assertTrue(targets.contains(theBoard.getCell(6, 5)));  
 		assertTrue(targets.contains(theBoard.getCell(5, 6)));  
 		assertFalse(targets.contains(theBoard.getCell(7, 6)));
-		targets.clear();
 	}
 }
