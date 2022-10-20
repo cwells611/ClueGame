@@ -213,20 +213,16 @@ public class BoadAdjTargetTest {
 		//test cell (2, 13) with roll 3
 		theBoard.calcTargets(theBoard.getCell(2, 13), 3);
 		targets = theBoard.getTargets();
-		assertEquals(9, targets.size());
+		assertEquals(5, targets.size());
 		assertTrue(targets.contains(theBoard.getCell(5, 11)));
 		assertTrue(targets.contains(theBoard.getCell(6, 12)));
 		assertTrue(targets.contains(theBoard.getCell(6, 14)));
 		assertTrue(targets.contains(theBoard.getCell(5, 15)));
-		assertTrue(targets.contains(theBoard.getCell(16, 12)));  
-		assertTrue(targets.contains(theBoard.getCell(15, 13)));  
-		assertTrue(targets.contains(theBoard.getCell(16, 14)));  
-		assertTrue(targets.contains(theBoard.getCell(24, 10)));  
-		assertTrue(targets.contains(theBoard.getCell(24, 12)));  
+		assertTrue(targets.contains(theBoard.getCell(20, 11))); 
 	}
 	
 //	Targets that reflect blocking by other players
-	//@Test
+	@Test
 	public void testPlayerBlock() {
 		Set<BoardCell> targets;
 		//test cell (12, 17) with occupied cell: (12,18)
