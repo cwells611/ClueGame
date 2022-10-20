@@ -206,7 +206,7 @@ public class BoadAdjTargetTest {
 	}
 	
 //	Targets calculated when leaving a room with secret passage
-	@Test
+	//@Test
 	public void testLeavingPassage() {
 		Set<BoardCell> targets;
 		//test cell (10, 2) with roll 2
@@ -237,7 +237,7 @@ public class BoadAdjTargetTest {
 	}
 	
 //	Targets that reflect blocking by other players
-	@Test
+	//@Test
 	public void testPlayerBlock() {
 		Set<BoardCell> targets;
 		//test cell (12, 17) with occupied cell: (12,18)

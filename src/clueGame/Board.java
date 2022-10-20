@@ -44,7 +44,7 @@ public class Board {
             doors = new HashSet<BoardCell>();
     		loadSetupConfig(); 
     		loadLayoutConfig(); 
-    		//loop through grid and calc adjacencies 
+    		//loop through grid and run calcAdjacencies for each cell
     		for(int row = 0; row < numRows; row++) {
     			for(int col = 0; col < numColumns; col++) {
     				BoardCell cell = grid[row][col]; 
