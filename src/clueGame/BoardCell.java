@@ -26,35 +26,46 @@ public class BoardCell{
 		this.doorway = false;
 		this.isRoom = false; 
 		this.hasSecretPassage = false; 
+		this.doorDirection = null; 
 		adjList = new HashSet<BoardCell>(); 
 	}
 	
-	
+	//door getters and setters 
 	public void setDoorDirection(DoorDirection d) {
 		this.doorDirection = d;
-	}
-	
-	public void addAdj(BoardCell adj) {
-		adjList.add(adj); 
-	}
-	
-	public boolean isDoorway() {
-		//TODO change this to not be just false
-		return doorway;
 	}
 	
 	public DoorDirection getDoorDirection() {
 		return this.doorDirection;
 	}
 	
+	public boolean isDoorway() {
+		return doorway;
+	}
+	
+	public void setDoorway(boolean doorway) {
+		this.doorway = doorway;
+	}
+	
+	//label getters and setters 
 	public boolean isLabel() {
 		return roomLabel;
 	}
 	
+	public void setRoomLabel(boolean label) {
+		this.roomLabel = label;
+	}
+	
+	//room center getters and setters 
 	public boolean isRoomCenter() {
 		return roomCenter;
 	}
 	
+	public void setRoomCenter(boolean center) {
+		this.roomCenter = center;
+	}
+	
+	//secret passage getters and setters 
 	public boolean hasSecretPassage() {
 		return this.hasSecretPassage;
 	}
@@ -63,31 +74,26 @@ public class BoardCell{
 		return this.secretPassage;
 	}
 	
+	public void setSecretPassage(char passage) {
+		this.hasSecretPassage = true;
+		this.secretPassage = passage;
+	}
+	
+	//character getter 
 	public char getCharacter() {
 		return this.character;
+	}
+	
+	//adj cell getters and setters 
+	public void addAdj(BoardCell adj) {
+		adjList.add(adj); 
 	}
 	
 	public Set<BoardCell> getAdjList(){
 		return this.adjList;
 	}
-	
-	public void setRoomLabel(boolean label) {
-		this.roomLabel = label;
-	}
-	
-	public void setRoomCenter(boolean center) {
-		this.roomCenter = center;
-	}
-	
-	public void setDoorway(boolean doorway) {
-		this.doorway = doorway;
-	}
-	
-	public void setSecretPassage(char passage) {
-		this.hasSecretPassage = true;
-		this.secretPassage = passage;
-	}
 
+	//row and col getters 
 	public int getCol() {
 		return this.col;
 	}
@@ -96,6 +102,7 @@ public class BoardCell{
 		return this.row;
 	}
 	
+	//room getters and setters 
 	public void setIsRoom(boolean room) {
 		this.isRoom = room; 
 	}
@@ -104,7 +111,7 @@ public class BoardCell{
 		return this.isRoom;
 	}
 
-
+	//occupied getters and setters 
 	public void setOccupied(boolean occupied) {
 		this.isOccupied = occupied;	
 	}

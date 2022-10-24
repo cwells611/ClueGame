@@ -11,14 +11,17 @@ public class Room {
 	private BoardCell secretPassageConnection;
 	private boolean hasSecretPassage; 
 	private char secretPassage; 
-	private Set<BoardCell> doors = new HashSet<BoardCell>();
-	private Set<BoardCell> roomCells = new HashSet<BoardCell>(); 
+	private Set<BoardCell> doors;
+	private Set<BoardCell> roomCells; 
 	
 	public Room(String name, char label) {
 		this.name = name; 
 		this.label = label;
+		roomCells = new HashSet<BoardCell>(); 
+		doors = new HashSet<BoardCell>();
 	}
 	
+	//door getters and setters
 	public void addDoor(BoardCell door) {
 		doors.add(door);
 	}
@@ -27,42 +30,52 @@ public class Room {
 		return this.doors;
 	}
 	
+	//name getter 
 	public String getName() {
 		return this.name;
+	}
+	
+	//center cell getters and setters
+	public void setCenterCell(BoardCell cell) {
+		this.centerCell = cell;
+	}
+	public BoardCell getCenterCell() {
+		return this.centerCell;
+	}
+	
+	//label cell getters and setters
+	public BoardCell getLabelCell() {
+		return this.labelCell;
 	}
 	
 	public void setLabelCell(BoardCell cell) {
 		this.labelCell = cell;
 	}
-	
-	public void setCenterCell(BoardCell cell) {
-		this.centerCell = cell;
-	}
-	
-	public BoardCell getLabelCell() {
-		return this.labelCell;
-	}
-	
-	public BoardCell getCenterCell() {
-		return this.centerCell;
-	}
+
+	//secret passage getters and setters 
 	public boolean hasSecretPassage() {
 		return this.hasSecretPassage; 
 	}
+	
 	public void setSecretPassage(BoardCell centerOfConnectingRoom, char passage) {
 		this.hasSecretPassage = true; 
 		this.secretPassage = passage; 
 		this.secretPassageConnection = centerOfConnectingRoom; 
 	}
+	
 	public char getSecretPassage() {
 		return this.secretPassage; 
 	}
+	
 	public BoardCell getCenterOfConnectingRoom() {
 		return this.secretPassageConnection; 
 	}
+	
+	//room cell getters and setters 
 	public void addRoomCell(BoardCell cell) {
 		roomCells.add(cell); 
 	}
+	
 	public Set<BoardCell> getRoomCells() {
 		return this.roomCells; 
 	}

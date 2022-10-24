@@ -16,7 +16,6 @@ public class Board {
 	private String layoutConfigFile;
 	private String setupConfigFile;
 	private Map<Character, Room> roomMap;
-	//private Map<Character, Character> secretPassages; 
 	private Set<BoardCell> visited;
 	private Set<BoardCell> targets;
 	private Set<BoardCell> doors;
