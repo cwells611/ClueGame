@@ -213,14 +213,21 @@ public class Board {
 				}
 			}
 		}
-		
+		//calculates adjacencies for all doors, since was not possible until all cells are loaded
+		calcDoorAdjacencies(doors);	
+	}
+	
+	public void calcDoorAdjacencies(Set<BoardCell> doors) {
 		for(BoardCell door : doors) {
-			char adjChar;
 			Room adjRoom;
-			switch(door.getDoorDirection()) {
+			char adjChar;
+			switch(door.getDoorDirection()) { //checks door direction
 			case UP:
+				//gets character of the cell the door is pointing too
 				adjChar = grid[door.getRow()-1][door.getCol()].getCharacter();
+				//gets the room of the adjChar
 				adjRoom = roomMap.get(adjChar);
+				//adds the door to the door set of the room
 				adjRoom.addDoor(grid[door.getRow()][door.getCol()]);
 				break;
 			case DOWN:
@@ -239,7 +246,6 @@ public class Board {
 				adjRoom.addDoor(grid[door.getRow()][door.getCol()]);
 				break;
 			}
-				
 		}
 	}
 	
@@ -396,6 +402,8 @@ public class Board {
 		}
 		
 	}
+	
+	
 	public Set<BoardCell> getTargets() {
 		return this.targets;
 	}
