@@ -176,6 +176,12 @@ public class Board {
 			}
 			row++;
 		}
+		tellRoomCellsSecretPassage(); 
+		//calculates adjacencies for all doors, since was not possible until all cells are loaded
+		calcDoorAdjacencies(doors);	
+	}
+	
+	public void tellRoomCellsSecretPassage() {
 		//if a room has a secret passage, loop through every cell in that room and tell it, it has a secret passage 
 		for(Room room : roomMap.values()) {
 			if(room.getName().equals("Walkway") || room.getName().equals("Unused")) {
@@ -187,8 +193,6 @@ public class Board {
 				}
 			}
 		}
-		//calculates adjacencies for all doors, since was not possible until all cells are loaded
-		calcDoorAdjacencies(doors);	
 	}
 	
 	public void calcDoorAdjacencies(Set<BoardCell> doors) {
@@ -229,7 +233,6 @@ public class Board {
 	}
 	
 	public Room getRoom(char Room) {
-		//returns room from map that is associated with the char passed as the parameter 
 		return roomMap.get(Room); 
 	}
 	
