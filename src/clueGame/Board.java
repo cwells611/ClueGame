@@ -208,7 +208,6 @@ public class Board {
 			if(room.getCenterCell().hasSecretPassage()) {
 				for(BoardCell roomCell : room.getRoomCells()) {
 					roomCell.setSecretPassage(room.getSecretPassage()); 
-					System.out.println(roomCell.getSecretPassage());
 				}
 			}
 		}
