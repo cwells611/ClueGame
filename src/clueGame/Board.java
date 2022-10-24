@@ -55,6 +55,11 @@ public class Board {
 		//load in ClueSetup.txt and then add the room character and room name to the map 
 		FileReader setupReader = new FileReader(setupConfigFile);  
 		Scanner setupScanner = new Scanner(setupReader); 
+		//loop to read in file data 
+		
+		char label;
+		Room room;
+
 		while(setupScanner.hasNextLine()) {
 			//reads in line of file  
 			String currentLine = setupScanner.nextLine(); 
@@ -67,10 +72,10 @@ public class Board {
 			//if the first word read in is not Room or Space, throw a BadConfigFormatException
 			if(lineInfo[0].equals("Room") || lineInfo[0].equals("Space")) {
 				//converts the string containing the label to a char 
-				char label = lineInfo[2].charAt(0); 
+				label = lineInfo[2].charAt(0); 
 				//creates a room out of the room name string contained in lineInfo 
-				Room room = new Room(lineInfo[1], label); 
-				//adds to map
+				room = new Room(lineInfo[1], label); 
+				//adds label and room to the map 
 				roomMap.put(label, room); 
 			}
 			else {
