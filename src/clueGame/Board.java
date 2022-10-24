@@ -83,24 +83,8 @@ public class Board {
 		//load in ClueLayout.txt and then add the room character and room name to the map 
 		FileReader layoutReader = new FileReader(layoutConfigFile);  
 		Scanner layoutScanner = new Scanner(layoutReader); 
-		//loops over file to determine number of rows and cols in board 
-		FileReader numsReader = new FileReader(layoutConfigFile); 
-		Scanner numsScanner = new Scanner(numsReader); 
-		while(numsScanner.hasNextLine()) {
-			String currentLine = numsScanner.nextLine(); 
-			numRows++;
-			//determines the number of columns by seeing how many labels are on each line 
-			String[] splitLine = currentLine.split(","); 
-			if(numColumns == 0) {
-				//since a proper board will have the same number of labels on each row, we only 
-				//need to set numColumns once 
-				numColumns = splitLine.length; 
-			}
-			//if there is not the same number of columns in each row, throw an exception
-			if(splitLine.length != numColumns) {
-				throw new BadConfigFormatException(); 
-			}
-		}
+		//calculates rows and cols 
+		calcRowCol(); 
 		//initializes grid 
 		this.grid = new BoardCell[numRows][numColumns]; 
 		int row = 0;
@@ -108,10 +92,12 @@ public class Board {
 			String currentLine = layoutScanner.nextLine(); 
 			String[] splitLine = currentLine.split(",");
 			int column = 0;
+			char initial; 
+			BoardCell currentCell; 
 			for(String cell : splitLine) {
 				//create a new board cell
-				char initial = cell.charAt(0);
-				BoardCell currentCell = new BoardCell(row, column, initial);
+				initial = cell.charAt(0);
+				currentCell = new BoardCell(row, column, initial);
 				//add cell to set of cells for the room it is in 
 				roomMap.get(initial).addRoomCell(currentCell);
 				
@@ -179,6 +165,28 @@ public class Board {
 		tellRoomCellsSecretPassage(); 
 		//calculates adjacencies for all doors, since was not possible until all cells are loaded
 		calcDoorAdjacencies(doors);	
+	}
+	
+	//method to initialize rows and columns 
+	public void calcRowCol() throws BadConfigFormatException, FileNotFoundException {
+		//loops over file to determine number of rows and cols in board 
+		FileReader numsReader = new FileReader(layoutConfigFile); 
+		Scanner numsScanner = new Scanner(numsReader); 
+		while(numsScanner.hasNextLine()) {
+			String currentLine = numsScanner.nextLine(); 
+			numRows++;
+			//determines the number of columns by seeing how many labels are on each line 
+			String[] splitLine = currentLine.split(","); 
+			if(numColumns == 0) {
+				//since a proper board will have the same number of labels on each row, we only 
+				//need to set numColumns once 
+				numColumns = splitLine.length; 
+			}
+			//if there is not the same number of columns in each row, throw an exception
+			if(splitLine.length != numColumns) {
+				throw new BadConfigFormatException(); 
+			}
+		}
 	}
 	
 	public void tellRoomCellsSecretPassage() {
@@ -377,10 +385,6 @@ public class Board {
 	
 	public Set<BoardCell> getTargets() {
 		return this.targets;
-	}
-	
-	public void clearTargets() {
-		this.targets = null;
 	}
 }
 	
