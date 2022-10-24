@@ -50,9 +50,7 @@ public class Board {
     				calcAdjacencies(cell); 
     			}
     		}
-    	}catch(FileNotFoundException e) {
-    		System.out.println(e);
-    	}catch(BadConfigFormatException e) {
+    	}catch(FileNotFoundException | BadConfigFormatException e) {
     		System.out.println(e);
     	}
     }
