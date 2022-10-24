@@ -4,10 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.PrintWriter;
 import java.util.*;
-
-import experiment.TestBoardCell;
 
 public class Board {
 	private BoardCell[][] grid;
@@ -29,9 +26,8 @@ public class Board {
     public static Board getInstance() {
            return theInstance;
     }
-    /*
-     * initialize the board (since we are using singleton pattern)
-     */
+    
+    //initializes data structures, and reads in board data files 
     public void initialize(){
     	try {
     		numRows = 0; 
@@ -39,7 +35,6 @@ public class Board {
             visited = new HashSet<BoardCell>();
             targets = new HashSet<BoardCell>(); 
             roomMap = new HashMap<Character, Room>();
-            //secretPassages = new HashMap<Character, Character>();
             doors = new HashSet<BoardCell>();
     		loadSetupConfig(); 
     		loadLayoutConfig(); 
@@ -60,28 +55,24 @@ public class Board {
 	
 	public void loadSetupConfig() throws FileNotFoundException, BadConfigFormatException{
 		//load in ClueSetup.txt and then add the room character and room name to the map 
-		//assign file object to setup file 
 		FileReader setupReader = new FileReader(setupConfigFile);  
-		//setup scanner
 		Scanner setupScanner = new Scanner(setupReader); 
-		//loop to read in file data 
 		while(setupScanner.hasNextLine()) {
 			//reads in line of file  
 			String currentLine = setupScanner.nextLine(); 
-			//checks to make sure the line is not a comment, if it is, then just continues to read in next line 
-			//since that line has no info the program needs  
+			//if file has a comment, ignores it and continues to next line 
 			if(currentLine.contains("//")) {
 				continue;
 			}
 			//takes each line and splits up line by comma then space
 			String[] lineInfo = currentLine.split(", "); 
-			//checks to make sure that the first string in the array is either Room or Space, if not, throws error
+			//if the first word read in is not Room or Space, throw a BadConfigFormatException
 			if(lineInfo[0].equals("Room") || lineInfo[0].equals("Space")) {
 				//converts the string containing the label to a char 
 				char label = lineInfo[2].charAt(0); 
 				//creates a room out of the room name string contained in lineInfo 
 				Room room = new Room(lineInfo[1], label); 
-				//adds label and room to the map 
+				//adds to map
 				roomMap.put(label, room); 
 			}
 			else {
@@ -92,19 +83,14 @@ public class Board {
 	
 	public void loadLayoutConfig() throws FileNotFoundException, BadConfigFormatException {
 		//load in ClueLayout.txt and then add the room character and room name to the map 
-		//assign file object to setup file 
 		FileReader layoutReader = new FileReader(layoutConfigFile);  
-		//setup scanner
 		Scanner layoutScanner = new Scanner(layoutReader); 
-		//need to first find the number of rows and cols to as to initialize the grid before we add anything to it
-		//creates new reader and scanner for loop that determines numRows and numColumns 
+		//loops over file to determine number of rows and cols in board 
 		FileReader numsReader = new FileReader(layoutConfigFile); 
 		Scanner numsScanner = new Scanner(numsReader); 
 		while(numsScanner.hasNextLine()) {
 			String currentLine = numsScanner.nextLine(); 
 			numRows++;
-			//since the board is a square, we only need to set the numColumns once because each 
-			//subsequent line will have the same number of columns 
 			//determines the number of columns by seeing how many labels are on each line 
 			String[] splitLine = currentLine.split(","); 
 			if(numColumns == 0) {
@@ -112,28 +98,26 @@ public class Board {
 				//need to set numColumns once 
 				numColumns = splitLine.length; 
 			}
-			//after numColumns has been set initially in above if-statement, if the length of the 
-			//current line is not equal to numColumns, throw an error 
+			//if there is not the same number of columns in each row, throw an exception
 			if(splitLine.length != numColumns) {
 				throw new BadConfigFormatException(); 
 			}
 		}
-		//initialize grid 
+		//initializes grid 
 		this.grid = new BoardCell[numRows][numColumns]; 
 		int row = 0;
 		while(layoutScanner.hasNextLine()) {
-			//create a board cell for each char
 			String currentLine = layoutScanner.nextLine(); 
 			String[] splitLine = currentLine.split(",");
 			int column = 0;
-			//used for door setup
 			for(String cell : splitLine) {
 				//create a new board cell
 				char initial = cell.charAt(0);
 				BoardCell currentCell = new BoardCell(row, column, initial);
-				//when we get the cell, we add it to the set of cells that corresponds with the room it's in
+				//add cell to set of cells for the room it is in 
 				roomMap.get(initial).addRoomCell(currentCell);
 				
+				//checks cases for special cells; centers, labels, doors, and secret passages
 				if(cell.length() == 2) {
 					switch(cell.charAt(1)) {
 					case '#':
@@ -171,26 +155,21 @@ public class Board {
 						doors.add(currentCell);
 						break;
 					default:
-						//if a room has a secret passage, then we want to get the center cell of that room 
-						//as tell that center cell it was a secret passage 
 						Room currentRoom = roomMap.get(cell.charAt(0)); 
 						BoardCell currentCenter = currentRoom.getCenterCell(); 
-						//if that center cell has been found then just tell that center cell it was a secret passage
+						//if that center cell has been found then just tell that center cell it has a secret passage
 						if(currentCenter != null) {
-							//even if the center cell has already been found, we still want to tell the room it has a secret passage
 							currentRoom.setSecretPassage(roomMap.get(cell.charAt(1)).getCenterCell(), cell.charAt(1));
 							currentCenter.setSecretPassage(cell.charAt(1));
 						}
-						//if not then we tell the room that if has a secret passage 
-						//and tell it the center cell of the room its secret passage connects to 
+						//if center cell of currentRoom has not been found, then tell the room as a whole it has a secret passage
 						else {
 							currentRoom.setSecretPassage(roomMap.get(cell.charAt(1)).getCenterCell(), cell.charAt(1));
 						}
 					}
 				}
 				
-				//check to see if the set of keys in the map of rooms contains the initial of the current
-				//cell, if not throw and error 
+				//if the map of rooms does not contain the label we are looking at, throw and exception
 				if(!roomMap.containsKey(initial)) {
 					throw new BadConfigFormatException(); 
 				}
@@ -199,8 +178,7 @@ public class Board {
 			}
 			row++;
 		}
-		//after every cell has been loaded, we are going to loop through each room then if that has a secret
-		//passage, then we loop through every cell in that room and set the hasSecretPassage boolean to true
+		//if a room has a secret passage, loop through every cell in that room and tell it, it has a secret passage 
 		for(Room room : roomMap.values()) {
 			if(room.getName().equals("Walkway") || room.getName().equals("Unused")) {
 				continue;
@@ -259,9 +237,7 @@ public class Board {
 	}
 	
 	public Room getRoom(BoardCell cell) {
-		//gets the label that is associated with the cell passed as the parameter 
 		char roomLabel = cell.getCharacter(); 
-		//returns room that is associated with the char in the map 
 		return roomMap.get(roomLabel); 
 	}
 	
@@ -274,22 +250,22 @@ public class Board {
 	}
 	
 	public BoardCell getCell(int row, int col) {
-		//returns cell that in grid at row, col 
 		return grid[row][col]; 
 	}
+	
 	public Set<BoardCell> getAdjList(int i, int j) {
 		return grid[i][j].getAdjList();
 	}
+	
 	public void calcTargets(BoardCell startCell, int pathLength) {
+		//clears both visited and targets list to make sure both are empty before calculating new targets
 		visited.clear();
 		targets.clear();
 		visited.add(startCell); 
 		recursiveCalcTargets(startCell, pathLength);
 	}
 	
-	// method that will determine the possible targets from a certain roll
 	public void recursiveCalcTargets(BoardCell startCell, int pathLength) {
-		//calculates adjacency list for cell we are currently looking at 
 		for( BoardCell adjCell : startCell.getAdjList()) {
 			if(visited.contains(adjCell)) {
 				continue;
@@ -316,8 +292,6 @@ public class Board {
 	}
 	
 	public void calcAdjacencies(BoardCell cell) {
-		//System.out.println("[" + cell.getRow() + ", " + cell.getCol() + "]");
-		//checking if the cell is a room
 		if(cell.isRoomCenter()) {
 			if(cell.hasSecretPassage()) {
 				//gets the other room that the secret passage connects 
@@ -342,14 +316,13 @@ public class Board {
 			if(leftCell.getCharacter() == 'W') {
 				cell.addAdj(leftCell);
 			}
-			//if the cell is not a walkway or unused space, then it must be a room, if that cell is 
+			//if the cell is not a walkway or unused space and if that cell is 
 			//a doorway, then we get the center cell of that room and add it to adjList
 			else if(cell.isDoorway() == true && cell.getDoorDirection() == DoorDirection.LEFT) {
 				Room adjRoom = roomMap.get(leftCell.getCharacter()); 
 				BoardCell roomCenter = adjRoom.getCenterCell(); 
 				cell.addAdj(roomCenter);
-			}
-			//if the left cell is a room, but not a doorway, then it does not go in adjList 
+			} 
 		}
 		// testing right edge
 		if (cell.getCol() != numColumns - 1) {
@@ -358,14 +331,13 @@ public class Board {
 			if(rightCell.getCharacter() == 'W') {
 				cell.addAdj(rightCell);
 			}
-			//if the cell is not a walkway or unused space, then it must be a room, if that cell is 
+			//if the cell is not a walkway or unused space and if that cell is 
 			//a doorway, then we get the center cell of that room and add it to adjList
 			else if(cell.isDoorway() == true && cell.getDoorDirection() == DoorDirection.RIGHT) {
 				Room adjRoom = roomMap.get(rightCell.getCharacter()); 
 				BoardCell roomCenter = adjRoom.getCenterCell(); 
 				cell.addAdj(roomCenter);
 			}
-			//if the right cell is a room, but not a doorway, then it does not go in adjList 
 		}
 		// testing top edge
 		if (cell.getRow() != 0) {
@@ -374,7 +346,7 @@ public class Board {
 			if(upperCell.getCharacter() == 'W') {
 				cell.addAdj(upperCell);
 			}
-			//if the cell is not a walkway or unused space, then it must be a room, if that cell is 
+			//if the cell is not a walkway or unused space and if that cell is 
 			//a doorway, then we get the center cell of that room and add it to adjList
 			else if(cell.isDoorway() == true && cell.getDoorDirection() == DoorDirection.UP) {
 				Room adjRoom = roomMap.get(upperCell.getCharacter()); 
@@ -390,7 +362,7 @@ public class Board {
 			if(lowerCell.getCharacter() == 'W') {
 				cell.addAdj(lowerCell);
 			}
-			//if the cell is not a walkway or unused space, then it must be a room, if that cell is 
+			//if the cell is not a walkway or unused space and if that cell is 
 			//a doorway, then we get the center cell of that room and add it to adjList
 			else if(cell.isDoorway() == true && cell.getDoorDirection() == DoorDirection.DOWN) {
 				Room adjRoom = roomMap.get(lowerCell.getCharacter()); 
