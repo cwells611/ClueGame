@@ -17,46 +17,46 @@ public class Board {
 	private Set<BoardCell> targets;
 	private Set<BoardCell> doors;
 	private static Board theInstance = new Board();
-	
-    // constructor is private to ensure only one can be created
-    private Board() {
-           super();
-    }
-    // this method returns the only Board
-    public static Board getInstance() {
-           return theInstance;
-    }
-    
-    //initializes data structures, and reads in board data files 
-    public void initialize(){
-    	try {
-    		numRows = 0; 
-            numColumns = 0; 
-            visited = new HashSet<BoardCell>();
-            targets = new HashSet<BoardCell>(); 
-            roomMap = new HashMap<Character, Room>();
-            doors = new HashSet<BoardCell>();
-    		loadSetupConfig(); 
-    		loadLayoutConfig(); 
-    		//loop through grid and run calcAdjacencies for each cell
-    		for(int row = 0; row < numRows; row++) {
-    			for(int col = 0; col < numColumns; col++) {
-    				BoardCell cell = grid[row][col]; 
-    				calcAdjacencies(cell); 
-    			}
-    		}
-    	}catch(FileNotFoundException | BadConfigFormatException e) {
-    		System.out.println(e);
-    	}
-    }
-     
-	
+
+	// constructor is private to ensure only one can be created
+	private Board() {
+		super();
+	}
+	// this method returns the only Board
+	public static Board getInstance() {
+		return theInstance;
+	}
+
+	//initializes data structures, and reads in board data files 
+	public void initialize(){
+		try {
+			numRows = 0; 
+			numColumns = 0; 
+			visited = new HashSet<BoardCell>();
+			targets = new HashSet<BoardCell>(); 
+			roomMap = new HashMap<Character, Room>();
+			doors = new HashSet<BoardCell>();
+			loadSetupConfig(); 
+			loadLayoutConfig(); 
+			//loop through grid and run calcAdjacencies for each cell
+			for(int row = 0; row < numRows; row++) {
+				for(int col = 0; col < numColumns; col++) {
+					BoardCell cell = grid[row][col]; 
+					calcAdjacencies(cell); 
+				}
+			}
+		}catch(FileNotFoundException | BadConfigFormatException e) {
+			System.out.println(e);
+		}
+	}
+
+
 	public void loadSetupConfig() throws FileNotFoundException, BadConfigFormatException{
 		//load in ClueSetup.txt and then add the room character and room name to the map 
 		FileReader setupReader = new FileReader(setupConfigFile);  
 		Scanner setupScanner = new Scanner(setupReader); 
 		//loop to read in file data 
-		
+
 		char label;
 		Room room;
 
@@ -83,7 +83,7 @@ public class Board {
 			}
 		}
 	}
-	
+
 	public void loadLayoutConfig() throws FileNotFoundException, BadConfigFormatException {
 		//load in ClueLayout.txt and then add the room character and room name to the map 
 		FileReader layoutReader = new FileReader(layoutConfigFile);  
@@ -105,7 +105,7 @@ public class Board {
 				currentCell = new BoardCell(row, column, initial);
 				//add cell to set of cells for the room it is in 
 				roomMap.get(initial).addRoomCell(currentCell);
-				
+
 				//checks cases for special cells; centers, labels, doors, and secret passages
 				if(cell.length() == 2) {
 					switch(cell.charAt(1)) {
@@ -157,7 +157,7 @@ public class Board {
 						}
 					}
 				}
-				
+
 				//if the map of rooms does not contain the label we are looking at, throw and exception
 				if(!roomMap.containsKey(initial)) {
 					throw new BadConfigFormatException(); 
@@ -171,7 +171,7 @@ public class Board {
 		//calculates adjacencies for all doors, since was not possible until all cells are loaded
 		calcDoorAdjacencies(doors);	
 	}
-	
+
 	//method to initialize rows and columns 
 	public void calcRowCol() throws BadConfigFormatException, FileNotFoundException {
 		//loops over file to determine number of rows and cols in board 
@@ -193,7 +193,7 @@ public class Board {
 			}
 		}
 	}
-	
+
 	public void tellRoomCellsSecretPassage() {
 		//if a room has a secret passage, loop through every cell in that room and tell it, it has a secret passage 
 		for(Room room : roomMap.values()) {
@@ -207,7 +207,7 @@ public class Board {
 			}
 		}
 	}
-	
+
 	public void calcDoorAdjacencies(Set<BoardCell> doors) {
 		for(BoardCell door : doors) {
 			Room adjRoom;
@@ -239,37 +239,37 @@ public class Board {
 			}
 		}
 	}
-	
+
 	public void setConfigFiles(String csvFile, String txtFile) {
 		this.layoutConfigFile = csvFile; 
 		this.setupConfigFile = txtFile; 
 	}
-	
+
 	public Room getRoom(char Room) {
 		return roomMap.get(Room); 
 	}
-	
+
 	public Room getRoom(BoardCell cell) {
 		char roomLabel = cell.getCharacter(); 
 		return roomMap.get(roomLabel); 
 	}
-	
+
 	public int getNumRows() {
 		return numRows;
 	}
-	
+
 	public int getNumColumns() {
 		return numColumns;
 	}
-	
+
 	public BoardCell getCell(int row, int col) {
 		return grid[row][col]; 
 	}
-	
+
 	public Set<BoardCell> getAdjList(int i, int j) {
 		return grid[i][j].getAdjList();
 	}
-	
+
 	public void calcTargets(BoardCell startCell, int pathLength) {
 		//clears both visited and targets list to make sure both are empty before calculating new targets
 		visited.clear();
@@ -277,7 +277,7 @@ public class Board {
 		visited.add(startCell); 
 		recursiveCalcTargets(startCell, pathLength);
 	}
-	
+
 	public void recursiveCalcTargets(BoardCell startCell, int pathLength) {
 		for( BoardCell adjCell : startCell.getAdjList()) {
 			if(visited.contains(adjCell)) {
@@ -303,7 +303,7 @@ public class Board {
 			}
 		}
 	}
-	
+
 	public void calcAdjacencies(BoardCell cell) {
 		if(cell.isRoomCenter()) {
 			if(cell.hasSecretPassage()) {
@@ -384,12 +384,17 @@ public class Board {
 			}
 			//if the below cell is a room, but not a doorway, then it does not go in adjList 
 		}
-		
+
 	}
-	
-	
+
 	public Set<BoardCell> getTargets() {
 		return this.targets;
 	}
-}
 	
+	//skeletons for new methods to complete C20A Clue Players 1 
+	public void deal() {
+		//some code goes here 
+	}
+	
+}
+
