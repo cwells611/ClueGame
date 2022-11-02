@@ -21,7 +21,7 @@ Computer, Gracie Hall, White, 18, 0
 //Weapons
 Weapon, Frying Pan
 Weapon, Switch Blade
-Weapon, Musket 
+Weapon, Musket
 Weapon, Bow and Arrow
 Weapon, Boulder
-Weapon, Car 
+Weapon, Car

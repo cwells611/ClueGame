@@ -40,7 +40,7 @@ class PlayerAndCardTests {
 		ArrayList<String> weapons = theBoard.getWeapons(); 
 		assertEquals(6, theBoard.getNumWeapons()); 
 		assertEquals("Frying Pan", weapons.get(0)); 
-		assertEquals("Switch Balde", weapons.get(1)); 
+		assertEquals("Switch Blade", weapons.get(1)); 
 		assertEquals("Musket", weapons.get(2));
 		assertEquals("Bow and Arrow", weapons.get(3));
 		assertEquals("Boulder", weapons.get(4));
