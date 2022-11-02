@@ -92,12 +92,17 @@ public class Board {
 				label = lineInfo[2].charAt(0); 
 				//creates a room out of the room name string contained in lineInfo 
 				room = new Room(lineInfo[1], label); 
-				//tell the room what type of card it is
-				room.setCardType(cardType); 
+				//only want to make a card if it is an actual room, not a walkway or unused space
+				if(lineInfo[0].equals("Room")) {
+					//tell the room what type of card it is
+					room.setCardType(CardType.ROOM); 
+					//create a card that corresponds to the room and add it to the deck 
+					card = new Card(lineInfo[1], room.getCardType());
+					//add card to arraylist 
+					deck.add(card); 
+				}
 				//adds label and room to the map 
 				roomMap.put(label, room);
-				//create a card that corresponds to the room and add it to the deck 
-				card = new Card(lineInfo[1], room.getCardType());
 			}
 			else if(lineInfo[0].equals("Human") || lineInfo[0].equals("Computer")) {
 				Player player; 
@@ -108,21 +113,21 @@ public class Board {
 				if(lineInfo[0].equals("Human")) {
 					player = new HumanPlayer(playerName, playerColor, playerStartRow, playerStartCol, lineInfo[0]); 
 					//increment human players counter
-					numHumanPlayers++; 
-					//tell the player what type of card it is
-					player.setCardType(cardType); 
-					//once human player is created, add it to set 
-					players.add(player); 
+					numHumanPlayers++;  
 				}
 				else {
 					player = new ComputerPlayer(playerName, playerColor, playerStartRow, playerStartCol, lineInfo[0]); 
 					//increment computer players counter 
 					numComputerPlayers++; 
-					//tell the player what type of card it is
-					player.setCardType(cardType); 
-					//once computer player is created, add it to list 
-					players.add(player); 
 				}
+				//tell the player what type of card it is
+				player.setCardType(CardType.PERSON); 
+				//once human player is created, add it to set 
+				players.add(player);
+				//create a card that corresponds to the player 
+				card = new Card(lineInfo[1], player.getCardType()); 
+				//add card to deck 
+				deck.add(card); 
 			}
 			else if(lineInfo[0].equals("Weapon")) {
 				//add weapon to arraylist of weapons
@@ -131,6 +136,10 @@ public class Board {
 				cardType = CardType.WEAPON;  
 				//increment numWeapons
 				numWeapons++; 
+				//create a card that corresponds to the current weapon
+				card = new Card(lineInfo[1], cardType); 
+				//add card to deck
+				deck.add(card); 
 			}
 			else {
 				throw new BadConfigFormatException("Setup text file not written properly, check spelling and spaces"); 
@@ -470,14 +479,6 @@ public class Board {
 	//Card getter
 	public ArrayList<Card> getDeck() {
 		return deck; 
-	}
-	
-	
-	public static void main(String[] args) throws FileNotFoundException, BadConfigFormatException {
-		Board test = new Board(); 
-		test.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
-		test.initialize();
-		System.out.println(test.getNumHumanPlayers());
 	}
 	
 }
