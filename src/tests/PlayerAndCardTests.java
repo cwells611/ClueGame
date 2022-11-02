@@ -3,11 +3,14 @@ package tests;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import clueGame.Board;
+import clueGame.Card;
+import clueGame.CardType;
 
 class PlayerAndCardTests {
 	//constant variables to hold board size 
@@ -46,5 +49,33 @@ class PlayerAndCardTests {
 		assertEquals("Boulder", weapons.get(4));
 		assertEquals("Car", weapons.get(5)); 
 	}
+	
+	@Test
+	void testNumCards() {
+		ArrayList<Card> deck = theBoard.getDeck(); 
+		assertEquals(21, deck.size()); 
+		assertEquals(CardType.ROOM, deck.get(0).getType()); 
+		assertEquals(CardType.ROOM, deck.get(1).getType()); 
+		assertEquals(CardType.ROOM, deck.get(2).getType()); 
+		assertEquals(CardType.ROOM, deck.get(3).getType()); 
+		assertEquals(CardType.ROOM, deck.get(4).getType()); 
+		assertEquals(CardType.ROOM, deck.get(5).getType()); 
+		assertEquals(CardType.ROOM, deck.get(6).getType()); 
+		assertEquals(CardType.ROOM, deck.get(7).getType()); 
+		assertEquals(CardType.ROOM, deck.get(8).getType()); 
+		assertEquals(CardType.PERSON, deck.get(9).getType()); 
+		assertEquals(CardType.PERSON, deck.get(10).getType()); 
+		assertEquals(CardType.PERSON, deck.get(11).getType()); 
+		assertEquals(CardType.PERSON, deck.get(12).getType()); 
+		assertEquals(CardType.PERSON, deck.get(13).getType()); 
+		assertEquals(CardType.PERSON, deck.get(14).getType()); 
+		assertEquals(CardType.WEAPON, deck.get(15).getType()); 
+		assertEquals(CardType.WEAPON, deck.get(16).getType()); 
+		assertEquals(CardType.WEAPON, deck.get(17).getType()); 
+		assertEquals(CardType.WEAPON, deck.get(18).getType()); 
+		assertEquals(CardType.WEAPON, deck.get(19).getType()); 
+		assertEquals(CardType.WEAPON, deck.get(20).getType()); 
+	}
+	
 
 }

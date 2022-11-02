@@ -13,6 +13,7 @@ public class Room {
 	private char secretPassage; 
 	private Set<BoardCell> doors;
 	private Set<BoardCell> roomCells; 
+	private CardType cardType; 
 	
 	public Room(String name, char label) {
 		this.name = name; 
@@ -80,4 +81,11 @@ public class Room {
 		return this.roomCells; 
 	}
 	
+	//CardType setters and getters
+	public void setCardType(CardType card) {
+		this.cardType = card; 
+	}
+	public CardType getCardType() {
+		return this.cardType;
+	}
 }

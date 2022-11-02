@@ -18,6 +18,7 @@ public class Board {
 	private Set<BoardCell> doors;
 	private Set<Player> players; 
 	private ArrayList<String> weapons; 
+	private ArrayList<Card> deck; 
 	char label;
 	Room room;
 	String playerName; 
@@ -27,6 +28,8 @@ public class Board {
 	int numHumanPlayers;
 	int numComputerPlayers; 
 	int numWeapons; 
+	CardType cardType; 
+	Card card; 
 	private static Board theInstance = new Board();
 
 	// constructor is private to ensure only one can be created
@@ -52,6 +55,7 @@ public class Board {
 			doors = new HashSet<BoardCell>();
 			players = new HashSet<Player>(); 
 			weapons = new ArrayList<String>(); 
+			deck = new ArrayList<Card>(); 
 			loadSetupConfig(); 
 			loadLayoutConfig(); 
 			//loop through grid and run calcAdjacencies for each cell
@@ -88,8 +92,12 @@ public class Board {
 				label = lineInfo[2].charAt(0); 
 				//creates a room out of the room name string contained in lineInfo 
 				room = new Room(lineInfo[1], label); 
+				//tell the room what type of card it is
+				room.setCardType(cardType); 
 				//adds label and room to the map 
-				roomMap.put(label, room); 
+				roomMap.put(label, room);
+				//create a card that corresponds to the room and add it to the deck 
+				card = new Card(lineInfo[1], room.getCardType());
 			}
 			else if(lineInfo[0].equals("Human") || lineInfo[0].equals("Computer")) {
 				Player player; 
@@ -101,6 +109,8 @@ public class Board {
 					player = new HumanPlayer(playerName, playerColor, playerStartRow, playerStartCol, lineInfo[0]); 
 					//increment human players counter
 					numHumanPlayers++; 
+					//tell the player what type of card it is
+					player.setCardType(cardType); 
 					//once human player is created, add it to set 
 					players.add(player); 
 				}
@@ -108,12 +118,18 @@ public class Board {
 					player = new ComputerPlayer(playerName, playerColor, playerStartRow, playerStartCol, lineInfo[0]); 
 					//increment computer players counter 
 					numComputerPlayers++; 
+					//tell the player what type of card it is
+					player.setCardType(cardType); 
 					//once computer player is created, add it to list 
 					players.add(player); 
 				}
 			}
 			else if(lineInfo[0].equals("Weapon")) {
+				//add weapon to arraylist of weapons
 				weapons.add(lineInfo[1]); 
+				//tell the board what type of card it is 
+				cardType = CardType.WEAPON;  
+				//increment numWeapons
 				numWeapons++; 
 			}
 			else {
@@ -449,6 +465,11 @@ public class Board {
 	}
 	public ArrayList<String> getWeapons() {
 		return weapons; 
+	}
+	
+	//Card getter
+	public ArrayList<Card> getDeck() {
+		return deck; 
 	}
 	
 	
