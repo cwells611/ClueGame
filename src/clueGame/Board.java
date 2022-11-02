@@ -396,5 +396,14 @@ public class Board {
 		//some code goes here 
 	}
 	
+	//methods to tell the board how many human and computer players are in the game 
+	public int getNumHumanPlayers() {
+		return 0; 
+	}
+	
+	public int getNumComputerPlayers() {
+		return 0; 
+	}
+	
 }
 

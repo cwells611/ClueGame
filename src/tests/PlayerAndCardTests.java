@@ -24,8 +24,13 @@ class PlayerAndCardTests {
 	}
 	
 	@Test
-	void testNumPlayers() {
-		
+	void testNumHumanPlayers() {
+		assertEquals(1, theBoard.getNumHumanPlayers()); 
+	}
+	
+	@Test 
+	void testNumComputerPlayers() {
+		assertEquals(5, theBoard.getNumComputerPlayers()); 
 	}
 
 }
