@@ -16,6 +16,15 @@ public class Board {
 	private Set<BoardCell> visited;
 	private Set<BoardCell> targets;
 	private Set<BoardCell> doors;
+	private Set<Player> players; 
+	char label;
+	Room room;
+	String playerName; 
+	String playerColor; 
+	int playerStartRow; 
+	int playerStartCol; 
+	int numHumanPlayers;
+	int numComputerPlayers; 
 	private static Board theInstance = new Board();
 
 	// constructor is private to ensure only one can be created
@@ -32,10 +41,13 @@ public class Board {
 		try {
 			numRows = 0; 
 			numColumns = 0; 
+			numHumanPlayers = 0; 
+			numComputerPlayers = 0; 
 			visited = new HashSet<BoardCell>();
 			targets = new HashSet<BoardCell>(); 
 			roomMap = new HashMap<Character, Room>();
 			doors = new HashSet<BoardCell>();
+			players = new HashSet<Player>(); 
 			loadSetupConfig(); 
 			loadLayoutConfig(); 
 			//loop through grid and run calcAdjacencies for each cell
@@ -57,9 +69,6 @@ public class Board {
 		Scanner setupScanner = new Scanner(setupReader); 
 		//loop to read in file data 
 
-		char label;
-		Room room;
-
 		while(setupScanner.hasNextLine()) {
 			//reads in line of file  
 			String currentLine = setupScanner.nextLine(); 
@@ -69,7 +78,7 @@ public class Board {
 			}
 			//takes each line and splits up line by comma then space
 			String[] lineInfo = currentLine.split(", "); 
-			//if the first word read in is not Room or Space, throw a BadConfigFormatException
+			//if the first word read in is not Room, Space, Human, or Computer, throw a BadConfigFormatException
 			if(lineInfo[0].equals("Room") || lineInfo[0].equals("Space")) {
 				//converts the string containing the label to a char 
 				label = lineInfo[2].charAt(0); 
@@ -77,6 +86,27 @@ public class Board {
 				room = new Room(lineInfo[1], label); 
 				//adds label and room to the map 
 				roomMap.put(label, room); 
+			}
+			else if(lineInfo[0].equals("Human") || lineInfo[0].equals("Computer")) {
+				Player player; 
+				playerName = lineInfo[1]; 
+				playerColor = lineInfo[2]; 
+				playerStartRow = Integer.parseInt(lineInfo[3]);
+				playerStartCol = Integer.parseInt(lineInfo[4]); 
+				if(lineInfo[0].equals("Human")) {
+					player = new HumanPlayer(playerName, playerColor, playerStartRow, playerStartCol, lineInfo[0]); 
+					//increment human players counter
+					numHumanPlayers++; 
+					//once human player is created, add it to set 
+					players.add(player); 
+				}
+				else {
+					player = new ComputerPlayer(playerName, playerColor, playerStartRow, playerStartCol, lineInfo[0]); 
+					//increment computer players counter 
+					numComputerPlayers++; 
+					//once computer player is created, add it to list 
+					players.add(player); 
+				}
 			}
 			else {
 				throw new BadConfigFormatException("Setup text file not written properly, check spelling and spaces"); 
@@ -398,11 +428,18 @@ public class Board {
 	
 	//methods to tell the board how many human and computer players are in the game 
 	public int getNumHumanPlayers() {
-		return 0; 
+		return numHumanPlayers; 
 	}
 	
 	public int getNumComputerPlayers() {
-		return 0; 
+		return numComputerPlayers; 
+	}
+	
+	public static void main(String[] args) throws FileNotFoundException, BadConfigFormatException {
+		Board test = new Board(); 
+		test.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
+		test.initialize();
+		System.out.println(test.getNumHumanPlayers());
 	}
 	
 }
