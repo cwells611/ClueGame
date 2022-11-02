@@ -17,6 +17,7 @@ public class Board {
 	private Set<BoardCell> targets;
 	private Set<BoardCell> doors;
 	private Set<Player> players; 
+	private ArrayList<String> weapons; 
 	char label;
 	Room room;
 	String playerName; 
@@ -25,6 +26,7 @@ public class Board {
 	int playerStartCol; 
 	int numHumanPlayers;
 	int numComputerPlayers; 
+	int numWeapons; 
 	private static Board theInstance = new Board();
 
 	// constructor is private to ensure only one can be created
@@ -43,11 +45,13 @@ public class Board {
 			numColumns = 0; 
 			numHumanPlayers = 0; 
 			numComputerPlayers = 0; 
+			numWeapons = 0; 
 			visited = new HashSet<BoardCell>();
 			targets = new HashSet<BoardCell>(); 
 			roomMap = new HashMap<Character, Room>();
 			doors = new HashSet<BoardCell>();
 			players = new HashSet<Player>(); 
+			weapons = new ArrayList<String>(); 
 			loadSetupConfig(); 
 			loadLayoutConfig(); 
 			//loop through grid and run calcAdjacencies for each cell
@@ -107,6 +111,10 @@ public class Board {
 					//once computer player is created, add it to list 
 					players.add(player); 
 				}
+			}
+			else if(lineInfo[0].equals("Weapon")) {
+				weapons.add(lineInfo[1]); 
+				numWeapons++; 
 			}
 			else {
 				throw new BadConfigFormatException("Setup text file not written properly, check spelling and spaces"); 
@@ -426,7 +434,7 @@ public class Board {
 		//some code goes here 
 	}
 	
-	//methods to tell the board how many human and computer players are in the game 
+	//Player getters 
 	public int getNumHumanPlayers() {
 		return numHumanPlayers; 
 	}
@@ -434,6 +442,15 @@ public class Board {
 	public int getNumComputerPlayers() {
 		return numComputerPlayers; 
 	}
+	
+	//Weapon getters
+	public int getNumWeapons() {
+		return numWeapons; 
+	}
+	public ArrayList<String> getWeapons() {
+		return weapons; 
+	}
+	
 	
 	public static void main(String[] args) throws FileNotFoundException, BadConfigFormatException {
 		Board test = new Board(); 
