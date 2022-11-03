@@ -148,7 +148,8 @@ public class Board {
 			}
 		} 
 		//after the deck has been fully loaded in, we want to randomly pick 1 room, 1 weapon, and 1 person that is the solution
-		Solution solution = new Solution(deck); 
+		Solution solution = new Solution(); 
+		solution.createSolution(deck); 
 	}
 
 	public void loadLayoutConfig() throws FileNotFoundException, BadConfigFormatException {
@@ -471,6 +472,9 @@ public class Board {
 	public int getNumComputerPlayers() {
 		return numComputerPlayers; 
 	}
+	public ArrayList<Player> getPlayers() {
+		return players; 
+	}
 	
 	//Weapon getters
 	public int getNumWeapons() {
@@ -484,8 +488,6 @@ public class Board {
 	public ArrayList<Card> getDeck() {
 		return deck; 
 	}
-	/*
-	 * public ArrayList<Card> getSolution() { return solution; }
-	 */
+
 }
 

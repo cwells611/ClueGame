@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import clueGame.Board;
 import clueGame.Card;
 import clueGame.CardType;
+import clueGame.Player;
 import clueGame.Solution;
 
 class PlayerAndCardTests {
@@ -31,16 +32,39 @@ class PlayerAndCardTests {
 	
 	@Test
 	void testNumHumanPlayers() {
+		ArrayList<Player> players = theBoard.getPlayers(); 
+		//we want to make sure that only 1 human player is created 
 		assertEquals(1, theBoard.getNumHumanPlayers()); 
+		//also want to make sure that the correct person is assigned as the human player 
+		//loop through list of players and if the player type is human, make sure the name associated is the human 
+		///player is Nigel Thomas 
+		int humanIndex = 0; 
+		for(Player player : players) {
+			if(player.getPlayerType().equals("Human")) {
+				humanIndex = players.indexOf(player);  
+			}
+		}
+		assertEquals("Nigel Thomas", players.get(humanIndex).getPlayerName()); 
 	}
 	
 	@Test 
 	void testNumComputerPlayers() {
+		ArrayList<Player> players = theBoard.getPlayers(); 
+		//we want to test that 5 computer players are created 
 		assertEquals(5, theBoard.getNumComputerPlayers()); 
+		//also want to make sure that the correct person is assigned as the human player 
+		//loop through list of players and if the player type is computer, make sure the names associated with the computers 
+		//are correct 
+		/*
+		 * int computer1 = 0; int computer2 = 0; int computer3 = 0; int computer4 = 0;
+		 * int computer5 = 0;
+		 */
+		
 	}
 	
 	@Test 
 	void testNumWeaponsAndWeapons() {
+		//We will have 6 different weapins 
 		ArrayList<String> weapons = theBoard.getWeapons(); 
 		assertEquals(6, theBoard.getNumWeapons()); 
 		assertEquals("Frying Pan", weapons.get(0)); 
@@ -53,8 +77,12 @@ class PlayerAndCardTests {
 	
 	@Test
 	void testNumCards() {
+		//our deck of cards will consists of 9 room, 6 players, and 6 weapons, so we want to make sure that the deck size is 
+		//21 to show all cards were loaded in 
 		ArrayList<Card> deck = theBoard.getDeck(); 
 		assertEquals(21, deck.size()); 
+		//since out ClueSetup.txt is written such that the laodSetup method reads in the room, then the people, then the weapons
+		//so the cards are added into the deck in that order so we want to test to make sure that all the card types are properly loaded in
 		assertEquals(CardType.ROOM, deck.get(0).getType()); 
 		assertEquals(CardType.ROOM, deck.get(1).getType()); 
 		assertEquals(CardType.ROOM, deck.get(2).getType()); 
@@ -82,7 +110,8 @@ class PlayerAndCardTests {
 	public void testSolutionCards() {
 		//we want to make sure that the ArrayList that contains the solution cards has a Person, a Weapon, and a Room
 		ArrayList<Card> deck = theBoard.getDeck(); 
-		Solution solution = new Solution(deck); 
+		Solution solution = new Solution();
+		solution.createSolution(deck);
 		assertEquals(CardType.PERSON, solution.getSolution().get(0).getType()); 
 		assertEquals(CardType.WEAPON, solution.getSolution().get(1).getType()); 
 		assertEquals(CardType.ROOM, solution.getSolution().get(2).getType()); 
