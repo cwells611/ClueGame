@@ -152,13 +152,13 @@ public class Board {
 		solution.createSolution(deck); 
 		//remove 3 in solution from cards in deck
 		for(Card solutionCard : deck) {
-			if(card.getName().equals(solution.getRoom().getName())) {
+			if(solutionCard.equals(solution.getRoom())) {
 				deck.remove(solutionCard);
 			}
-			if(card.getName().equals(solution.getPerson().getName())) {
+			if(solutionCard.equals(solution.getWeapon())) {
 				deck.remove(solutionCard);
 			}
-			if(card.getName().equals(solution.getWeapon().getName())) {
+			if(solutionCard.equals(solution.getPerson())) {
 				deck.remove(solutionCard);
 			}
 		}
