@@ -52,19 +52,19 @@ class PlayerAndCardTests {
 		ArrayList<Player> players = theBoard.getPlayers(); 
 		//we want to test that 5 computer players are created 
 		assertEquals(5, theBoard.getNumComputerPlayers()); 
-		//also want to make sure that the correct person is assigned as the human player 
-		//loop through list of players and if the player type is computer, make sure the names associated with the computers 
-		//are correct 
-		/*
-		 * int computer1 = 0; int computer2 = 0; int computer3 = 0; int computer4 = 0;
-		 * int computer5 = 0;
-		 */
-		
+		//also want to make sure that the correct person is assigned as the computers players 
+		//since we know that when the players are read in from the .txt file, the human will be seen first 
+		//the computer players will be seen next, we can just check the next 5 indexes of the players ArrayList 
+		assertEquals("Bobby Long", players.get(1).getPlayerName()); 
+		assertEquals("Craig Downs", players.get(2).getPlayerName()); 
+		assertEquals("Edna Dickson", players.get(3).getPlayerName()); 
+		assertEquals("Judas Watkins", players.get(4).getPlayerName()); 
+		assertEquals("Gracie Hall", players.get(5).getPlayerName()); 
 	}
 	
 	@Test 
 	void testNumWeaponsAndWeapons() {
-		//We will have 6 different weapins 
+		//We will have 6 different weapons 
 		ArrayList<String> weapons = theBoard.getWeapons(); 
 		assertEquals(6, theBoard.getNumWeapons()); 
 		assertEquals("Frying Pan", weapons.get(0)); 
