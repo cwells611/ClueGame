@@ -77,5 +77,15 @@ class PlayerAndCardTests {
 		assertEquals(CardType.WEAPON, deck.get(20).getType()); 
 	}
 	
+	@Test 
+	public void testSolutionCards() {
+		//we want to make sure that the ArrayList that contains the solution cards has a Person, a Weapon, and a Room
+		ArrayList<Card> solution = theBoard.getSolution(); 
+		assertEquals(CardType.PERSON, solution.get(0).getType()); 
+		assertEquals(CardType.WEAPON, solution.get(1).getType());
+		assertEquals(CardType.ROOM, solution.get(2).getType());
+		
+	}
+	
 
 }

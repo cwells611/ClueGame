@@ -16,9 +16,10 @@ public class Board {
 	private Set<BoardCell> visited;
 	private Set<BoardCell> targets;
 	private Set<BoardCell> doors;
-	private Set<Player> players; 
+	private ArrayList<Player> players; 
 	private ArrayList<String> weapons; 
 	private ArrayList<Card> deck; 
+	private ArrayList<Card> solution; 
 	char label;
 	Room room;
 	String playerName; 
@@ -53,9 +54,10 @@ public class Board {
 			targets = new HashSet<BoardCell>(); 
 			roomMap = new HashMap<Character, Room>();
 			doors = new HashSet<BoardCell>();
-			players = new HashSet<Player>(); 
+			players = new ArrayList<Player>(); 
 			weapons = new ArrayList<String>(); 
 			deck = new ArrayList<Card>(); 
+			solution = new ArrayList<Card>(); 
 			loadSetupConfig(); 
 			loadLayoutConfig(); 
 			//loop through grid and run calcAdjacencies for each cell
@@ -145,6 +147,8 @@ public class Board {
 				throw new BadConfigFormatException("Setup text file not written properly, check spelling and spaces"); 
 			}
 		}
+		//line to make the test fail
+		solution.add(card); 
 	}
 
 	public void loadLayoutConfig() throws FileNotFoundException, BadConfigFormatException {
@@ -476,9 +480,12 @@ public class Board {
 		return weapons; 
 	}
 	
-	//Card getter
+	//Deck and Solution getters
 	public ArrayList<Card> getDeck() {
 		return deck; 
+	}
+	public ArrayList<Card> getSolution() {
+		return solution; 
 	}
 	
 }
