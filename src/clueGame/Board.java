@@ -150,6 +150,11 @@ public class Board {
 		//after the deck has been fully loaded in, we want to randomly pick 1 room, 1 weapon, and 1 person that is the solution
 		Solution solution = new Solution(); 
 		solution.createSolution(deck); 
+		//remove 3 in solution from cards in deck
+		
+		//shuffle the deck
+		
+		//deal deck to players
 	}
 
 	public void loadLayoutConfig() throws FileNotFoundException, BadConfigFormatException {
