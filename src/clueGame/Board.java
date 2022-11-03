@@ -151,7 +151,17 @@ public class Board {
 		Solution solution = new Solution(); 
 		solution.createSolution(deck); 
 		//remove 3 in solution from cards in deck
-		
+		for(Card card : deck) {
+			if(card.getName().equals(solution.getRoom().getName())) {
+				deck.remove(card);
+			}
+			if(card.getName().equals(solution.getPerson().getName())) {
+				deck.remove(card);
+			}
+			if(card.getName().equals(solution.getWeapon().getName())) {
+				deck.remove(card);
+			}
+		}
 		//shuffle the deck
 		
 		//deal deck to players

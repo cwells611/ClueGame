@@ -4,7 +4,7 @@ public class Card {
 	private String cardName; 
 	private CardType type; 
 	
-	//contructor 
+	//constructor 
 	public Card(String name, CardType cardType) {
 		this.cardName = name;
 		this.type = cardType; 
