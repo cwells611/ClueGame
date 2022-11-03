@@ -19,18 +19,18 @@ public class Board {
 	private ArrayList<Player> players; 
 	private ArrayList<String> weapons; 
 	private ArrayList<Card> deck; 
-	private ArrayList<Card> solution; 
-	char label;
-	Room room;
-	String playerName; 
-	String playerColor; 
-	int playerStartRow; 
-	int playerStartCol; 
-	int numHumanPlayers;
-	int numComputerPlayers; 
-	int numWeapons; 
-	CardType cardType; 
-	Card card; 
+	//private ArrayList<Card> solutionDeck; 
+	private char label;
+	private Room room;
+	private String playerName; 
+	private String playerColor; 
+	private int playerStartRow; 
+	private int playerStartCol; 
+	private int numHumanPlayers;
+	private int numComputerPlayers; 
+	private int numWeapons; 
+	private CardType cardType; 
+	private Card card; 
 	private static Board theInstance = new Board();
 
 	// constructor is private to ensure only one can be created
@@ -57,7 +57,7 @@ public class Board {
 			players = new ArrayList<Player>(); 
 			weapons = new ArrayList<String>(); 
 			deck = new ArrayList<Card>(); 
-			solution = new ArrayList<Card>(); 
+			//solution = new ArrayList<Card>(); 
 			loadSetupConfig(); 
 			loadLayoutConfig(); 
 			//loop through grid and run calcAdjacencies for each cell
@@ -146,9 +146,9 @@ public class Board {
 			else {
 				throw new BadConfigFormatException("Setup text file not written properly, check spelling and spaces"); 
 			}
-		}
-		//line to make the test fail
-		solution.add(card); 
+		} 
+		//after the deck has been fully loaded in, we want to randomly pick 1 room, 1 weapon, and 1 person that is the solution
+		Solution solution = new Solution(deck); 
 	}
 
 	public void loadLayoutConfig() throws FileNotFoundException, BadConfigFormatException {
@@ -484,9 +484,8 @@ public class Board {
 	public ArrayList<Card> getDeck() {
 		return deck; 
 	}
-	public ArrayList<Card> getSolution() {
-		return solution; 
-	}
-	
+	/*
+	 * public ArrayList<Card> getSolution() { return solution; }
+	 */
 }
 

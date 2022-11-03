@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import clueGame.Board;
 import clueGame.Card;
 import clueGame.CardType;
+import clueGame.Solution;
 
 class PlayerAndCardTests {
 	//constant variables to hold board size 
@@ -80,11 +81,11 @@ class PlayerAndCardTests {
 	@Test 
 	public void testSolutionCards() {
 		//we want to make sure that the ArrayList that contains the solution cards has a Person, a Weapon, and a Room
-		ArrayList<Card> solution = theBoard.getSolution(); 
-		assertEquals(CardType.PERSON, solution.get(0).getType()); 
-		assertEquals(CardType.WEAPON, solution.get(1).getType());
-		assertEquals(CardType.ROOM, solution.get(2).getType());
-		
+		ArrayList<Card> deck = theBoard.getDeck(); 
+		Solution solution = new Solution(deck); 
+		assertEquals(CardType.PERSON, solution.getSolution().get(0).getType()); 
+		assertEquals(CardType.WEAPON, solution.getSolution().get(1).getType()); 
+		assertEquals(CardType.ROOM, solution.getSolution().get(2).getType()); 
 	}
 	
 
