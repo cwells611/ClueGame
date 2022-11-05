@@ -460,8 +460,22 @@ public class Board {
 
 	}
 	
-	public void shuffleDeck(ArrayList<Card> deck) {
+	public ArrayList<Card> shuffleDeck(ArrayList<Card> deck) {
+		ArrayList<Card> initDeck = (ArrayList<Card>)deck.clone();
+		ArrayList<Card> finalDeck = new ArrayList<Card>();
+		Random random = new Random();
+		//make a copy of deck called initDeck
+		//while loop until initDeck is empty
 		
+		while(initDeck.size() > 0) {
+			int randInt = random.nextInt(initDeck.size());
+			Card currentCard = initDeck.get(randInt);
+			finalDeck.add(currentCard);
+			initDeck.remove(currentCard);
+		}
+		//choose a random value from initDeck and add it to finalDeck
+		//
+		return finalDeck;
 	}
 
 	public Set<BoardCell> getTargets() {

@@ -147,8 +147,10 @@ class PlayerAndCardTests {
 	@Test
 	public void testShuffleDeck() {
 		ArrayList<Card> deck = theBoard.getDeck();
+		ArrayList<Card> shuffledDeck;
 		Random random = new Random();
 		ArrayList<Integer> randomInts = new ArrayList<Integer>();
+		int initialDeckSize = deck.size();
 		
 		//creating arrayList of 5 random positions
 		while(randomInts.size() < 5) {
@@ -171,14 +173,16 @@ class PlayerAndCardTests {
 		int card5InitPos = randomInts.get(4);
 		Card card5 = deck.get(card5InitPos);
 		
-		theBoard.shuffleDeck(deck);
+		shuffledDeck = theBoard.shuffleDeck(deck);
 		
-		int card1FinalPos = deck.indexOf(card1);
-		int card2FinalPos = deck.indexOf(card2);
-		int card3FinalPos = deck.indexOf(card3);
-		int card4FinalPos = deck.indexOf(card4);
-		int card5FinalPos = deck.indexOf(card5);
+		int card1FinalPos = shuffledDeck.indexOf(card1);
+		int card2FinalPos = shuffledDeck.indexOf(card2);
+		int card3FinalPos = shuffledDeck.indexOf(card3);
+		int card4FinalPos = shuffledDeck.indexOf(card4);
+		int card5FinalPos = shuffledDeck.indexOf(card5);
 		
+		//making sure the size of the deck has not changed
+		assertEquals(deck.size(), initialDeckSize);
 		assertNotEquals(card1InitPos, card1FinalPos);
 		assertNotEquals(card2InitPos, card2FinalPos);
 		assertNotEquals(card3InitPos, card3FinalPos);
