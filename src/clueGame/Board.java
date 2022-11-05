@@ -18,7 +18,7 @@ public class Board {
 	private Set<BoardCell> doors;
 	private ArrayList<Player> players; 
 	private ArrayList<String> weapons; 
-	private static ArrayList<Card> deck; 
+	private ArrayList<Card> deck; 
 	//private ArrayList<Card> solutionDeck; 
 	private char label;
 	private Room room;
@@ -460,7 +460,13 @@ public class Board {
 
 	}
 	
-	public ArrayList<Card> shuffleDeck(ArrayList<Card> deck) {
+	public void removeSolutionCards(Solution solution) {
+		deck.remove(solution.getRoom());
+		deck.remove(solution.getPerson());
+		deck.remove(solution.getWeapon());
+	}
+	
+	public void shuffleDeck() {
 		ArrayList<Card> initDeck = (ArrayList<Card>)deck.clone();
 		ArrayList<Card> finalDeck = new ArrayList<Card>();
 		Random random = new Random();
@@ -481,7 +487,7 @@ public class Board {
 		}
 		//choose a random value from initDeck and add it to finalDeck
 		//
-		return finalDeck;
+		deck = finalDeck;
 	}
 
 	public Set<BoardCell> getTargets() {
@@ -490,7 +496,10 @@ public class Board {
 	
 	//skeletons for new methods to complete C20A Clue Players 1 
 	public void deal() {
-		//some code goes here 
+		//shuffles the deck before the deal
+		//shuffleDeck();
+		
+		
 	}
 	
 	//Player getters 

@@ -8,6 +8,7 @@ import java.util.Random;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import clueGame.Board;
@@ -29,6 +30,11 @@ class PlayerAndCardTests {
 		//has the board read in the config files and setup board based on files 
 		theBoard.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
 		//loads both files even though we are only using one instance of board 
+	}
+	
+	//necessary to initialize before each, as deck size must be different between tests
+	@BeforeEach
+	public void initialize() {
 		theBoard.initialize();
 	}
 	
@@ -122,15 +128,14 @@ class PlayerAndCardTests {
 	@Test
 	public void testRemoveSolution() {
 		ArrayList<Card> deck = theBoard.getDeck();
-		ArrayList<Card> newDeck;
 		Solution solution = new Solution();
 		solution.createSolution(deck); 
 		Card solutionRoom = solution.getRoom();
 		Card solutionPerson = solution.getPerson();
 		Card solutionWeapon = solution.getWeapon();
-		newDeck = solution.removeSolutionCards(deck);
-		assertEquals(18, newDeck.size());
-		for(Card card : newDeck) {
+		theBoard.removeSolutionCards(solution);
+		assertEquals(18, deck.size());
+		for(Card card : deck) {
 			//testing each card in the deck by type, and checking that the solution card is not in the deck
 			if(card.getType() == CardType.PERSON) {
 				assertNotEquals(card.getName(), solutionPerson.getName());
@@ -173,13 +178,15 @@ class PlayerAndCardTests {
 		int card5InitPos = randomInts.get(4);
 		Card card5 = deck.get(card5InitPos);
 		
-		shuffledDeck = theBoard.shuffleDeck(deck);
+		theBoard.shuffleDeck();
+		//need to update the deck
+		deck = theBoard.getDeck();
 		
-		int card1FinalPos = shuffledDeck.indexOf(card1);
-		int card2FinalPos = shuffledDeck.indexOf(card2);
-		int card3FinalPos = shuffledDeck.indexOf(card3);
-		int card4FinalPos = shuffledDeck.indexOf(card4);
-		int card5FinalPos = shuffledDeck.indexOf(card5);
+		int card1FinalPos = deck.indexOf(card1);
+		int card2FinalPos = deck.indexOf(card2);
+		int card3FinalPos = deck.indexOf(card3);
+		int card4FinalPos = deck.indexOf(card4);
+		int card5FinalPos = deck.indexOf(card5);
 		
 		//making sure the size of the deck has not changed
 		assertEquals(deck.size(), initialDeckSize);
@@ -193,7 +200,11 @@ class PlayerAndCardTests {
 	//@Test
 	public void testDeal() {
 		ArrayList<Card> deck = theBoard.getDeck();
+		ArrayList<Card> allPlayerHands = new ArrayList<Card>();
+		Solution solution = new Solution();
+		solution.createSolution(deck);
 		
+		theBoard.removeSolutionCards(solution);
 		theBoard.deal();
 		
 		Player player1 = theBoard.getPlayers().get(0);
@@ -207,7 +218,20 @@ class PlayerAndCardTests {
 		//all cards dealt
 		assertEquals(deck.size(), 0);
 		//players have roughly same number of cards
-		
+//		assertTrue(player1.getHand().size() == avgCards)
+//		assertTrue(player2.getHand().size() == avgCards || player2.getHand().size() == avgCards + 1);
+//		assertTrue(player3.getHand().size() == avgCards || player3.getHand().size() == avgCards + 1);
+//		assertTrue(player4.getHand().size() == avgCards || player4.getHand().size() == avgCards + 1);
+//		assertTrue(player5.getHand().size() == avgCards || player5.getHand().size() == avgCards + 1);
+//		assertTrue(player6.getHand().size() == avgCards || player6.getHand().size() == avgCards + 1);
 		//no card dealt twice
+		allPlayerHands.addAll(player1.getHand());
+		allPlayerHands.addAll(player2.getHand());
+		allPlayerHands.addAll(player3.getHand());
+		allPlayerHands.addAll(player4.getHand());
+		allPlayerHands.addAll(player5.getHand());
+		allPlayerHands.addAll(player6.getHand());
+		
+		//assertEquals()
 	}
 }

@@ -36,6 +36,10 @@ public abstract class Player {
 		return this.name; 
 	}
 	
+	public ArrayList<Card> getHand(){
+		return this.hand;
+	}
+	
 	public void updateHand(Card card) {
 		
 	}
