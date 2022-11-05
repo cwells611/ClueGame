@@ -46,4 +46,13 @@ public class Solution {
 	public Card getWeapon() {
 		return solution.get(1); 
 	}
+	
+	public ArrayList<Card> removeSolutionCards(ArrayList<Card> deck){
+		ArrayList<Card> newDeck = new ArrayList<Card>();
+		newDeck = (ArrayList<Card>)deck.clone();
+		newDeck.remove(this.room);
+		newDeck.remove(this.person);
+		newDeck.remove(this.weapon);
+		return newDeck;
+	}
 }

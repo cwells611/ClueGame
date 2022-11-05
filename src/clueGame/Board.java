@@ -18,7 +18,7 @@ public class Board {
 	private Set<BoardCell> doors;
 	private ArrayList<Player> players; 
 	private ArrayList<String> weapons; 
-	private ArrayList<Card> deck; 
+	private static ArrayList<Card> deck; 
 	//private ArrayList<Card> solutionDeck; 
 	private char label;
 	private Room room;
@@ -151,7 +151,7 @@ public class Board {
 		Solution solution = new Solution(); 
 		solution.createSolution(deck);
 		//remove 3 in solution from cards in deck
-		//removeSolutionCards(solution);
+		
 		//shuffle the deck
 		
 		//deal deck to players
@@ -460,25 +460,25 @@ public class Board {
 
 	}
 	
-	public ArrayList<Card> removeSolutionCards(Solution solution, ArrayList<Card> deck) {
-		ArrayList<Card> removalCards = new ArrayList<Card>();
-		for(Card solutionCard : deck) {
-			if(solutionCard.equals(solution.getRoom())) {
-				removalCards.add(solutionCard);
-			}
-			if(solutionCard.equals(solution.getWeapon())) {
-				removalCards.add(solutionCard);
-			}
-			if(solutionCard.equals(solution.getPerson())) {
-				removalCards.add(solutionCard);
-			}
-		}
-		
-		for(Card removalCard : removalCards) {
-			deck.remove(removalCard);
-		}
-		return deck;
-	}
+//	public ArrayList<Card> removeSolutionCards(Solution solution, ArrayList<Card> deck) {
+//		ArrayList<Card> removalCards = new ArrayList<Card>();
+//		for(Card solutionCard : deck) {
+//			if(solutionCard.equals(solution.getRoom())) {
+//				removalCards.add(solutionCard);
+//			}
+//			if(solutionCard.equals(solution.getWeapon())) {
+//				removalCards.add(solutionCard);
+//			}
+//			if(solutionCard.equals(solution.getPerson())) {
+//				removalCards.add(solutionCard);
+//			}
+//		}
+//		
+//		for(Card removalCard : removalCards) {
+//			deck.remove(removalCard);
+//		}
+//		return deck;
+//	}
 
 	public Set<BoardCell> getTargets() {
 		return this.targets;

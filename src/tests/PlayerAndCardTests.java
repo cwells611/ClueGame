@@ -120,14 +120,15 @@ class PlayerAndCardTests {
 	@Test
 	public void testRemoveSolution() {
 		ArrayList<Card> deck = theBoard.getDeck();
+		ArrayList<Card> newDeck;
 		Solution solution = new Solution();
 		solution.createSolution(deck); 
 		Card solutionRoom = solution.getRoom();
 		Card solutionPerson = solution.getPerson();
 		Card solutionWeapon = solution.getWeapon();
-		deck = theBoard.removeSolutionCards(solution, deck);
-		assertEquals(18, deck.size());
-		for(Card card : deck) {
+		newDeck = solution.removeSolutionCards(deck);
+		assertEquals(18, newDeck.size());
+		for(Card card : newDeck) {
 			//testing each card in the deck by type, and checking that the solution card is not in the deck
 			if(card.getType() == CardType.PERSON) {
 				assertNotEquals(card.getName(), solutionPerson.getName());
