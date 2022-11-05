@@ -189,4 +189,25 @@ class PlayerAndCardTests {
 		assertNotEquals(card4InitPos, card4FinalPos);
 		assertNotEquals(card5InitPos, card5FinalPos);
 	}
+	
+	//@Test
+	public void testDeal() {
+		ArrayList<Card> deck = theBoard.getDeck();
+		
+		theBoard.deal();
+		
+		Player player1 = theBoard.getPlayers().get(0);
+		Player player2 = theBoard.getPlayers().get(1);
+		Player player3 = theBoard.getPlayers().get(2);
+		Player player4 = theBoard.getPlayers().get(3);
+		Player player5 = theBoard.getPlayers().get(4);
+		Player player6 = theBoard.getPlayers().get(5);
+		
+		
+		//all cards dealt
+		assertEquals(deck.size(), 0);
+		//players have roughly same number of cards
+		
+		//no card dealt twice
+	}
 }

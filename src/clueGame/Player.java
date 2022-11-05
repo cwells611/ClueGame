@@ -1,11 +1,14 @@
 package clueGame;
 
+import java.util.ArrayList;
+
 public abstract class Player {
 	private String name;
 	private String color; //can also be of type Color, need to decide how we are passing in the color
 	//corresponds to player starting location on the board 
 	private int row; 
 	private int col; 
+	private ArrayList<Card> hand;
 	private String playerType; 
 	private CardType type; 
 	
@@ -33,5 +36,7 @@ public abstract class Player {
 		return this.name; 
 	}
 	
-	public abstract void updateHand(Card card); 
+	public void updateHand(Card card) {
+		
+	}
 }

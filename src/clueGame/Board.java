@@ -470,8 +470,14 @@ public class Board {
 		while(initDeck.size() > 0) {
 			int randInt = random.nextInt(initDeck.size());
 			Card currentCard = initDeck.get(randInt);
-			finalDeck.add(currentCard);
-			initDeck.remove(currentCard);
+			//only adds the card to the finalDeck if the adding position is different from its original position in the deck
+			if(deck.indexOf(currentCard) != finalDeck.size()) {
+				finalDeck.add(currentCard);
+				initDeck.remove(currentCard);
+			}else {
+				continue;
+			}
+			
 		}
 		//choose a random value from initDeck and add it to finalDeck
 		//
