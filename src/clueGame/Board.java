@@ -149,19 +149,9 @@ public class Board {
 		} 
 		//after the deck has been fully loaded in, we want to randomly pick 1 room, 1 weapon, and 1 person that is the solution
 		Solution solution = new Solution(); 
-		solution.createSolution(deck); 
+		solution.createSolution(deck);
 		//remove 3 in solution from cards in deck
-		for(Card solutionCard : deck) {
-			if(solutionCard.equals(solution.getRoom())) {
-				deck.remove(solutionCard);
-			}
-			if(solutionCard.equals(solution.getWeapon())) {
-				deck.remove(solutionCard);
-			}
-			if(solutionCard.equals(solution.getPerson())) {
-				deck.remove(solutionCard);
-			}
-		}
+		//removeSolutionCards(solution);
 		//shuffle the deck
 		
 		//deal deck to players
@@ -468,6 +458,26 @@ public class Board {
 			//if the below cell is a room, but not a doorway, then it does not go in adjList 
 		}
 
+	}
+	
+	public ArrayList<Card> removeSolutionCards(Solution solution, ArrayList<Card> deck) {
+		ArrayList<Card> removalCards = new ArrayList<Card>();
+		for(Card solutionCard : deck) {
+			if(solutionCard.equals(solution.getRoom())) {
+				removalCards.add(solutionCard);
+			}
+			if(solutionCard.equals(solution.getWeapon())) {
+				removalCards.add(solutionCard);
+			}
+			if(solutionCard.equals(solution.getPerson())) {
+				removalCards.add(solutionCard);
+			}
+		}
+		
+		for(Card removalCard : removalCards) {
+			deck.remove(removalCard);
+		}
+		return deck;
 	}
 
 	public Set<BoardCell> getTargets() {

@@ -125,6 +125,7 @@ class PlayerAndCardTests {
 		Card solutionRoom = solution.getRoom();
 		Card solutionPerson = solution.getPerson();
 		Card solutionWeapon = solution.getWeapon();
+		deck = theBoard.removeSolutionCards(solution, deck);
 		assertEquals(18, deck.size());
 		for(Card card : deck) {
 			//testing each card in the deck by type, and checking that the solution card is not in the deck
