@@ -460,25 +460,9 @@ public class Board {
 
 	}
 	
-//	public ArrayList<Card> removeSolutionCards(Solution solution, ArrayList<Card> deck) {
-//		ArrayList<Card> removalCards = new ArrayList<Card>();
-//		for(Card solutionCard : deck) {
-//			if(solutionCard.equals(solution.getRoom())) {
-//				removalCards.add(solutionCard);
-//			}
-//			if(solutionCard.equals(solution.getWeapon())) {
-//				removalCards.add(solutionCard);
-//			}
-//			if(solutionCard.equals(solution.getPerson())) {
-//				removalCards.add(solutionCard);
-//			}
-//		}
-//		
-//		for(Card removalCard : removalCards) {
-//			deck.remove(removalCard);
-//		}
-//		return deck;
-//	}
+	public void shuffleDeck(ArrayList<Card> deck) {
+		
+	}
 
 	public Set<BoardCell> getTargets() {
 		return this.targets;

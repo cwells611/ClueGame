@@ -3,6 +3,8 @@ package tests;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -140,5 +142,47 @@ class PlayerAndCardTests {
 				assertNotEquals(card.getName(), solutionWeapon.getName());
 			}
 		}
+	}
+	
+	@Test
+	public void testShuffleDeck() {
+		ArrayList<Card> deck = theBoard.getDeck();
+		Random random = new Random();
+		ArrayList<Integer> randomInts = new ArrayList<Integer>();
+		
+		//creating arrayList of 5 random positions
+		while(randomInts.size() < 5) {
+			int currentRandom = random.nextInt(deck.size());
+			if(randomInts.contains(currentRandom) == false) {
+				randomInts.add(currentRandom);
+			}
+		}
+		
+		//creating 5 cards that are randomly chosen from the deck
+		//along with their positions
+		int card1InitPos = randomInts.get(0);
+		Card card1 = deck.get(card1InitPos);
+		int card2InitPos = randomInts.get(1);
+		Card card2 = deck.get(card2InitPos);
+		int card3InitPos = randomInts.get(2);
+		Card card3 = deck.get(card3InitPos);
+		int card4InitPos = randomInts.get(3);
+		Card card4 = deck.get(card4InitPos);
+		int card5InitPos = randomInts.get(4);
+		Card card5 = deck.get(card5InitPos);
+		
+		theBoard.shuffleDeck(deck);
+		
+		int card1FinalPos = deck.indexOf(card1);
+		int card2FinalPos = deck.indexOf(card2);
+		int card3FinalPos = deck.indexOf(card3);
+		int card4FinalPos = deck.indexOf(card4);
+		int card5FinalPos = deck.indexOf(card5);
+		
+		assertNotEquals(card1InitPos, card1FinalPos);
+		assertNotEquals(card2InitPos, card2FinalPos);
+		assertNotEquals(card3InitPos, card3FinalPos);
+		assertNotEquals(card4InitPos, card4FinalPos);
+		assertNotEquals(card5InitPos, card5FinalPos);
 	}
 }
