@@ -3,6 +3,7 @@ package tests;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -197,13 +198,12 @@ class PlayerAndCardTests {
 		assertNotEquals(card5InitPos, card5FinalPos);
 	}
 	
-	//@Test
+	@Test
 	public void testDeal() {
 		ArrayList<Card> deck = theBoard.getDeck();
 		ArrayList<Card> allPlayerHands = new ArrayList<Card>();
 		Solution solution = new Solution();
 		solution.createSolution(deck);
-		
 		theBoard.removeSolutionCards(solution);
 		theBoard.deal();
 		
@@ -217,13 +217,13 @@ class PlayerAndCardTests {
 		
 		//all cards dealt
 		assertEquals(deck.size(), 0);
-		//players have roughly same number of cards
-//		assertTrue(player1.getHand().size() == avgCards)
-//		assertTrue(player2.getHand().size() == avgCards || player2.getHand().size() == avgCards + 1);
-//		assertTrue(player3.getHand().size() == avgCards || player3.getHand().size() == avgCards + 1);
-//		assertTrue(player4.getHand().size() == avgCards || player4.getHand().size() == avgCards + 1);
-//		assertTrue(player5.getHand().size() == avgCards || player5.getHand().size() == avgCards + 1);
-//		assertTrue(player6.getHand().size() == avgCards || player6.getHand().size() == avgCards + 1);
+		//checking that players all have 3 cards
+		assertEquals(player1.getHand().size(), 3);
+		assertEquals(player2.getHand().size(), 3);
+		assertEquals(player3.getHand().size(), 3);
+		assertEquals(player4.getHand().size(), 3);
+		assertEquals(player5.getHand().size(), 3);
+		assertEquals(player6.getHand().size(), 3);
 		//no card dealt twice
 		allPlayerHands.addAll(player1.getHand());
 		allPlayerHands.addAll(player2.getHand());
@@ -231,7 +231,11 @@ class PlayerAndCardTests {
 		allPlayerHands.addAll(player4.getHand());
 		allPlayerHands.addAll(player5.getHand());
 		allPlayerHands.addAll(player6.getHand());
+		assertEquals(allPlayerHands.size(), 18);
 		
-		//assertEquals()
+		for(Card card : allPlayerHands) {
+			int occurences = Collections.frequency(allPlayerHands, card);
+			assertEquals(occurences, 1);
+		}
 	}
 }
