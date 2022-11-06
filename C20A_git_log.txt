@@ -1,0 +1,185 @@
+commit e143a7abd3c13514c7bc864b48b8a61a70c445f8
+Author: zcrennen <98796321+zcrennen@users.noreply.github.com>
+Date:   Sat Nov 5 18:12:02 2022 -0600
+
+    Added players and weapons to ClueSetup306
+    
+    Ensures that all 54 tests run now
+
+commit 5d1fbd8472cc08ab95cb72f745143706eeb4b6f1
+Author: zcrennen <98796321+zcrennen@users.noreply.github.com>
+Date:   Sat Nov 5 18:08:28 2022 -0600
+
+    Completed deal method
+    
+    All 8 tests pass!
+
+commit 9bbdf4461348b8ba60ec45a0ad0e2df6efc377b6
+Author: zcrennen <98796321+zcrennen@users.noreply.github.com>
+Date:   Sat Nov 5 17:27:18 2022 -0600
+
+    Created testDeal()
+
+commit 73807a32d3f601134233cd04b64437ff49ee4387
+Author: zcrennen <98796321+zcrennen@users.noreply.github.com>
+Date:   Sat Nov 5 17:21:18 2022 -0600
+
+    Fixed bugs in removeSolution and shuffleDeck
+    
+    made void functions instead of returning objects. Realized mistake was because initialize needs to be called beforeEach, and not beforeAll
+
+commit 6e61a7d512b708610844bff54112f839cd02b783
+Author: zcrennen <98796321+zcrennen@users.noreply.github.com>
+Date:   Sat Nov 5 16:43:11 2022 -0600
+
+    Fixed bug in shuffleDeck
+    
+    was previously allowed to add card to the same position. For example, was able to add the 6th card back to the 6th spot
+
+commit e905fd2240936b561a68d73d1107d2493e17f513
+Author: zcrennen <98796321+zcrennen@users.noreply.github.com>
+Date:   Sat Nov 5 16:18:14 2022 -0600
+
+    Complete shuffleDeck()
+    
+    7/7 test pass
+
+commit 23c138b34603df78d15b5384690ac01765c74fba
+Author: zcrennen <98796321+zcrennen@users.noreply.github.com>
+Date:   Sat Nov 5 15:59:39 2022 -0600
+
+    Created test for shuffling deck
+
+commit 618f99b9d4924bf1952a9f1d8d05b195f98cda2e
+Author: zcrennen <98796321+zcrennen@users.noreply.github.com>
+Date:   Sat Nov 5 15:12:50 2022 -0600
+
+    Got RemoveSolutionCards() to work
+    
+    Made a new deck that was a clone of the old deck, and removed the solution cards
+
+commit f0d63c7aced3511c17deef8510d5dfa3a6498bae
+Author: zcrennen <98796321+zcrennen@users.noreply.github.com>
+Date:   Sat Nov 5 14:51:17 2022 -0600
+
+    Created removeSolutionCard function
+
+commit 7d2ba449eb0c05af1fcc212a6a29d736616f9975
+Author: zcrennen <98796321+zcrennen@users.noreply.github.com>
+Date:   Thu Nov 3 13:43:52 2022 -0600
+
+    Refactored equals method in Board.java
+
+commit d12ac348de03eadcca2c79c5d45015c7217f5777
+Author: zcrennen <98796321+zcrennen@users.noreply.github.com>
+Date:   Thu Nov 3 13:43:25 2022 -0600
+
+    CHanged equals method for card comparisons
+
+commit 692a088c20b28041928a73b131be5d7d7597ec9e
+Author: zcrennen <98796321+zcrennen@users.noreply.github.com>
+Date:   Thu Nov 3 13:30:12 2022 -0600
+
+    Wrote a failing test testRemoveSolution()
+    
+    Tests to make sure that the solution cards are removed from the deck
+
+commit e0a5972cf83438853ce78f72f14bbb599eccb91a
+Author: zcrennen <98796321+zcrennen@users.noreply.github.com>
+Date:   Thu Nov 3 13:14:21 2022 -0600
+
+    Created method to remove 3 cards
+    
+    removes the solution cards from the deck
+
+commit c242c16fc10eba260d7e42e5606df92aa2a3bf13
+Author: zcrennen <98796321+zcrennen@users.noreply.github.com>
+Date:   Thu Nov 3 13:02:32 2022 -0600
+
+    Filled out pseudocode in Board.java
+
+commit bccc834d922b72401c7a54f6eea35541be840b34
+Author: zcrennen <98796321+zcrennen@users.noreply.github.com>
+Date:   Thu Nov 3 13:00:26 2022 -0600
+
+    Completed equals method in Card.java
+
+commit 57adbab0b5826a131557f417acea743f03ff03bc
+Author: Caden <cwells@mines.edu>
+Date:   Thu Nov 3 12:55:57 2022 -0600
+
+    forgot to add all of the new files to the repo, added now
+
+commit 46340223c8c889d2f2adf4207376d0f37353be90
+Author: Caden <cwells@mines.edu>
+Date:   Thu Nov 3 12:52:05 2022 -0600
+
+    refactored a couple tests to better test behavior of methods
+
+commit 4fd626ffa9f594de285c1471a703334dca316eba
+Author: Caden <cwells@mines.edu>
+Date:   Wed Nov 2 22:00:53 2022 -0600
+
+    got solution deck created, and passed test
+
+commit e0dad84507cba6ccdf71c7ba3fe2654d42211b87
+Author: Caden <cwells@mines.edu>
+Date:   Wed Nov 2 20:03:19 2022 -0600
+
+    wrote test to check to make sure the solution contains a person, weapon, and room. test currently fails
+
+commit 10e0a0cbbbbe56489d707db52c1008bee64e3106
+Author: Caden <cwells@mines.edu>
+Date:   Wed Nov 2 13:27:04 2022 -0600
+
+    got test that checks if the deck is properly created passing
+
+commit f722a3d4739a2f805271974294566ecd985505e1
+Author: Caden <cwells@mines.edu>
+Date:   Wed Nov 2 13:15:35 2022 -0600
+
+    Wrote test to check if the deck of cards is loaded in properly, fails
+
+commit 774d5d3f375d85015dfc8d02bd62410c59ea7d2e
+Author: Caden <cwells@mines.edu>
+Date:   Wed Nov 2 12:49:28 2022 -0600
+
+    Weapons test passes
+
+commit 4f9d763f43a66b5882dad0457770c633c5dfc1e6
+Author: Caden <cwells@mines.edu>
+Date:   Wed Nov 2 12:48:24 2022 -0600
+
+    Wrote test for number and type of weapons, failed
+
+commit 01194af01683de95603c577fbf939e332f63709c
+Author: Caden <cwells@mines.edu>
+Date:   Wed Nov 2 12:34:33 2022 -0600
+
+    got numHumanPlayers and numComputerPlayers tests to pass
+
+commit 98bc49fa25df94dc5d98978242254be87f0acab9
+Author: Caden <cwells@mines.edu>
+Date:   Wed Nov 2 11:04:32 2022 -0600
+
+    wrote tests to get the number of human and computer players from the board, both tests fail. wrote constructors for the abstract player classes and the two child classes
+
+commit 340ca492bac50300355f911311b46e056c612492
+Author: Caden <cwells@mines.edu>
+Date:   Tue Nov 1 13:38:47 2022 -0600
+
+    updated ClueSetup.txt and added player info
+
+commit 9e58b963c50ba76f9ea8976821833431b17b46c9
+Author: Caden <cwells@mines.edu>
+Date:   Tue Nov 1 13:15:47 2022 -0600
+
+    added player and card test file
+
+commit 60a99bd8b7432a925e17b28bef8d5539aa8a78a5
+Author: Caden <cwells@mines.edu>
+Date:   Sun Oct 30 22:35:45 2022 -0600
+
+    added new classes based on UML given in C20A Clue Players 1.
+
+

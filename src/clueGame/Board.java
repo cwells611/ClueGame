@@ -149,22 +149,7 @@ public class Board {
 		} 
 		//after the deck has been fully loaded in, we want to randomly pick 1 room, 1 weapon, and 1 person that is the solution
 		Solution solution = new Solution(); 
-		solution.createSolution(deck); 
-		//remove 3 in solution from cards in deck
-		for(Card solutionCard : deck) {
-			if(solutionCard.equals(solution.getRoom())) {
-				deck.remove(solutionCard);
-			}
-			if(solutionCard.equals(solution.getWeapon())) {
-				deck.remove(solutionCard);
-			}
-			if(solutionCard.equals(solution.getPerson())) {
-				deck.remove(solutionCard);
-			}
-		}
-		//shuffle the deck
-		
-		//deal deck to players
+		solution.createSolution(deck);
 	}
 
 	public void loadLayoutConfig() throws FileNotFoundException, BadConfigFormatException {
@@ -469,6 +454,35 @@ public class Board {
 		}
 
 	}
+	
+	public void removeSolutionCards(Solution solution) {
+		//removed the specified room, person, and weapon from the deck
+		deck.remove(solution.getRoom());
+		deck.remove(solution.getPerson());
+		deck.remove(solution.getWeapon());
+	}
+	
+	public void shuffleDeck() {
+		ArrayList<Card> initDeck = (ArrayList<Card>)deck.clone();
+		ArrayList<Card> finalDeck = new ArrayList<Card>();
+		Random random = new Random();
+		
+		while(initDeck.size() > 0) {
+			//picks a random card from the deck
+			int randInt = random.nextInt(initDeck.size());
+			Card currentCard = initDeck.get(randInt);
+			//only adds the card to the finalDeck if the adding position is different from its original position in the deck
+			if(deck.indexOf(currentCard) != finalDeck.size()) {
+				finalDeck.add(currentCard);
+				//removes the selected card from the initial deck until it is empty
+				initDeck.remove(currentCard);
+			}else {
+				continue;
+			}
+			
+		}
+		deck = finalDeck;
+	}
 
 	public Set<BoardCell> getTargets() {
 		return this.targets;
@@ -476,7 +490,18 @@ public class Board {
 	
 	//skeletons for new methods to complete C20A Clue Players 1 
 	public void deal() {
-		//some code goes here 
+		//shuffles the deck before the deal
+		shuffleDeck();
+		while(deck.size() > 0) {
+			//simulates selecting the top card from the deck, and dealing to players in a circle until the deck 
+			for( Player player : players) {
+				//giving the player the last card in the array
+				Card topCard = deck.get(deck.size()-1);
+				player.updateHand(topCard);
+				deck.remove(topCard);
+			}
+		}
+		
 	}
 	
 	//Player getters 

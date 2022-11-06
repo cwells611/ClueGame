@@ -46,4 +46,5 @@ public class Solution {
 	public Card getWeapon() {
 		return solution.get(1); 
 	}
+	
 }

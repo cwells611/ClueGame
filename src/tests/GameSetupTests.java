@@ -3,9 +3,13 @@ package tests;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import clueGame.Board;
@@ -14,7 +18,7 @@ import clueGame.CardType;
 import clueGame.Player;
 import clueGame.Solution;
 
-class PlayerAndCardTests {
+class GameSetupTests {
 	//constant variables to hold board size 
 	public static final int ROWS = 25; 
 	public static final int COLS = 25; 
@@ -27,6 +31,11 @@ class PlayerAndCardTests {
 		//has the board read in the config files and setup board based on files 
 		theBoard.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
 		//loads both files even though we are only using one instance of board 
+	}
+	
+	//necessary to initialize before each, as deck size must be different between tests
+	@BeforeEach
+	public void initialize() {
 		theBoard.initialize();
 	}
 	
@@ -125,6 +134,10 @@ class PlayerAndCardTests {
 		Card solutionRoom = solution.getRoom();
 		Card solutionPerson = solution.getPerson();
 		Card solutionWeapon = solution.getWeapon();
+		
+		theBoard.removeSolutionCards(solution);
+		
+		//testing that the deck has had 3 cards removed
 		assertEquals(18, deck.size());
 		for(Card card : deck) {
 			//testing each card in the deck by type, and checking that the solution card is not in the deck
@@ -137,6 +150,98 @@ class PlayerAndCardTests {
 			if(card.getType() == CardType.WEAPON) {
 				assertNotEquals(card.getName(), solutionWeapon.getName());
 			}
+		}
+	}
+	
+	@Test
+	public void testShuffleDeck() {
+		ArrayList<Card> deck = theBoard.getDeck();
+		ArrayList<Card> shuffledDeck;
+		Random random = new Random();
+		ArrayList<Integer> randomInts = new ArrayList<Integer>();
+		int initialDeckSize = deck.size();
+		
+		//creating arrayList of 5 random positions
+		while(randomInts.size() < 5) {
+			int currentRandom = random.nextInt(deck.size());
+			if(randomInts.contains(currentRandom) == false) {
+				randomInts.add(currentRandom);
+			}
+		}
+		
+		//creating 5 cards that are randomly chosen from the deck
+		//along with their positions
+		int card1InitPos = randomInts.get(0);
+		Card card1 = deck.get(card1InitPos);
+		int card2InitPos = randomInts.get(1);
+		Card card2 = deck.get(card2InitPos);
+		int card3InitPos = randomInts.get(2);
+		Card card3 = deck.get(card3InitPos);
+		int card4InitPos = randomInts.get(3);
+		Card card4 = deck.get(card4InitPos);
+		int card5InitPos = randomInts.get(4);
+		Card card5 = deck.get(card5InitPos);
+		
+		theBoard.shuffleDeck();
+		//need to update the deck
+		deck = theBoard.getDeck();
+		
+		int card1FinalPos = deck.indexOf(card1);
+		int card2FinalPos = deck.indexOf(card2);
+		int card3FinalPos = deck.indexOf(card3);
+		int card4FinalPos = deck.indexOf(card4);
+		int card5FinalPos = deck.indexOf(card5);
+		
+		//making sure the size of the deck has not changed
+		assertEquals(deck.size(), initialDeckSize);
+		assertNotEquals(card1InitPos, card1FinalPos);
+		assertNotEquals(card2InitPos, card2FinalPos);
+		assertNotEquals(card3InitPos, card3FinalPos);
+		assertNotEquals(card4InitPos, card4FinalPos);
+		assertNotEquals(card5InitPos, card5FinalPos);
+	}
+	
+	@Test
+	public void testDeal() {
+		ArrayList<Card> deck = theBoard.getDeck();
+		ArrayList<Card> allPlayerHands = new ArrayList<Card>();
+		
+		//creating the solution, removing the solution cards, and dealing the deck
+		Solution solution = new Solution();
+		solution.createSolution(deck);
+		theBoard.removeSolutionCards(solution);
+		theBoard.deal();
+		
+		Player player1 = theBoard.getPlayers().get(0);
+		Player player2 = theBoard.getPlayers().get(1);
+		Player player3 = theBoard.getPlayers().get(2);
+		Player player4 = theBoard.getPlayers().get(3);
+		Player player5 = theBoard.getPlayers().get(4);
+		Player player6 = theBoard.getPlayers().get(5);
+		
+		
+		//all cards dealt
+		deck = theBoard.getDeck();
+		assertEquals(0, deck.size());
+		//checking that players all have 3 cards
+		assertEquals(3, player1.getHand().size());
+		assertEquals(3, player2.getHand().size());
+		assertEquals(3, player3.getHand().size());
+		assertEquals(3, player4.getHand().size());
+		assertEquals(3, player5.getHand().size());
+		assertEquals(3, player6.getHand().size());
+		//no card dealt twice
+		allPlayerHands.addAll(player1.getHand());
+		allPlayerHands.addAll(player2.getHand());
+		allPlayerHands.addAll(player3.getHand());
+		allPlayerHands.addAll(player4.getHand());
+		allPlayerHands.addAll(player5.getHand());
+		allPlayerHands.addAll(player6.getHand());
+		assertEquals(allPlayerHands.size(), 18);
+		
+		for(Card card : allPlayerHands) {
+			int occurences = Collections.frequency(allPlayerHands, card);
+			assertEquals(occurences, 1);
 		}
 	}
 }
