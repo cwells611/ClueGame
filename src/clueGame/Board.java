@@ -150,11 +150,6 @@ public class Board {
 		//after the deck has been fully loaded in, we want to randomly pick 1 room, 1 weapon, and 1 person that is the solution
 		Solution solution = new Solution(); 
 		solution.createSolution(deck);
-		//remove 3 in solution from cards in deck
-		
-		//shuffle the deck
-		
-		//deal deck to players
 	}
 
 	public void loadLayoutConfig() throws FileNotFoundException, BadConfigFormatException {
@@ -461,6 +456,7 @@ public class Board {
 	}
 	
 	public void removeSolutionCards(Solution solution) {
+		//removed the specified room, person, and weapon from the deck
 		deck.remove(solution.getRoom());
 		deck.remove(solution.getPerson());
 		deck.remove(solution.getWeapon());
@@ -470,23 +466,21 @@ public class Board {
 		ArrayList<Card> initDeck = (ArrayList<Card>)deck.clone();
 		ArrayList<Card> finalDeck = new ArrayList<Card>();
 		Random random = new Random();
-		//make a copy of deck called initDeck
-		//while loop until initDeck is empty
 		
 		while(initDeck.size() > 0) {
+			//picks a random card from the deck
 			int randInt = random.nextInt(initDeck.size());
 			Card currentCard = initDeck.get(randInt);
 			//only adds the card to the finalDeck if the adding position is different from its original position in the deck
 			if(deck.indexOf(currentCard) != finalDeck.size()) {
 				finalDeck.add(currentCard);
+				//removes the selected card from the initial deck until it is empty
 				initDeck.remove(currentCard);
 			}else {
 				continue;
 			}
 			
 		}
-		//choose a random value from initDeck and add it to finalDeck
-		//
 		deck = finalDeck;
 	}
 
@@ -499,6 +493,7 @@ public class Board {
 		//shuffles the deck before the deal
 		shuffleDeck();
 		while(deck.size() > 0) {
+			//simulates selecting the top card from the deck, and dealing to players in a circle until the deck 
 			for( Player player : players) {
 				//giving the player the last card in the array
 				Card topCard = deck.get(deck.size()-1);

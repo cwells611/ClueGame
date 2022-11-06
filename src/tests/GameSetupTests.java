@@ -18,7 +18,7 @@ import clueGame.CardType;
 import clueGame.Player;
 import clueGame.Solution;
 
-class PlayerAndCardTests {
+class GameSetupTests {
 	//constant variables to hold board size 
 	public static final int ROWS = 25; 
 	public static final int COLS = 25; 
@@ -134,7 +134,10 @@ class PlayerAndCardTests {
 		Card solutionRoom = solution.getRoom();
 		Card solutionPerson = solution.getPerson();
 		Card solutionWeapon = solution.getWeapon();
+		
 		theBoard.removeSolutionCards(solution);
+		
+		//testing that the deck has had 3 cards removed
 		assertEquals(18, deck.size());
 		for(Card card : deck) {
 			//testing each card in the deck by type, and checking that the solution card is not in the deck
@@ -202,6 +205,8 @@ class PlayerAndCardTests {
 	public void testDeal() {
 		ArrayList<Card> deck = theBoard.getDeck();
 		ArrayList<Card> allPlayerHands = new ArrayList<Card>();
+		
+		//creating the solution, removing the solution cards, and dealing the deck
 		Solution solution = new Solution();
 		solution.createSolution(deck);
 		theBoard.removeSolutionCards(solution);
