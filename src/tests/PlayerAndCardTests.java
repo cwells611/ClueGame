@@ -216,14 +216,15 @@ class PlayerAndCardTests {
 		
 		
 		//all cards dealt
-		assertEquals(deck.size(), 0);
+		deck = theBoard.getDeck();
+		assertEquals(0, deck.size());
 		//checking that players all have 3 cards
-		assertEquals(player1.getHand().size(), 3);
-		assertEquals(player2.getHand().size(), 3);
-		assertEquals(player3.getHand().size(), 3);
-		assertEquals(player4.getHand().size(), 3);
-		assertEquals(player5.getHand().size(), 3);
-		assertEquals(player6.getHand().size(), 3);
+		assertEquals(3, player1.getHand().size());
+		assertEquals(3, player2.getHand().size());
+		assertEquals(3, player3.getHand().size());
+		assertEquals(3, player4.getHand().size());
+		assertEquals(3, player5.getHand().size());
+		assertEquals(3, player6.getHand().size());
 		//no card dealt twice
 		allPlayerHands.addAll(player1.getHand());
 		allPlayerHands.addAll(player2.getHand());

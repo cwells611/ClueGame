@@ -497,8 +497,15 @@ public class Board {
 	//skeletons for new methods to complete C20A Clue Players 1 
 	public void deal() {
 		//shuffles the deck before the deal
-		//shuffleDeck();
-		
+		shuffleDeck();
+		while(deck.size() > 0) {
+			for( Player player : players) {
+				//giving the player the last card in the array
+				Card topCard = deck.get(deck.size()-1);
+				player.updateHand(topCard);
+				deck.remove(topCard);
+			}
+		}
 		
 	}
 	

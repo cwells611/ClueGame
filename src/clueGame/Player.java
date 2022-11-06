@@ -18,7 +18,8 @@ public abstract class Player {
 		this.color = color; 
 		this.row = startRow; 
 		this.col = startCol;  
-		this.playerType = type; 
+		this.playerType = type;
+		hand = new ArrayList<Card>();
 	}
 	
 	public void setCardType(CardType cardType) {
@@ -41,6 +42,6 @@ public abstract class Player {
 	}
 	
 	public void updateHand(Card card) {
-		
+		hand.add(card);
 	}
 }
