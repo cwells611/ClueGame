@@ -255,7 +255,7 @@ public class GameSolutionTest {
 		assertEquals(null, disprovedCard);
 	}
 	
-	//Handle suggestion tests
+	//HANDLE SUGGESTION TESTS
 	
 //	Suggestion no one can disprove returns null
 	@Test
@@ -340,7 +340,6 @@ public class GameSolutionTest {
 				Card bladeCard = new Card("Swtich Blade", CardType.WEAPON);
 				Card musketCard = new Card("Musket", CardType.WEAPON);
 				Card carCard = new Card("Car", CardType.WEAPON);
-				
 				
 				//giving all of the players 3 cards from the deck, so theater judas and boulder will be left over
 				humanPlayer.updateHand(roofCard);
@@ -455,7 +454,7 @@ public class GameSolutionTest {
 		Card carCard = new Card("Car", CardType.WEAPON);
 		Card boulderCard = new Card("Boulder", CardType.WEAPON);
 
-		//giving all of the players 3 cards from the deck, so theater judas and boulder will be left over
+		//giving all of the players 3 cards from the deck, so boulder will be left over
 		humanPlayer.updateHand(roofCard);
 		humanPlayer.updateHand(nigelCard);
 		humanPlayer.updateHand(panCard);
@@ -476,14 +475,14 @@ public class GameSolutionTest {
 		players.add(cpu2);
 		players.add(cpu3);
 
-		//creating a solution with cpu2's room card and cpu3's person card 
+		//creating a solution with cpu2's sauna room card and cpu3's edna person card 
 		Solution solution = new Solution();
 		solution.setRoom(saunaCard);
 		solution.setPerson(ednaCard);
 		solution.setWeapon(boulderCard);
 		//the human player suggests the true solution
 		Card handleCard = theBoard.handleSuggestion(humanPlayer, players, solution);
-		//ensuring that the returnCard is cpu2's room card
+		//ensuring that the returnCard is cpu2's sauna room card
 		assertEquals(handleCard, saunaCard);
 	}
 }

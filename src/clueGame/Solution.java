@@ -30,9 +30,9 @@ public class Solution {
 		int randomWeaponIndex = random.nextInt(5) + 16; 
 		this.weapon = deck.get(randomWeaponIndex); 
 		//once all solution cards are generated, add to list 
-		solution.add(person); 
-		solution.add(weapon);
-		solution.add(room);
+		solution.set(0, room);
+		solution.set(1, person); 
+		solution.set(2, weapon);
 		//sets the answer in theBoard
 		Board.getInstance().setTheAnswer(this);
 		
