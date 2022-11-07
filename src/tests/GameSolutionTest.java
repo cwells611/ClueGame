@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import clueGame.Board;
 import clueGame.Card;
 import clueGame.CardType;
+import clueGame.ComputerPlayer;
 import clueGame.Player;
 import clueGame.Solution;
 
@@ -161,6 +162,34 @@ public class GameSolutionTest {
 	
 	
 	//Disprove suggestion tests
+	@Test
+	void disproveOneMatch() {
+		Card cardInHand1 = new Card("Musket", CardType.WEAPON);
+		Card cardInHand2 = new Card("Car", CardType.WEAPON);
+		Card cardInHand3 = new Card("Edna Dickson", CardType.PERSON);
+		
+		Card suggestionRoom = new Card("Roof", CardType.ROOM);
+		Card suggestionPerson = new Card("Bobby Long", CardType.PERSON);
+		Card suggestionWeapon = new Card("Musket")
+		//creating a default player to access their hand
+		Player defaultPlayer = new ComputerPlayer("Default", "color", 0, 0, "type");
+		defaultPlayer.updateHand(cardInHand1);
+		defaultPlayer.updateHand(cardInHand2);
+		defaultPlayer.updateHand(cardInHand3);
+		
+		Card disprovedCard = defaultPlayer.disproveSuggestion();
+		
+	}
+	
+	@Test
+	void disproveMoreThanOneMatch() {
+		
+	}
+	
+	@Test
+	void disproveNoMatch() {
+		
+	}
 	
 	//Handle suggestion tests
 	
