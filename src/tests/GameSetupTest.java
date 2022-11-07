@@ -18,7 +18,7 @@ import clueGame.CardType;
 import clueGame.Player;
 import clueGame.Solution;
 
-class GameSetupTests {
+class GameSetupTest {
 	//constant variables to hold board size 
 	public static final int ROWS = 25; 
 	public static final int COLS = 25; 
@@ -156,7 +156,6 @@ class GameSetupTests {
 	@Test
 	public void testShuffleDeck() {
 		ArrayList<Card> deck = theBoard.getDeck();
-		ArrayList<Card> shuffledDeck;
 		Random random = new Random();
 		ArrayList<Integer> randomInts = new ArrayList<Integer>();
 		int initialDeckSize = deck.size();
