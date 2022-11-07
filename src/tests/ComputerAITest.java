@@ -82,12 +82,12 @@ public class ComputerAITest {
 		test.addSeenCard(deck.get(15));
 		test.addSeenCard(deck.get(16));
 		test.addSeenCard(deck.get(17));
-		test.addSeenCard(deck.get(18));
 		test.addSeenCard(deck.get(19));
+		test.addSeenCard(deck.get(20));
 		//creates new suggestion 
 		Solution computerSuggestion = test.createSuggestion(theBoard, currentRoom); 
 		//check to make sure that the weapon in the suggestion is the only one the computer has not seen
-		assertEquals(computerSuggestion.getWeapon(), deck.get(20)); 
+		assertEquals(computerSuggestion.getWeapon(), deck.get(18)); 
 	}
 	
 	@Test

@@ -7,6 +7,7 @@ public class ComputerPlayer extends Player{
 	private ArrayList<Card> seen = new ArrayList<Card>(); 
 	private ArrayList<Card> notSeen = new ArrayList<Card>(); 
 	private int numWeaponsSeen = 0; 
+	private int numPeopleSeen = 0; 
 
 	public ComputerPlayer(String name, String color, int startRow, int startCol, String type) {
 		super(name, color, startRow, startCol, type);
@@ -33,30 +34,43 @@ public class ComputerPlayer extends Player{
 			if(card.getType() == CardType.WEAPON) {
 				numWeaponsSeen++; 
 			}
+			//count number of people seen 
+			if(card.getType() == CardType.PERSON) {
+				numPeopleSeen++; 
+			}
 		}
-		//after we know how many weapons we have seen, if it is 5, then we find out the one we have not seen and 
-		//make that the weapons in the suggestion 
-		if(numWeaponsSeen == 5) {
+		//after we know how many weapons and people we have seen, if either is 5, then we find out the ones we have not seen and 
+		//make that the weapon or person in the suggestion 
+		if(numWeaponsSeen == 5 || numPeopleSeen == 5) {
 			//loop through the deck 
 			for(Card card : board.getDeck()) {
 				//loop through seen list 
 				for(Card seenCard : seen) {
-					//if we have seen the card and the card is a weapon then continue
-					if(seenCard.equals(card) && card.getType() == CardType.WEAPON) {
-						continue; 
+					//if we have seen the card and the card is a weapon or a person then continue then we want to remove it from the seen list
+					//to show that we are already compared it with a card in the deck 
+					if((seenCard.equals(card) && card.getType() == CardType.WEAPON) || (seenCard.equals(card) && card.getType() == CardType.PERSON)) {
+						seen.remove(seenCard); 
+						break; 
 					}
-					//if we have not seen the card and it's a weapon, then add it to the unseen list 
-					if(!seenCard.equals(card) && card.getType() == CardType.WEAPON) {
+					//if we have not seen the card and it's a weapon or a person, then add it to the unseen list 
+					if((!seenCard.equals(card) && card.getType() == CardType.WEAPON) || (!seenCard.equals(card) && card.getType() == CardType.PERSON)) {
 						notSeen.add(card); 
+						break; 
+					}	
+					else {
+						break; 
 					}
 				}
 			}
-			//after everything that been looped through, since we know that only 1 weapon should be 
+			//after everything that been looped through, since we know that only 1 weapon or 1 person should be 
 			//in the unSeen list, then we loop through the unseen list and if that card type is a 
 			//weapon then we add it to the suggestion 
 			for(Card unSeen : notSeen) {
 				if(unSeen.getType() == CardType.WEAPON) {
 					suggestion.setWeapon(unSeen);
+				}
+				if(unSeen.getType() == CardType.PERSON) {
+					suggestion.setPerson(unSeen);
 				}
 			}
 		}
