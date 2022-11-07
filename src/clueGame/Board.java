@@ -486,6 +486,7 @@ public class Board {
 	}
 	
 	public boolean checkAccusation(Solution accusation) {
+		//getting theAnswer cards, and the accusaed cards
 		Card correctRoom = theAnswer.getRoom();
 		Card correctPerson = theAnswer.getPerson();
 		Card correctWeapon = theAnswer.getWeapon();
@@ -493,6 +494,7 @@ public class Board {
 		Card accusedPerson = accusation.getPerson();
 		Card accusedWeapon = accusation.getWeapon();
 		
+		// returns true if and only if all the rooms, people, and weapons match
 		if(correctRoom == accusedRoom && correctPerson == accusedPerson && correctWeapon == accusedWeapon) {
 			return true;
 		}
