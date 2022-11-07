@@ -32,6 +32,7 @@ public class Board {
 	private CardType cardType; 
 	private Card card; 
 	private static Board theInstance = new Board();
+	private Solution theAnswer;
 
 	// constructor is private to ensure only one can be created
 	private Board() {
@@ -483,6 +484,20 @@ public class Board {
 		}
 		deck = finalDeck;
 	}
+	
+	public boolean checkAccusation(Solution accusation) {
+		Card correctRoom = theAnswer.getRoom();
+		Card correctPerson = theAnswer.getPerson();
+		Card correctWeapon = theAnswer.getWeapon();
+		Card accusedRoom = accusation.getRoom();
+		Card accusedPerson = accusation.getPerson();
+		Card accusedWeapon = accusation.getWeapon();
+		
+		if(correctRoom == accusedRoom && correctPerson == accusedPerson && correctWeapon == accusedWeapon) {
+			return true;
+		}
+		return false;
+	}
 
 	public Set<BoardCell> getTargets() {
 		return this.targets;
@@ -527,6 +542,14 @@ public class Board {
 	//Deck and Solution getters
 	public ArrayList<Card> getDeck() {
 		return deck; 
+	}
+	
+	//theAnswer getters and setters
+	public Solution getTheAnswer() {
+		return theAnswer;
+	}
+	public void setTheAnswer(Solution theAnswer) {
+		this.theAnswer = theAnswer;
 	}
 
 }
