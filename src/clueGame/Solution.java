@@ -7,10 +7,15 @@ public class Solution {
 	private Card room; 
 	private Card person; 
 	private Card weapon; 
-	private ArrayList<Card> solution = new ArrayList<Card>(); 
+	private ArrayList<Card> solution;
+	
 	//constructor 
 	public Solution() {
-		
+		solution = new ArrayList<Card>();
+		//adding 3 null elements to the solution, as they will later be set
+		for(int i = 0; i < 3; i++) {
+			solution.add(null);
+		}
 	}
 	
 	public void createSolution(ArrayList<Card> deck) {
@@ -50,15 +55,18 @@ public class Solution {
 		return this.weapon; 
 	}
 	
-	public void setPerson(Card person) {
-		this.person = person;
-	}
-	
 	public void setRoom(Card room) {
 		this.room = room;
+		solution.set(0, room);
+	}
+	
+	public void setPerson(Card person) {
+		this.person = person;
+		solution.set(1, person);
 	}
 	
 	public void setWeapon(Card weapon) {
 		this.weapon = weapon;
+		solution.set(2, weapon);
 	}
 }

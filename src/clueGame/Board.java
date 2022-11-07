@@ -498,6 +498,15 @@ public class Board {
 		}
 		return false;
 	}
+	
+	public Card handleSuggestion(Player suggestingPlayer, ArrayList<Player> players, Solution solution) {
+		//process all players to see if they can dispute a suggestion
+		
+		//return null if no player can dispute a suggestion
+		
+		//return first card that disputed the suggestion otherwise
+		return null;
+	}
 
 	public Set<BoardCell> getTargets() {
 		return this.targets;

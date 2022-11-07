@@ -16,6 +16,7 @@ import clueGame.Board;
 import clueGame.Card;
 import clueGame.CardType;
 import clueGame.ComputerPlayer;
+import clueGame.HumanPlayer;
 import clueGame.Player;
 import clueGame.Solution;
 
@@ -256,4 +257,66 @@ public class GameSolutionTest {
 	
 	//Handle suggestion tests
 	
+//	Suggestion no one can disprove returns null
+	@Test
+	void noDisproves() {
+		//creating 4 players, the human player and 3 cpus
+		Player humanPlayer = new HumanPlayer("Human", "color", 0 , 0, "type");
+		Player cpu1 = new ComputerPlayer("cpu1", "color", 1, 1, "type");
+		Player cpu2 = new ComputerPlayer("cpu2", "color", 2, 2, "type");
+		Player cpu3 = new ComputerPlayer("cpu3", "color", 3, 3, "type");
+		
+		//creating 15 cards, so each player can have 3 cards, and 3 extra cards
+		Card roofCard = new Card("Roof", CardType.ROOM);
+		Card bedroomCard = new Card("Bedroom", CardType.ROOM);
+		Card saunaCard = new Card("Sauna", CardType.ROOM);
+		Card atriumCard = new Card("Atrium", CardType.ROOM);
+		Card theaterCard = new Card("Theater", CardType.ROOM);
+		Card nigelCard = new Card("Nigel Thomas", CardType.PERSON);
+		Card bobbyCard = new Card("Bobby Long", CardType.PERSON);
+		Card craigCard = new Card("Craig Downs", CardType.PERSON);
+		Card ednaCard = new Card("Edna Dickson", CardType.PERSON);
+		Card judasCard = new Card("Judas Watkins", CardType.PERSON);
+		Card panCard = new Card("Frying pan", CardType.WEAPON);
+		Card bladeCard = new Card("Swtich Blade", CardType.WEAPON);
+		Card musketCard = new Card("Musket", CardType.WEAPON);
+		Card carCard = new Card("Car", CardType.WEAPON);
+		Card boulderCard = new Card("Boulder", CardType.WEAPON);
+		
+		//giving all of the players 3 cards from the deck, so judas card will be left over
+		humanPlayer.updateHand(roofCard);
+		humanPlayer.updateHand(nigelCard);
+		humanPlayer.updateHand(panCard);
+		cpu1.updateHand(bedroomCard);
+		cpu1.updateHand(bobbyCard);
+		cpu1.updateHand(bladeCard);
+		cpu2.updateHand(saunaCard);
+		cpu2.updateHand(craigCard);
+		cpu2.updateHand(musketCard);
+		cpu3.updateHand(atriumCard);
+		cpu3.updateHand(ednaCard);
+		cpu3.updateHand(carCard);
+		
+		//creating an arrayList of the players
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(humanPlayer);
+		players.add(cpu1);
+		players.add(cpu2);
+		players.add(cpu3);
+		
+		//creating a solution with cards that the 3 cards that are not in anyone's hand
+		Solution solution = new Solution();
+		solution.setRoom(theaterCard);
+		solution.setPerson(judasCard);
+		solution.setWeapon(boulderCard);
+		//the human player suggests the true solution
+		Card handleCard = theBoard.handleSuggestion(humanPlayer, players, solution);
+		
+		assertEquals(handleCard, null);
+	}
+	
+	
+//	Suggestion only suggesting player can disprove returns null
+//	Suggestion only human can disprove returns answer (i.e., card that disproves suggestion)
+//	Suggestion that two players can disprove, correct player (based on starting with next player in list) returns answer
 }
