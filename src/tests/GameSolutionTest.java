@@ -432,4 +432,58 @@ public class GameSolutionTest {
 	}
 	
 //	Suggestion that two players can disprove, correct player (based on starting with next player in list) returns answer
+	@Test
+	void twoPlayersCanDisprove() {
+		//creating 4 players, the human player and 3 cpus
+		Player humanPlayer = new HumanPlayer("Human", "color", 0 , 0, "type");
+		Player cpu1 = new ComputerPlayer("cpu1", "color", 1, 1, "type");
+		Player cpu2 = new ComputerPlayer("cpu2", "color", 2, 2, "type");
+		Player cpu3 = new ComputerPlayer("cpu3", "color", 3, 3, "type");
+
+		//creating 13 cards, so each player can have 3 cards, and 1 extra cards
+		Card roofCard = new Card("Roof", CardType.ROOM);
+		Card bedroomCard = new Card("Bedroom", CardType.ROOM);
+		Card saunaCard = new Card("Sauna", CardType.ROOM);
+		Card atriumCard = new Card("Atrium", CardType.ROOM);
+		Card nigelCard = new Card("Nigel Thomas", CardType.PERSON);
+		Card bobbyCard = new Card("Bobby Long", CardType.PERSON);
+		Card craigCard = new Card("Craig Downs", CardType.PERSON);
+		Card ednaCard = new Card("Edna Dickson", CardType.PERSON);
+		Card panCard = new Card("Frying pan", CardType.WEAPON);
+		Card bladeCard = new Card("Swtich Blade", CardType.WEAPON);
+		Card musketCard = new Card("Musket", CardType.WEAPON);
+		Card carCard = new Card("Car", CardType.WEAPON);
+		Card boulderCard = new Card("Boulder", CardType.WEAPON);
+
+		//giving all of the players 3 cards from the deck, so theater judas and boulder will be left over
+		humanPlayer.updateHand(roofCard);
+		humanPlayer.updateHand(nigelCard);
+		humanPlayer.updateHand(panCard);
+		cpu1.updateHand(bedroomCard);
+		cpu1.updateHand(bobbyCard);
+		cpu1.updateHand(bladeCard);
+		cpu2.updateHand(saunaCard);
+		cpu2.updateHand(craigCard);
+		cpu2.updateHand(musketCard);
+		cpu3.updateHand(atriumCard);
+		cpu3.updateHand(ednaCard);
+		cpu3.updateHand(carCard);
+
+		//creating an arrayList of the players
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(humanPlayer);
+		players.add(cpu1);
+		players.add(cpu2);
+		players.add(cpu3);
+
+		//creating a solution with cpu2's room card and cpu3's person card 
+		Solution solution = new Solution();
+		solution.setRoom(saunaCard);
+		solution.setPerson(ednaCard);
+		solution.setWeapon(boulderCard);
+		//the human player suggests the true solution
+		Card handleCard = theBoard.handleSuggestion(humanPlayer, players, solution);
+		//ensuring that the returnCard is cpu2's room card
+		assertEquals(handleCard, saunaCard);
+	}
 }
