@@ -1,8 +1,10 @@
 package clueGame;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 public class ComputerPlayer extends Player{
+	ArrayList<Card> seen = new ArrayList<Card>(); 
 
 	public ComputerPlayer(String name, String color, int startRow, int startCol, String type) {
 		super(name, color, startRow, startCol, type);
@@ -29,6 +31,11 @@ public class ComputerPlayer extends Player{
 	//the set of boardcells that are available targets 
 	public BoardCell selectTarget(Set<BoardCell> targets) {
 		return null;
+	}
+	
+	//method to add card to players seen list 
+	public void addSeenCard(Card seenCard) {
+		seen.add(seenCard); 
 	}
 
 
