@@ -486,6 +486,7 @@ public class Board {
 	}
 	
 	public boolean checkAccusation(Solution accusation) {
+		//getting theAnswer cards, and the accusaed cards
 		Card correctRoom = theAnswer.getRoom();
 		Card correctPerson = theAnswer.getPerson();
 		Card correctWeapon = theAnswer.getWeapon();
@@ -493,10 +494,33 @@ public class Board {
 		Card accusedPerson = accusation.getPerson();
 		Card accusedWeapon = accusation.getWeapon();
 		
+		// returns true if and only if all the rooms, people, and weapons match
 		if(correctRoom == accusedRoom && correctPerson == accusedPerson && correctWeapon == accusedWeapon) {
 			return true;
 		}
 		return false;
+	}
+	
+	public Card handleSuggestion(Player suggestingPlayer, ArrayList<Player> players, Solution solution) {
+		//get start index
+		int startIndex = players.indexOf(suggestingPlayer);
+		//processing all players
+		//loop starts at the next player in line from the suggesting player
+			//i.e. the player to the left of the suggesting player
+		//ends at the last player left not including the suggesting player
+			//i.e. the player to the right of the suggesting player
+		for(int i = startIndex + 1; i < startIndex + players.size(); i++) { //loops from the next player from the suggestingPlayer through the players
+			//index of the player in the arraylist, so an out of bounds exception is not thrown
+			int playersIndex = i % players.size();
+			//checking if each player can disprove a card
+			Card disprovedCard = players.get(playersIndex).disproveSuggestion(solution.getRoom(), solution.getPerson(), solution.getWeapon());
+			if(disprovedCard != null) {
+				//returns the disproved card the first time it sees one
+				return disprovedCard;
+			}
+		}
+		//returns null if a disproved card is never found
+		return null;
 	}
 
 	public Set<BoardCell> getTargets() {

@@ -121,9 +121,9 @@ class GameSetupTest {
 		ArrayList<Card> deck = theBoard.getDeck(); 
 		Solution solution = new Solution();
 		solution.createSolution(deck);
-		assertEquals(CardType.PERSON, solution.getSolution().get(0).getType()); 
-		assertEquals(CardType.WEAPON, solution.getSolution().get(1).getType()); 
-		assertEquals(CardType.ROOM, solution.getSolution().get(2).getType()); 
+		assertEquals(CardType.ROOM, solution.getSolution().get(0).getType()); 
+		assertEquals(CardType.PERSON, solution.getSolution().get(1).getType()); 
+		assertEquals(CardType.WEAPON, solution.getSolution().get(2).getType()); 
 	}
 	
 	@Test
