@@ -56,7 +56,7 @@ public class ComputerAITest {
 		//get the room the player is in from the board using the computer position
 		Room currentRoom = theBoard.getRoom(playerPosition); 
 		//now that the computer is in a room, we are going to create a suggestion 
-		Solution computerSuggestion = test.createSuggestion(currentRoom); 
+		Solution computerSuggestion = test.createSuggestion(theBoard, currentRoom); 
 		//get the card from the deck that is associated with the room the player is in  
 		for(Card card : deck) {
 			if(card.getName().equals(currentRoom.getName())) {
