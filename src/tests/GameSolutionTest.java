@@ -56,11 +56,108 @@ public class GameSolutionTest {
 		accusation.setPerson(correctPerson);
 		accusation.setRoom(correctRoom);
 		accusation.setWeapon(correctWeapon);
-		
+		//checking the accusation matches the solution
 		assertTrue(theBoard.checkAccusation(accusation));
-		
 	}
 	
+	@Test
+	void checkAccusationWrongRoom() {
+		//creating a solution
+		ArrayList<Card> deck = theBoard.getDeck();
+		Solution solution = new Solution();
+		solution.createSolution(deck);
+		//creating variables for the correct cards
+		Card correctRoom = solution.getRoom();
+		Card correctPerson = solution.getPerson();
+		Card correctWeapon = solution.getWeapon();
+		Card wrongRoom = new Card();
+		
+		theBoard.removeSolutionCards(solution);
+		//getting a room from the deck, which will not be in the solution
+		for(int i = 0; i < deck.size(); i++) {
+			Card currentCard = deck.get(i);
+			if(currentCard.getType() == CardType.ROOM) {
+				wrongRoom = currentCard;
+				break;
+			}
+		}
+		//dealing out the deck
+		theBoard.deal();
+		
+		//creating the correct accusation
+		Solution accusation = new Solution();
+		accusation.setPerson(correctPerson);
+		accusation.setRoom(wrongRoom);
+		accusation.setWeapon(correctWeapon);
+		//checking the accusation matches the solution
+		assertFalse(theBoard.checkAccusation(accusation));
+	}
+	
+	@Test
+	void checkAccusationWrongPerson() {
+		//creating a solution
+		ArrayList<Card> deck = theBoard.getDeck();
+		Solution solution = new Solution();
+		solution.createSolution(deck);
+		//creating variables for the correct cards
+		Card correctRoom = solution.getRoom();
+		Card correctPerson = solution.getPerson();
+		Card correctWeapon = solution.getWeapon();
+		Card wrongPerson = new Card();
+		
+		theBoard.removeSolutionCards(solution);
+		//getting a room from the deck, which will not be in the solution
+		for(int i = 0; i < deck.size(); i++) {
+			Card currentCard = deck.get(i);
+			if(currentCard.getType() == CardType.PERSON) {
+				wrongPerson = currentCard;
+				break;
+			}
+		}
+		//dealing out the deck
+		theBoard.deal();
+		
+		//creating the correct accusation
+		Solution accusation = new Solution();
+		accusation.setPerson(wrongPerson);
+		accusation.setRoom(correctRoom);
+		accusation.setWeapon(correctWeapon);
+		//checking the accusation matches the solution
+		assertFalse(theBoard.checkAccusation(accusation));
+	}
+	
+	@Test
+	void checkAccusationWrongWeapon() {
+		//creating a solution
+		ArrayList<Card> deck = theBoard.getDeck();
+		Solution solution = new Solution();
+		solution.createSolution(deck);
+		//creating variables for the correct cards
+		Card correctRoom = solution.getRoom();
+		Card correctPerson = solution.getPerson();
+		Card correctWeapon = solution.getWeapon();
+		Card wrongWeapon = new Card();
+		
+		theBoard.removeSolutionCards(solution);
+		//getting a room from the deck, which will not be in the solution
+		for(int i = 0; i < deck.size(); i++) {
+			Card currentCard = deck.get(i);
+			if(currentCard.getType() == CardType.WEAPON) {
+				wrongWeapon = currentCard;
+				break;
+			}
+		}
+		//dealing out the deck
+		theBoard.deal();
+		
+		//creating the correct accusation
+		Solution accusation = new Solution();
+		accusation.setPerson(correctPerson);
+		accusation.setRoom(correctRoom);
+		accusation.setWeapon(wrongWeapon);
+		//checking the accusation matches the solution
+		assertFalse(theBoard.checkAccusation(accusation));
+	}
 	//Disprove suggestion tests
 	
 	//Handle suggestion tests

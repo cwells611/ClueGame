@@ -4,7 +4,10 @@ public class Card {
 	private String cardName; 
 	private CardType type; 
 	
-	//constructor 
+	//default constructor 
+	public Card() {}
+	
+	//parameterized constructor
 	public Card(String name, CardType cardType) {
 		this.cardName = name;
 		this.type = cardType; 
