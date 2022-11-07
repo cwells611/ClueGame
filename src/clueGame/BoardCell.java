@@ -93,13 +93,19 @@ public class BoardCell{
 		return this.adjList;
 	}
 
-	//row and col getters 
+	//row and col getters and setters
 	public int getCol() {
 		return this.col;
+	}
+	public void setCol(int newCol) {
+		this.col = newCol; 
 	}
 	
 	public int getRow() {
 		return this.row;
+	}
+	public void setRow(int newRow) {
+		this.row = newRow; 
 	}
 	
 	//room getters and setters 

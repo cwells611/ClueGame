@@ -11,8 +11,8 @@ public class ComputerPlayer extends Player{
 	//even though we are creating a suggestion, since the solution class already utilizes creation 
 	//of a room, weapon, and person card, we will use this class for our suggestion
 	public Solution createSuggestion(Room currentRoom) {
-		
-		return null; 
+		Solution solution = new Solution(); 
+		return solution; 
 	}
 	
 	//the computer player needs to be able to select its next target, so we will return that target given 
@@ -20,5 +20,6 @@ public class ComputerPlayer extends Player{
 	public BoardCell selectTarget(Set<BoardCell> targets) {
 		return null;
 	}
+
 
 }

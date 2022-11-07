@@ -551,6 +551,5 @@ public class Board {
 	public void setTheAnswer(Solution theAnswer) {
 		this.theAnswer = theAnswer;
 	}
-
 }
 
