@@ -311,7 +311,7 @@ public class GameSolutionTest {
 		solution.setWeapon(boulderCard);
 		//the human player suggests the true solution
 		Card handleCard = theBoard.handleSuggestion(humanPlayer, players, solution);
-		
+		//asserting null, as suggestion is equal to the answer
 		assertEquals(handleCard, null);
 	}
 	
@@ -371,7 +371,7 @@ public class GameSolutionTest {
 				solution.setWeapon(panCard);
 				//the human player suggests the true solution
 				Card handleCard = theBoard.handleSuggestion(humanPlayer, players, solution);
-				
+				//asserting null, because the human is guessing only cards that are either in the solution or in the human's hand
 				assertEquals(handleCard, null);
 	}
 //	Suggestion only human can disprove returns answer (i.e., card that disproves suggestion)
@@ -427,7 +427,7 @@ public class GameSolutionTest {
 		solution.setWeapon(panCard);
 		//cpu1 is suggesting the solution with theater judas and pan, human player has pan
 		Card handleCard = theBoard.handleSuggestion(cpu1, players, solution);
-
+		//asserting that the handled card is the panCard, which was held by the human
 		assertEquals(panCard, handleCard);
 	}
 	
