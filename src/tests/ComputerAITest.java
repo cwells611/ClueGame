@@ -78,7 +78,7 @@ public class ComputerAITest {
 		BoardCell playerPosition = theBoard.getCell(20, 11); 
 		//get the room the player is in from the board using the computer position
 		Room currentRoom = theBoard.getRoom(playerPosition); 
-		//adds 5 out of the 6 weapons to the players seen list 
+		//adds 5 out of the 6 weapons to the computer's seen list 
 		test.addSeenCard(deck.get(15));
 		test.addSeenCard(deck.get(16));
 		test.addSeenCard(deck.get(17));
