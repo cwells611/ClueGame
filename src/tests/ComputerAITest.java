@@ -112,4 +112,30 @@ public class ComputerAITest {
 		//check to make sure that the person in the suggestion is the only one the computer has not seen
 		assertEquals(computerSuggestion.getPerson(), deck.get(11)); 
 	}
+	
+	@Test 
+	public void ifMultipleWeaponsNotSeenOnePickedRandomly() {
+		//if the computer has not seen all but 1 weapon, then it picks randomly from the weapons it has not seen 
+		//and adds that to the suggestion 
+		//gets the deck of cards 
+		ArrayList<Card> deck = theBoard.getDeck(); 
+		//creates new computer player 
+		ComputerPlayer test = new ComputerPlayer("Bobby Long", "Purple", 3, 0, "Computer"); 
+		//sets the position of the player in the bedroom 
+		BoardCell playerPosition = theBoard.getCell(20, 11); 
+		//get the room the player is in from the board using the computer position
+		Room currentRoom = theBoard.getRoom(playerPosition); 
+		//adds 3 out of the 6 weapons to the computers seen list 
+		test.addSeenCard(deck.get(15));
+		test.addSeenCard(deck.get(17));
+		test.addSeenCard(deck.get(20));
+		//creates new suggestion 
+		Solution computerSuggestion = test.createSuggestion(theBoard, currentRoom);
+		//check to make sure that the weapon in the suggestion is not one of the ones that it has seen 
+		assertNotEquals(computerSuggestion.getWeapon(), deck.get(15)); 
+		assertNotEquals(computerSuggestion.getWeapon(), deck.get(17)); 
+		assertNotEquals(computerSuggestion.getWeapon(), deck.get(20));
+		//if we know that it is not equal to any of the cards we have seen then we can assume it is one of the 
+		//weapon cards we have not seen
+	}
 }
