@@ -69,7 +69,7 @@ public class ComputerAITest {
 
 	@Test
 	public void ifOneWeaponNotSeenThenSelected() {
-		//if the computer has seen 5 out of the weapons, then it puts that pick into its suggestion
+		//if the computer has seen 5 out of the 6 weapons, then it puts that weapon into its suggestion
 		//gets the deck of cards 
 		ArrayList<Card> deck = theBoard.getDeck(); 
 		//creates new computer player 
@@ -88,5 +88,28 @@ public class ComputerAITest {
 		Solution computerSuggestion = test.createSuggestion(theBoard, currentRoom); 
 		//check to make sure that the weapon in the suggestion is the only one the computer has not seen
 		assertEquals(computerSuggestion.getWeapon(), deck.get(20)); 
+	}
+	
+	@Test
+	public void ifOnePersonNotSeenThenSelected() {
+		//if the computer has seen 5 out of the 6 people, then it puts that person into its suggestion
+		//gets the deck of cards 
+		ArrayList<Card> deck = theBoard.getDeck(); 
+		//creates new computer player 
+		ComputerPlayer test = new ComputerPlayer("Bobby Long", "Purple", 3, 0, "Computer"); 
+		//sets the position of the player in the bedroom 
+		BoardCell playerPosition = theBoard.getCell(20, 11); 
+		//get the room the player is in from the board using the computer position
+		Room currentRoom = theBoard.getRoom(playerPosition); 
+		//adds 5 out of the 6 people to the computer's seen list 
+		test.addSeenCard(deck.get(9));
+		test.addSeenCard(deck.get(10));
+		test.addSeenCard(deck.get(12));
+		test.addSeenCard(deck.get(13));
+		test.addSeenCard(deck.get(14));
+		//creates new suggestion 
+		Solution computerSuggestion = test.createSuggestion(theBoard, currentRoom); 
+		//check to make sure that the person in the suggestion is the only one the computer has not seen
+		assertEquals(computerSuggestion.getPerson(), deck.get(11)); 
 	}
 }
