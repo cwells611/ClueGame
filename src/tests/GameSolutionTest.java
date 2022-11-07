@@ -158,6 +158,8 @@ public class GameSolutionTest {
 		//checking the accusation matches the solution
 		assertFalse(theBoard.checkAccusation(accusation));
 	}
+	
+	
 	//Disprove suggestion tests
 	
 	//Handle suggestion tests

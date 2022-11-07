@@ -39,15 +39,15 @@ public class Solution {
 	
 	//getters
 	public Card getPerson() {
-		return solution.get(0); 
+		return this.person;
 	}
 	
 	public Card getRoom() {
-		return solution.get(2); 
+		return this.room;
 	}
 	
 	public Card getWeapon() {
-		return solution.get(1); 
+		return this.weapon; 
 	}
 	
 	public void setPerson(Card person) {

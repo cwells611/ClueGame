@@ -486,6 +486,16 @@ public class Board {
 	}
 	
 	public boolean checkAccusation(Solution accusation) {
+		Card correctRoom = theAnswer.getRoom();
+		Card correctPerson = theAnswer.getPerson();
+		Card correctWeapon = theAnswer.getWeapon();
+		Card accusedRoom = accusation.getRoom();
+		Card accusedPerson = accusation.getPerson();
+		Card accusedWeapon = accusation.getWeapon();
+		
+		if(correctRoom == accusedRoom && correctPerson == accusedPerson && correctWeapon == accusedWeapon) {
+			return true;
+		}
 		return false;
 	}
 
