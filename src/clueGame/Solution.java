@@ -27,7 +27,10 @@ public class Solution {
 		//once all solution cards are generated, add to list 
 		solution.add(person); 
 		solution.add(weapon);
-		solution.add(room); 
+		solution.add(room);
+		//sets the answer in theBoard
+		Board.getInstance().setTheAnswer(this);
+		
 	}
 	
 	public ArrayList<Card> getSolution() {
@@ -47,4 +50,15 @@ public class Solution {
 		return solution.get(1); 
 	}
 	
+	public void setPerson(Card person) {
+		this.person = person;
+	}
+	
+	public void setRoom(Card room) {
+		this.room = room;
+	}
+	
+	public void setWeapon(Card weapon) {
+		this.weapon = weapon;
+	}
 }
