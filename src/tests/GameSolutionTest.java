@@ -170,7 +170,7 @@ public class GameSolutionTest {
 		//creating a default player
 		Player defaultPlayer = new ComputerPlayer("Default", "color", 0, 0, "type");
 		
-		//creating 3 random cards to go in the default player's hand
+		//creating 3 cards to go in the default player's hand, including the musket card
 		Card cardInHand1 = musketCard;
 		Card cardInHand2 = new Card("Car", CardType.WEAPON);
 		Card cardInHand3 = new Card("Edna Dickson", CardType.PERSON);
@@ -180,7 +180,7 @@ public class GameSolutionTest {
 		defaultPlayer.updateHand(cardInHand2);
 		defaultPlayer.updateHand(cardInHand3);
 		
-		//creating a suggestion
+		//creating a suggestion, including the musket card
 		Card suggestionRoom = new Card("Roof", CardType.ROOM);
 		Card suggestionPerson = new Card("Bobby Long", CardType.PERSON);
 		Card suggestionWeapon = musketCard;
@@ -195,14 +195,63 @@ public class GameSolutionTest {
 		
 	}
 	
-	//@Test
+	@Test
 	void disproveMoreThanOneMatch() {
-		
+		//creating the musketCard, will be in the player's hand and will be suggested
+		Card musketCard = new Card("Musket", CardType.WEAPON);
+		//creating the ednaCard, will be in the player's hand and will be suggested
+		Card ednaCard = new Card("Edna Dickson", CardType.PERSON);
+		//creating a default player
+		Player defaultPlayer = new ComputerPlayer("Default", "color", 0, 0, "type");
+
+		//creating 3 cards to go in the default player's hand, including the musket and edna cards
+		Card cardInHand1 = musketCard;
+		Card cardInHand2 = new Card("Car", CardType.WEAPON);
+		Card cardInHand3 = ednaCard;
+
+		//updating the player with the given cards
+		defaultPlayer.updateHand(cardInHand1);
+		defaultPlayer.updateHand(cardInHand2);
+		defaultPlayer.updateHand(cardInHand3);
+
+		//creating a suggestion, including the musket and edna cards
+		Card suggestionRoom = new Card("Roof", CardType.ROOM);
+		Card suggestionPerson = ednaCard;
+		Card suggestionWeapon = musketCard;
+
+		//creating the disproved card
+		Card disprovedCard = defaultPlayer.disproveSuggestion(suggestionRoom, suggestionPerson, suggestionWeapon);
+
+		//testing that the disproved card is one of the cards in the player's hand
+		assertTrue(cardInHand1 == disprovedCard || cardInHand3 == disprovedCard);
+		//testing that the disproved card one of the suggested cards
+		assertTrue(suggestionWeapon == disprovedCard || suggestionPerson == disprovedCard);
 	}
 	
-	//@Test
+	@Test
 	void disproveNoMatch() {
-		
+		//creating a default player
+		Player defaultPlayer = new ComputerPlayer("Default", "color", 0, 0, "type");
+
+		//creating 3 cards to go in the default player's hand, including the musket card
+		Card cardInHand1 = new Card("Atrium", CardType.ROOM);
+		Card cardInHand2 = new Card("Car", CardType.WEAPON);
+		Card cardInHand3 = new Card("Edna Dickson", CardType.PERSON);
+
+		//updating the player with the given cards
+		defaultPlayer.updateHand(cardInHand1);
+		defaultPlayer.updateHand(cardInHand2);
+		defaultPlayer.updateHand(cardInHand3);
+
+		//creating a suggestion, including the musket card
+		Card suggestionRoom = new Card("Roof", CardType.ROOM);
+		Card suggestionPerson = new Card("Bobby Long", CardType.PERSON);
+		Card suggestionWeapon = new Card("Musket", CardType.WEAPON);
+
+		//creating the disproved card
+		Card disprovedCard = defaultPlayer.disproveSuggestion(suggestionRoom, suggestionPerson, suggestionWeapon);
+		//testing that the disprovedCard is null
+		assertEquals(null, disprovedCard);
 	}
 	
 	//Handle suggestion tests
