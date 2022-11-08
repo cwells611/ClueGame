@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Set;
 
 public class ComputerPlayer extends Player{
@@ -12,7 +13,7 @@ public class ComputerPlayer extends Player{
 	public ComputerPlayer(String name, String color, int startRow, int startCol, String type) {
 		super(name, color, startRow, startCol, type);
 	}
-	
+
 	//even though we are creating a suggestion, since the solution class already utilizes creation 
 	//of a room, weapon, and person card, we will use this class for our suggestion
 	public Solution createSuggestion(Board board, Room currentRoom) {
@@ -39,29 +40,30 @@ public class ComputerPlayer extends Player{
 				numPeopleSeen++; 
 			}
 		}
+		//determine which cards the computer has and has not seen
+		//loop through the deck 
+		for(Card card : board.getDeck()) {
+			//loop through seen list 
+			for(Card seenCard : seen) {
+				//if we have seen the card and the card is a weapon or a person then continue then we want to remove it from the seen list
+				//to show that we are already compared it with a card in the deck 
+				if((seenCard.equals(card) && card.getType() == CardType.WEAPON) || (seenCard.equals(card) && card.getType() == CardType.PERSON)) {
+					seen.remove(seenCard); 
+					break; 
+				}
+				//if we have not seen the card and it's a weapon or a person, then add it to the unseen list 
+				else if((!seenCard.equals(card) && card.getType() == CardType.WEAPON) || (!seenCard.equals(card) && card.getType() == CardType.PERSON)) {
+					notSeen.add(card); 
+					break; 
+				}	
+				else {
+					break; 
+				}
+			}
+		}
 		//after we know how many weapons and people we have seen, if either is 5, then we find out the ones we have not seen and 
 		//make that the weapon or person in the suggestion 
 		if(numWeaponsSeen == 5 || numPeopleSeen == 5) {
-			//loop through the deck 
-			for(Card card : board.getDeck()) {
-				//loop through seen list 
-				for(Card seenCard : seen) {
-					//if we have seen the card and the card is a weapon or a person then continue then we want to remove it from the seen list
-					//to show that we are already compared it with a card in the deck 
-					if((seenCard.equals(card) && card.getType() == CardType.WEAPON) || (seenCard.equals(card) && card.getType() == CardType.PERSON)) {
-						seen.remove(seenCard); 
-						break; 
-					}
-					//if we have not seen the card and it's a weapon or a person, then add it to the unseen list 
-					if((!seenCard.equals(card) && card.getType() == CardType.WEAPON) || (!seenCard.equals(card) && card.getType() == CardType.PERSON)) {
-						notSeen.add(card); 
-						break; 
-					}	
-					else {
-						break; 
-					}
-				}
-			}
 			//after everything that been looped through, since we know that only 1 weapon or 1 person should be 
 			//in the unSeen list, then we loop through the unseen list and if that card type is a 
 			//weapon then we add it to the suggestion 
@@ -74,15 +76,33 @@ public class ComputerPlayer extends Player{
 				}
 			}
 		}
+		//if numWeaponsSeen is not 5 and not 0 because we need to make sure we have see at least one weapon, 
+		//then we need to randomly pick from the unseen weapons for the suggestion 
+		if(numWeaponsSeen != 5 && numWeaponsSeen != 0){
+			//based on how we read in the setup.txt file, we know that we will be reading in the people before the 
+			//weapons, so in the notSeen ArrayList, we know that the weapons will in the indices behind the people
+			//so based on how many weapons we have not seen, we can can create a random number that only encapsulates
+			//the indices in the notSeen list that are weapons 
+
+			//determines how many weapons we have not seen 
+			int numWeaponsNotSeen = 6 - numWeaponsSeen; 
+			//creates random object 
+			Random random = new Random(); 
+			//since the weapons are second in the list, then the list length - 1 will be 
+			//the index of the last weapon in the list 
+			int randomWeaponIndex = random.nextInt(notSeen.size() - 1) + numWeaponsNotSeen; 
+			//sets the weapon based on the random
+			suggestion.setWeapon(notSeen.get(randomWeaponIndex));
+		}
 		return suggestion; 
 	}
-	
+
 	//the computer player needs to be able to select its next target, so we will return that target given 
 	//the set of boardcells that are available targets 
 	public BoardCell selectTarget(Set<BoardCell> targets) {
 		return null;
 	}
-	
+
 	//method to add card to players seen list 
 	public void addSeenCard(Card seenCard) {
 		seen.add(seenCard); 
