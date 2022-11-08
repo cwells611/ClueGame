@@ -190,7 +190,7 @@ public class ComputerAITest {
 		ArrayList<Card> deck = theBoard.getDeck(); 
 		//creates new computer player 
 		ComputerPlayer test = new ComputerPlayer("Bobby Long", "Purple", 3, 0, "Computer"); 
-		//add a few rooms to the computer's seen list (not including bedroom which is accessible with the roll provided)
+		//adds a few rooms to the computer's seen list (not including bedroom which is accessible with the roll provided)
 		test.addSeenCard(deck.get(0));    //chapter
 		test.addSeenCard(deck.get(8));    //deck
 		test.addSeenCard(deck.get(5));    //theater
@@ -204,7 +204,7 @@ public class ComputerAITest {
 		//since the bedroom can be reached on the given roll and has not been seen by the computer, the center cell of the bedroom
 		//should be the targetCell 
 		assertTrue(targetCell == theBoard.getCell(20, 11)); 
-		
+
 		//tests on cell (9,5) with a roll of 3
 		theBoard.calcTargets(theBoard.getCell(9, 5), 3);
 		targets = theBoard.getTargets();
@@ -212,5 +212,30 @@ public class ComputerAITest {
 		//since roof has not been seen and is reachable on the roof, the center cell of the roof 
 		//should be the target cell 
 		assertTrue(targetCell == theBoard.getCell(10, 2)); 
+	}
+
+	@Test 
+	public void ifRoomInTargetListHasBeenAllCellsInTargetListPickedRandomly() {
+		//gets the deck of cards 
+		ArrayList<Card> deck = theBoard.getDeck(); 
+		//creates new computer player 
+		ComputerPlayer test = new ComputerPlayer("Bobby Long", "Purple", 3, 0, "Computer"); 
+		//adds a few rooms to the computer's seen list (including deck which is accessible from roll )
+		test.addSeenCard(deck.get(0));    //chapter
+		test.addSeenCard(deck.get(8));    //deck
+		test.addSeenCard(deck.get(5));    //theater
+		//set to hold target list 
+		Set<BoardCell> targets; 
+		//test roll of 2 at cell (10, 20) 
+		theBoard.calcTargets(theBoard.getCell(10, 20), 2);
+		targets = theBoard.getTargets();
+		//with the target list we are going to have the computer player select a target
+		BoardCell targetCell = test.selectTarget(targets, theBoard); 
+		//even though a room is accessible from the roll, since the computer has already seen the room
+		//it will pick randomly from the entire target list 
+		for(BoardCell target : targets) {
+			System.out.println(target.getRow() + " " + target.getCol());
+		}
+		assertTrue(targetCell == theBoard.getCell(12, 20) || targetCell == theBoard.getCell(10, 22) || targetCell == theBoard.getCell(10, 18) || targetCell == theBoard.getCell(11, 19) || targetCell == theBoard.getCell(5, 21) || targetCell == theBoard.getCell(11, 21)); 
 	}
 }
