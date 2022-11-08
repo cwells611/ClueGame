@@ -78,21 +78,30 @@ public class ComputerPlayer extends Player{
 		}
 		//if numWeaponsSeen is not 5 and not 0 because we need to make sure we have see at least one weapon, 
 		//then we need to randomly pick from the unseen weapons for the suggestion 
-		if(numWeaponsSeen != 5 && numWeaponsSeen != 0){
-			//based on how we read in the setup.txt file, we know that we will be reading in the people before the 
-			//weapons, so in the notSeen ArrayList, we know that the weapons will in the indices behind the people
-			//so based on how many weapons we have not seen, we can can create a random number that only encapsulates
-			//the indices in the notSeen list that are weapons 
-
+		if(numWeaponsSeen != 5 && numWeaponsSeen != 0) {
 			//determines how many weapons we have not seen 
 			int numWeaponsNotSeen = 6 - numWeaponsSeen; 
 			//creates random object 
 			Random random = new Random(); 
 			//since the weapons are second in the list, then the list length - 1 will be 
 			//the index of the last weapon in the list 
-			int randomWeaponIndex = random.nextInt(notSeen.size() - 1) + numWeaponsNotSeen; 
-			//sets the weapon based on the random
+			int randomWeaponIndex = random.nextInt(notSeen.size() - 1) + numWeaponsNotSeen;
+			//sets the weapon based on the random index
 			suggestion.setWeapon(notSeen.get(randomWeaponIndex));
+		}
+		
+		//if numPeopleSeen is not 5 and not 0 because we need to make sure we have see at least one person, 
+		//then we need to randomly pick from the unseen weapons for the suggestion 
+		if(numPeopleSeen != 5 && numPeopleSeen != 0) {
+			//determines how many people we have not see
+			int numPeopleNotSeen = 6 - numPeopleSeen; 
+			//creates random object 
+			Random random = new Random(); 
+			//since the people are in the first part of the list, we want a random index between 
+			//the beginning of the list and the number of people not seen
+			int randomPersonIndex = random.nextInt(numPeopleNotSeen); 
+			//sets the person based on the random index
+			suggestion.setPerson(notSeen.get(randomPersonIndex));
 		}
 		return suggestion; 
 	}
