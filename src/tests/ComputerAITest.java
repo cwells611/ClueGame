@@ -43,6 +43,7 @@ public class ComputerAITest {
 	}
 
 	//tests that handle computer player creating suggestion 
+
 	@Test 
 	public void checkRoomAndCurrentLocation() {
 		//want to make sure that the room the computer player is basing its suggestion on matches the current
@@ -163,5 +164,30 @@ public class ComputerAITest {
 		assertNotEquals(computerSuggestion.getPerson(), deck.get(14));
 		//if we know that it is not equal to any of the cards we have seen then we can assume it is one of the 
 		//weapon cards we have not seen
+	}
+
+	//tests that handle computer player selecting a target 
+
+	@Test 
+	public void ifNotRoomsInTargetListThenSelectTargetRandomly() {
+		//creates new computer player 
+		ComputerPlayer test = new ComputerPlayer("Bobby Long", "Purple", 3, 0, "Computer"); 
+		//set to hold target list 
+		Set<BoardCell> targets; 
+		//test roll of 2 at cell (12, 21) 
+		theBoard.calcTargets(theBoard.getCell(12, 21), 2);
+		targets = theBoard.getTargets(); 
+		//with the target list we are going to have the computer player select a target
+		BoardCell targetCell = test.selectTarget(targets, theBoard); 
+		//check to make sure that the target cell is any of the cells in the target list because there are not rooms in target list
+		assertTrue(targetCell == theBoard.getCell(11, 22) || targetCell == theBoard.getCell(10, 21) || targetCell == theBoard.getCell(11, 20) || targetCell == theBoard.getCell(13, 20) || targetCell == theBoard.getCell(14, 21) || targetCell == theBoard.getCell(12, 19) || targetCell == theBoard.getCell(12, 23) || targetCell == theBoard.getCell(13, 22)); 
+		
+		//now that we have the list of potential targets, we want to loop through that list and check to see if any of the targets
+		//is a room, if not then we will just pick a target randomly from the list 
+		/*
+		 * for(BoardCell target : targets) { if(target.getIsRoom()) {
+		 * test.selectTarget(target); } }
+		 */
+		//after looping through 
 	}
 }

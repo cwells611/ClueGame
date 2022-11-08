@@ -108,8 +108,9 @@ public class ComputerPlayer extends Player{
 
 	//the computer player needs to be able to select its next target, so we will return that target given 
 	//the set of boardcells that are available targets 
-	public BoardCell selectTarget(Set<BoardCell> targets) {
-		return null;
+	public BoardCell selectTarget(Set<BoardCell> targets, Board board) {
+		BoardCell filler = new BoardCell(1, 1, 'C'); 
+		return filler; 
 	}
 
 	//method to add card to players seen list 
