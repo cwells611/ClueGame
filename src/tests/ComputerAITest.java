@@ -183,4 +183,26 @@ public class ComputerAITest {
 		assertTrue(targetCell == theBoard.getCell(11, 22) || targetCell == theBoard.getCell(10, 21) || targetCell == theBoard.getCell(11, 20) || targetCell == theBoard.getCell(13, 20) || targetCell == theBoard.getCell(14, 21) || targetCell == theBoard.getCell(12, 19) || targetCell == theBoard.getCell(12, 23) || targetCell == theBoard.getCell(13, 22)); 
 
 	}
+
+	@Test 
+	public void ifRoomInListNotSeenThenSelected() {
+		//gets the deck of cards 
+		ArrayList<Card> deck = theBoard.getDeck(); 
+		//creates new computer player 
+		ComputerPlayer test = new ComputerPlayer("Bobby Long", "Purple", 3, 0, "Computer"); 
+		//add a few rooms to the computer's seen list (not including bedroom which is accessible with the roll provided)
+		test.addSeenCard(deck.get(0));    //chapter
+		test.addSeenCard(deck.get(8));    //deck
+		test.addSeenCard(deck.get(5));    //theater
+		//set to hold target list 
+		Set<BoardCell> targets; 
+		//test roll of 2 at cell (16, 12) 
+		theBoard.calcTargets(theBoard.getCell(16, 12), 2);
+		targets = theBoard.getTargets(); 
+		//with the target list we are going to have the computer player select a target
+		BoardCell targetCell = test.selectTarget(targets); 
+		//since the bedroom can be reached on the given roll and has not been seen by the computer, the center cell of the bedroom
+		//should be the targetCell 
+		assertTrue(targetCell == theBoard.getCell(22, 11)); 
+	}
 }
