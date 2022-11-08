@@ -108,12 +108,21 @@ public class ComputerPlayer extends Player{
 
 	//the computer player needs to be able to select its next target, so we will return that target given 
 	//the set of boardcells that are available targets 
-	public BoardCell selectTarget(Set<BoardCell> targets) {
+	public BoardCell selectTarget(Set<BoardCell> targets, Board board) {
 		//loop through the target list 
 		for(BoardCell target : targets) {
-			//if target is a room, then return that cell as the selected target of the player
+			//if target is a room and the computer has not seen that room, then return that cell as the selected target of the player
 			if(target.getIsRoom()) {
-				return target; 
+				//loop through the deck in order to find the card that corresponds to the room that is a potential target
+				for(Card card : board.getDeck()) {
+					if(card.getName().equals(board.getRoom(target).getName())) {
+						Card roomCard = card; 
+						//if computer has not seen roomCard, then return target 
+						if(!seen.contains(roomCard)) {
+							return target; 
+						}
+					}
+				}
 			}
 		}
 		//if we loop through the whole target list, and there are no rooms, then pick a random cell from target list 

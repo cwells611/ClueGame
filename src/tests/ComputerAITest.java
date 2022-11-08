@@ -178,7 +178,7 @@ public class ComputerAITest {
 		theBoard.calcTargets(theBoard.getCell(12, 21), 2);
 		targets = theBoard.getTargets(); 
 		//with the target list we are going to have the computer player select a target
-		BoardCell targetCell = test.selectTarget(targets); 
+		BoardCell targetCell = test.selectTarget(targets, theBoard); 
 		//check to make sure that the target cell is any of the cells in the target list because there are not rooms in target list
 		assertTrue(targetCell == theBoard.getCell(11, 22) || targetCell == theBoard.getCell(10, 21) || targetCell == theBoard.getCell(11, 20) || targetCell == theBoard.getCell(13, 20) || targetCell == theBoard.getCell(14, 21) || targetCell == theBoard.getCell(12, 19) || targetCell == theBoard.getCell(12, 23) || targetCell == theBoard.getCell(13, 22)); 
 
@@ -198,11 +198,19 @@ public class ComputerAITest {
 		Set<BoardCell> targets; 
 		//test roll of 2 at cell (16, 12) 
 		theBoard.calcTargets(theBoard.getCell(16, 12), 2);
-		targets = theBoard.getTargets(); 
+		targets = theBoard.getTargets();
 		//with the target list we are going to have the computer player select a target
-		BoardCell targetCell = test.selectTarget(targets); 
+		BoardCell targetCell = test.selectTarget(targets, theBoard); 
 		//since the bedroom can be reached on the given roll and has not been seen by the computer, the center cell of the bedroom
 		//should be the targetCell 
-		assertTrue(targetCell == theBoard.getCell(22, 11)); 
+		assertTrue(targetCell == theBoard.getCell(20, 11)); 
+		
+		//tests on cell (9,5) with a roll of 3
+		theBoard.calcTargets(theBoard.getCell(9, 5), 3);
+		targets = theBoard.getTargets();
+		targetCell = test.selectTarget(targets, theBoard);
+		//since roof has not been seen and is reachable on the roof, the center cell of the roof 
+		//should be the target cell 
+		assertTrue(targetCell == theBoard.getCell(10, 2)); 
 	}
 }

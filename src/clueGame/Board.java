@@ -183,6 +183,10 @@ public class Board {
 						currentCell.setRoomLabel(true);
 						break;
 					case '*':
+						//if the first char in the string is not W or S then tell the cell it is a room
+						if(cell.charAt(0) != 'W' && cell.charAt(0) != 'S') {
+							currentCell.setIsRoom(true);
+						}
 						roomMap.get(initial).setCenterCell(currentCell);
 						currentCell.setRoomCenter(true);
 						if(roomMap.get(initial).hasSecretPassage()) {
