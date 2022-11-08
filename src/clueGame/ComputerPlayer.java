@@ -85,7 +85,7 @@ public class ComputerPlayer extends Player{
 			Random random = new Random(); 
 			//since the weapons are second in the list, then the list length - 1 will be 
 			//the index of the last weapon in the list 
-			int randomWeaponIndex = random.nextInt(notSeen.size() - 1) + numWeaponsNotSeen;
+			int randomWeaponIndex = random.nextInt(notSeen.size() - numWeaponsNotSeen) + numWeaponsNotSeen;
 			//sets the weapon based on the random index
 			suggestion.setWeapon(notSeen.get(randomWeaponIndex));
 		}
@@ -108,9 +108,28 @@ public class ComputerPlayer extends Player{
 
 	//the computer player needs to be able to select its next target, so we will return that target given 
 	//the set of boardcells that are available targets 
-	public BoardCell selectTarget(Set<BoardCell> targets, Board board) {
-		BoardCell filler = new BoardCell(1, 1, 'C'); 
-		return filler; 
+	public BoardCell selectTarget(Set<BoardCell> targets) {
+		//loop through the target list 
+		for(BoardCell target : targets) {
+			//if target is a room, then return that cell as the selected target of the player
+			if(target.getIsRoom()) {
+				return target; 
+			}
+		}
+		//if we loop through the whole target list, and there are no rooms, then pick a random cell from target list 
+		Random random = new Random(); 
+		//generates a random number between 0 and the last element of the set
+		int randomTargetCell = random.nextInt(targets.size() - 1); 
+		int counter = 0; 
+		//loop through set 
+		for(BoardCell target : targets) {
+			//if the counter is equal to the random number that was generated, return target 
+			if(counter == randomTargetCell) {
+				return target;
+			}
+			counter++; 
+		}
+		return null; 
 	}
 
 	//method to add card to players seen list 
