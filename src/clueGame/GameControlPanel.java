@@ -12,6 +12,7 @@ import javax.swing.border.TitledBorder;
 
 public class GameControlPanel extends JPanel {
 
+	
 	/**
 	 * Constructor for the panel, it does 90% of the work
 	 */
@@ -27,6 +28,7 @@ public class GameControlPanel extends JPanel {
 	
 	private JPanel upperPanel() {
 		JPanel panel = new JPanel();
+		
 		//TODO needs 4 separate panels
 		//whose turn panel
 		//roll panel
@@ -78,8 +80,13 @@ public class GameControlPanel extends JPanel {
 	}
 	
 	private JPanel lowerPanel() {
-		JPanel panel = new JPanel();
 		//TODO needs 2 separate panels
+		JPanel panel = new JPanel();
+		setLayout(new GridLayout(0, 2));
+		addPanel = guessPanel();
+		panel.add(addPanel);
+		addPanel = guessResultPanel();
+		panel.add(addPanel);
 		//guess panel
 		//guess result panel
 		return panel;
@@ -87,12 +94,16 @@ public class GameControlPanel extends JPanel {
 	
 	private JPanel guessPanel() {
 		JPanel panel = new JPanel();
+		setLayout(new GridLayout(1, 0));
+		addTextField = guessTextField();
+		
 		//incorporates guessTextField
 		return panel;
 	}
 	
 	private JTextField guessTextField() {
 		JTextField textField = new JTextField();
+		
 		return textField;
 	}
 	
