@@ -232,7 +232,6 @@ public class ComputerAITest {
 		//with the target list we are going to have the computer player select a target
 		BoardCell targetCell = test.selectTarget(targets, theBoard); 
 		//even though a room is accessible from the roll, since the computer has already seen the room
-		//it will pick randomly from the entire target list 
 		assertTrue(targetCell == theBoard.getCell(12, 20) || targetCell == theBoard.getCell(10, 22) || targetCell == theBoard.getCell(10, 18) || targetCell == theBoard.getCell(11, 19) || targetCell == theBoard.getCell(5, 21) || targetCell == theBoard.getCell(11, 21)); 
 	}
 }
