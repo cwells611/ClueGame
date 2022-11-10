@@ -39,3 +39,4 @@ public class GameControlPanel extends JPanel {
 		//panel.setGuess( "I have no guess!");
 		//panel.setGuessResult( "So you have nothing?");
 	}
+}
