@@ -233,9 +233,6 @@ public class ComputerAITest {
 		BoardCell targetCell = test.selectTarget(targets, theBoard); 
 		//even though a room is accessible from the roll, since the computer has already seen the room
 		//it will pick randomly from the entire target list 
-		for(BoardCell target : targets) {
-			System.out.println(target.getRow() + " " + target.getCol());
-		}
 		assertTrue(targetCell == theBoard.getCell(12, 20) || targetCell == theBoard.getCell(10, 22) || targetCell == theBoard.getCell(10, 18) || targetCell == theBoard.getCell(11, 19) || targetCell == theBoard.getCell(5, 21) || targetCell == theBoard.getCell(11, 21)); 
 	}
 }

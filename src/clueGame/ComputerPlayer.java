@@ -125,7 +125,7 @@ public class ComputerPlayer extends Player{
 				}
 			}
 		}
-		//if we loop through the whole target list, and there are no rooms, then pick a random cell from target list 
+		//if we loop through the whole target list, and there gitare no rooms, then pick a random cell from target list 
 		Random random = new Random(); 
 		//generates a random number between 0 and the last element of the set
 		int randomTargetCell = random.nextInt(targets.size() - 1); 
