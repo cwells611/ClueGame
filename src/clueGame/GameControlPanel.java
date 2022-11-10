@@ -11,7 +11,14 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 public class GameControlPanel extends JPanel {
-
+	
+	//instance variables that will be reassigned each time a 
+	//new GUI feature needs to be added 
+	JPanel addPanel; 
+	JButton addButton; 
+	JTextField addText; 
+	JLabel addLabel; 
+	
 	/**
 	 * Constructor for the panel, it does 90% of the work
 	 */
@@ -26,19 +33,27 @@ public class GameControlPanel extends JPanel {
 
 	
 	private JPanel upperPanel() {
-		JPanel panel = new JPanel();
-		//TODO needs 4 separate panels
-		//whose turn panel
-		//roll panel
-		//make accusation button
-		//next button
-		return panel;
+		JPanel upperPanel = new JPanel();
+		upperPanel.setLayout(new GridLayout(1, 4)); 
+		addPanel = whoseTurnPanel(); 
+		upperPanel.add(addPanel); 
+		addPanel = rollPanel(); 
+		upperPanel.add(addPanel);
+		addButton = accusationButton(); 
+		upperPanel.add(addButton); 
+		addButton = nextButton(); 
+		upperPanel.add(addButton); 
+		return upperPanel; 
 	}
 	
 	private JPanel whoseTurnPanel() {
-		JPanel panel = new JPanel();
-		//incorporates whoseTurnLabel and whoseTurnTextField
-		return panel;
+		JPanel turnPanel = new JPanel();
+		turnPanel.setLayout(new GridLayout(2, 1));
+		addLabel = whoseTurnLabel(); 
+		turnPanel.add(addLabel);
+		addText = whoseTurnTextField(); 
+		turnPanel.add(addText); 
+		return turnPanel;
 	}
 	
 	private JLabel whoseTurnLabel() {
@@ -104,6 +119,10 @@ public class GameControlPanel extends JPanel {
 	private JTextField guessResultTextField() {
 		JTextField textField = new JTextField();
 		return textField;
+	}
+	
+	public void setText(String text) {
+		this.addText.setText(text);
 	}
 	
 
