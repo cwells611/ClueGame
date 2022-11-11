@@ -2,11 +2,14 @@ package clueGame;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
@@ -18,7 +21,9 @@ public class GameControlPanel extends JPanel {
 	JButton addButton; 
 	JTextField addText; 
 	JLabel addLabel; 
+	//global variables for anything that needs a setter
 	JTextField guessTextField;
+	JTextField guessResultTextField;
 	
 	/**
 	 * Constructor for the panel, it does 90% of the work
@@ -107,29 +112,32 @@ public class GameControlPanel extends JPanel {
 	private JPanel guessPanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(1, 0));
+		Border blackline = BorderFactory.createTitledBorder("Guess");
 		addText = guessTextField();
 		panel.add(addText);
+		panel.setBorder(blackline);
 		//incorporates guessTextField
 		return panel;
 	}
 	
 	private JTextField guessTextField() {
 		guessTextField = new JTextField();
-		guessTextField.setText("Balls");
 		return guessTextField;
 	}
 	
 	private JPanel guessResultPanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(1,0));
+		Border blackline = BorderFactory.createTitledBorder("Guess Result");
 		addText = guessResultTextField();
 		panel.add(addText);
+		panel.setBorder(blackline);
 		return panel;
 	}
 	
 	private JTextField guessResultTextField() {
-		JTextField textField = new JTextField();
-		return textField;
+		guessResultTextField = new JTextField();
+		return guessResultTextField;
 	}
 	
 	public void setText(String text) {
@@ -141,7 +149,7 @@ public class GameControlPanel extends JPanel {
 	}
 	
 	public void setGuessResult(String text) {
-		this.guessResultTextField().setText(text);
+		guessResultTextField.setText(text);
 	}
 
 	/**
