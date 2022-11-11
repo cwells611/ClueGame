@@ -18,6 +18,7 @@ public class GameControlPanel extends JPanel {
 	JButton addButton; 
 	JTextField addText; 
 	JLabel addLabel; 
+	JTextField guessTextField;
 	
 	/**
 	 * Constructor for the panel, it does 90% of the work
@@ -94,6 +95,9 @@ public class GameControlPanel extends JPanel {
 	
 	private JPanel lowerPanel() {
 		JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(0, 2));
+		panel.add(guessPanel());
+		panel.add(guessResultPanel());
 		//TODO needs 2 separate panels
 		//guess panel
 		//guess result panel
@@ -102,17 +106,24 @@ public class GameControlPanel extends JPanel {
 	
 	private JPanel guessPanel() {
 		JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(1, 0));
+		addText = guessTextField();
+		panel.add(addText);
 		//incorporates guessTextField
 		return panel;
 	}
 	
 	private JTextField guessTextField() {
-		JTextField textField = new JTextField();
-		return textField;
+		guessTextField = new JTextField();
+		guessTextField.setText("Balls");
+		return guessTextField;
 	}
 	
 	private JPanel guessResultPanel() {
 		JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(1,0));
+		addText = guessResultTextField();
+		panel.add(addText);
 		return panel;
 	}
 	
@@ -125,6 +136,13 @@ public class GameControlPanel extends JPanel {
 		this.addText.setText(text);
 	}
 	
+	public void setGuess(String text) {
+		guessTextField.setText(text);
+	}
+	
+	public void setGuessResult(String text) {
+		this.guessResultTextField().setText(text);
+	}
 
 	/**
 	 * Main to test the panel
@@ -141,7 +159,7 @@ public class GameControlPanel extends JPanel {
 
 		// test filling in the data
 		//panel.setTurn(new ComputerPlayer( "Col. Mustard", 0, 0, "orange"), 5);
-		//panel.setGuess( "I have no guess!");
-		//panel.setGuessResult( "So you have nothing?");
+		panel.setGuess( "I have no guess!");
+		panel.setGuessResult( "So you have nothing?");
 	}
 }
