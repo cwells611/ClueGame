@@ -25,6 +25,11 @@ public class GameControlPanel extends JPanel {
 	JTextField addText; 
 	JLabel addLabel; 
 	
+	JTextField guessResult; 
+	JTextField guess; 
+	JTextField roll;
+	JTextField playerTurn; 
+	
 	/**
 	 * Constructor for the panel, it does 90% of the work
 	 */
@@ -60,8 +65,6 @@ public class GameControlPanel extends JPanel {
 		turnPanel.add(addLabel);
 		addText = whoseTurnTextField(); 
 		addText.setEditable(false);
-		addText.setBackground(Color.yellow);
-		addText.setText("Col. Mustard");
 		turnPanel.add(addText); 
 		return turnPanel;
 	}
@@ -73,9 +76,9 @@ public class GameControlPanel extends JPanel {
 	}
 	
 	private JTextField whoseTurnTextField() {
-		JTextField turnTextField = new JTextField();
-		turnTextField.setHorizontalAlignment(SwingConstants.CENTER); 
-		return turnTextField;
+		playerTurn = new JTextField();
+		playerTurn.setHorizontalAlignment(SwingConstants.CENTER); 
+		return playerTurn;
 	}
 	
 	private JPanel rollPanel() {
@@ -86,7 +89,6 @@ public class GameControlPanel extends JPanel {
 		rollPanel.add(addLabel);
 		addText = rollTextField(); 
 		addText.setEditable(false);
-		addText.setText("5");    //5 is set as a place holder for now just to get layout working
 		rollPanel.add(addText); 
 		return rollPanel;
 	}
@@ -98,8 +100,8 @@ public class GameControlPanel extends JPanel {
 	}
 	
 	private JTextField rollTextField() {
-		JTextField rollTextField = new JTextField();
-		return rollTextField;
+		roll = new JTextField();
+		return roll;
 	}
 	
 	private JButton accusationButton() {
@@ -125,7 +127,6 @@ public class GameControlPanel extends JPanel {
 	
 	private JLabel nextLabel() {
 		JLabel nextLabel = new JLabel(); 
-		//nextLabel.setHorizontalAlignment(SwingConstants.CENTER); 
 		return nextLabel; 
 	}
 	
@@ -143,16 +144,14 @@ public class GameControlPanel extends JPanel {
 		Border blackline = BorderFactory.createTitledBorder("Guess");
 		addText = guessTextField();
 		addText.setEditable(false);
-		addText.setText("I have no guess!"); 
 		panel.add(addText);
 		panel.setBorder(blackline);
-		//incorporates guessTextField
 		return panel;
 	}
 	
 	private JTextField guessTextField() {
-		JTextField guessTextField = new JTextField();
-		return guessTextField;
+		guess = new JTextField();
+		return guess;
 	}
 	
 	private JPanel guessResultPanel() {
@@ -161,22 +160,42 @@ public class GameControlPanel extends JPanel {
 		Border blackline = BorderFactory.createTitledBorder("Guess Result");
 		addText = guessResultTextField();
 		addText.setEditable(false);
-		addText.setText("So you have nothing?"); 
 		panel.add(addText);
 		panel.setBorder(blackline);
 		return panel;
 	}
 	
 	private JTextField guessResultTextField() {
-		JTextField guessResultTextField = new JTextField();
-		return guessResultTextField;
+		guessResult = new JTextField();
+		return guessResult;
 	}
 	
-	public void setText(String text) {
-		//sets text of both the text field and label attributes, can be re-called if label and text field need different strings
-		this.addText.setText(text);
-		this.addLabel.setText(text);
+	public void setGuess(String guess) {
+		this.guess.setText(guess);
 	}
+	
+	public void SetGuessResult(String guessResult) {
+		this.guessResult.setText(guessResult);
+	}
+	
+	public void setRoll(int roll) { 
+		this.roll.setText(Integer.toString(roll));
+	}
+	
+	public void setPlayer(String player) {
+		this.playerTurn.setText(player);
+	}
+	
+	public void setPlayerColor(Color color) {
+		this.playerTurn.setBackground(color);
+	}
+	
+	public void setTurn(Player player, int roll) {
+		setRoll(roll); 
+		setPlayer(player.getPlayerName()); 
+		setPlayerColor(Color.getColor(player.getColor())); 
+	}
+	
 
 	/**
 	 * Main to test the panel
@@ -192,6 +211,8 @@ public class GameControlPanel extends JPanel {
 		frame.setVisible(true); // make it visible
 
 		// test filling in the data
-		//panel.setTurn(new ComputerPlayer( "Col. Mustard", 0, 0, "orange"), 5);
+		panel.setTurn(new ComputerPlayer( "Col. Mustard", "orange", 0, 0, "Computer"), 5);
+		panel.setGuess("I have no guess!"); 
+		panel.SetGuessResult("So you have nothing?");
 	}
 }
