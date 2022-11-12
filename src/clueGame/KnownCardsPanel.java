@@ -155,6 +155,12 @@ public class KnownCardsPanel extends JPanel {
 			break;
 		}
 	}
+	
+	public JPanel updateDisplay(Player player) {
+		//in order to update the panel we are going to want to re-the constructor to redraw the panel
+		KnownCardsPanel panel = new KnownCardsPanel(player); 
+		return panel; 
+	}
 
 
 	/**
