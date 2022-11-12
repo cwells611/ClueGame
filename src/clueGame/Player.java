@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -71,5 +72,9 @@ public abstract class Player {
 		}
 		//returning null if no matching cards
 		return null;
+	}
+	
+	public String getColor() {
+		return this.color; 
 	}
 }
