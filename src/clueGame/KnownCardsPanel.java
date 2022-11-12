@@ -2,6 +2,7 @@ package clueGame;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -22,6 +23,7 @@ public class KnownCardsPanel extends JPanel {
 
 	JPanel addPanel;
 	JTextField addText;
+	
 
 	public KnownCardsPanel() {
 		// Create a layout with 3 rows
@@ -88,12 +90,21 @@ public class KnownCardsPanel extends JPanel {
 		return textField;
 	}
 	
-	public void addSeenCard(Card card) {
+	public void addSeenCard(Player player, Card card) {
+		
 		JTextField seenField = new JTextField(); 
 		//set the text in the text field to the name of the card 
 		seenField.setText(card.getName());
 		seenField.setEditable(false);
-		
+		switch(card.getType()) {
+		//if the card is of type room, then we are going to add the text field to the seen room panel
+		case ROOM: 
+			break;
+		case PERSON:
+			break; 
+		case WEAPON:
+			break; 
+		}
 	}
 
 

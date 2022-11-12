@@ -6,7 +6,7 @@ import java.util.Random;
 import java.util.Set;
 
 public class ComputerPlayer extends Player{
-	private ArrayList<Card> seen = new ArrayList<Card>(); 
+	//private ArrayList<Card> seen = new ArrayList<Card>(); 
 	private ArrayList<Card> notSeen = new ArrayList<Card>(); 
 	private int numWeaponsSeen = 0; 
 	private int numPeopleSeen = 0; 
@@ -31,7 +31,7 @@ public class ComputerPlayer extends Player{
 			}
 		}
 		//loops through seen list 
-		for(Card card : seen) {
+		for(Card card : super.getSeenCards()) {
 			//counts the number of weapons seen 
 			if(card.getType() == CardType.WEAPON) {
 				numWeaponsSeen++; 
@@ -45,11 +45,11 @@ public class ComputerPlayer extends Player{
 		//loop through the deck 
 		for(Card card : board.getDeck()) {
 			//loop through seen list 
-			for(Card seenCard : seen) {
+			for(Card seenCard : super.getSeenCards()) {
 				//if we have seen the card and the card is a weapon or a person then continue then we want to remove it from the seen list
 				//to show that we are already compared it with a card in the deck 
 				if((seenCard.equals(card) && card.getType() == CardType.WEAPON) || (seenCard.equals(card) && card.getType() == CardType.PERSON)) {
-					seen.remove(seenCard); 
+					super.getSeenCards().remove(seenCard); 
 					break; 
 				}
 				//if we have not seen the card and it's a weapon or a person, then add it to the unseen list 
@@ -119,7 +119,7 @@ public class ComputerPlayer extends Player{
 					if(card.getName().equals(board.getRoom(target).getName())) {
 						Card roomCard = card; 
 						//if computer has not seen roomCard, then return target 
-						if(!seen.contains(roomCard)) {
+						if(!super.getSeenCards().contains(roomCard)) {
 							return target; 
 						}
 					}
@@ -142,10 +142,10 @@ public class ComputerPlayer extends Player{
 		return null; 
 	}
 
-	//method to add card to players seen list 
-	public void addSeenCard(Card seenCard) {
-		seen.add(seenCard); 
-	}
+	/*
+	 * //method to add card to players seen list public void addSeenCard(Card
+	 * seenCard) { seen.add(seenCard); }
+	 */
 
 
 }

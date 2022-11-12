@@ -22,8 +22,17 @@ public abstract class Player {
 		this.row = startRow; 
 		this.col = startCol;  
 		hand = new ArrayList<Card>();
+		seenCards = new ArrayList<Card>(); 
 	}
 	
+	public ArrayList<Card> getSeenCards() {
+		return seenCards;
+	}
+
+	public void addSeenCard(Card card) {
+		this.seenCards.add(card);
+	}
+
 	public void setCardType(CardType cardType) {
 		this.type = cardType; 
 	}
