@@ -149,9 +149,26 @@ public class KnownCardsPanel extends JPanel {
 				player.addSeenCard(card);
 				roomsPanel = roomsPanel(player);
 			}
+			break;
 		case PERSON:
+			if(player.getHand().contains(card)) {
+				inHandCards.add(card);
+				//recall the constructor, now that the arrayList is updated
+				peoplePanel = peoplePanel(player);
+			}else if(player.getSeenCards().contains(card)) {
+				player.addSeenCard(card);
+				peoplePanel = peoplePanel(player);
+			}
 			break;
 		case WEAPON:
+			if(player.getHand().contains(card)) {
+				inHandCards.add(card);
+				//recall the constructor, now that the arrayList is updated
+				weaponsPanel = weaponsPanel(player);
+			}else if(player.getSeenCards().contains(card)) {
+				player.addSeenCard(card);
+				weaponsPanel = weaponsPanel(player);
+			}
 			break;
 		}
 	}
