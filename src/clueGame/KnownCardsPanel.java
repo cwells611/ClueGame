@@ -142,7 +142,7 @@ public class KnownCardsPanel extends JPanel {
 
 	public void setCardTextFields(CardType type, JPanel panel, ArrayList<Card> vector) {
 		if(vector.size() == 0) {
-			JLabel none = new JLabel();
+			JTextField none = new JTextField();
 			none.setText("None");
 			panel.add(none);
 		}else {
@@ -191,6 +191,8 @@ public class KnownCardsPanel extends JPanel {
 		humanPlayer.addSeenCard(room1);
 		humanPlayer.addSeenCard(weapon1);
 		humanPlayer.addSeenCard(weapon2);
+		
+		//panel = updateDisplay(humanPlayer);
 
 	}
 }
