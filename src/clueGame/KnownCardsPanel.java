@@ -148,7 +148,7 @@ public class KnownCardsPanel extends JPanel {
 		}else {
 			for(Card card : vector) {
 				if(card.getType() == type) {
-					JLabel addLabel = new JLabel();
+					JTextField addLabel = new JTextField();
 					addLabel.setText(card.getName());
 					panel.add(addLabel);
 				}
