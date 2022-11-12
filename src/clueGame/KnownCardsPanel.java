@@ -135,14 +135,10 @@ public class KnownCardsPanel extends JPanel {
 	}
 
 
-<<<<<<< HEAD
 
-	public void addInHandCard(Card card, Player player) {
-=======
 	public void addCard(Card card, Player player) {
 		JLabel label = new JLabel();
 		label.setText(card.getName());
->>>>>>> c9b86434bfd37202a8117345b7e3efbe31b191ba
 		switch(card.getType()) {
 		case ROOM:
 			if(player.getHand().contains(card)) {
