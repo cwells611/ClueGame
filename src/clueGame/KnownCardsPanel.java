@@ -142,7 +142,7 @@ public class KnownCardsPanel extends JPanel {
 		frame.setVisible(true); // make it visible
 
 
-		Player humanPlayer = new HumanPlayer( "Col. Mustard", 0, 0, "orange");
+		
 
 	}
 }
