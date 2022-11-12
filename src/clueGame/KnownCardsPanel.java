@@ -195,6 +195,8 @@ public class KnownCardsPanel extends JPanel {
 		humanPlayer.addSeenCard(weapon2);
 		panel = new KnownCardsPanel(humanPlayer);
 		frame.setContentPane(panel);
+		
+		panel.revalidate();
 
 	}
 }
