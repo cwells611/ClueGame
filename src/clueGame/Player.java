@@ -16,12 +16,11 @@ public abstract class Player {
 	private ArrayList<Card> seenCards;
 	
 	//constructor 
-	public Player(String name, String color, int startRow, int startCol, String type) {
+	public Player(String name, String color, int startRow, int startCol) {
 		this.name = name; 
 		this.color = color; 
 		this.row = startRow; 
 		this.col = startCol;  
-		this.playerType = type;
 		hand = new ArrayList<Card>();
 	}
 	

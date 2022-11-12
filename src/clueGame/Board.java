@@ -32,7 +32,6 @@ public class Board {
 	private CardType cardType; 
 	private Card card; 
 	private static Board theInstance = new Board();
-	private static Player humanPlayer = new HumanPlayer();
 	private Solution theAnswer;
 
 	// constructor is private to ensure only one can be created
@@ -115,12 +114,12 @@ public class Board {
 				playerStartRow = Integer.parseInt(lineInfo[3]);
 				playerStartCol = Integer.parseInt(lineInfo[4]); 
 				if(lineInfo[0].equals("Human")) {
-					player = new HumanPlayer(playerName, playerColor, playerStartRow, playerStartCol, lineInfo[0]); 
+					player = new HumanPlayer(playerName, playerColor, playerStartRow, playerStartCol); 
 					//increment human players counter
 					numHumanPlayers++;  
 				}
 				else {
-					player = new ComputerPlayer(playerName, playerColor, playerStartRow, playerStartCol, lineInfo[0]); 
+					player = new ComputerPlayer(playerName, playerColor, playerStartRow, playerStartCol); 
 					//increment computer players counter 
 					numComputerPlayers++; 
 				}

@@ -39,22 +39,17 @@ class GameSetupTest {
 		theBoard.initialize();
 	}
 	
-	@Test
-	void testNumHumanPlayers() {
-		ArrayList<Player> players = theBoard.getPlayers(); 
-		//we want to make sure that only 1 human player is created 
-		assertEquals(1, theBoard.getNumHumanPlayers()); 
-		//also want to make sure that the correct person is assigned as the human player 
-		//loop through list of players and if the player type is human, make sure the name associated is the human 
-		///player is Nigel Thomas 
-		int humanIndex = 0; 
-		for(Player player : players) {
-			if(player.getPlayerType().equals("Human")) {
-				humanIndex = players.indexOf(player);  
-			}
-		}
-		assertEquals("Nigel Thomas", players.get(humanIndex).getPlayerName()); 
-	}
+	/*
+	 * @Test void testNumHumanPlayers() { ArrayList<Player> players =
+	 * theBoard.getPlayers(); //we want to make sure that only 1 human player is
+	 * created assertEquals(1, theBoard.getNumHumanPlayers()); //also want to make
+	 * sure that the correct person is assigned as the human player //loop through
+	 * list of players and if the player type is human, make sure the name
+	 * associated is the human ///player is Nigel Thomas int humanIndex = 0;
+	 * for(Player player : players) { if(player.getPlayerType().equals("Human")) {
+	 * humanIndex = players.indexOf(player); } } assertEquals("Nigel Thomas",
+	 * players.get(humanIndex).getPlayerName()); }
+	 */
 	
 	@Test 
 	void testNumComputerPlayers() {

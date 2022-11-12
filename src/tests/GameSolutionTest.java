@@ -166,7 +166,7 @@ public class GameSolutionTest {
 		Card musketCard = new Card("Musket", CardType.WEAPON);
 		
 		//creating a default player
-		Player defaultPlayer = new ComputerPlayer("Default", "color", 0, 0, "type");
+		Player defaultPlayer = new ComputerPlayer("Default", "color", 0, 0);
 		
 		//creating 3 cards to go in the default player's hand, including the musket card
 		Card cardInHand1 = musketCard;
@@ -202,7 +202,7 @@ public class GameSolutionTest {
 		//creating the ednaCard, will be in the player's hand and will be suggested
 		Card ednaCard = new Card("Edna Dickson", CardType.PERSON);
 		//creating a default player
-		Player defaultPlayer = new ComputerPlayer("Default", "color", 0, 0, "type");
+		Player defaultPlayer = new ComputerPlayer("Default", "color", 0, 0);
 
 		//creating 3 cards to go in the default player's hand, including the musket and edna cards
 		Card cardInHand1 = musketCard;
@@ -231,7 +231,7 @@ public class GameSolutionTest {
 	@Test
 	void disproveNoMatch() {
 		//creating a default player
-		Player defaultPlayer = new ComputerPlayer("Default", "color", 0, 0, "type");
+		Player defaultPlayer = new ComputerPlayer("Default", "color", 0, 0);
 
 		//creating 3 cards to go in the default player's hand, including the musket card
 		Card cardInHand1 = new Card("Atrium", CardType.ROOM);
@@ -260,10 +260,10 @@ public class GameSolutionTest {
 	@Test
 	void noDisproves() {
 		//creating 4 players, the human player and 3 cpus
-		Player humanPlayer = new HumanPlayer("Human", "color", 0 , 0, "type");
-		Player cpu1 = new ComputerPlayer("cpu1", "color", 1, 1, "type");
-		Player cpu2 = new ComputerPlayer("cpu2", "color", 2, 2, "type");
-		Player cpu3 = new ComputerPlayer("cpu3", "color", 3, 3, "type");
+		Player humanPlayer = new HumanPlayer("Human", "color", 0 , 0);
+		Player cpu1 = new ComputerPlayer("cpu1", "color", 1, 1);
+		Player cpu2 = new ComputerPlayer("cpu2", "color", 2, 2);
+		Player cpu3 = new ComputerPlayer("cpu3", "color", 3, 3);
 		
 		//creating 15 cards, so each player can have 3 cards, and 3 extra cards
 		Card roofCard = new Card("Roof", CardType.ROOM);
@@ -319,10 +319,10 @@ public class GameSolutionTest {
 	@Test
 	void onlySuggestingPlayerCanDisprove() {
 		//creating 4 players, the human player and 3 cpus
-		Player humanPlayer = new HumanPlayer("Human", "color", 0 , 0, "type");
-		Player cpu1 = new ComputerPlayer("cpu1", "color", 1, 1, "type");
-		Player cpu2 = new ComputerPlayer("cpu2", "color", 2, 2, "type");
-		Player cpu3 = new ComputerPlayer("cpu3", "color", 3, 3, "type");
+		Player humanPlayer = new HumanPlayer("Human", "color", 0 , 0);
+		Player cpu1 = new ComputerPlayer("cpu1", "color", 1, 1);
+		Player cpu2 = new ComputerPlayer("cpu2", "color", 2, 2);
+		Player cpu3 = new ComputerPlayer("cpu3", "color", 3, 3);
 
 		//creating 14 cards, so each player can have 3 cards, and 2 extra cards
 		Card roofCard = new Card("Roof", CardType.ROOM);
@@ -376,10 +376,10 @@ public class GameSolutionTest {
 	@Test
 	void onlyHumanCanDisprove(){
 		//creating 4 players, the human player and 3 cpus
-		Player humanPlayer = new HumanPlayer("Human", "color", 0 , 0, "type");
-		Player cpu1 = new ComputerPlayer("cpu1", "color", 1, 1, "type");
-		Player cpu2 = new ComputerPlayer("cpu2", "color", 2, 2, "type");
-		Player cpu3 = new ComputerPlayer("cpu3", "color", 3, 3, "type");
+		Player humanPlayer = new HumanPlayer("Human", "color", 0 , 0);
+		Player cpu1 = new ComputerPlayer("cpu1", "color", 1, 1);
+		Player cpu2 = new ComputerPlayer("cpu2", "color", 2, 2);
+		Player cpu3 = new ComputerPlayer("cpu3", "color", 3, 3);
 
 		//creating 14 cards, so each player can have 3 cards, and 2 extra cards
 		Card roofCard = new Card("Roof", CardType.ROOM);
@@ -433,10 +433,10 @@ public class GameSolutionTest {
 	@Test
 	void twoPlayersCanDisprove() {
 		//creating 4 players, the human player and 3 cpus
-		Player humanPlayer = new HumanPlayer("Human", "color", 0 , 0, "type");
-		Player cpu1 = new ComputerPlayer("cpu1", "color", 1, 1, "type");
-		Player cpu2 = new ComputerPlayer("cpu2", "color", 2, 2, "type");
-		Player cpu3 = new ComputerPlayer("cpu3", "color", 3, 3, "type");
+		Player humanPlayer = new HumanPlayer("Human", "color", 0 , 0);
+		Player cpu1 = new ComputerPlayer("cpu1", "color", 1, 1);
+		Player cpu2 = new ComputerPlayer("cpu2", "color", 2, 2);
+		Player cpu3 = new ComputerPlayer("cpu3", "color", 3, 3);
 
 		//creating 13 cards, so each player can have 3 cards, and 1 extra card
 		Card roofCard = new Card("Roof", CardType.ROOM);

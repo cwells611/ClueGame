@@ -11,8 +11,8 @@ public class ComputerPlayer extends Player{
 	private int numWeaponsSeen = 0; 
 	private int numPeopleSeen = 0; 
 
-	public ComputerPlayer(String name, String color, int startRow, int startCol, String type) {
-		super(name, color, startRow, startCol, type);
+	public ComputerPlayer(String name, String color, int startRow, int startCol) {
+		super(name, color, startRow, startCol);
 	}
 
 	//even though we are creating a suggestion, since the solution class already utilizes creation 

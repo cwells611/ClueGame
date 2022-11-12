@@ -51,7 +51,7 @@ public class ComputerAITest {
 		//gets the deck of cards 
 		ArrayList<Card> deck = theBoard.getDeck(); 
 		//creates new computer player 
-		ComputerPlayer test = new ComputerPlayer("Bobby Long", "Purple", 3, 0, "Computer"); 
+		ComputerPlayer test = new ComputerPlayer("Bobby Long", "Purple", 3, 0); 
 		//sets the position of the player in the bedroom 
 		BoardCell playerPosition = theBoard.getCell(20, 11); 
 		//get the room the player is in from the board using the computer position
@@ -74,7 +74,7 @@ public class ComputerAITest {
 		//gets the deck of cards 
 		ArrayList<Card> deck = theBoard.getDeck(); 
 		//creates new computer player 
-		ComputerPlayer test = new ComputerPlayer("Bobby Long", "Purple", 3, 0, "Computer"); 
+		ComputerPlayer test = new ComputerPlayer("Bobby Long", "Purple", 3, 0); 
 		//sets the position of the player in the bedroom 
 		BoardCell playerPosition = theBoard.getCell(20, 11); 
 		//get the room the player is in from the board using the computer position
@@ -97,7 +97,7 @@ public class ComputerAITest {
 		//gets the deck of cards 
 		ArrayList<Card> deck = theBoard.getDeck(); 
 		//creates new computer player 
-		ComputerPlayer test = new ComputerPlayer("Bobby Long", "Purple", 3, 0, "Computer"); 
+		ComputerPlayer test = new ComputerPlayer("Bobby Long", "Purple", 3, 0); 
 		//sets the position of the player in the bedroom 
 		BoardCell playerPosition = theBoard.getCell(20, 11); 
 		//get the room the player is in from the board using the computer position
@@ -121,7 +121,7 @@ public class ComputerAITest {
 		//gets the deck of cards 
 		ArrayList<Card> deck = theBoard.getDeck(); 
 		//creates new computer player 
-		ComputerPlayer test = new ComputerPlayer("Bobby Long", "Purple", 3, 0, "Computer"); 
+		ComputerPlayer test = new ComputerPlayer("Bobby Long", "Purple", 3, 0); 
 		//sets the position of the player in the bedroom 
 		BoardCell playerPosition = theBoard.getCell(20, 11); 
 		//get the room the player is in from the board using the computer position
@@ -147,7 +147,7 @@ public class ComputerAITest {
 		//gets the deck of cards 
 		ArrayList<Card> deck = theBoard.getDeck(); 
 		//creates new computer player 
-		ComputerPlayer test = new ComputerPlayer("Bobby Long", "Purple", 3, 0, "Computer"); 
+		ComputerPlayer test = new ComputerPlayer("Bobby Long", "Purple", 3, 0); 
 		//sets the position of the player in the bedroom 
 		BoardCell playerPosition = theBoard.getCell(20, 11); 
 		//get the room the player is in from the board using the computer position
@@ -171,7 +171,7 @@ public class ComputerAITest {
 	@Test 
 	public void ifNotRoomsInTargetListThenSelectTargetRandomly() {
 		//creates new computer player 
-		ComputerPlayer test = new ComputerPlayer("Bobby Long", "Purple", 3, 0, "Computer"); 
+		ComputerPlayer test = new ComputerPlayer("Bobby Long", "Purple", 3, 0); 
 		//set to hold target list 
 		Set<BoardCell> targets; 
 		//test roll of 2 at cell (12, 21) 
@@ -189,7 +189,7 @@ public class ComputerAITest {
 		//gets the deck of cards 
 		ArrayList<Card> deck = theBoard.getDeck(); 
 		//creates new computer player 
-		ComputerPlayer test = new ComputerPlayer("Bobby Long", "Purple", 3, 0, "Computer"); 
+		ComputerPlayer test = new ComputerPlayer("Bobby Long", "Purple", 3, 0); 
 		//adds a few rooms to the computer's seen list (not including bedroom which is accessible with the roll provided)
 		test.addSeenCard(deck.get(0));    //chapter
 		test.addSeenCard(deck.get(8));    //deck
@@ -219,7 +219,7 @@ public class ComputerAITest {
 		//gets the deck of cards 
 		ArrayList<Card> deck = theBoard.getDeck(); 
 		//creates new computer player 
-		ComputerPlayer test = new ComputerPlayer("Bobby Long", "Purple", 3, 0, "Computer"); 
+		ComputerPlayer test = new ComputerPlayer("Bobby Long", "Purple", 3, 0); 
 		//adds a few rooms to the computer's seen list (including deck which is accessible from roll )
 		test.addSeenCard(deck.get(0));    //chapter
 		test.addSeenCard(deck.get(8));    //deck

@@ -211,7 +211,7 @@ public class GameControlPanel extends JPanel {
 		frame.setVisible(true); // make it visible
 
 		// test filling in the data
-		panel.setTurn(new ComputerPlayer( "Col. Mustard", "orange", 0, 0, "Computer"), 5);
+		panel.setTurn(new ComputerPlayer( "Col. Mustard", "orange", 0, 0), 5);
 		panel.setGuess("I have no guess!"); 
 		panel.SetGuessResult("So you have nothing?");
 	}
