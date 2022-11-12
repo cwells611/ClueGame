@@ -23,21 +23,26 @@ public class KnownCardsPanel extends JPanel {
 
 	JPanel addPanel;
 	JTextField addText;
-	
 
-	public KnownCardsPanel() {
-		// Create a layout with 3 rows
-		setLayout(new GridLayout(3, 0));
+	JPanel peoplePanel;
+	JPanel roomsPanel;
+	JPanel weaponsPanel;
+
+	private ArrayList<Card> inHandCards;
+
+
+	public KnownCardsPanel()  {
+		//Create a layout with 3 rows
+		setLayout(new GridLayout(3,0));
 		Border blackline = BorderFactory.createTitledBorder("Known Cards");
 		setBorder(blackline);
-		addPanel = peoplePanel();
-		add(addPanel);
-		addPanel = roomsPanel();
-		add(addPanel);
-		addPanel = weaponsPanel();
-		add(addPanel);
-		// need to add people rooms and weapons panels
-
+		peoplePanel = peoplePanel();
+		add(peoplePanel);
+		roomsPanel = roomsPanel();
+		add(roomsPanel);
+		weaponsPanel = weaponsPanel();
+		add(weaponsPanel);
+		//need to add people rooms and weapons panels
 	}
 
 	private JPanel peoplePanel() {
@@ -57,6 +62,11 @@ public class KnownCardsPanel extends JPanel {
 		Border blackline = BorderFactory.createTitledBorder("Rooms");
 		panel.setBorder(blackline);
 		panel.add(inHandLabel());
+		for(Card card : inHandCards) {
+			JLabel addLabel = new JLabel();
+			addLabel.setText(card.getName());
+			panel.add(addLabel);
+		}
 		panel.add(seenLabel());
 		// needs card textFields
 		return panel;
@@ -85,13 +95,8 @@ public class KnownCardsPanel extends JPanel {
 		return label;
 	}
 
-	private JTextField cardTextField() {
-		JTextField textField = new JTextField();
-		return textField;
-	}
-	
 	public void addSeenCard(Player player, Card card) {
-		
+
 		JTextField seenField = new JTextField(); 
 		//set the text in the text field to the name of the card 
 		seenField.setText(card.getName());
@@ -99,6 +104,7 @@ public class KnownCardsPanel extends JPanel {
 		switch(card.getType()) {
 		//if the card is of type room, then we are going to add the text field to the seen room panel
 		case ROOM: 
+
 			break;
 		case PERSON:
 			break; 
@@ -108,18 +114,17 @@ public class KnownCardsPanel extends JPanel {
 	}
 
 
-	public void addInHandCard(Card card) { 
+	public void addInHandCard(Card card, Player player) {
 		JLabel label = new JLabel();
-		label.setText(card.getName()); 
-		switch(card.getType()) { 
-		case ROOM: if()
-			break; 
-		case PERSON:
-
-			break; 
-		case WEAPON:
-
-			break; } 
+		label.setText(card.getName());
+		switch(card.getType()) {
+		case ROOM:
+			if(player.getHand().contains(card)) {
+				inHandCards.add(card);
+				//recall the constructor, now that the arrayList is updated
+				roomsPanel = roomsPanel();
+			}
+		}
 	}
 
 
@@ -136,7 +141,8 @@ public class KnownCardsPanel extends JPanel {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
 		frame.setVisible(true); // make it visible
 
-		// Player humanPlayer = new humanPlayer( "Col. Mustard", 0, 0, "orange");
+
+		Player humanPlayer = new HumanPlayer( "Col. Mustard", 0, 0, "orange");
 
 	}
 }
