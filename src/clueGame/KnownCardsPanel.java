@@ -134,11 +134,11 @@ public class KnownCardsPanel extends JPanel {
 		}
 	}
 	
-	/*
-	 * public JPanel updateDisplay(Player player) { //in order to update the panel
-	 * we are going to want to re-the constructor to redraw the panel
-	 * KnownCardsPanel panel = new KnownCardsPanel(player); return panel; }
-	 */
+	public KnownCardsPanel updateDisplay(Player player, KnownCardsPanel panel) {
+		//in order to update the panel we are going to want to re-the constructor to redraw the panel
+		panel = new KnownCardsPanel(player); 
+		return panel; 
+	}
 
 	public void setCardTextFields(CardType type, JPanel panel, ArrayList<Card> vector) {
 		if(vector.size() == 0) {
@@ -193,8 +193,8 @@ public class KnownCardsPanel extends JPanel {
 		humanPlayer.addSeenCard(room1);
 		humanPlayer.addSeenCard(weapon1);
 		humanPlayer.addSeenCard(weapon2);
-		
-		//panel = new KnownCardsPanel(humanPlayer); 
+		panel = new KnownCardsPanel(humanPlayer);
+		frame.setContentPane(panel);
 
 	}
 }
