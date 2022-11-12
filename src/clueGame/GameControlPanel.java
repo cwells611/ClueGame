@@ -53,6 +53,7 @@ public class GameControlPanel extends JPanel {
 		JPanel turnPanel = new JPanel();
 		turnPanel.setLayout(new GridLayout(2, 1));
 		addLabel = whoseTurnLabel(); 
+		addLabel.setText("Whose turn?");
 		turnPanel.add(addLabel);
 		addText = whoseTurnTextField(); 
 		addText.setEditable(false);
@@ -62,39 +63,61 @@ public class GameControlPanel extends JPanel {
 	}
 	
 	private JLabel whoseTurnLabel() {
-		JLabel label = new JLabel();
-		return label;
+		JLabel turnLabel = new JLabel();
+		return turnLabel;
 	}
 	
 	private JTextField whoseTurnTextField() {
-		JTextField textField = new JTextField();
-		return textField;
+		JTextField turnTextField = new JTextField();
+		return turnTextField;
 	}
 	
 	private JPanel rollPanel() {
-		JPanel panel = new JPanel();
-		//incorporates rollLabel and rollTextField
-		return panel;
+		JPanel rollPanel = new JPanel();
+		rollPanel.setLayout(new GridLayout(1, 1));
+		addLabel = rollLabel(); 
+		addLabel.setText("Roll:");
+		rollPanel.add(addLabel);
+		addText = rollTextField(); 
+		addText.setText("5");    //5 is set as a place holder for now just to get layout working
+		rollPanel.add(addText); 
+		return rollPanel;
 	}
 	
 	private JLabel rollLabel() {
-		JLabel label = new JLabel();
-		return label;
+		JLabel rollLabel = new JLabel();
+		return rollLabel;
 	}
 	
 	private JTextField rollTextField() {
-		JTextField textField = new JTextField();
-		return textField;
+		JTextField rollTextField = new JTextField();
+		return rollTextField;
 	}
 	
 	private JButton accusationButton() {
-		JButton button = new JButton();
-		return button;
+		JButton accusationButton = new JButton();
+		addLabel = accusationLabel(); 
+		addLabel.setText("Make Accusation");
+		accusationButton.add(addLabel); 
+		return accusationButton;
+	}
+	
+	private JLabel accusationLabel() {
+		JLabel accusationLabel = new JLabel(); 
+		return accusationLabel; 
 	}
 	
 	private JButton nextButton() {
-		JButton button = new JButton();
-		return button;
+		JButton nextButton = new JButton();
+		addLabel = nextLabel(); 
+		addLabel.setText("NEXT!");
+		nextButton.add(addLabel); 
+		return nextButton;
+	}
+	
+	private JLabel nextLabel() {
+		JLabel nextLabel = new JLabel(); 
+		return nextLabel; 
 	}
 	
 	private JPanel lowerPanel() {
@@ -102,9 +125,6 @@ public class GameControlPanel extends JPanel {
 		panel.setLayout(new GridLayout(0, 2));
 		panel.add(guessPanel());
 		panel.add(guessResultPanel());
-		//TODO needs 2 separate panels
-		//guess panel
-		//guess result panel
 		return panel;
 	}
 	
@@ -144,7 +164,9 @@ public class GameControlPanel extends JPanel {
 	}
 	
 	public void setText(String text) {
+		//sets text of both the text field and label attributes, can be re-called if label and text field need different strings
 		this.addText.setText(text);
+		this.addLabel.setText(text);
 	}
 
 	/**
