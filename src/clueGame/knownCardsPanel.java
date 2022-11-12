@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.SwingConstants;
 
 public class knownCardsPanel extends JPanel {
 

@@ -56,7 +56,6 @@ public class GameControlPanel extends JPanel {
 		JPanel turnPanel = new JPanel();
 		turnPanel.setLayout(new GridLayout(2, 1));
 		addLabel = whoseTurnLabel(); 
-		addLabel.setAlignmentX(CENTER_ALIGNMENT);
 		addLabel.setText("Whose turn?");
 		turnPanel.add(addLabel);
 		addText = whoseTurnTextField(); 
@@ -69,11 +68,13 @@ public class GameControlPanel extends JPanel {
 	
 	private JLabel whoseTurnLabel() {
 		JLabel turnLabel = new JLabel();
+		turnLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		return turnLabel;
 	}
 	
 	private JTextField whoseTurnTextField() {
 		JTextField turnTextField = new JTextField();
+		turnTextField.setHorizontalAlignment(SwingConstants.CENTER); 
 		return turnTextField;
 	}
 	
@@ -92,6 +93,7 @@ public class GameControlPanel extends JPanel {
 	
 	private JLabel rollLabel() {
 		JLabel rollLabel = new JLabel();
+		rollLabel.setHorizontalAlignment(SwingConstants.CENTER); 
 		return rollLabel;
 	}
 	
@@ -102,7 +104,7 @@ public class GameControlPanel extends JPanel {
 	
 	private JButton accusationButton() {
 		JButton accusationButton = new JButton();
-		addLabel = accusationLabel(); 
+		addLabel = accusationLabel();  
 		addLabel.setText("Make Accusation");
 		accusationButton.add(addLabel); 
 		return accusationButton;
@@ -123,6 +125,7 @@ public class GameControlPanel extends JPanel {
 	
 	private JLabel nextLabel() {
 		JLabel nextLabel = new JLabel(); 
+		//nextLabel.setHorizontalAlignment(SwingConstants.CENTER); 
 		return nextLabel; 
 	}
 	
