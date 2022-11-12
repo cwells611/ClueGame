@@ -55,6 +55,8 @@ public class GameControlPanel extends JPanel {
 		addLabel = whoseTurnLabel(); 
 		turnPanel.add(addLabel);
 		addText = whoseTurnTextField(); 
+		addText.setEditable(false);
+		addText.setText("Col. Mustard");
 		turnPanel.add(addText); 
 		return turnPanel;
 	}
@@ -111,6 +113,7 @@ public class GameControlPanel extends JPanel {
 		panel.setLayout(new GridLayout(1, 0));
 		Border blackline = BorderFactory.createTitledBorder("Guess");
 		addText = guessTextField();
+		addText.setEditable(false);
 		addText.setText("I have no guess!"); 
 		panel.add(addText);
 		panel.setBorder(blackline);
@@ -128,6 +131,7 @@ public class GameControlPanel extends JPanel {
 		panel.setLayout(new GridLayout(1,0));
 		Border blackline = BorderFactory.createTitledBorder("Guess Result");
 		addText = guessResultTextField();
+		addText.setEditable(false);
 		addText.setText("So you have nothing?"); 
 		panel.add(addText);
 		panel.setBorder(blackline);
