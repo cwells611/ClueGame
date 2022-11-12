@@ -53,6 +53,13 @@ public class KnownCardsPanel extends JPanel {
 		Border blackline = BorderFactory.createTitledBorder("People");
 		panel.setBorder(blackline);
 		panel.add(inHandLabel());
+		for(Card card : inHandCards) {
+			if(card.getType() == CardType.PERSON) {
+				JLabel addLabel = new JLabel();
+				addLabel.setText(card.getName());
+				panel.add(addLabel);
+			}
+		}
 		panel.add(seenLabel());
 		//loops through player's seen cards and if it is a room, add it to panel 
 		for(Card card : player.getSeenCards()) {
@@ -96,6 +103,13 @@ public class KnownCardsPanel extends JPanel {
 		panel.setLayout(new GridLayout(0, 1));
 		panel.setBorder(blackline);
 		panel.add(inHandLabel());
+		for(Card card : inHandCards) {
+			if(card.getType() == CardType.WEAPON) {
+				JLabel addLabel = new JLabel();
+				addLabel.setText(card.getName());
+				panel.add(addLabel);
+			}
+		}
 		panel.add(seenLabel());
 		//loops through player's seen cards and if it is a weapon, add it to panel 
 		for(Card card : player.getSeenCards()) {
@@ -136,8 +150,6 @@ public class KnownCardsPanel extends JPanel {
 
 
 	public void addInHandCard(Card card, Player player) {
-		JLabel label = new JLabel();
-		label.setText(card.getName());
 		switch(card.getType()) {
 		case ROOM:
 			if(player.getHand().contains(card)) {
