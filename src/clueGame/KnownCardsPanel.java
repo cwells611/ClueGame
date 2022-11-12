@@ -53,22 +53,9 @@ public class KnownCardsPanel extends JPanel {
 		Border blackline = BorderFactory.createTitledBorder("People");
 		panel.setBorder(blackline);
 		panel.add(inHandLabel());
-		for(Card card : inHandCards) {
-			if(card.getType() == CardType.PERSON) {
-				JLabel addLabel = new JLabel();
-				addLabel.setText(card.getName());
-				panel.add(addLabel);
-			}
-		}
+		setCardTextFields(CardType.PERSON, panel, inHandCards);
 		panel.add(seenLabel());
-		//loops through player's seen cards and if it is a person, add it to panel 
-		for(Card card : player.getSeenCards()) {
-			if(card.getType() == CardType.PERSON) {
-				JLabel addLabel = new JLabel(); 
-				addLabel.setText(card.getName());
-				panel.add(addLabel); 
-			}
-		}
+		setCardTextFields(CardType.PERSON, panel, player.getSeenCards());
 		return panel;
 	}
 
@@ -78,22 +65,9 @@ public class KnownCardsPanel extends JPanel {
 		Border blackline = BorderFactory.createTitledBorder("Rooms");
 		panel.setBorder(blackline);
 		panel.add(inHandLabel());
-		for(Card card : inHandCards) {
-			if(card.getType() == CardType.ROOM) {
-				JLabel addLabel = new JLabel();
-				addLabel.setText(card.getName());
-				panel.add(addLabel);
-			}
-		}
+		setCardTextFields(CardType.ROOM, panel, inHandCards);
 		panel.add(seenLabel());
-		//loops through player's seen cards and if it is a room, add it to panel 
-		for(Card card : player.getSeenCards()) {
-			if(card.getType() == CardType.ROOM) {
-				JLabel addLabel = new JLabel(); 
-				addLabel.setText(card.getName());
-				panel.add(addLabel); 
-			}
-		}
+		setCardTextFields(CardType.ROOM, panel, player.getSeenCards());
 		return panel;
 	}
 
@@ -103,22 +77,9 @@ public class KnownCardsPanel extends JPanel {
 		panel.setLayout(new GridLayout(0, 1));
 		panel.setBorder(blackline);
 		panel.add(inHandLabel());
-		for(Card card : inHandCards) {
-			if(card.getType() == CardType.WEAPON) {
-				JLabel addLabel = new JLabel();
-				addLabel.setText(card.getName());
-				panel.add(addLabel);
-			}
-		}
+		setCardTextFields(CardType.WEAPON, panel, inHandCards);
 		panel.add(seenLabel());
-		//loops through player's seen cards and if it is a weapon, add it to panel 
-		for(Card card : player.getSeenCards()) {
-			if(card.getType() == CardType.WEAPON) {
-				JLabel addLabel = new JLabel(); 
-				addLabel.setText(card.getName());
-				panel.add(addLabel); 
-			}
-		}
+		setCardTextFields(CardType.WEAPON, panel, player.getSeenCards());
 		return panel;
 	}
 
@@ -179,7 +140,22 @@ public class KnownCardsPanel extends JPanel {
 		return panel; 
 	}
 
-
+	public void setCardTextFields(CardType type, JPanel panel, ArrayList<Card> vector) {
+		if(vector.size() == 0) {
+			JLabel none = new JLabel();
+			none.setText("None");
+			panel.add(none);
+		}else {
+			for(Card card : vector) {
+				if(card.getType() == type) {
+					JLabel addLabel = new JLabel();
+					addLabel.setText(card.getName());
+					panel.add(addLabel);
+				}
+			}
+		}
+	}
+	
 	/**
 	 * Main to test the panel
 	 * 
@@ -194,7 +170,7 @@ public class KnownCardsPanel extends JPanel {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
 		frame.setVisible(true); // make it visible
 
-
+		
 
 
 	}
