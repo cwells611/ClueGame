@@ -193,9 +193,27 @@ public class KnownCardsPanel extends JPanel {
 		frame.setSize(180, 570); // size the frame
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
 		frame.setVisible(true); // make it visible
-
-
-
+		//Makes 3 people, 3 weapons, and 3 rooms cards for testing purposes 
+		Card person1 = new Card("person1", CardType.PERSON); 
+		Card person2 = new Card("person2", CardType.PERSON); 
+		Card person3 = new Card("person3", CardType.PERSON); 
+		Card room1 = new Card("room1", CardType.ROOM); 
+		Card room2 = new Card("room2", CardType.ROOM); 
+		Card room3 = new Card("room3", CardType.ROOM); 
+		Card weapon1 = new Card("weapon1", CardType.WEAPON); 
+		Card weapon2 = new Card("weapon2", CardType.WEAPON); 
+		Card weapon3 = new Card("weapon3", CardType.WEAPON); 
+		//adds 2 rooms and a weapon to the players hand
+		humanPlayer.updateHand(room2);
+		humanPlayer.updateHand(room3);
+		humanPlayer.updateHand(weapon3);
+		//adds the remaining cards to the players seen list 
+		humanPlayer.addSeenCard(person1);
+		humanPlayer.addSeenCard(person2);
+		humanPlayer.addSeenCard(person3);
+		humanPlayer.addSeenCard(room1);
+		humanPlayer.addSeenCard(weapon1);
+		humanPlayer.addSeenCard(weapon2);
 
 	}
 }
