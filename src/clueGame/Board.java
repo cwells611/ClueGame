@@ -32,6 +32,7 @@ public class Board {
 	private CardType cardType; 
 	private Card card; 
 	private static Board theInstance = new Board();
+	private static Player humanPlayer = new HumanPlayer();
 	private Solution theAnswer;
 
 	// constructor is private to ensure only one can be created

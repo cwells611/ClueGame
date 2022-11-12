@@ -12,6 +12,7 @@ public abstract class Player {
 	private ArrayList<Card> hand;
 	private String playerType; 
 	private CardType type; 
+	private ArrayList<Card> seenCards;
 	
 	//constructor 
 	public Player(String name, String color, int startRow, int startCol, String type) {

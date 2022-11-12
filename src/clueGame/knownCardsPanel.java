@@ -89,6 +89,23 @@ public class knownCardsPanel extends JPanel {
 		return textField;
 	}
 	
+	public void addSeenCard(Card card) {
+		JLabel label = new JLabel();
+		label.setText(card.getName());
+		switch(card.getType()) {
+		case ROOM:
+			if()
+			break;
+		case PERSON:
+			
+			break;
+		case WEAPON:
+			
+			break;
+		}
+	}
+	
+	
 	/**
 	 * Main to test the panel
 	 * 
@@ -101,6 +118,8 @@ public class knownCardsPanel extends JPanel {
 		frame.setSize(180, 570);  // size the frame
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
 		frame.setVisible(true); // make it visible
+		
+		Player humanPlayer = new humanPlayer( "Col. Mustard", 0, 0, "orange");
 
 		
 	}
