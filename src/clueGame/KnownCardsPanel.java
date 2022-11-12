@@ -28,7 +28,7 @@ public class KnownCardsPanel extends JPanel {
 	JPanel roomsPanel;
 	JPanel weaponsPanel;
 
-	private ArrayList<Card> inHandCards;
+	private ArrayList<Card> inHandCards = new ArrayList<Card>();
 
 
 	public KnownCardsPanel()  {
