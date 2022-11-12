@@ -124,6 +124,10 @@ public class KnownCardsPanel extends JPanel {
 				//recall the constructor, now that the arrayList is updated
 				roomsPanel = roomsPanel();
 			}
+		case PERSON:
+			break;
+		case WEAPON:
+			break;
 		}
 	}
 
