@@ -21,9 +21,6 @@ public class GameControlPanel extends JPanel {
 	JButton addButton; 
 	JTextField addText; 
 	JLabel addLabel; 
-	//global variables for anything that needs a setter
-	JTextField guessTextField;
-	JTextField guessResultTextField;
 	
 	/**
 	 * Constructor for the panel, it does 90% of the work
@@ -114,6 +111,7 @@ public class GameControlPanel extends JPanel {
 		panel.setLayout(new GridLayout(1, 0));
 		Border blackline = BorderFactory.createTitledBorder("Guess");
 		addText = guessTextField();
+		addText.setText("I have no guess!"); 
 		panel.add(addText);
 		panel.setBorder(blackline);
 		//incorporates guessTextField
@@ -121,7 +119,7 @@ public class GameControlPanel extends JPanel {
 	}
 	
 	private JTextField guessTextField() {
-		guessTextField = new JTextField();
+		JTextField guessTextField = new JTextField();
 		return guessTextField;
 	}
 	
@@ -130,26 +128,19 @@ public class GameControlPanel extends JPanel {
 		panel.setLayout(new GridLayout(1,0));
 		Border blackline = BorderFactory.createTitledBorder("Guess Result");
 		addText = guessResultTextField();
+		addText.setText("So you have nothing?"); 
 		panel.add(addText);
 		panel.setBorder(blackline);
 		return panel;
 	}
 	
 	private JTextField guessResultTextField() {
-		guessResultTextField = new JTextField();
+		JTextField guessResultTextField = new JTextField();
 		return guessResultTextField;
 	}
 	
 	public void setText(String text) {
 		this.addText.setText(text);
-	}
-	
-	public void setGuess(String text) {
-		guessTextField.setText(text);
-	}
-	
-	public void setGuessResult(String text) {
-		guessResultTextField.setText(text);
 	}
 
 	/**
@@ -167,7 +158,5 @@ public class GameControlPanel extends JPanel {
 
 		// test filling in the data
 		//panel.setTurn(new ComputerPlayer( "Col. Mustard", 0, 0, "orange"), 5);
-		panel.setGuess( "I have no guess!");
-		panel.setGuessResult( "So you have nothing?");
 	}
 }
