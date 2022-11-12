@@ -33,6 +33,8 @@ public class KnownCardsPanel extends JPanel {
 
 	public KnownCardsPanel(Player player)  {
 		//Create a layout with 3 rows
+		inHandCards = player.getHand();
+		
 		setLayout(new GridLayout(3,0));
 		Border blackline = BorderFactory.createTitledBorder("Known Cards");
 		setBorder(blackline);
@@ -70,9 +72,11 @@ public class KnownCardsPanel extends JPanel {
 		panel.setBorder(blackline);
 		panel.add(inHandLabel());
 		for(Card card : inHandCards) {
-			JLabel addLabel = new JLabel();
-			addLabel.setText(card.getName());
-			panel.add(addLabel);
+			if(card.getType() == CardType.ROOM) {
+				JLabel addLabel = new JLabel();
+				addLabel.setText(card.getName());
+				panel.add(addLabel);
+			}
 		}
 		panel.add(seenLabel());
 		//loops through player's seen cards and if it is a room, add it to panel 
@@ -155,7 +159,8 @@ public class KnownCardsPanel extends JPanel {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		KnownCardsPanel panel = new KnownCardsPanel(); // create the panel
+		Player humanPlayer = new HumanPlayer("Col. Mustard", "orange", 0, 0);
+		KnownCardsPanel panel = new KnownCardsPanel(humanPlayer); // create the panel
 		JFrame frame = new JFrame(); // create the frame
 		frame.setContentPane(panel); // put the panel in the frame
 		frame.setSize(180, 570); // size the frame
