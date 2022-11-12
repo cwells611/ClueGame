@@ -52,7 +52,14 @@ public class KnownCardsPanel extends JPanel {
 		panel.setBorder(blackline);
 		panel.add(inHandLabel());
 		panel.add(seenLabel());
-		// needs card textFields
+		//loops through player's seen cards and if it is a room, add it to panel 
+		for(Card card : player.getSeenCards()) {
+			if(card.getType() == CardType.PERSON) {
+				JLabel addLabel = new JLabel(); 
+				addLabel.setText(card.getName());
+				panel.add(addLabel); 
+			}
+		}
 		return panel;
 	}
 
@@ -68,8 +75,14 @@ public class KnownCardsPanel extends JPanel {
 			panel.add(addLabel);
 		}
 		panel.add(seenLabel());
-		//loops through player's seen cards and adds them to the 
-		// needs card textFields
+		//loops through player's seen cards and if it is a room, add it to panel 
+		for(Card card : player.getSeenCards()) {
+			if(card.getType() == CardType.ROOM) {
+				JLabel addLabel = new JLabel(); 
+				addLabel.setText(card.getName());
+				panel.add(addLabel); 
+			}
+		}
 		return panel;
 	}
 
@@ -80,7 +93,14 @@ public class KnownCardsPanel extends JPanel {
 		panel.setBorder(blackline);
 		panel.add(inHandLabel());
 		panel.add(seenLabel());
-		// needs card textFields
+		//loops through player's seen cards and if it is a weapon, add it to panel 
+		for(Card card : player.getSeenCards()) {
+			if(card.getType() == CardType.WEAPON) {
+				JLabel addLabel = new JLabel(); 
+				addLabel.setText(card.getName());
+				panel.add(addLabel); 
+			}
+		}
 		return panel;
 	}
 
@@ -97,15 +117,11 @@ public class KnownCardsPanel extends JPanel {
 	}
 
 	public void addSeenCard(Player player, Card card) {
-
-		JTextField seenField = new JTextField(); 
 		//set the text in the text field to the name of the card 
-		seenField.setText(card.getName());
-		seenField.setEditable(false);
 		switch(card.getType()) {
 		//if the card is of type room, then we are going to add the text field to the seen room panel
 		case ROOM: 
-
+			//if 
 			break;
 		case PERSON:
 			break; 
@@ -123,7 +139,7 @@ public class KnownCardsPanel extends JPanel {
 			if(player.getHand().contains(card)) {
 				inHandCards.add(card);
 				//recall the constructor, now that the arrayList is updated
-				roomsPanel = roomsPanel();
+				roomsPanel = roomsPanel(player);
 			}
 		case PERSON:
 			break;
@@ -147,7 +163,7 @@ public class KnownCardsPanel extends JPanel {
 		frame.setVisible(true); // make it visible
 
 
-		
+
 
 	}
 }
