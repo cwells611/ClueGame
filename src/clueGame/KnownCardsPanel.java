@@ -54,7 +54,7 @@ public class KnownCardsPanel extends JPanel {
 		panel.setBorder(blackline);
 		panel.add(inHandLabel());
 		panel.add(seenLabel());
-		//loops through player's seen cards and if it is a room, add it to panel 
+		//loops through player's seen cards and if it is a person, add it to panel 
 		for(Card card : player.getSeenCards()) {
 			if(card.getType() == CardType.PERSON) {
 				JLabel addLabel = new JLabel(); 
@@ -120,22 +120,8 @@ public class KnownCardsPanel extends JPanel {
 		return label;
 	}
 
-	public void addSeenCard(Player player, Card card) {
-		//set the text in the text field to the name of the card 
-		switch(card.getType()) {
-		//if the card is of type room, then we are going to add the text field to the seen room panel
-		case ROOM: 
-			//if 
-			break;
-		case PERSON:
-			break; 
-		case WEAPON:
-			break; 
-		}
-	}
 
-
-	public void addInHandCard(Card card, Player player) {
+	public void addCard(Card card, Player player) {
 		JLabel label = new JLabel();
 		label.setText(card.getName());
 		switch(card.getType()) {
