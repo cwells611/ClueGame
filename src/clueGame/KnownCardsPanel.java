@@ -134,9 +134,9 @@ public class KnownCardsPanel extends JPanel {
 		}
 	}
 	
-	public JPanel updateDisplay(Player player) {
+	public KnownCardsPanel updateDisplay(Player player, KnownCardsPanel panel) {
 		//in order to update the panel we are going to want to re-the constructor to redraw the panel
-		KnownCardsPanel panel = new KnownCardsPanel(player); 
+		panel = new KnownCardsPanel(player); 
 		return panel; 
 	}
 
@@ -192,7 +192,9 @@ public class KnownCardsPanel extends JPanel {
 		humanPlayer.addSeenCard(weapon1);
 		humanPlayer.addSeenCard(weapon2);
 		
-		//panel = updateDisplay(humanPlayer);
+		panel = new KnownCardsPanel(humanPlayer);
+		frame.setContentPane(panel);
+		//panel = updateDisplay(humanPlayer, panel);
 
 	}
 }
