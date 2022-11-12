@@ -1,6 +1,8 @@
 package clueGame;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
@@ -9,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
@@ -53,10 +56,12 @@ public class GameControlPanel extends JPanel {
 		JPanel turnPanel = new JPanel();
 		turnPanel.setLayout(new GridLayout(2, 1));
 		addLabel = whoseTurnLabel(); 
+		addLabel.setAlignmentX(CENTER_ALIGNMENT);
 		addLabel.setText("Whose turn?");
 		turnPanel.add(addLabel);
 		addText = whoseTurnTextField(); 
 		addText.setEditable(false);
+		addText.setBackground(Color.yellow);
 		addText.setText("Col. Mustard");
 		turnPanel.add(addText); 
 		return turnPanel;
@@ -74,11 +79,12 @@ public class GameControlPanel extends JPanel {
 	
 	private JPanel rollPanel() {
 		JPanel rollPanel = new JPanel();
-		rollPanel.setLayout(new GridLayout(1, 1));
+		rollPanel.setLayout(new GridLayout(1, 0));
 		addLabel = rollLabel(); 
 		addLabel.setText("Roll:");
 		rollPanel.add(addLabel);
 		addText = rollTextField(); 
+		addText.setEditable(false);
 		addText.setText("5");    //5 is set as a place holder for now just to get layout working
 		rollPanel.add(addText); 
 		return rollPanel;

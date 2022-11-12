@@ -20,6 +20,7 @@ public class knownCardsPanel extends JPanel {
 	 */
 	
 	JPanel addPanel;
+	JTextField addText;
 	
 	
 	public knownCardsPanel()  {
