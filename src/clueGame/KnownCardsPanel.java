@@ -145,6 +145,9 @@ public class KnownCardsPanel extends JPanel {
 				inHandCards.add(card);
 				//recall the constructor, now that the arrayList is updated
 				roomsPanel = roomsPanel(player);
+			}else if(player.getSeenCards().contains(card)) {
+				player.addSeenCard(card);
+				roomsPanel = roomsPanel(player);
 			}
 		case PERSON:
 			break;
