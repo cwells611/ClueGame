@@ -31,21 +31,21 @@ public class KnownCardsPanel extends JPanel {
 	private ArrayList<Card> inHandCards = new ArrayList<Card>();
 
 
-	public KnownCardsPanel()  {
+	public KnownCardsPanel(Player player)  {
 		//Create a layout with 3 rows
 		setLayout(new GridLayout(3,0));
 		Border blackline = BorderFactory.createTitledBorder("Known Cards");
 		setBorder(blackline);
-		peoplePanel = peoplePanel();
+		peoplePanel = peoplePanel(player);
 		add(peoplePanel);
-		roomsPanel = roomsPanel();
+		roomsPanel = roomsPanel(player);
 		add(roomsPanel);
-		weaponsPanel = weaponsPanel();
+		weaponsPanel = weaponsPanel(player);
 		add(weaponsPanel);
 		//need to add people rooms and weapons panels
 	}
 
-	private JPanel peoplePanel() {
+	private JPanel peoplePanel(Player player) {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(0, 1));
 		Border blackline = BorderFactory.createTitledBorder("People");
@@ -56,7 +56,7 @@ public class KnownCardsPanel extends JPanel {
 		return panel;
 	}
 
-	private JPanel roomsPanel() {
+	private JPanel roomsPanel(Player player) {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(0, 1));
 		Border blackline = BorderFactory.createTitledBorder("Rooms");
@@ -68,11 +68,12 @@ public class KnownCardsPanel extends JPanel {
 			panel.add(addLabel);
 		}
 		panel.add(seenLabel());
+		//loops through player's seen cards and adds them to the 
 		// needs card textFields
 		return panel;
 	}
 
-	private JPanel weaponsPanel() {
+	private JPanel weaponsPanel(Player player) {
 		JPanel panel = new JPanel();
 		Border blackline = BorderFactory.createTitledBorder("Weapons");
 		panel.setLayout(new GridLayout(0, 1));
