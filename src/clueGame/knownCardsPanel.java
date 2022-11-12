@@ -2,6 +2,7 @@ package clueGame;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -23,18 +24,24 @@ public class knownCardsPanel extends JPanel {
 	JPanel addPanel;
 	JTextField addText;
 	
+	JPanel peoplePanel;
+	JPanel roomsPanel;
+	JPanel weaponsPanel;
+	
+	private ArrayList<Card> inHandCards;
+	
 	
 	public knownCardsPanel()  {
 		//Create a layout with 3 rows
 		setLayout(new GridLayout(3,0));
 		Border blackline = BorderFactory.createTitledBorder("Known Cards");
 		setBorder(blackline);
-		addPanel = peoplePanel();
-		add(addPanel);
-		addPanel = roomsPanel();
-		add(addPanel);
-		addPanel = weaponsPanel();
-		add(addPanel);
+		peoplePanel = peoplePanel();
+		add(peoplePanel);
+		roomsPanel = roomsPanel();
+		add(roomsPanel);
+		weaponsPanel = weaponsPanel();
+		add(weaponsPanel);
 		//need to add people rooms and weapons panels
 		
 	}
@@ -56,6 +63,11 @@ public class knownCardsPanel extends JPanel {
 		Border blackline = BorderFactory.createTitledBorder("Rooms");
 		panel.setBorder(blackline);
 		panel.add(inHandLabel());
+		for(Card card : inHandCards) {
+			JLabel addLabel = new JLabel();
+			addLabel.setText(card.getName());
+			panel.add(addLabel);
+		}
 		panel.add(seenLabel());
 		//needs card textFields
 		return panel;
@@ -89,12 +101,16 @@ public class knownCardsPanel extends JPanel {
 		return textField;
 	}
 	
-	public void addSeenCard(Card card) {
+	public void addInHandCard(Card card, Player player) {
 		JLabel label = new JLabel();
 		label.setText(card.getName());
 		switch(card.getType()) {
 		case ROOM:
-			if()
+			if(player.getHand().contains(card)) {
+				inHandCards.add(card);
+				//recall the constructor, now that the arrayList is updated
+				roomsPanel = roomsPanel();
+			}
 			break;
 		case PERSON:
 			
@@ -119,7 +135,7 @@ public class knownCardsPanel extends JPanel {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
 		frame.setVisible(true); // make it visible
 		
-		Player humanPlayer = new humanPlayer( "Col. Mustard", 0, 0, "orange");
+		Player humanPlayer = new HumanPlayer( "Col. Mustard", 0, 0, "orange");
 
 		
 	}
