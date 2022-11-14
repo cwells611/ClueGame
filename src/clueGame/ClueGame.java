@@ -23,7 +23,7 @@ public class ClueGame extends JFrame {
 		this.gameBoard = board; 
 		this.game = new JFrame(); 
 		this.controlPanel = new GameControlPanel(); 
-		this.gamePanel = new DrawBoard(); 
+		this.gamePanel = new DrawBoard(this.gameBoard); 
 		//sets up JFrame behavior such as size, and title 
 		this.game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.game.setTitle("Clue");
