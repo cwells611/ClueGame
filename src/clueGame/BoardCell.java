@@ -152,6 +152,9 @@ public class BoardCell{
 		if(this.isRoom) {
 			g.setColor(Color.gray);
 			g.fillRect(xOffset, yOffset, width, height);
+			if(this.doorway) {
+				System.out.println("test");
+			}
 		}
 	}
 }

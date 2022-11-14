@@ -141,7 +141,15 @@ public class KnownCardsPanel extends JPanel {
 	}
 
 	public void setCardTextFields(CardType type, JPanel panel, ArrayList<Card> vector) {
-		if(vector.size() == 0) {
+		boolean b = false;
+		//checking if any of the cards in the vector match the given type
+		for(Card card : vector) {
+			if(card.getType() == type) {
+				b = true;
+				break;
+			}
+		}
+		if(vector.size() == 0 || b == false) {
 			JTextField none = new JTextField();
 			none.setText("None");
 			panel.add(none);
