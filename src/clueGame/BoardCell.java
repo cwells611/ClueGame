@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.*;
 
@@ -127,6 +128,7 @@ public class BoardCell{
 		return this.isOccupied;
 	}
 	
+	
 	//method to allow each board cell to draw itself 
 	//parameters will be the graphics object to be able to call paint method, 
 	//the width of the cell, the height of the cell, and the offset 
@@ -135,5 +137,18 @@ public class BoardCell{
 		//drawRect to draw the rectangle at the coordinates (xOffset, yOffset) with a width 
 		//of width and a height of height 
 		g.drawRect(xOffset, yOffset, width, height);
+		
+		//we want to check the behavior of each cell in order to determine how to draw the cell 
+		if(this.character ==  'W') {
+			g.setColor(Color.yellow);
+			g.fillRect(xOffset, yOffset, width, height);
+		}
+		
+		if(this.character ==  'X') {
+			g.setColor(Color.black);
+			g.fillRect(xOffset, yOffset, width, height);
+		}
+		
+		g.setColor(Color.black);
 	}
 }

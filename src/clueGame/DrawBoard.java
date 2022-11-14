@@ -29,7 +29,6 @@ public class DrawBoard extends JPanel {
 		//determine the size of each cell each time paintComponent is called 
 		cellWidth = this.getWidth()/this.board.getNumColumns(); 
 		cellHeight = this.getHeight()/this.board.getNumRows(); 
-		g.setColor(Color.blue);
 		//loops through the grid and calls the draw board cell function for each cell
 		for(int row = 0; row < this.board.getNumRows(); row++) {
 			for(int col = 0; col < this.board.getNumColumns(); col++) {

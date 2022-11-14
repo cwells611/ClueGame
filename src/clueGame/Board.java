@@ -176,7 +176,7 @@ public class Board {
 				roomMap.get(initial).addRoomCell(currentCell);
 
 				//checks cases for special cells; centers, labels, doors, and secret passages
-				if(cell.length() == 2) {
+				if(cell.length() ==  2) {
 					switch(cell.charAt(1)) {
 					case '#':
 						roomMap.get(initial).setLabelCell(currentCell);
@@ -220,7 +220,7 @@ public class Board {
 						Room currentRoom = roomMap.get(cell.charAt(0)); 
 						BoardCell currentCenter = currentRoom.getCenterCell(); 
 						//if that center cell has been found then just tell that center cell it has a secret passage
-						if(currentCenter != null) {
+						if(currentCenter !=  null) {
 							currentRoom.setSecretPassage(roomMap.get(cell.charAt(1)).getCenterCell(), cell.charAt(1));
 							currentCenter.setSecretPassage(cell.charAt(1));
 						}
