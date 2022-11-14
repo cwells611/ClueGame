@@ -195,9 +195,7 @@ public class Board extends JPanel {
 						break;
 					case '*':
 						//if the first char in the string is not W or S then tell the cell it is a room
-						if(cell.charAt(0) != 'W' && cell.charAt(0) != 'S') {
-							currentCell.setIsRoom(true);
-						}
+						currentCell.setIsRoom(true);
 						roomMap.get(initial).setCenterCell(currentCell);
 						currentCell.setRoomCenter(true);
 						if(roomMap.get(initial).hasSecretPassage()) {
@@ -291,7 +289,7 @@ public class Board extends JPanel {
 				}
 			}
 			//if the center cell is a room, tell every cell in that room what room it is 
-			if(room.getCenterCell().getIsRoom()) {
+			if(room.getCenterCell().getIsRoom() == true) {
 				for(BoardCell roomCell : room.getRoomCells()) {
 					roomCell.setIsRoom(true);
 				}

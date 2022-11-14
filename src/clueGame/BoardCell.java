@@ -135,7 +135,6 @@ public class BoardCell{
 		//with all the info the board cell needs passed in as parameters, we can just call 
 		//drawRect to draw the rectangle at the coordinates (xOffset, yOffset) with a width 
 		//of width and a height of height 
-		g.drawRect(xOffset, yOffset, width, height);
 		
 		//check for walkways and unused spaces 
 		if(this.character ==  'W') {
@@ -154,7 +153,5 @@ public class BoardCell{
 			g.setColor(Color.gray);
 			g.fillRect(xOffset, yOffset, width, height);
 		}
-		
-		g.setColor(Color.black);
 	}
 }
