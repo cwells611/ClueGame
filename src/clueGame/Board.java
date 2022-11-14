@@ -621,10 +621,19 @@ public class Board extends JPanel {
 		}
 		
 		for(BoardCell door : doors) {
+			g.setColor(Color.BLUE);
 			switch(door.getDoorDirection()) {
 			case UP:
-				g.setColor(Color.BLUE);
 				g.fillRect(door.getCol() * cellWidth, (door.getRow() * cellHeight) - 3, cellWidth, 3);
+				break;
+			case DOWN:
+				g.fillRect(door.getCol() * cellWidth, ((door.getRow() + 1)  * cellHeight), cellWidth, 3);
+				break;
+			case LEFT:
+				g.fillRect((door.getCol() * cellWidth) - 3, door.getRow() * cellHeight, 3, cellHeight);
+				break;
+			case RIGHT:
+				g.fillRect(((door.getCol() + 1) * cellWidth), door.getRow() * cellHeight, 3, cellHeight);
 				break;
 			default:
 				break;	
