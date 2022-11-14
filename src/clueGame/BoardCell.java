@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.Graphics;
 import java.util.*;
 
 public class BoardCell{
@@ -122,8 +123,12 @@ public class BoardCell{
 		this.isOccupied = occupied;	
 	}
 
-
 	public boolean getOccupied() {
 		return this.isOccupied;
+	}
+	
+	//method to allow each boardcell to draw itself 
+	public void drawBoardCell(Graphics g, int width, int height) {
+		
 	}
 }
