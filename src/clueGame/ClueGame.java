@@ -1,13 +1,17 @@
 package clueGame;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Graphics;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class ClueGame extends JFrame {
 	//instance variables
 	private Board gameBoard; 
 	private JFrame game; 
+	private DrawBoard gamePanel; 
 	private GameControlPanel controlPanel; 
 	private KnownCardsPanel cardsPanel; 
 	
@@ -19,17 +23,24 @@ public class ClueGame extends JFrame {
 		this.gameBoard = board; 
 		this.game = new JFrame(); 
 		this.controlPanel = new GameControlPanel(); 
-		//for initial testing, the KnownCardsPanel just gets the first player in the 
-		//board's array list of players, will change to update with each player's turn
-		//this.cardsPanel = new KnownCardsPanel(board.getPlayers().get(0)); 
+		this.gamePanel = new DrawBoard(); 
 		//sets up JFrame behavior such as size, and title 
 		this.game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.game.setTitle("Clue");
 		this.game.setSize(600, 600);
-		this.game.setVisible(true);
-		//initially adds the control panel and the known cards panel to the JFrame
+		//adds the control panel to the bottom of the frame
 		this.game.add(controlPanel, BorderLayout.SOUTH); 
-		//this.game.add(cardsPanel, BorderLayout.EAST); 
+		//in the initial creation of the frame, we also want to set the config files 
+		//and initialize the board 
+		this.gameBoard.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
+		this.gameBoard.initialize();
+		//for initial testing, just adds the known cards panel for the first person 
+		//in the board's player list, will change to dynamically update each player 
+		this.cardsPanel = new KnownCardsPanel(gameBoard.getPlayers().get(0));
+		this.game.add(cardsPanel, BorderLayout.EAST);
+		//adds game panel to the center of the JFrame 
+		this.game.add(gamePanel, BorderLayout.CENTER); 
+		this.game.setVisible(true);
 	}
 
 	public static void main(String[] args) {
