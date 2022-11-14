@@ -40,7 +40,8 @@ public class DrawBoard extends JPanel {
 				xCoord += cellWidth; 
 			}
 			//after an entire row is drawn, we want to increase the yCoord by cellHeight 
-			//so the next row will be right under the next 
+			//so the next row will be right under the next and reset the xCoord to 0
+			xCoord = 0; 
 			yCoord += cellHeight; 
 		}
 	}
