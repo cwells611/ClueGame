@@ -39,6 +39,15 @@ public class ClueGame extends JFrame {
 		Board gameBoard = Board.getInstance();
 		gameBoard.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
 		gameBoard.initialize();
+		
+		//after the board gets initialized, but before we create the frame, set the solution
+		Solution solution = gameBoard.getTheAnswer(); 
+		//remove solution cards from the deck 
+		gameBoard.removeSolutionCards(solution);
+		//deal out cards to the players 
+		gameBoard.deal();
+		
+		
 		//creates an instance of a ClueGame object which is a JFrame
 		ClueGame game = new ClueGame(700, 900); 
 		game.setVisible(true);
