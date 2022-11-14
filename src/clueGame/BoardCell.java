@@ -127,8 +127,13 @@ public class BoardCell{
 		return this.isOccupied;
 	}
 	
-	//method to allow each boardcell to draw itself 
-	public void drawBoardCell(Graphics g, int width, int height) {
-		
+	//method to allow each board cell to draw itself 
+	//parameters will be the graphics object to be able to call paint method, 
+	//the width of the cell, the height of the cell, and the offset 
+	public void drawBoardCell(Graphics g, int width, int height, int xOffset, int yOffset) {
+		//with all the info the board cell needs passed in as parameters, we can just call 
+		//drawRect to draw the rectangle at the coordinates (xOffset, yOffset) with a width 
+		//of width and a height of height 
+		g.drawRect(xOffset, yOffset, width, height);
 	}
 }

@@ -34,8 +34,14 @@ public class DrawBoard extends JPanel {
 		for(int row = 0; row < this.board.getNumRows(); row++) {
 			for(int col = 0; col < this.board.getNumColumns(); col++) {
 				BoardCell cell = this.board.getCell(row, col);  
-				cell.drawBoardCell(g, cellWidth, cellHeight); 
+				cell.drawBoardCell(g, cellWidth, cellHeight, xCoord, yCoord); 
+				//after a board cell is draw, we want to increase the xCoord by cellWidth 
+				//so the next cell will be drawn right next to it 
+				xCoord += cellWidth; 
 			}
+			//after an entire row is drawn, we want to increase the yCoord by cellHeight 
+			//so the next row will be right under the next 
+			yCoord += cellHeight; 
 		}
 	}
 	
