@@ -17,6 +17,8 @@ public class BoardCell{
 	private boolean hasSecretPassage;
 	private char secretPassage;
 	private Set<BoardCell> adjList;
+	private int doorXOffset;
+	private int doorYOffset;
 	
 	public BoardCell(int row, int col, char initial) {
 		this.row = row;
@@ -39,6 +41,15 @@ public class BoardCell{
 	
 	public DoorDirection getDoorDirection() {
 		return this.doorDirection;
+	}
+	
+	//door offset getters
+	public int getDoorYOffset() {
+		return doorYOffset;
+	}
+	
+	public int getDoorXOffset() {
+		return doorXOffset;
 	}
 	
 	public boolean isDoorway() {
@@ -152,9 +163,8 @@ public class BoardCell{
 		if(this.isRoom) {
 			g.setColor(Color.gray);
 			g.fillRect(xOffset, yOffset, width, height);
-			if(this.doorway) {
-				System.out.println("test");
-			}
+			this.doorXOffset = xOffset;
+			this.doorYOffset = yOffset;
 		}
 	}
 }
