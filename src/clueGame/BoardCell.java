@@ -128,24 +128,30 @@ public class BoardCell{
 		return this.isOccupied;
 	}
 	
-	
 	//method to allow each board cell to draw itself 
 	//parameters will be the graphics object to be able to call paint method, 
 	//the width of the cell, the height of the cell, and the offset 
-	public void drawBoardCell(Graphics g, int width, int height, int xOffset, int yOffset) {
+	public void draw(Graphics g, int width, int height, int xOffset, int yOffset) {
 		//with all the info the board cell needs passed in as parameters, we can just call 
 		//drawRect to draw the rectangle at the coordinates (xOffset, yOffset) with a width 
 		//of width and a height of height 
 		g.drawRect(xOffset, yOffset, width, height);
 		
-		//we want to check the behavior of each cell in order to determine how to draw the cell 
+		//check for walkways and unused spaces 
 		if(this.character ==  'W') {
 			g.setColor(Color.yellow);
 			g.fillRect(xOffset, yOffset, width, height);
+			g.setColor(Color.black);
+			g.drawRect(xOffset, yOffset, width, height);
 		}
-		
 		if(this.character ==  'X') {
 			g.setColor(Color.black);
+			g.fillRect(xOffset, yOffset, width, height);
+		}
+		
+		//check if its a room, have no lines between cells 
+		if(this.isRoom) {
+			g.setColor(Color.gray);
 			g.fillRect(xOffset, yOffset, width, height);
 		}
 		

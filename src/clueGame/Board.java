@@ -2,11 +2,14 @@ package clueGame;
 
 import static org.junit.Assert.assertEquals;
 
+import java.awt.Graphics;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.*;
 
-public class Board {
+import javax.swing.JPanel;
+
+public class Board extends JPanel {
 	private BoardCell[][] grid;
 	private int numRows;
 	private int numColumns;
@@ -33,6 +36,14 @@ public class Board {
 	private Card card; 
 	private static Board theInstance = new Board();
 	private Solution theAnswer;
+	//instance variables that will determine the size of each board cell
+	int cellWidth = 0; 
+	int cellHeight = 0;
+	int xCoord = 0;
+	int yCoord = 0; 
+	//board instance variable that will allow us to get the size of the board
+	//in order to determine the size of each cell 
+	Board board; 
 
 	// constructor is private to ensure only one can be created
 	private Board() {
@@ -240,7 +251,7 @@ public class Board {
 			}
 			row++;
 		}
-		tellRoomCellsSecretPassage(); 
+		tellRoomCellsSecretPassageAndRoom(); 
 		//calculates adjacencies for all doors, since was not possible until all cells are loaded
 		calcDoorAdjacencies(doors);	
 	}
@@ -267,15 +278,22 @@ public class Board {
 		}
 	}
 
-	public void tellRoomCellsSecretPassage() {
+	public void tellRoomCellsSecretPassageAndRoom() {
 		//if a room has a secret passage, loop through every cell in that room and tell it, it has a secret passage 
 		for(Room room : roomMap.values()) {
 			if(room.getName().equals("Walkway") || room.getName().equals("Unused")) {
 				continue;
 			}
+			//if the center cell is a secret passage, tell every cell in the room it has a secret passage 
 			if(room.getCenterCell().hasSecretPassage()) {
 				for(BoardCell roomCell : room.getRoomCells()) {
 					roomCell.setSecretPassage(room.getSecretPassage()); 
+				}
+			}
+			//if the center cell is a room, tell every cell in that room what room it is 
+			if(room.getCenterCell().getIsRoom()) {
+				for(BoardCell roomCell : room.getRoomCells()) {
+					roomCell.setIsRoom(true);
 				}
 			}
 		}
@@ -459,19 +477,19 @@ public class Board {
 		}
 
 	}
-	
+
 	public void removeSolutionCards(Solution solution) {
 		//removed the specified room, person, and weapon from the deck
 		deck.remove(solution.getRoom());
 		deck.remove(solution.getPerson());
 		deck.remove(solution.getWeapon());
 	}
-	
+
 	public void shuffleDeck() {
 		ArrayList<Card> initDeck = (ArrayList<Card>)deck.clone();
 		ArrayList<Card> finalDeck = new ArrayList<Card>();
 		Random random = new Random();
-		
+
 		while(initDeck.size() > 0) {
 			//picks a random card from the deck
 			int randInt = random.nextInt(initDeck.size());
@@ -484,11 +502,11 @@ public class Board {
 			}else {
 				continue;
 			}
-			
+
 		}
 		deck = finalDeck;
 	}
-	
+
 	public boolean checkAccusation(Solution accusation) {
 		//getting theAnswer cards, and the accusaed cards
 		Card correctRoom = theAnswer.getRoom();
@@ -497,22 +515,22 @@ public class Board {
 		Card accusedRoom = accusation.getRoom();
 		Card accusedPerson = accusation.getPerson();
 		Card accusedWeapon = accusation.getWeapon();
-		
+
 		// returns true if and only if all the rooms, people, and weapons match
 		if(correctRoom == accusedRoom && correctPerson == accusedPerson && correctWeapon == accusedWeapon) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	public Card handleSuggestion(Player suggestingPlayer, ArrayList<Player> players, Solution solution) {
 		//get start index
 		int startIndex = players.indexOf(suggestingPlayer);
 		//processing all players
 		//loop starts at the next player in line from the suggesting player
-			//i.e. the player to the left of the suggesting player
+		//i.e. the player to the left of the suggesting player
 		//ends at the last player left not including the suggesting player
-			//i.e. the player to the right of the suggesting player
+		//i.e. the player to the right of the suggesting player
 		for(int i = startIndex + 1; i < startIndex + players.size(); i++) { //loops from the next player from the suggestingPlayer through the players
 			//index of the player in the arraylist, so an out of bounds exception is not thrown
 			int playersIndex = i % players.size();
@@ -530,7 +548,7 @@ public class Board {
 	public Set<BoardCell> getTargets() {
 		return this.targets;
 	}
-	
+
 	//skeletons for new methods to complete C20A Clue Players 1 
 	public void deal() {
 		//shuffles the deck before the deal
@@ -544,21 +562,21 @@ public class Board {
 				deck.remove(topCard);
 			}
 		}
-		
+
 	}
-	
+
 	//Player getters 
 	public int getNumHumanPlayers() {
 		return numHumanPlayers; 
 	}
-	
+
 	public int getNumComputerPlayers() {
 		return numComputerPlayers; 
 	}
 	public ArrayList<Player> getPlayers() {
 		return players; 
 	}
-	
+
 	//Weapon getters
 	public int getNumWeapons() {
 		return numWeapons; 
@@ -566,18 +584,42 @@ public class Board {
 	public ArrayList<String> getWeapons() {
 		return weapons; 
 	}
-	
+
 	//Deck and Solution getters
 	public ArrayList<Card> getDeck() {
 		return deck; 
 	}
-	
+
 	//theAnswer getters and setters
 	public Solution getTheAnswer() {
 		return theAnswer;
 	}
 	public void setTheAnswer(Solution theAnswer) {
 		this.theAnswer = theAnswer;
+	}
+
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		//determine the size of each cell each time paintComponent is called 
+		cellWidth = this.getWidth()/numColumns; 
+		cellHeight = this.getHeight()/numRows; 
+		cellWidth = Math.min(cellWidth, cellHeight); 
+		cellHeight = cellWidth; 
+		//loops through the grid and calls the draw board cell function for each cell
+		for(int row = 0; row < numRows; row++) {
+			for(int col = 0; col < numColumns; col++) {
+				BoardCell cell = grid[row][col];  
+				cell.draw(g, cellWidth, cellHeight, xCoord, yCoord); 
+				//after a board cell is draw, we want to increase the xCoord by cellWidth 
+				//so the next cell will be drawn right next to it 
+				xCoord += cellWidth; 
+			}
+			//after an entire row is drawn, we want to increase the yCoord by cellHeight 
+			//so the next row will be right under the next and reset the xCoord to 0
+			xCoord = 0; 
+			yCoord += cellHeight; 
+		}
 	}
 }
 

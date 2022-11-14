@@ -29,11 +29,13 @@ public class DrawBoard extends JPanel {
 		//determine the size of each cell each time paintComponent is called 
 		cellWidth = this.getWidth()/this.board.getNumColumns(); 
 		cellHeight = this.getHeight()/this.board.getNumRows(); 
+		cellWidth = Math.min(cellWidth, cellHeight); 
+		cellHeight = cellWidth; 
 		//loops through the grid and calls the draw board cell function for each cell
 		for(int row = 0; row < this.board.getNumRows(); row++) {
 			for(int col = 0; col < this.board.getNumColumns(); col++) {
 				BoardCell cell = this.board.getCell(row, col);  
-				cell.drawBoardCell(g, cellWidth, cellHeight, xCoord, yCoord); 
+				cell.draw(g, cellWidth, cellHeight, xCoord, yCoord); 
 				//after a board cell is draw, we want to increase the xCoord by cellWidth 
 				//so the next cell will be drawn right next to it 
 				xCoord += cellWidth; 
