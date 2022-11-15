@@ -12,7 +12,7 @@ Room, Hall, H
 Space, Unused, X
 Space, Walkway, W
 //Players info (Player Type, Name, Color, Start Row, Start Col)
-Human, Nigel Thomas, Purple, 3, 0
+Human, Nigel Thomas, Pink, 3, 0
 Computer, Bobby Long, Green, 0, 10
 Computer, Craig Downs, Blue, 24, 6
 Computer, Edna Dickson, Red, 11, 24
