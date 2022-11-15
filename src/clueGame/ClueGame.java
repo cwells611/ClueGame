@@ -4,12 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class ClueGame extends JFrame {
 	//instance variables
-	private Board gameBoard;  
 	private Board gamePanel; 
 	private GameControlPanel controlPanel; 
 	private KnownCardsPanel cardsPanel; 
@@ -51,5 +53,10 @@ public class ClueGame extends JFrame {
 		//creates an instance of a ClueGame object which is a JFrame
 		ClueGame game = new ClueGame(700, 900); 
 		game.setVisible(true);
+		
+		//Creates Splash Screen 
+		JOptionPane.showMessageDialog(gameBoard, "You are " + gameBoard.getPlayers().get(0).getPlayerName() + ". \n Can you find the solution \n before the Computer players?", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE); 
+		
 	}
 }
+; 
