@@ -91,9 +91,11 @@ public class Room {
 		return this.cardType;
 	}
 
-	public void draw(Graphics g, int row, int col) {
+	public void draw(Graphics g, int width) {
 		String label = this.name; 
 		g.setColor(Color.blue);
-		g.drawString(label, row, col);
+		int labelCol = labelCell.getCol();
+		int labelRow = labelCell.getRow();
+		g.drawString(label, labelRow * width, labelCol * width);
 	}
 }
