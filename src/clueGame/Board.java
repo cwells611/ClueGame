@@ -602,6 +602,9 @@ public class Board extends JPanel {
 		//determine the size of each cell each time paintComponent is called 
 		cellWidth = this.getWidth()/numColumns; 
 		cellHeight = this.getHeight()/numRows; 
+		//since the width and height may not be the same and we want squares, 
+		//sets the width to be the min of width and height and then sets height to be 
+		//that same value 
 		cellWidth = Math.min(cellWidth, cellHeight); 
 		cellHeight = cellWidth; 
 		//loops through the grid and calls the draw board cell function for each cell
