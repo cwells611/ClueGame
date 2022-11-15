@@ -96,6 +96,6 @@ public class Room {
 		g.setColor(Color.blue);
 		int labelCol = this.labelCell.getCol(); 
 		int labelRow = labelCell.getRow();
-		g.drawString(label, labelRow * width, labelCol * width);
+		g.drawString(label, labelCol * width, labelRow * width);
 	}
 }
