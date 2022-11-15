@@ -623,6 +623,7 @@ public class Board extends JPanel {
 			yCoord += cellHeight; 
 		}
 		
+		//drawing all of the doors
 		for(BoardCell door : doors) {
 			g.setColor(Color.BLUE);
 			switch(door.getDoorDirection()) {
@@ -642,6 +643,11 @@ public class Board extends JPanel {
 				break;	
 			}
 			
+		}
+		//drawing the players
+		
+		for(Player player : players) {
+			player.draw(g, cellWidth);
 		}
 	}
 }

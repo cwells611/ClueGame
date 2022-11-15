@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -85,5 +86,31 @@ public abstract class Player {
 	
 	public String getColor() {
 		return this.color; 
+	}
+	
+	public void draw(Graphics g, int diameter) {
+		//setting the color
+		switch(color) {
+		case "Pink":
+			g.setColor(Color.PINK);
+			break;
+		case "Green":
+			g.setColor(Color.GREEN);
+			break;
+		case "Blue":
+			g.setColor(Color.BLUE);
+			break;
+		case "Red":
+			g.setColor(Color.RED);
+			break;
+		case "Orange":
+			g.setColor(Color.ORANGE);
+			break;
+		case "Magenta":
+			g.setColor(Color.MAGENTA);
+			break;
+			
+		}
+		g.fillOval((diameter * col) + 1, (diameter * row) + 1, diameter - 2, diameter - 2);
 	}
 }
