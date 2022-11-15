@@ -625,7 +625,9 @@ public class Board extends JPanel {
 		
 		//writing room names 
 		for(Room room : roomMap.values()) {
-			room.draw(g, cellWidth);
+			if(!room.getName().equals("Walkway") && !room.getName().equals("Unused")) {
+				room.draw(g, cellWidth);	
+			}
 		}
 		
 		//drawing all of the doors

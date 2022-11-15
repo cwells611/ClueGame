@@ -94,7 +94,7 @@ public class Room {
 	public void draw(Graphics g, int width) {
 		String label = this.name; 
 		g.setColor(Color.blue);
-		int labelCol = labelCell.getCol();
+		int labelCol = this.labelCell.getCol(); 
 		int labelRow = labelCell.getRow();
 		g.drawString(label, labelRow * width, labelCol * width);
 	}
