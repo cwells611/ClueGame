@@ -163,13 +163,6 @@ public class BoardCell{
 		if(this.isRoom) {
 			g.setColor(Color.gray);
 			g.fillRect(xOffset, yOffset, width, height);
-			if(this.roomLabel) {
-				Room room = Board.getInstance().getRoom(this.character);
-				String label = room.getName();
-				g.setColor(Color.blue);
-				g.drawString(label, xOffset, yOffset);
-				
-			}
 		}
 	}
 }
