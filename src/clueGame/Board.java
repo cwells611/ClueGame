@@ -2,6 +2,7 @@ package clueGame;
 
 import static org.junit.Assert.assertEquals;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -620,6 +621,27 @@ public class Board extends JPanel {
 			//so the next row will be right under the next and reset the xCoord to 0
 			xCoord = 0; 
 			yCoord += cellHeight; 
+		}
+		
+		for(BoardCell door : doors) {
+			g.setColor(Color.BLUE);
+			switch(door.getDoorDirection()) {
+			case UP:
+				g.fillRect(door.getCol() * cellWidth, (door.getRow() * cellHeight) - 3, cellWidth, 3);
+				break;
+			case DOWN:
+				g.fillRect(door.getCol() * cellWidth, ((door.getRow() + 1)  * cellHeight), cellWidth, 3);
+				break;
+			case LEFT:
+				g.fillRect((door.getCol() * cellWidth) - 3, door.getRow() * cellHeight, 3, cellHeight);
+				break;
+			case RIGHT:
+				g.fillRect(((door.getCol() + 1) * cellWidth), door.getRow() * cellHeight, 3, cellHeight);
+				break;
+			default:
+				break;	
+			}
+			
 		}
 	}
 }
