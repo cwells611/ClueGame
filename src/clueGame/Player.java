@@ -112,5 +112,7 @@ public abstract class Player {
 			
 		}
 		g.fillOval((diameter * col) + 1, (diameter * row) + 1, diameter - 2, diameter - 2);
+		g.setColor(Color.BLACK);
+		g.drawOval((diameter * col) + 1, (diameter * row) + 1, diameter - 2, diameter - 2);
 	}
 }
