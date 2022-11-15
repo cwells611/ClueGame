@@ -167,7 +167,6 @@ public class BoardCell{
 				Room room = Board.getInstance().getRoom(this.character);
 				String label = room.getName();
 				g.setColor(Color.blue);
-				System.out.println(label);
 				g.drawString(label, xOffset, yOffset);
 				
 			}
