@@ -195,7 +195,7 @@ public class GameControlPanel extends JPanel {
 	public void setTurn(Player player, int roll) {
 		setRoll(roll); 
 		setPlayer(player.getPlayerName()); 
-		setPlayerColor(Color.getColor(player.getColor())); 
+		setPlayerColor(player.getColor()); 
 	}
 
 	//getter for next button 

@@ -29,7 +29,7 @@ public class ClueGame extends JFrame {
 		setTitle("Clue");
 		setSize(width, height);
 		//before we add the control panel, since the human player will go first, we set the turn 
-		//to the human player 
+		//to the human 
 		controlPanel.setTurn(Board.getInstance().getPlayers().get(0), Board.getInstance().getPlayers().get(0).rollDie());
 		//adds the control panel to the bottom of the frame
 		add(controlPanel, BorderLayout.SOUTH); 
@@ -48,7 +48,7 @@ public class ClueGame extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			//check to see if the next button was pressed 
 			if(controlPanel.getNext().isSelected()) {
-				
+				//do some code 
 			}
 
 		}

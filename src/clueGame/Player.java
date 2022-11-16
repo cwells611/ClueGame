@@ -2,12 +2,13 @@ package clueGame;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class Player {
 	private String name;
-	private String color; //can also be of type Color, need to decide how we are passing in the color
+	private Color color; 
 	//corresponds to player starting location on the board 
 	private int row; 
 	private int col; 
@@ -19,9 +20,15 @@ public abstract class Player {
 	//constructor 
 	public Player(String name, String color, int startRow, int startCol) {
 		this.name = name; 
-		this.color = color; 
 		this.row = startRow; 
-		this.col = startCol;  
+		this.col = startCol;
+		try {
+			Field field = Class.forName("java.awt.Color").getField(color.toUpperCase()); 
+			this.color = (Color)field.get(null);
+		} catch (Exception e) {
+			System.out.println("Invalid color");
+			this.color = null; 
+		}
 		hand = new ArrayList<Card>();
 		seenCards = new ArrayList<Card>(); 
 	}
@@ -56,6 +63,10 @@ public abstract class Player {
 	public void updateHand(Card card) {
 		hand.add(card);
 	}
+	public Color getColor() {
+		return this.color; 
+	}
+	
 	
 	public Card disproveSuggestion(Card room, Card person, Card weapon) {
 		//creating an arraylist of the cards that match
@@ -84,33 +95,11 @@ public abstract class Player {
 		return null;
 	}
 	
-	public String getColor() {
-		return this.color; 
-	}
+	
 	
 	public void draw(Graphics g, int diameter) {
 		//setting the color
-		switch(color) {
-		case "Pink":
-			g.setColor(Color.PINK);
-			break;
-		case "Green":
-			g.setColor(Color.GREEN);
-			break;
-		case "Blue":
-			g.setColor(Color.BLUE);
-			break;
-		case "Red":
-			g.setColor(Color.RED);
-			break;
-		case "Orange":
-			g.setColor(Color.ORANGE);
-			break;
-		case "Magenta":
-			g.setColor(Color.MAGENTA);
-			break;
-			
-		}
+		g.setColor(this.color); 
 		g.fillOval((diameter * col) + 1, (diameter * row) + 1, diameter - 2, diameter - 2);
 		g.setColor(Color.BLACK);
 		g.drawOval((diameter * col) + 1, (diameter * row) + 1, diameter - 2, diameter - 2);
