@@ -174,6 +174,7 @@ public class KnownCardsPanel extends JPanel {
 	 */
 	public static void main(String[] args) {
 		Player humanPlayer = new HumanPlayer("Col. Mustard", "orange", 0, 0);
+		Player comp1Player = new ComputerPlayer("jim", "pink", 0, 0);
 		KnownCardsPanel panel = new KnownCardsPanel(humanPlayer); // create the panel
 		JFrame frame = new JFrame(); // create the frame
 		frame.setContentPane(panel); // put the panel in the frame
@@ -195,6 +196,10 @@ public class KnownCardsPanel extends JPanel {
 		humanPlayer.updateHand(room2);
 		humanPlayer.updateHand(room3);
 		humanPlayer.updateHand(weapon3);
+		
+		comp1Player.updateHand(room1);
+		comp1Player.updateHand(weapon2);
+		comp1Player.updateHand(person3);
 		
 		panel = new KnownCardsPanel(humanPlayer); 
 		//adds the remaining cards to the players seen list 

@@ -66,8 +66,22 @@ public abstract class Player {
 	public Color getColor() {
 		return this.color; 
 	}
-	
-	
+	public int getRow() {
+		return row;
+	}
+
+	public void setRow(int row) {
+		this.row = row;
+	}
+
+	public int getCol() {
+		return col;
+	}
+
+	public void setCol(int col) {
+		this.col = col;
+	}
+
 	public Card disproveSuggestion(Card room, Card person, Card weapon) {
 		//creating an arraylist of the cards that match
 		ArrayList<Card> matchingCards = new ArrayList<Card>();
