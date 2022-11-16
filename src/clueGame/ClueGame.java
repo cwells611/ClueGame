@@ -3,6 +3,8 @@ package clueGame;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,7 +17,7 @@ public class ClueGame extends JFrame {
 	private Board gamePanel; 
 	private GameControlPanel controlPanel; 
 	private KnownCardsPanel cardsPanel; 
-	
+
 	//constructor that will set all the parts of the JFrame
 	//the constructor will be passed a board as a parameter
 	public ClueGame(int width, int height) {
@@ -26,6 +28,9 @@ public class ClueGame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Clue");
 		setSize(width, height);
+		//before we add the control panel, since the human player will go first, we set the turn 
+		//to the human player 
+		controlPanel.setTurn(Board.getInstance().getPlayers().get(0), Board.getInstance().getPlayers().get(0).rollDie());
 		//adds the control panel to the bottom of the frame
 		add(controlPanel, BorderLayout.SOUTH); 
 		//for initial testing, just adds the known cards panel for the first person 
@@ -36,27 +41,42 @@ public class ClueGame extends JFrame {
 		add(gamePanel, BorderLayout.CENTER); 
 	}
 
+	//creates class that implements ActionListener to listen to when the button are pressed
+	private class ButtonListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			//check to see if the next button was pressed 
+			if(controlPanel.getNext().isSelected()) {
+				
+			}
+
+		}
+
+	}
+
 	public static void main(String[] args) {
 		//Creates a board instance to be passed into constructor
 		Board gameBoard = Board.getInstance();
 		gameBoard.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
 		gameBoard.initialize();
-		
+
 		//after the board gets initialized, but before we create the frame, set the solution
 		Solution solution = gameBoard.getTheAnswer(); 
 		//remove solution cards from the deck 
 		gameBoard.removeSolutionCards(solution);
 		//deal out cards to the players 
 		gameBoard.deal();
-		
-		
+
+
 		//creates an instance of a ClueGame object which is a JFrame
 		ClueGame game = new ClueGame(700, 900); 
 		game.setVisible(true);
-		
+
 		//Creates Splash Screen 
-		JOptionPane.showMessageDialog(gameBoard, "You are " + gameBoard.getPlayers().get(0).getPlayerName() + ". \n Can you find the solution \n before the Computer players?", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE); 
-		
+		JOptionPane.showMessageDialog(gameBoard, "You are " + gameBoard.getPlayers().get(0).getPlayerName() + ". \n Can you find the solution \n "
+				+ "before the Computer players?", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE); 
+
 	}
 }
 ; 

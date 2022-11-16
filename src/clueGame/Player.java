@@ -115,4 +115,10 @@ public abstract class Player {
 		g.setColor(Color.BLACK);
 		g.drawOval((diameter * col) + 1, (diameter * row) + 1, diameter - 2, diameter - 2);
 	}
+	
+	//method for the player to roll the die 
+	public int rollDie() {
+		Random randomRoll = new Random(); 
+		return randomRoll.nextInt(6); 
+	}
 }

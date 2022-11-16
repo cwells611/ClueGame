@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -195,7 +197,11 @@ public class GameControlPanel extends JPanel {
 		setPlayer(player.getPlayerName()); 
 		setPlayerColor(Color.getColor(player.getColor())); 
 	}
-	
+
+	//getter for next button 
+	public JButton getNext() {
+		return this.nextButton(); 
+	}
 
 	/**
 	 * Main to test the panel
