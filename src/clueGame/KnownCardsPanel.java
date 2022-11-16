@@ -23,15 +23,16 @@ public class KnownCardsPanel extends JPanel {
 
 	JPanel addPanel;
 	JTextField addText;
-
 	JPanel peoplePanel;
 	JPanel roomsPanel;
 	JPanel weaponsPanel;
+	Player player; 
 
 	private ArrayList<Card> inHandCards = new ArrayList<Card>();
 
 
-	public KnownCardsPanel(Player player)  {
+	public KnownCardsPanel(Player player) {
+		this.player = player; 
 		//Create a layout with 3 rows
 		inHandCards = player.getHand();
 		
@@ -158,6 +159,8 @@ public class KnownCardsPanel extends JPanel {
 				if(card.getType() == type) {
 					JTextField addLabel = new JTextField();
 					addLabel.setText(card.getName());
+					//set the background of the text field to the color of the player 
+					addLabel.setBackground(player.getColor());
 					panel.add(addLabel);
 				}
 			}

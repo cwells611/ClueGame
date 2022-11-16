@@ -4,6 +4,7 @@ public class Card {
 	private String cardName; 
 	private CardType type; 
 	
+	
 	//default constructor 
 	public Card() {}
 	
