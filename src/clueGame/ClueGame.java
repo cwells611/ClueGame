@@ -16,36 +16,24 @@ import javax.swing.JPanel;
 
 public class ClueGame extends JFrame {
 	//instance variables
-	private Board theBoard; 
 	private GameControlPanel controlPanel; 
 	private KnownCardsPanel cardsPanel; 
-<<<<<<< HEAD
 	private BoardPanel boardPanel; 
-	private int currentPlayerIndex; 
-=======
-	private int currentPlayerIndex = 0;
->>>>>>> e1044c162d8834bf06a20865e4dbd457f170819d
+	private Board theBoard; 
+
 
 	//constructor that will set all the parts of the JFrame
 	//the constructor will be passed a board as a parameter
 	public ClueGame(int width, int height) {
 		//sets instance variables
-<<<<<<< HEAD
 		this.controlPanel = new GameControlPanel();
 		this.boardPanel = new BoardPanel(); 
-		this.gamePanel = Board.getInstance();
-=======
 		this.controlPanel = new GameControlPanel(); 
-		this.theBoard = Board.getInstance();
->>>>>>> e1044c162d8834bf06a20865e4dbd457f170819d
-		this.currentPlayerIndex = 0; 
+		this.theBoard = Board.getInstance(); 
 		//sets up JFrame behavior such as size, and title 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Clue");
 		setSize(width, height);
-		
-		//adding the mouse listener
-		addMouseListener(new boardListener());
 		
 		//before we add the control panel, since the human player will go first, we set the turn 
 		//to the human 
@@ -57,46 +45,8 @@ public class ClueGame extends JFrame {
 		this.cardsPanel = new KnownCardsPanel(Board.getInstance().getPlayers().get(0));
 		add(cardsPanel, BorderLayout.EAST);
 		//adds game panel to the center of the JFrame 
-<<<<<<< HEAD
 		add(boardPanel, BorderLayout.CENTER); 
-=======
-		add(theBoard, BorderLayout.CENTER); 
->>>>>>> e1044c162d8834bf06a20865e4dbd457f170819d
 		//adds the listener to the button 
-		
-	}
-	
-	private class boardListener implements MouseListener{
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
-			System.out.println("Board pressed");
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
 		
 	}
 
