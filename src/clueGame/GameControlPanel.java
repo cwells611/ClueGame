@@ -32,6 +32,8 @@ public class GameControlPanel extends JPanel {
 	JTextField roll;
 	JTextField playerTurn; 
 
+	private Board theBoard;
+	
 	/**
 	 * Constructor for the panel, it does 90% of the work
 	 */
@@ -53,9 +55,14 @@ public class GameControlPanel extends JPanel {
 		addPanel = rollPanel(); 
 		upperPanel.add(addPanel);
 		addButton = accusationButton(); 
+		//add listener for accusation button
+		addButton.addActionListener(new accusationListener());
 		upperPanel.add(addButton); 
 		addButton = nextButton(); 
+		//add listener for next button
+		addButton.addActionListener(new nextListener());
 		upperPanel.add(addButton); 
+		
 		return upperPanel; 
 	}
 
@@ -121,7 +128,6 @@ public class GameControlPanel extends JPanel {
 
 	private JButton nextButton() {
 		JButton nextButton = new JButton();
-		nextButton.addActionListener(new ButtonListener());
 		addLabel = nextLabel(); 
 		addLabel.setText("NEXT!");
 		nextButton.add(addLabel); 
@@ -198,40 +204,34 @@ public class GameControlPanel extends JPanel {
 		setPlayer(player.getPlayerName()); 
 		setPlayerColor(player.getColor()); 
 	}
-
-	//creates class that implements ActionListener to listen to when the button are pressed
-	private class ButtonListener implements ActionListener {
+	
+	private class nextListener implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			//check to see if the next button was pressed 
+			// TODO Auto-generated method stub
 			System.out.println("next button pressed");
-			//when the next button is first pressed, we want to make sure that 
-			//the current human player is finished. To do that we want to make sure
-			//they have moved so we will check their row and col position to make sure it 
-			//is not the same 
-
-			//if the human is finished, update the current player by incrementing 
-			//currentPlayerIndex
-
-			//have the new player roll the dice 
-
-			//calc targets based on the new roll 
-
-			//update the control panel with the new player and new roll
-
-			//if the current player is human, display the possible targets on the baord 
-
-			//flag unfinished, and be done 
-
-			//if the current player is a computer, check to see if we can make an accusation
-
-			//move
-
-			//check to see if we can make a suggestion, and be done
-			}
-
+			theBoard = Board.getInstance();
+			theBoard.processNextTurn();
+			//call appropriate methods in board
+			//probably a single method to handle the rest of the turn
+			
+		}
+		
 	}
+	
+	private class accusationListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			System.out.println("make accusation button pressed");
+			
+			//call appropriate methods in board
+		}
+		
+	}
+
 
 	/**
 	 * Main to test the panel

@@ -611,5 +611,34 @@ public class Board {
 	public Player getHumanPlayer() {
 		return humanPlayer;
 	}
+	public void processNextTurn() {
+		// TODO Auto-generated method stub
+		//if(controlPanel.getNext().isSelected()) {
+		System.out.println("Board class accesed via next listener");
+		//when the next button is first pressed, we want to make sure that 
+		//the current human player is finished. To do that we want to make sure
+		//they have moved so we will check their row and col position to make sure it 
+		//is not the same 
+		
+		//if the human is finished, update the current player by incrementing 
+		//currentPlayerIndex
+		
+		//have the new player roll the dice 
+		
+		//calc targets based on the new roll 
+		
+		//update the control panel with the new player and new roll
+		
+		//if the current player is human, display the possible targets on the baord 
+		
+		//flag unfinished, and be done 
+		
+		//if the current player is a computer, check to see if we can make an accusation
+		
+		//move
+		
+		//check to see if we can make a suggestion, and be done
+	//}
+	}
 }
 
