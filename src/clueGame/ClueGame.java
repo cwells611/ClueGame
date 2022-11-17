@@ -41,10 +41,8 @@ public class ClueGame extends JFrame {
 		add(cardsPanel, BorderLayout.EAST);
 		//adds game panel to the center of the JFrame 
 		add(gamePanel, BorderLayout.CENTER); 
-		//creates listener object for the next button 
-		ButtonListener nextListener = new ButtonListener(); 
 		//adds the listener to the button 
-		controlPanel.getNext().addActionListener(nextListener);
+		controlPanel.getNext().addActionListener(new ButtonListener());
 	}
 
 	//creates class that implements ActionListener to listen to when the button are pressed
@@ -53,7 +51,8 @@ public class ClueGame extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			//check to see if the next button was pressed 
-			if(controlPanel.getNext().isSelected()) {
+			//if(controlPanel.getNext().isSelected()) {
+				System.out.println("next button pressed");
 				//when the next button is first pressed, we want to make sure that 
 				//the current human player is finished. To do that we want to make sure
 				//they have moved so we will check their row and col position to make sure it 
@@ -77,7 +76,7 @@ public class ClueGame extends JFrame {
 				//move
 				
 				//check to see if we can make a suggestion, and be done
-			}
+			//}
 
 		}
 
