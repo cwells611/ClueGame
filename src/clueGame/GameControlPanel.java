@@ -31,6 +31,7 @@ public class GameControlPanel extends JPanel {
 	JTextField guess; 
 	JTextField roll;
 	JTextField playerTurn; 
+	private Board theBoard;
 	
 	/**
 	 * Constructor for the panel, it does 90% of the work
@@ -209,6 +210,11 @@ public class GameControlPanel extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			System.out.println("next button pressed");
+			theBoard = Board.getInstance();
+			theBoard.processNextTurn();
+			//call appropriate methods in board
+			//probably a single method to handle the rest of the turn
+			
 		}
 		
 	}
@@ -219,6 +225,8 @@ public class GameControlPanel extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			System.out.println("make accusation button pressed");
+			
+			//call appropriate methods in board
 		}
 		
 	}
