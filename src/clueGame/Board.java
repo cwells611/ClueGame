@@ -608,5 +608,8 @@ public class Board {
 	public Map<Character, Room> getRoomMap() {
 		return roomMap;
 	}
+	public Player getHumanPlayer() {
+		return humanPlayer;
+	}
 }
 

@@ -14,11 +14,13 @@ public class BoardPanel extends JPanel {
 	int xCoord = 0; 
 	int yCoord = 0; 
 	BoardCell[][] grid; 
+	Player human; 
 	
 	public BoardPanel() {
 		board = Board.getInstance();  
 		grid = board.getGrid(); 
 		this.addMouseListener(new BoardClick());
+		human = board.getHumanPlayer(); 
 	}
 	
 	@Override
@@ -97,7 +99,7 @@ public class BoardPanel extends JPanel {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			System.out.println("mouse clicked");
+			
 		}
 
 	}
