@@ -19,19 +19,19 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 public class GameControlPanel extends JPanel {
-	
+
 	//instance variables that will be reassigned each time a 
 	//new GUI feature needs to be added 
 	JPanel addPanel; 
 	JButton addButton; 
 	JTextField addText; 
 	JLabel addLabel; 
-	
+
 	JTextField guessResult; 
 	JTextField guess; 
 	JTextField roll;
 	JTextField playerTurn; 
-	
+
 	/**
 	 * Constructor for the panel, it does 90% of the work
 	 */
@@ -44,7 +44,7 @@ public class GameControlPanel extends JPanel {
 		add(panel);
 	}
 
-	
+
 	private JPanel upperPanel() {
 		JPanel upperPanel = new JPanel();
 		upperPanel.setLayout(new GridLayout(1, 4)); 
@@ -58,7 +58,7 @@ public class GameControlPanel extends JPanel {
 		upperPanel.add(addButton); 
 		return upperPanel; 
 	}
-	
+
 	private JPanel whoseTurnPanel() {
 		JPanel turnPanel = new JPanel();
 		turnPanel.setLayout(new GridLayout(2, 1));
@@ -70,19 +70,19 @@ public class GameControlPanel extends JPanel {
 		turnPanel.add(addText); 
 		return turnPanel;
 	}
-	
+
 	private JLabel whoseTurnLabel() {
 		JLabel turnLabel = new JLabel();
 		turnLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		return turnLabel;
 	}
-	
+
 	private JTextField whoseTurnTextField() {
 		playerTurn = new JTextField();
 		playerTurn.setHorizontalAlignment(SwingConstants.CENTER); 
 		return playerTurn;
 	}
-	
+
 	private JPanel rollPanel() {
 		JPanel rollPanel = new JPanel();
 		rollPanel.setLayout(new GridLayout(1, 0));
@@ -94,18 +94,18 @@ public class GameControlPanel extends JPanel {
 		rollPanel.add(addText); 
 		return rollPanel;
 	}
-	
+
 	private JLabel rollLabel() {
 		JLabel rollLabel = new JLabel();
 		rollLabel.setHorizontalAlignment(SwingConstants.CENTER); 
 		return rollLabel;
 	}
-	
+
 	private JTextField rollTextField() {
 		roll = new JTextField();
 		return roll;
 	}
-	
+
 	private JButton accusationButton() {
 		JButton accusationButton = new JButton();
 		addLabel = accusationLabel();  
@@ -113,25 +113,26 @@ public class GameControlPanel extends JPanel {
 		accusationButton.add(addLabel); 
 		return accusationButton;
 	}
-	
+
 	private JLabel accusationLabel() {
 		JLabel accusationLabel = new JLabel(); 
 		return accusationLabel; 
 	}
-	
+
 	private JButton nextButton() {
 		JButton nextButton = new JButton();
+		nextButton.addActionListener(new ButtonListener());
 		addLabel = nextLabel(); 
 		addLabel.setText("NEXT!");
 		nextButton.add(addLabel); 
 		return nextButton;
 	}
-	
+
 	private JLabel nextLabel() {
 		JLabel nextLabel = new JLabel(); 
 		return nextLabel; 
 	}
-	
+
 	private JPanel lowerPanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(0, 2));
@@ -139,7 +140,7 @@ public class GameControlPanel extends JPanel {
 		panel.add(guessResultPanel());
 		return panel;
 	}
-	
+
 	private JPanel guessPanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(1, 0));
@@ -150,12 +151,12 @@ public class GameControlPanel extends JPanel {
 		panel.setBorder(blackline);
 		return panel;
 	}
-	
+
 	private JTextField guessTextField() {
 		guess = new JTextField();
 		return guess;
 	}
-	
+
 	private JPanel guessResultPanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(1,0));
@@ -166,41 +167,70 @@ public class GameControlPanel extends JPanel {
 		panel.setBorder(blackline);
 		return panel;
 	}
-	
+
 	private JTextField guessResultTextField() {
 		guessResult = new JTextField();
 		return guessResult;
 	}
-	
+
 	public void setGuess(String guess) {
 		this.guess.setText(guess);
 	}
-	
+
 	public void SetGuessResult(String guessResult) {
 		this.guessResult.setText(guessResult);
 	}
-	
+
 	public void setRoll(int roll) { 
 		this.roll.setText(Integer.toString(roll));
 	}
-	
+
 	public void setPlayer(String player) {
 		this.playerTurn.setText(player);
 	}
-	
+
 	public void setPlayerColor(Color color) {
 		this.playerTurn.setBackground(color);
 	}
-	
+
 	public void setTurn(Player player, int roll) {
 		setRoll(roll); 
 		setPlayer(player.getPlayerName()); 
 		setPlayerColor(player.getColor()); 
 	}
 
-	//getter for next button 
-	public JButton getNext() {
-		return this.nextButton(); 
+	//creates class that implements ActionListener to listen to when the button are pressed
+	private class ButtonListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			//check to see if the next button was pressed 
+			System.out.println("next button pressed");
+			//when the next button is first pressed, we want to make sure that 
+			//the current human player is finished. To do that we want to make sure
+			//they have moved so we will check their row and col position to make sure it 
+			//is not the same 
+
+			//if the human is finished, update the current player by incrementing 
+			//currentPlayerIndex
+
+			//have the new player roll the dice 
+
+			//calc targets based on the new roll 
+
+			//update the control panel with the new player and new roll
+
+			//if the current player is human, display the possible targets on the baord 
+
+			//flag unfinished, and be done 
+
+			//if the current player is a computer, check to see if we can make an accusation
+
+			//move
+
+			//check to see if we can make a suggestion, and be done
+			}
+
 	}
 
 	/**

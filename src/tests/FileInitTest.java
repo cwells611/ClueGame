@@ -183,7 +183,7 @@ public class FileInitTest {
 		cell = theBoard.getCell(1, 1);
 		assertTrue(cell.isRoomCenter());
 		cell = theBoard.getCell(0, 0);
-		assertTrue(cell.isLabel());
+		assertFalse(cell.isLabel());
 
 		//game room test
 		cell = theBoard.getCell(2, 7);

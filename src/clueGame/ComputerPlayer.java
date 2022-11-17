@@ -142,10 +142,4 @@ public class ComputerPlayer extends Player{
 		return null; 
 	}
 
-	/*
-	 * //method to add card to players seen list public void addSeenCard(Card
-	 * seenCard) { seen.add(seenCard); }
-	 */
-
-
 }

@@ -4,13 +4,17 @@ import static org.junit.Assert.assertEquals;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.*;
 
 import javax.swing.JPanel;
 
-public class Board extends JPanel {
+public class Board {
 	private BoardCell[][] grid;
 	private int numRows;
 	private int numColumns;
@@ -32,6 +36,7 @@ public class Board extends JPanel {
 	private int playerStartCol; 
 	private int numHumanPlayers;
 	private int numComputerPlayers; 
+	private Player humanPlayer; 
 	private int numWeapons; 
 	private CardType cardType; 
 	private Card card; 
@@ -42,9 +47,6 @@ public class Board extends JPanel {
 	int cellHeight = 0;
 	int xCoord = 0;
 	int yCoord = 0; 
-	//board instance variable that will allow us to get the size of the board
-	//in order to determine the size of each cell 
-	Board board; 
 
 	// constructor is private to ensure only one can be created
 	private Board() {
@@ -127,6 +129,7 @@ public class Board extends JPanel {
 				playerStartCol = Integer.parseInt(lineInfo[4]); 
 				if(lineInfo[0].equals("Human")) {
 					player = new HumanPlayer(playerName, playerColor, playerStartRow, playerStartCol); 
+					humanPlayer = player; 
 					//increment human players counter
 					numHumanPlayers++;  
 				}
@@ -596,65 +599,14 @@ public class Board extends JPanel {
 	public void setTheAnswer(Solution theAnswer) {
 		this.theAnswer = theAnswer;
 	}
-
-	@Override
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		//determine the size of each cell each time paintComponent is called 
-		cellWidth = this.getWidth()/numColumns; 
-		cellHeight = this.getHeight()/numRows; 
-		//since the width and height may not be the same and we want squares, 
-		//sets the width to be the min of width and height and then sets height to be 
-		//that same value 
-		cellWidth = Math.min(cellWidth, cellHeight); 
-		cellHeight = cellWidth; 
-		//loops through the grid and calls the draw board cell function for each cell
-		for(int row = 0; row < numRows; row++) {
-			for(int col = 0; col < numColumns; col++) {
-				BoardCell cell = grid[row][col];  
-				cell.draw(g, cellWidth, cellHeight, xCoord, yCoord); 
-				//after a board cell is draw, we want to increase the xCoord by cellWidth 
-				//so the next cell will be drawn right next to it 
-				xCoord += cellWidth; 
-			}
-			//after an entire row is drawn, we want to increase the yCoord by cellHeight 
-			//so the next row will be right under the next and reset the xCoord to 0
-			xCoord = 0; 
-			yCoord += cellHeight; 
-		}
-		
-		//writing room names 
-		for(Room room : roomMap.values()) {
-			if(!room.getName().equals("Walkway") && !room.getName().equals("Unused")) {
-				room.draw(g, cellWidth);	
-			}
-		}
-		
-		//drawing all of the doors
-		for(BoardCell door : doors) {
-			g.setColor(Color.BLUE);
-			switch(door.getDoorDirection()) {
-			case UP:
-				g.fillRect(door.getCol() * cellWidth, (door.getRow() * cellHeight) - 3, cellWidth, 3);
-				break;
-			case DOWN:
-				g.fillRect(door.getCol() * cellWidth, ((door.getRow() + 1)  * cellHeight), cellWidth, 3);
-				break;
-			case LEFT:
-				g.fillRect((door.getCol() * cellWidth) - 3, door.getRow() * cellHeight, 3, cellHeight);
-				break;
-			case RIGHT:
-				g.fillRect(((door.getCol() + 1) * cellWidth), door.getRow() * cellHeight, 3, cellHeight);
-				break;
-			default:
-				break;	
-			}
-		}
-		
-		//drawing the players
-		for(Player player : players) {
-			player.draw(g, cellWidth);
-		}
+	public BoardCell[][] getGrid() {
+		return grid;
+	}
+	public Set<BoardCell> getDoors() {
+		return doors;
+	}
+	public Map<Character, Room> getRoomMap() {
+		return roomMap;
 	}
 }
 

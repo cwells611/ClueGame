@@ -17,13 +17,15 @@ public class ClueGame extends JFrame {
 	private Board gamePanel; 
 	private GameControlPanel controlPanel; 
 	private KnownCardsPanel cardsPanel; 
+	private BoardPanel boardPanel; 
 	private int currentPlayerIndex; 
 
 	//constructor that will set all the parts of the JFrame
 	//the constructor will be passed a board as a parameter
 	public ClueGame(int width, int height) {
 		//sets instance variables
-		this.controlPanel = new GameControlPanel(); 
+		this.controlPanel = new GameControlPanel();
+		this.boardPanel = new BoardPanel(); 
 		this.gamePanel = Board.getInstance();
 		this.currentPlayerIndex = 0; 
 		//sets up JFrame behavior such as size, and title 
@@ -40,46 +42,9 @@ public class ClueGame extends JFrame {
 		this.cardsPanel = new KnownCardsPanel(Board.getInstance().getPlayers().get(0));
 		add(cardsPanel, BorderLayout.EAST);
 		//adds game panel to the center of the JFrame 
-		add(gamePanel, BorderLayout.CENTER); 
+		add(boardPanel, BorderLayout.CENTER); 
 		//adds the listener to the button 
-		controlPanel.getNext().addActionListener(new ButtonListener());
-	}
-
-	//creates class that implements ActionListener to listen to when the button are pressed
-	private class ButtonListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			//check to see if the next button was pressed 
-			//if(controlPanel.getNext().isSelected()) {
-				System.out.println("next button pressed");
-				//when the next button is first pressed, we want to make sure that 
-				//the current human player is finished. To do that we want to make sure
-				//they have moved so we will check their row and col position to make sure it 
-				//is not the same 
-				
-				//if the human is finished, update the current player by incrementing 
-				//currentPlayerIndex
-				
-				//have the new player roll the dice 
-				
-				//calc targets based on the new roll 
-				
-				//update the control panel with the new player and new roll
-				
-				//if the current player is human, display the possible targets on the baord 
-				
-				//flag unfinished, and be done 
-				
-				//if the current player is a computer, check to see if we can make an accusation
-				
-				//move
-				
-				//check to see if we can make a suggestion, and be done
-			//}
-
-		}
-
+		
 	}
 
 	public static void main(String[] args) {
@@ -101,7 +66,7 @@ public class ClueGame extends JFrame {
 		game.setVisible(true);
 
 		//Creates Splash Screen 
-		JOptionPane.showMessageDialog(gameBoard, "You are " + gameBoard.getPlayers().get(0).getPlayerName() + ". \n Can you find the solution \n "
+		JOptionPane.showMessageDialog(game, "You are " + gameBoard.getPlayers().get(0).getPlayerName() + ". \n Can you find the solution \n "
 				+ "before the Computer players?", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE); 
 
 	}
