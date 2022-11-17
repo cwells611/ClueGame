@@ -35,6 +35,7 @@ public class ClueGame extends JFrame {
 		
 		//adding listeners
 		addMouseListener(new boardListener());
+		
 		//before we add the control panel, since the human player will go first, we set the turn 
 		//to the human 
 		controlPanel.setTurn(Board.getInstance().getPlayers().get(0), Board.getInstance().getPlayers().get(0).rollDie());

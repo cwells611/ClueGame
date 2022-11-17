@@ -55,7 +55,10 @@ public class GameControlPanel extends JPanel {
 		addButton = accusationButton(); 
 		upperPanel.add(addButton); 
 		addButton = nextButton(); 
+		//add listener for next button
+		addButton.addActionListener(new nextListener());
 		upperPanel.add(addButton); 
+		
 		return upperPanel; 
 	}
 	
@@ -196,6 +199,16 @@ public class GameControlPanel extends JPanel {
 		setRoll(roll); 
 		setPlayer(player.getPlayerName()); 
 		setPlayerColor(player.getColor()); 
+	}
+	
+	private class nextListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			System.out.println("next button pressed");
+		}
+		
 	}
 
 	//getter for next button 
