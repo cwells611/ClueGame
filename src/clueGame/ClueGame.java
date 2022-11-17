@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,22 +16,25 @@ import javax.swing.JPanel;
 
 public class ClueGame extends JFrame {
 	//instance variables
-	private Board gamePanel; 
+	private Board theBoard; 
 	private GameControlPanel controlPanel; 
 	private KnownCardsPanel cardsPanel; 
-	private int currentPlayerIndex; 
+	private int currentPlayerIndex = 0;
 
 	//constructor that will set all the parts of the JFrame
 	//the constructor will be passed a board as a parameter
 	public ClueGame(int width, int height) {
 		//sets instance variables
 		this.controlPanel = new GameControlPanel(); 
-		this.gamePanel = Board.getInstance();
+		this.theBoard = Board.getInstance();
 		this.currentPlayerIndex = 0; 
 		//sets up JFrame behavior such as size, and title 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Clue");
 		setSize(width, height);
+		
+		//adding listeners
+		addMouseListener(new boardListener());
 		//before we add the control panel, since the human player will go first, we set the turn 
 		//to the human 
 		controlPanel.setTurn(Board.getInstance().getPlayers().get(0), Board.getInstance().getPlayers().get(0).rollDie());
@@ -40,7 +45,7 @@ public class ClueGame extends JFrame {
 		this.cardsPanel = new KnownCardsPanel(Board.getInstance().getPlayers().get(0));
 		add(cardsPanel, BorderLayout.EAST);
 		//adds game panel to the center of the JFrame 
-		add(gamePanel, BorderLayout.CENTER); 
+		add(theBoard, BorderLayout.CENTER); 
 		//adds the listener to the button 
 		controlPanel.getNext().addActionListener(new ButtonListener());
 	}
@@ -80,6 +85,40 @@ public class ClueGame extends JFrame {
 
 		}
 
+	}
+	
+	private class boardListener implements MouseListener{
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			System.out.println("Board pressed");
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
 	}
 
 	public static void main(String[] args) {
