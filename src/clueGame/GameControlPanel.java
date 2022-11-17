@@ -53,6 +53,8 @@ public class GameControlPanel extends JPanel {
 		addPanel = rollPanel(); 
 		upperPanel.add(addPanel);
 		addButton = accusationButton(); 
+		//add listener for accusation button
+		addButton.addActionListener(new accusationListener());
 		upperPanel.add(addButton); 
 		addButton = nextButton(); 
 		//add listener for next button
@@ -207,6 +209,16 @@ public class GameControlPanel extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			System.out.println("next button pressed");
+		}
+		
+	}
+	
+	private class accusationListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			System.out.println("make accusation button pressed");
 		}
 		
 	}
