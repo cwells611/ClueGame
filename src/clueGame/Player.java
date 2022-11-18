@@ -118,4 +118,7 @@ public abstract class Player {
 		g.setColor(Color.BLACK);
 		g.drawOval((diameter * col) + 1, (diameter * row) + 1, diameter - 2, diameter - 2);
 	}
+	
+	
+	public void handleCPUTurn() {}
 }

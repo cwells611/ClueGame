@@ -26,9 +26,8 @@ public class ClueGame extends JFrame {
 	//the constructor will be passed a board as a parameter
 	public ClueGame(int width, int height) {
 		//sets instance variables
-		this.controlPanel = new GameControlPanel();
 		this.boardPanel = new BoardPanel(); 
-		this.controlPanel = new GameControlPanel(); 
+		this.controlPanel = GameControlPanel.getGCPanel(); 
 		this.theBoard = Board.getInstance(); 
 		//sets up JFrame behavior such as size, and title 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -69,7 +68,7 @@ public class ClueGame extends JFrame {
 				+ "before the Computer players?", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE); 
 
 		//after the splash screen is displayed, we want to set the turn in the control panel
-		game.controlPanel.setTurn(gameBoard.getPlayers().get(gameBoard.getCurrentPlayerIndex()), gameBoard.rollDie());
+		game.controlPanel.setTurn(gameBoard.getCurrentPlayer(), gameBoard.rollDie());
 		//we then want to process the turn 
 		gameBoard.processNextTurn();
 		

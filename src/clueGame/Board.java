@@ -42,9 +42,22 @@ public class Board {
 	private Card card; 
 	private static Board theInstance = new Board();
 	private Solution theAnswer;
-	//variable that will keep track of which player we are on by incrementing until it 
-	//gets to 6 and then re-setting
-	private int currentPlayerIndex; 
+	private boolean humanPlayerFinishedTurn;
+	private int currentPlayerIdx;
+	private Player currentPlayer;
+	private int roll;
+	private int currentPlayerRow;
+	private int currentPlayerCol;
+	private BoardCell currentPlayerCell;
+	private int clickedRow;
+	private int clickedCol;
+	private boolean clickedOnTarget;
+	//instance variables that will determine the size of each board cell
+	int cellWidth = 0; 
+	int cellHeight = 0;
+	int xCoord = 0;
+	int yCoord = 0; 
+
 
 	// constructor is private to ensure only one can be created
 	private Board() {
@@ -63,7 +76,7 @@ public class Board {
 			numHumanPlayers = 0; 
 			numComputerPlayers = 0; 
 			numWeapons = 0; 
-			currentPlayerIndex = 0; 
+			currentPlayerIdx = 0;
 			visited = new HashSet<BoardCell>();
 			targets = new HashSet<BoardCell>(); 
 			roomMap = new HashMap<Character, Room>();
@@ -616,53 +629,95 @@ public class Board {
 		Random randomRoll = new Random(); 
 		return randomRoll.nextInt(6); 
 	}
-
-	//method to process the turn, the parameters will be the board cell that the current 
-	//player is on, given by the current player index, and that players roll
+	
+	
 	public void processNextTurn() {
-		//the first thing we want to do if make sure that we are not at the end of the 
-		//player list by checking if currentPlayerIndex > 6, if it is, we have made it through
-		//all the players so we re-set it to 0
-		if(currentPlayerIndex > 6) {
-			currentPlayerIndex = 0; 
+		// TODO Auto-generated method stub
+		//if(controlPanel.getNext().isSelected()) {
+		System.out.println("Board class accesed via next listener");
+		
+		//temporary
+		humanPlayerFinishedTurn = true;
+		
+		//if the player has not finished the turn yet
+		if(!humanPlayerFinishedTurn) {
+			//throw error message
+		}else {
+			//updating the current player
+			//making sure the current player index is not the last index
+			if(currentPlayerIdx == players.size()-1) {
+				//if so, setting it to 0 to go back to the first player in the list
+				currentPlayerIdx = 0;
+			}else {
+				currentPlayerIdx++;
+			}
+			currentPlayer = players.get(currentPlayerIdx);
+			
 		}
-		//if it is not 6 then we continue with the turn by first calculating the targets, 
-		//based on the roll
-		int currentPlayerRow = players.get(currentPlayerIndex).getRow(); 
-		int currentPlayerCol = players.get(currentPlayerRow).getCol();
-		int roll = rollDie();
-		calcTargets(grid[currentPlayerRow][currentPlayerCol], roll); 
-		//once we have the targets calculated, we want to highlight the target cells
-		//by drawing them a different color
+		roll = rollDie();
+		System.out.println(roll);
+		System.out.println(currentPlayer.getPlayerName());
 		
+		currentPlayerRow = currentPlayer.getRow();
+		currentPlayerCol = currentPlayer.getCol();
+		currentPlayerCell = grid[currentPlayerRow][currentPlayerCol];
+		calcTargets(currentPlayerCell, roll);
 		
+		//setting the GUI elements in game control panel
+		//sets the new player and the roll
+		GameControlPanel.getGCPanel().setTurn(currentPlayer, roll);
 		
-		//when the next button is first pressed, we want to make sure that 
-		//the current human player is finished. To do that we want to make sure
-		//they have moved so we will check their row and col position to make sure it 
-		//is not the same 
-
-		//if the human is finished, update the current player by incrementing 
-		//currentPlayerIndex
-
-		//have the new player roll the dice 
-
-		//calc targets based on the new roll 
-
-		//update the control panel with the new player and new roll
-
-		//if the current player is human, display the possible targets on the baord 
-
-		//flag unfinished, and be done 
-
-		//if the current player is a computer, check to see if we can make an accusation
-
-		//move
-
-		//check to see if we can make a suggestion, and be done
+		//checking to see if the player is the human player
+		if(currentPlayer == players.get(0)) {
+			//TODO display targets
+			//must access BoardPanel
+			
+			humanPlayerFinishedTurn = false;
+		}else {//if it is a computer player's turn
+			currentPlayer.handleCPUTurn();
+		}
+		
 	}
-	public int getCurrentPlayerIndex() {
-		return currentPlayerIndex;
+	
+	public void processBoardClick(int x, int y, int width) {
+		//seeing if it is  the human player's turn
+		if(currentPlayer == players.get(0)) {
+			clickedRow = x/width;
+			clickedCol = y/width;
+			//initially assuming not clicked on target, trying to prove wrong
+			clickedOnTarget = false;
+			for(BoardCell target : targets) {
+				if(target.getRow() == clickedRow && target.getCol() == clickedCol) {
+					clickedOnTarget = true;
+					break;
+				}
+			}
+			if(!clickedOnTarget) {
+				//throw error
+				return;
+			}else {
+				//moving the player
+				currentPlayer.setRow(clickedRow);
+				currentPlayer.setCol(clickedCol);
+				currentPlayerCell = grid[clickedRow][clickedCol];
+				//seeing if the player moved to a room
+				if(currentPlayerCell.getIsRoom()) {
+					//handling suggestion
+					//update result
+				}
+			}
+			//flagging that the human player has finished their turn
+			humanPlayerFinishedTurn = true;
+		}
+	}
+	
+	public Player getCurrentPlayer() {
+		// TODO Auto-generated method stub
+		return currentPlayer;
+	}
+	public int getRoll() {
+		// TODO Auto-generated method stub
+		return roll;
 	}
 }
 
