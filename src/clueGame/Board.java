@@ -691,6 +691,7 @@ public class Board {
 			}
 			if(!clickedOnTarget) {
 				//throw error
+				return;
 			}else {
 				//moving the player
 				currentPlayer.setRow(clickedRow);
@@ -702,6 +703,8 @@ public class Board {
 					//update result
 				}
 			}
+			//flagging that the human player has finished their turn
+			humanPlayerFinishedTurn = true;
 		}
 	}
 	

@@ -94,6 +94,7 @@ public class BoardPanel extends JPanel {
 			System.out.println("Board clicked");
 			//handling mouse click in Board instead of in BoardPanel
 			Board.getInstance().processBoardClick(e.getX(), e.getY(), CELL_WIDTH);
+			repaint();
 		}
 
 	}
