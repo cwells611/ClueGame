@@ -34,11 +34,14 @@ public class GameControlPanel extends JPanel {
 
 	private Board theBoard;
 	
+	private static GameControlPanel theGCPanel = new GameControlPanel();
+	
 	/**
 	 * Constructor for the panel, it does 90% of the work
 	 */
 	
-	public GameControlPanel()  {
+	//private to ensure only one can be created
+	private GameControlPanel()  {
 		//Create a layout with 2 rows
 		setLayout(new GridLayout(2,0));
 		JPanel panel = upperPanel();
@@ -46,8 +49,15 @@ public class GameControlPanel extends JPanel {
 		panel = lowerPanel();
 		add(panel);
 	}
+	
+	public static GameControlPanel getGCPanel() {
+		return theGCPanel;
+	}
 
-
+	public String test() {
+		return "test";
+	}
+	
 	private JPanel upperPanel() {
 		JPanel upperPanel = new JPanel();
 		upperPanel.setLayout(new GridLayout(1, 4)); 
@@ -216,16 +226,15 @@ public class GameControlPanel extends JPanel {
 			theBoard = Board.getInstance();
 			//processing the next turn
 			theBoard.processNextTurn();
-			//setting the roll and turn GUIs
-			setTurn(theBoard.getCurrentPlayer(), theBoard.getRoll());
+			//make suggestion
 			repaint();
+			}
+			
 			//call appropriate methods in board
 			//probably a single method to handle the rest of the turn
 			
 		}
 		
-	}
-	
 	private class accusationListener implements ActionListener{
 
 		@Override
@@ -245,7 +254,7 @@ public class GameControlPanel extends JPanel {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		GameControlPanel panel = new GameControlPanel();  // create the panel
+		GameControlPanel panel = GameControlPanel.getGCPanel();  // create the panel
 		JFrame frame = new JFrame();  // create the frame 
 		frame.setContentPane(panel); // put the panel in the frame
 		frame.setSize(750, 180);  // size the frame

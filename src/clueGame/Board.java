@@ -656,6 +656,9 @@ public class Board {
 		currentPlayerCol = currentPlayer.getCol();
 		currentPlayerCell = grid[currentPlayerRow][currentPlayerCol];
 		calcTargets(currentPlayerCell, roll);
+		
+		//setting the GUI elements in game control panel
+		GameControlPanel.getGCPanel().setTurn(currentPlayer, roll);
 		//when the next button is first pressed, we want to make sure that 
 		//the current human player is finished. To do that we want to make sure
 		//they have moved so we will check their row and col position to make sure it 

@@ -26,9 +26,8 @@ public class ClueGame extends JFrame {
 	//the constructor will be passed a board as a parameter
 	public ClueGame(int width, int height) {
 		//sets instance variables
-		this.controlPanel = new GameControlPanel();
 		this.boardPanel = new BoardPanel(); 
-		this.controlPanel = new GameControlPanel(); 
+		this.controlPanel = GameControlPanel.getGCPanel(); 
 		this.theBoard = Board.getInstance(); 
 		//sets up JFrame behavior such as size, and title 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
