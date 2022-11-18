@@ -212,7 +212,7 @@ public class GameControlPanel extends JPanel {
 			// TODO Auto-generated method stub
 			System.out.println("next button pressed");
 			theBoard = Board.getInstance();
-			theBoard.processNextTurn();
+			//theBoard.processNextTurn();
 			//call appropriate methods in board
 			//probably a single method to handle the rest of the turn
 			

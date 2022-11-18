@@ -34,10 +34,6 @@ public class ClueGame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Clue");
 		setSize(width, height);
-		
-		//before we add the control panel, since the human player will go first, we set the turn 
-		//to the human 
-		controlPanel.setTurn(Board.getInstance().getPlayers().get(0), Board.getInstance().getPlayers().get(0).rollDie());
 		//adds the control panel to the bottom of the frame
 		add(controlPanel, BorderLayout.SOUTH); 
 		//for initial testing, just adds the known cards panel for the first person 
@@ -72,6 +68,11 @@ public class ClueGame extends JFrame {
 		JOptionPane.showMessageDialog(game, "You are " + gameBoard.getPlayers().get(0).getPlayerName() + ". \n Can you find the solution \n "
 				+ "before the Computer players?", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE); 
 
+		//after the splash screen is displayed, we want to set the turn in the control panel
+		game.controlPanel.setTurn(gameBoard.getPlayers().get(gameBoard.getCurrentPlayerIndex()), gameBoard.rollDie());
+		//we then want to process the turn 
+		gameBoard.processNextTurn();
+		
 	}
 }
 ; 

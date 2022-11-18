@@ -42,11 +42,9 @@ public class Board {
 	private Card card; 
 	private static Board theInstance = new Board();
 	private Solution theAnswer;
-	//instance variables that will determine the size of each board cell
-	int cellWidth = 0; 
-	int cellHeight = 0;
-	int xCoord = 0;
-	int yCoord = 0; 
+	//variable that will keep track of which player we are on by incrementing until it 
+	//gets to 6 and then re-setting
+	private int currentPlayerIndex; 
 
 	// constructor is private to ensure only one can be created
 	private Board() {
@@ -65,6 +63,7 @@ public class Board {
 			numHumanPlayers = 0; 
 			numComputerPlayers = 0; 
 			numWeapons = 0; 
+			currentPlayerIndex = 0; 
 			visited = new HashSet<BoardCell>();
 			targets = new HashSet<BoardCell>(); 
 			roomMap = new HashMap<Character, Room>();
@@ -611,34 +610,59 @@ public class Board {
 	public Player getHumanPlayer() {
 		return humanPlayer;
 	}
+
+	//method for the player to roll the die 
+	public int rollDie() {
+		Random randomRoll = new Random(); 
+		return randomRoll.nextInt(6); 
+	}
+
+	//method to process the turn, the parameters will be the board cell that the current 
+	//player is on, given by the current player index, and that players roll
 	public void processNextTurn() {
-		// TODO Auto-generated method stub
-		//if(controlPanel.getNext().isSelected()) {
-		System.out.println("Board class accesed via next listener");
+		//the first thing we want to do if make sure that we are not at the end of the 
+		//player list by checking if currentPlayerIndex > 6, if it is, we have made it through
+		//all the players so we re-set it to 0
+		if(currentPlayerIndex > 6) {
+			currentPlayerIndex = 0; 
+		}
+		//if it is not 6 then we continue with the turn by first calculating the targets, 
+		//based on the roll
+		int currentPlayerRow = players.get(currentPlayerIndex).getRow(); 
+		int currentPlayerCol = players.get(currentPlayerRow).getCol();
+		int roll = rollDie();
+		calcTargets(grid[currentPlayerRow][currentPlayerCol], roll); 
+		//once we have the targets calculated, we want to highlight the target cells
+		//by drawing them a different color
+		
+		
+		
 		//when the next button is first pressed, we want to make sure that 
 		//the current human player is finished. To do that we want to make sure
 		//they have moved so we will check their row and col position to make sure it 
 		//is not the same 
-		
+
 		//if the human is finished, update the current player by incrementing 
 		//currentPlayerIndex
-		
+
 		//have the new player roll the dice 
-		
+
 		//calc targets based on the new roll 
-		
+
 		//update the control panel with the new player and new roll
-		
+
 		//if the current player is human, display the possible targets on the baord 
-		
+
 		//flag unfinished, and be done 
-		
+
 		//if the current player is a computer, check to see if we can make an accusation
-		
+
 		//move
-		
+
 		//check to see if we can make a suggestion, and be done
-	//}
+	}
+	public int getCurrentPlayerIndex() {
+		return currentPlayerIndex;
 	}
 }
 
