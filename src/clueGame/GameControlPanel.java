@@ -37,6 +37,7 @@ public class GameControlPanel extends JPanel {
 	/**
 	 * Constructor for the panel, it does 90% of the work
 	 */
+	
 	public GameControlPanel()  {
 		//Create a layout with 2 rows
 		setLayout(new GridLayout(2,0));
@@ -191,8 +192,8 @@ public class GameControlPanel extends JPanel {
 		this.roll.setText(Integer.toString(roll));
 	}
 
-	public void setPlayer(String player) {
-		this.playerTurn.setText(player);
+	public void setPlayer(String playerName) {
+		this.playerTurn.setText(playerName);
 	}
 
 	public void setPlayerColor(Color color) {
@@ -211,8 +212,13 @@ public class GameControlPanel extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			System.out.println("next button pressed");
+			//refreshing the board each time next button is pressed
 			theBoard = Board.getInstance();
+			//processing the next turn
 			theBoard.processNextTurn();
+			//setting the roll and turn GUIs
+			setTurn(theBoard.getCurrentPlayer(), theBoard.getRoll());
+			repaint();
 			//call appropriate methods in board
 			//probably a single method to handle the rest of the turn
 			

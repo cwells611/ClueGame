@@ -37,7 +37,7 @@ public class ClueGame extends JFrame {
 		
 		//before we add the control panel, since the human player will go first, we set the turn 
 		//to the human 
-		controlPanel.setTurn(Board.getInstance().getPlayers().get(0), Board.getInstance().getPlayers().get(0).rollDie());
+		controlPanel.setTurn(Board.getInstance().getPlayers().get(0), Board.getInstance().rollDie());
 		//adds the control panel to the bottom of the frame
 		add(controlPanel, BorderLayout.SOUTH); 
 		//for initial testing, just adds the known cards panel for the first person 

@@ -42,6 +42,13 @@ public class Board {
 	private Card card; 
 	private static Board theInstance = new Board();
 	private Solution theAnswer;
+	private boolean humanPlayerFinishedTurn;
+	private int currentPlayerIdx;
+	private Player currentPlayer;
+	private int roll;
+	private int currentPlayerRow;
+	private int currentPlayerCol;
+	private BoardCell currentPlayerCell;
 	//instance variables that will determine the size of each board cell
 	int cellWidth = 0; 
 	int cellHeight = 0;
@@ -65,6 +72,7 @@ public class Board {
 			numHumanPlayers = 0; 
 			numComputerPlayers = 0; 
 			numWeapons = 0; 
+			currentPlayerIdx = 0;
 			visited = new HashSet<BoardCell>();
 			targets = new HashSet<BoardCell>(); 
 			roomMap = new HashMap<Character, Room>();
@@ -611,10 +619,43 @@ public class Board {
 	public Player getHumanPlayer() {
 		return humanPlayer;
 	}
+	
+	public int rollDie() {
+		Random randomRoll = new Random(); 
+		return randomRoll.nextInt(6) + 1; 
+	}
+	
 	public void processNextTurn() {
 		// TODO Auto-generated method stub
 		//if(controlPanel.getNext().isSelected()) {
 		System.out.println("Board class accesed via next listener");
+		
+		//temporary
+		humanPlayerFinishedTurn = true;
+		
+		//if the player has not finished the turn yet
+		if(!humanPlayerFinishedTurn) {
+			//throw error message
+		}else {
+			//updating the current player
+			//making sure the current player index is not the last index
+			if(currentPlayerIdx == players.size()-1) {
+				//if so, setting it to 0 to go back to the first player in the list
+				currentPlayerIdx = 0;
+			}else {
+				currentPlayerIdx++;
+			}
+			currentPlayer = players.get(currentPlayerIdx);
+			
+		}
+		roll = rollDie();
+		System.out.println(roll);
+		System.out.println(currentPlayer.getPlayerName());
+		
+		currentPlayerRow = currentPlayer.getRow();
+		currentPlayerCol = currentPlayer.getCol();
+		currentPlayerCell = grid[currentPlayerRow][currentPlayerCol];
+		calcTargets(currentPlayerCell, roll);
 		//when the next button is first pressed, we want to make sure that 
 		//the current human player is finished. To do that we want to make sure
 		//they have moved so we will check their row and col position to make sure it 
@@ -639,6 +680,14 @@ public class Board {
 		
 		//check to see if we can make a suggestion, and be done
 	//}
+	}
+	public Player getCurrentPlayer() {
+		// TODO Auto-generated method stub
+		return currentPlayer;
+	}
+	public int getRoll() {
+		// TODO Auto-generated method stub
+		return roll;
 	}
 }
 
