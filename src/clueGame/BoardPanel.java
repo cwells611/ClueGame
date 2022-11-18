@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Set;
 
 import javax.swing.JPanel;
 
@@ -15,14 +16,14 @@ public class BoardPanel extends JPanel {
 	int yCoord = 0; 
 	BoardCell[][] grid; 
 	Player human; 
-	
+
 	public BoardPanel() {
 		board = Board.getInstance();  
 		grid = board.getGrid(); 
 		this.addMouseListener(new BoardClick());
 		human = board.getHumanPlayer(); 
 	}
-	
+
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -81,6 +82,25 @@ public class BoardPanel extends JPanel {
 		for(Player player : board.getPlayers()) {
 			player.draw(g, CELL_WIDTH);
 		}
+
+		//check if human players turn 
+		if(board.isHumanPlayer()) {
+			g.setColor(Color.CYAN);
+			Set<BoardCell> targets = board.getTargets(); 
+			//loop through the target list and and re-draw each cell in target list
+			for(BoardCell target : targets) {
+				//if cell is a room, loop through the set of cells in that room and re-draw the cells 
+				if(target.getIsRoom()) {
+					//gets the room that the cell is 
+					Room targetRoom = board.getRoomMap().get(target.getCharacter()); 
+					for(BoardCell roomCell : targetRoom.getRoomCells()) { 
+						roomCell.draw(g, CELL_WIDTH, CELL_HEIGHT, xCoord, yCoord); 
+					}
+				}
+				//redraws target cells 
+				target.draw(g, CELL_WIDTH, CELL_HEIGHT, xCoord, yCoord); 
+			}
+		}
 	}
 
 	//class for mouse click 
@@ -98,5 +118,5 @@ public class BoardPanel extends JPanel {
 		}
 
 	}
-	
+
 }

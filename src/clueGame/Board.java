@@ -57,6 +57,7 @@ public class Board {
 	int cellHeight = 0;
 	int xCoord = 0;
 	int yCoord = 0; 
+	private boolean isHumanPlayer = false; 
 
 	// constructor is private to ensure only one can be created
 	private Board() {
@@ -666,19 +667,9 @@ public class Board {
 		
 		//checking to see if the player is the human player
 		if(currentPlayer == players.get(0)) {
+			isHumanPlayer = true; 
 			//TODO display targets
 			//must access BoardPanel
-			//loop through the target list and and re-draw each cell in target list
-			for(BoardCell target : targets) {
-				//if cell is a room, loop through the set of cells in that room and re-draw the cells 
-				if(target.getIsRoom()) {
-					//gets the room that the cell is 
-					Room targetRoom = roomMap.get(target); 
-					for(BoardCell roomCell : targetRoom.getRoomCells()) {
-						roomCell.draw(Graphics g, cellWidth, cellHeight, cellWidth, cellHeight);
-					}
-				}
-			}
 			
 			humanPlayerFinishedTurn = false;
 		}else {//if it is a computer player's turn
@@ -726,6 +717,9 @@ public class Board {
 	public int getRoll() {
 		// TODO Auto-generated method stub
 		return roll;
+	}
+	public boolean isHumanPlayer() {
+		return isHumanPlayer;
 	}
 }
 
