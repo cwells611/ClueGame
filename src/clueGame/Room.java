@@ -3,6 +3,7 @@ package clueGame;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,13 +16,13 @@ public class Room {
 	private boolean hasSecretPassage; 
 	private char secretPassage; 
 	private Set<BoardCell> doors;
-	private Set<BoardCell> roomCells; 
+	private ArrayList<BoardCell> roomCells; 
 	private CardType cardType; 
 
 	public Room(String name, char label) {
 		this.name = name; 
 		this.label = label;
-		roomCells = new HashSet<BoardCell>(); 
+		roomCells = new ArrayList<BoardCell>(); 
 		doors = new HashSet<BoardCell>();
 	}
 
@@ -80,7 +81,7 @@ public class Room {
 		roomCells.add(cell); 
 	}
 
-	public Set<BoardCell> getRoomCells() {
+	public ArrayList<BoardCell> getRoomCells() {
 		return this.roomCells; 
 	}
 
