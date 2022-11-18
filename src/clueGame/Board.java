@@ -49,6 +49,9 @@ public class Board {
 	private int currentPlayerRow;
 	private int currentPlayerCol;
 	private BoardCell currentPlayerCell;
+	private int clickedRow;
+	private int clickedCol;
+	private boolean clickedOnTarget;
 	//instance variables that will determine the size of each board cell
 	int cellWidth = 0; 
 	int cellHeight = 0;
@@ -672,6 +675,36 @@ public class Board {
 		}
 		
 	}
+	
+	public void processBoardClick(int x, int y, int width) {
+		//seeing if it is  the human player's turn
+		if(currentPlayer == players.get(0)) {
+			clickedRow = x/width;
+			clickedCol = y/width;
+			//initially assuming not clicked on target, trying to prove wrong
+			clickedOnTarget = false;
+			for(BoardCell target : targets) {
+				if(target.getRow() == clickedRow && target.getCol() == clickedCol) {
+					clickedOnTarget = true;
+					break;
+				}
+			}
+			if(!clickedOnTarget) {
+				//throw error
+			}else {
+				//moving the player
+				currentPlayer.setRow(clickedRow);
+				currentPlayer.setCol(clickedCol);
+				currentPlayerCell = grid[clickedRow][clickedCol];
+				//seeing if the player moved to a room
+				if(currentPlayerCell.getIsRoom()) {
+					//handling suggestion
+					//update result
+				}
+			}
+		}
+	}
+	
 	public Player getCurrentPlayer() {
 		// TODO Auto-generated method stub
 		return currentPlayer;

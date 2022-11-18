@@ -156,7 +156,6 @@ public class ComputerPlayer extends Player{
 	
 	private void makeSuggestion() {
 		GameControlPanel.getGCPanel().setGuess("I suggest that Edna used a car in the Atrium");
-		GameControlPanel.getGCPanel().SetGuessResult("Edna");
 	}
 
 }
