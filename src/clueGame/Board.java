@@ -58,6 +58,7 @@ public class Board {
 	int xCoord = 0;
 	int yCoord = 0; 
 
+
 	// constructor is private to ensure only one can be created
 	private Board() {
 		super();
@@ -622,11 +623,13 @@ public class Board {
 	public Player getHumanPlayer() {
 		return humanPlayer;
 	}
-	
+
+	//method for the player to roll the die 
 	public int rollDie() {
 		Random randomRoll = new Random(); 
-		return randomRoll.nextInt(6) + 1; 
+		return randomRoll.nextInt(6); 
 	}
+	
 	
 	public void processNextTurn() {
 		// TODO Auto-generated method stub
