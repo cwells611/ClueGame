@@ -89,6 +89,7 @@ public class BoardPanel extends JPanel {
 			Set<BoardCell> targets = board.getTargets(); 
 			//loop through the target list and and re-draw each cell in target list
 			for(BoardCell target : targets) {
+				System.out.println("made it to target loop");
 				//if cell is a room, loop through the set of cells in that room and re-draw the cells 
 				if(target.getIsRoom()) {
 					//gets the room that the cell is 
@@ -113,7 +114,7 @@ public class BoardPanel extends JPanel {
 		public void mouseClicked(MouseEvent e) {
 			System.out.println("Board clicked");
 			//handling mouse click in Board instead of in BoardPanel
-			Board.getInstance().processBoardClick(e.getX(), e.getY(), CELL_WIDTH);
+			board.processBoardClick(e.getX(), e.getY(), CELL_WIDTH);
 			repaint();
 		}
 

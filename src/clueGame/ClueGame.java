@@ -33,7 +33,7 @@ public class ClueGame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Clue");
 		setSize(width, height);
-		
+
 		//before we add the control panel, since the human player will go first, we set the turn 
 		//to the human 
 		controlPanel.setTurn(Board.getInstance().getPlayers().get(0), Board.getInstance().rollDie());
@@ -46,7 +46,7 @@ public class ClueGame extends JFrame {
 		//adds game panel to the center of the JFrame 
 		add(boardPanel, BorderLayout.CENTER); 
 		//adds the listener to the button 
-		
+
 	}
 
 	public static void main(String[] args) {
@@ -62,15 +62,12 @@ public class ClueGame extends JFrame {
 		//deal out cards to the players 
 		gameBoard.deal();
 
-
 		//creates an instance of a ClueGame object which is a JFrame
 		ClueGame game = new ClueGame(700, 900); 
 		game.setVisible(true);
 
 		//Creates Splash Screen 
 		JOptionPane.showMessageDialog(game, "You are " + gameBoard.getPlayers().get(0).getPlayerName() + ". \n Can you find the solution \n "
-				+ "before the Computer players?", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE); 
-
+				+ "before the Computer players?", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
 	}
 }
-; 
