@@ -229,6 +229,7 @@ public class GameControlPanel extends JPanel {
 			//make suggestion
 			repaint();
 			}
+			
 			//call appropriate methods in board
 			//probably a single method to handle the rest of the turn
 			
