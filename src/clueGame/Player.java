@@ -119,4 +119,6 @@ public abstract class Player {
 		g.drawOval((diameter * col) + 1, (diameter * row) + 1, diameter - 2, diameter - 2);
 	}
 	
+	
+	public void handleCPUTurn() {}
 }

@@ -658,31 +658,19 @@ public class Board {
 		calcTargets(currentPlayerCell, roll);
 		
 		//setting the GUI elements in game control panel
+		//sets the new player and the roll
 		GameControlPanel.getGCPanel().setTurn(currentPlayer, roll);
-		//when the next button is first pressed, we want to make sure that 
-		//the current human player is finished. To do that we want to make sure
-		//they have moved so we will check their row and col position to make sure it 
-		//is not the same 
 		
-		//if the human is finished, update the current player by incrementing 
-		//currentPlayerIndex
+		//checking to see if the player is the human player
+		if(currentPlayer == players.get(0)) {
+			//TODO display targets
+			//must access BoardPanel
+			
+			humanPlayerFinishedTurn = false;
+		}else {//if it is a computer player's turn
+			currentPlayer.handleCPUTurn();
+		}
 		
-		//have the new player roll the dice 
-		
-		//calc targets based on the new roll 
-		
-		//update the control panel with the new player and new roll
-		
-		//if the current player is human, display the possible targets on the baord 
-		
-		//flag unfinished, and be done 
-		
-		//if the current player is a computer, check to see if we can make an accusation
-		
-		//move
-		
-		//check to see if we can make a suggestion, and be done
-	//}
 	}
 	public Player getCurrentPlayer() {
 		// TODO Auto-generated method stub

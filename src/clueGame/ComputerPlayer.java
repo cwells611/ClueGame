@@ -141,5 +141,22 @@ public class ComputerPlayer extends Player{
 		}
 		return null; 
 	}
+	
+	@Override
+	public void handleCPUTurn() {
+		doAccusation();
+		//do move
+		
+		makeSuggestion();
+	}
+	
+	private void doAccusation() {
+		System.out.println("accusation test");
+	}
+	
+	private void makeSuggestion() {
+		GameControlPanel.getGCPanel().setGuess("I suggest that Edna used a car in the Atrium");
+		GameControlPanel.getGCPanel().SetGuessResult("Edna");
+	}
 
 }
