@@ -74,6 +74,6 @@ public class ClueGame extends JFrame {
 		gameBoard.processNextTurn();
 		
 		//after we process the turn, we want to repaint the board panel 
-		//game.boardPanel.repaint();
+		game.boardPanel.repaint();
 	}
 }
