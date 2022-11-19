@@ -92,13 +92,15 @@ public class BoardPanel extends JPanel {
 			Set<BoardCell> targets = board.getTargets(); 
 			//loop through the target list and and re-draw each cell in target list
 			for(BoardCell target : targets) {
-				xCoord = target.getRow() * CELL_WIDTH; 
-				yCoord = target.getCol() * CELL_WIDTH; 
+				xCoord = target.getCol() * CELL_WIDTH; 
+				yCoord = target.getRow() * CELL_WIDTH; 
 				//if cell is a room, loop through the set of cells in that room and re-draw the cells 
 				if(target.getIsRoom()) {
 					//gets the room that the cell is 
 					Room targetRoom = board.getRoomMap().get(target.getCharacter()); 
 					for(BoardCell roomCell : targetRoom.getRoomCells()) { 
+						xCoord = roomCell.getCol() * CELL_WIDTH; 
+						yCoord = roomCell.getRow() * CELL_WIDTH;
 						roomCell.draw(g, CELL_WIDTH, CELL_HEIGHT, xCoord, yCoord); 
 					}
 				}
