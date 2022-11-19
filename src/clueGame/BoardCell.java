@@ -19,6 +19,9 @@ public class BoardCell{
 	private Set<BoardCell> adjList;
 	private int doorXOffset;
 	private int doorYOffset;
+	private Room currentRoom;
+	Set<BoardCell> targets;
+	
 	
 	public BoardCell(int row, int col, char initial) {
 		this.row = row;
@@ -148,8 +151,12 @@ public class BoardCell{
 		//of width and a height of height 
 		
 		//check for walkways and unused spaces 
+		
+		targets = Board.getInstance().getTargets();
+		
 		if(this.character ==  'W') {
-			if(Board.getInstance().getTargets().contains(this)) {
+			//checking if the cell is a target cell
+			if(targets.contains(this)) {
 				g.setColor(Color.cyan);
 			}else {
 				g.setColor(Color.yellow);
@@ -165,7 +172,12 @@ public class BoardCell{
 		
 		//check if its a room, have no lines between cells 
 		if(this.isRoom) {
-			g.setColor(Color.gray);
+			currentRoom = Board.getInstance().getRoom(this);
+			if(targets.contains(currentRoom.getCenterCell())) {
+				g.setColor(Color.cyan);
+			}else {
+				g.setColor(Color.gray);
+			}
 			g.fillRect(xOffset, yOffset, width, height);
 		}
 	}
