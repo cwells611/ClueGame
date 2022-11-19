@@ -53,6 +53,32 @@ public class BoardPanel extends JPanel {
 			yCoord += CELL_HEIGHT; 
 		}
 
+		//check if human players turn 
+		if(board.isHumanPlayer()) {
+			g.setColor(Color.CYAN);
+			Set<BoardCell> targets = board.getTargets(); 
+			//loop through the target list and and re-draw each cell in target list
+			for(BoardCell target : targets) {
+				xCoord = target.getCol() * CELL_WIDTH; 
+				yCoord = target.getRow() * CELL_WIDTH; 
+				//if cell is a room, loop through the set of cells in that room and re-draw the cells 
+				if(target.getIsRoom()) {
+					//gets the room that the cell is 
+					Room targetRoom = board.getRoomMap().get(target.getCharacter()); 
+					for(BoardCell roomCell : targetRoom.getRoomCells()) { 
+						xCoord = roomCell.getCol() * CELL_WIDTH; 
+						yCoord = roomCell.getRow() * CELL_WIDTH;
+						roomCell.draw(g, CELL_WIDTH, CELL_HEIGHT, xCoord, yCoord); 
+					}
+				}
+				else {
+					//redraws target cells 
+					target.draw(g, CELL_WIDTH, CELL_HEIGHT, xCoord, yCoord); 
+				}
+
+			}
+		}
+
 		//writing room names 
 		for(Room room : board.getRoomMap().values()) {
 			if(!room.getName().equals("Walkway") && !room.getName().equals("Unused")) {
@@ -85,39 +111,13 @@ public class BoardPanel extends JPanel {
 		for(Player player : board.getPlayers()) {
 			player.draw(g, CELL_WIDTH);
 		}
-
-		//check if human players turn 
-		if(board.isHumanPlayer()) {
-			g.setColor(Color.CYAN);
-			Set<BoardCell> targets = board.getTargets(); 
-			//loop through the target list and and re-draw each cell in target list
-			for(BoardCell target : targets) {
-				xCoord = target.getCol() * CELL_WIDTH; 
-				yCoord = target.getRow() * CELL_WIDTH; 
-				//if cell is a room, loop through the set of cells in that room and re-draw the cells 
-				if(target.getIsRoom()) {
-					//gets the room that the cell is 
-					Room targetRoom = board.getRoomMap().get(target.getCharacter()); 
-					for(BoardCell roomCell : targetRoom.getRoomCells()) { 
-						xCoord = roomCell.getCol() * CELL_WIDTH; 
-						yCoord = roomCell.getRow() * CELL_WIDTH;
-						roomCell.draw(g, CELL_WIDTH, CELL_HEIGHT, xCoord, yCoord); 
-					}
-				}
-				else {
-					//redraws target cells 
-					target.draw(g, CELL_WIDTH, CELL_HEIGHT, xCoord, yCoord); 
-				}
-				
-			}
-		}
 	}
 
 	//class for mouse click 
 	private class BoardClick implements MouseListener {
 		public void mousePressed(MouseEvent e) {}
 		public void mouseReleased(MouseEvent e) {}
-		
+
 		public void mouseEntered(MouseEvent e) {}
 		public void mouseExited(MouseEvent e) {}
 		@Override
