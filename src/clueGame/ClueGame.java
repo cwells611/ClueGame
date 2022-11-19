@@ -69,5 +69,11 @@ public class ClueGame extends JFrame {
 		//Creates Splash Screen 
 		JOptionPane.showMessageDialog(game, "You are " + gameBoard.getPlayers().get(0).getPlayerName() + ". \n Can you find the solution \n "
 				+ "before the Computer players?", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
+		
+		//initially process the first turn of the game (the human's first turn)
+		gameBoard.processNextTurn();
+		
+		//after we process the turn, we want to repaint the board panel 
+		game.boardPanel.repaint();
 	}
 }

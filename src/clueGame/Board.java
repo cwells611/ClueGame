@@ -631,10 +631,7 @@ public class Board {
 	
 	public void processNextTurn() {
 		//at the beginning of each turn we want to assume the human player is not up 
-		isHumanPlayer = false; 
-		// TODO Auto-generated method stub
-		//if(controlPanel.getNext().isSelected()) {
-		System.out.println("Board class accesed via next listener");
+		isHumanPlayer = false;
 		
 		//temporary
 		humanPlayerFinishedTurn = true;
@@ -648,8 +645,6 @@ public class Board {
 			if(currentPlayerIdx == players.size()-1) {
 				//if so, setting it to 0 to go back to the first player in the list
 				currentPlayerIdx = 0;
-			}else if(currentPlayerIdx != 0) {
-				currentPlayerIdx++;
 			}
 			currentPlayer = players.get(currentPlayerIdx);
 		}
@@ -676,7 +671,8 @@ public class Board {
 		}else {//if it is a computer player's turn
 			currentPlayer.handleCPUTurn();
 		}
-		
+		//after an entire turn has been processed, we increment the player index 
+		currentPlayerIdx++; 
 	}
 	
 	public void processBoardClick(int x, int y, int width) {
@@ -692,9 +688,6 @@ public class Board {
 					break;
 				}
 			}
-			
-			System.out.println(clickedRow);
-			System.out.println(clickedCol);
 			
 			if(!clickedOnTarget) {
 				//throw error

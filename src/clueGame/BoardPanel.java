@@ -27,6 +27,9 @@ public class BoardPanel extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		//at the start of each paint component call, we want to reset the xCoord and yCoord to 0, 
+		xCoord = 0; 
+		yCoord = 0; 
 		//determine the size of each cell each time paintComponent is called 
 		CELL_WIDTH = this.getWidth()/board.getNumColumns(); 
 		CELL_HEIGHT = this.getHeight()/board.getNumRows(); 
