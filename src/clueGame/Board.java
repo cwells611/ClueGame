@@ -623,58 +623,52 @@ public class Board {
 	public Player getHumanPlayer() {
 		return humanPlayer;
 	}
-	
+
 	public int rollDie() {
 		Random randomRoll = new Random(); 
 		return randomRoll.nextInt(6) + 1; 
 	}
-	
+
 	public void processNextTurn() {
 		//at the beginning of each turn we want to assume the human player is not up 
 		isHumanPlayer = false;
-		
-		//temporary
-		humanPlayerFinishedTurn = true;
-		
-		//if the player has not finished the turn yet
-		if(!humanPlayerFinishedTurn) {
-			//throw error message
-		}else {
-			//updating the current player
-			//making sure the current player index is not the last index
-			if(currentPlayerIdx == players.size()-1) {
-				//if so, setting it to 0 to go back to the first player in the list
-				currentPlayerIdx = 0;
-			}
-			currentPlayer = players.get(currentPlayerIdx);
+
+		//updating the current player
+		//making sure the current player index is not the last index
+		if(currentPlayerIdx == players.size()-1) {
+			//if so, setting it to 0 to go back to the first player in the list
+			currentPlayerIdx = 0;
 		}
+		currentPlayer = players.get(currentPlayerIdx);
+
 		roll = rollDie();
-		System.out.println(roll);
-		System.out.println(currentPlayer.getPlayerName());
-		
+
 		currentPlayerRow = currentPlayer.getRow();
 		currentPlayerCol = currentPlayer.getCol();
 		currentPlayerCell = grid[currentPlayerRow][currentPlayerCol];
 		calcTargets(currentPlayerCell, roll);
-		
+
 		//setting the GUI elements in game control panel
 		//sets the new player and the roll
 		GameControlPanel.getGCPanel().setTurn(currentPlayer, roll);
-		
+
 		//checking to see if the player is the human player
 		if(currentPlayer == players.get(0)) {
 			isHumanPlayer = true; 
-			//TODO display targets
-			//must access BoardPanel
-			//after the human player has gone, increment the player index 
 			humanPlayerFinishedTurn = false;
 		}else {//if it is a computer player's turn
-			currentPlayer.handleCPUTurn();
+			//get the board cell of the target selected by the select target method
+			BoardCell compTarget = currentPlayer.selectTarget(targets, this);
+			//set the row and col of the current player to the row and col of the target cell
+			currentPlayer.setRow(compTarget.getRow());
+			currentPlayer.setCol(compTarget.getCol());
+			currentPlayerCell = grid[currentPlayer.getRow()][currentPlayer.getCol()]; 
+
 		}
 		//after an entire turn has been processed, we increment the player index 
 		currentPlayerIdx++; 
 	}
-	
+
 	public void processBoardClick(int x, int y, int width) {
 		//seeing if it is  the human player's turn
 		if(currentPlayer == players.get(0)) {
@@ -688,9 +682,9 @@ public class Board {
 					break;
 				}
 			}
-			
+
 			if(!clickedOnTarget) {
-				//throw error
+				System.out.println("Please click a valid target");
 				return;
 			}else {
 				//moving the player
@@ -702,14 +696,14 @@ public class Board {
 					//handling suggestion
 					//update result
 				}
+				//flagging that the human player has finished their turn
+				humanPlayerFinishedTurn = true; 
 			}
-			//flagging that the human player has finished their turn
-			humanPlayerFinishedTurn = true; 
 			targets.clear();
 		}
 	}
-	
-	
+
+
 	public void setCurrentPlayer(Player player) {
 		this.currentPlayer = player; 
 	}

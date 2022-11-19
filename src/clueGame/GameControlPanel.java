@@ -33,13 +33,13 @@ public class GameControlPanel extends JPanel {
 	JTextField playerTurn; 
 
 	private Board theBoard;
-	
+
 	private static GameControlPanel theGCPanel = new GameControlPanel();
-	
+
 	/**
 	 * Constructor for the panel, it does 90% of the work
 	 */
-	
+
 	//private to ensure only one can be created
 	private GameControlPanel()  {
 		//Create a layout with 2 rows
@@ -49,7 +49,7 @@ public class GameControlPanel extends JPanel {
 		panel = lowerPanel();
 		add(panel);
 	}
-	
+
 	public static GameControlPanel getGCPanel() {
 		return theGCPanel;
 	}
@@ -57,7 +57,7 @@ public class GameControlPanel extends JPanel {
 	public String test() {
 		return "test";
 	}
-	
+
 	private JPanel upperPanel() {
 		JPanel upperPanel = new JPanel();
 		upperPanel.setLayout(new GridLayout(1, 4)); 
@@ -73,7 +73,7 @@ public class GameControlPanel extends JPanel {
 		//add listener for next button
 		addButton.addActionListener(new nextListener());
 		upperPanel.add(addButton); 
-		
+
 		return upperPanel; 
 	}
 
@@ -215,7 +215,7 @@ public class GameControlPanel extends JPanel {
 		setPlayer(player.getPlayerName()); 
 		setPlayerColor(player.getColor()); 
 	}
-	
+
 	private class nextListener implements ActionListener{
 
 		@Override
@@ -228,23 +228,23 @@ public class GameControlPanel extends JPanel {
 			theBoard.processNextTurn();
 			//make suggestion
 			repaint();
-			}
-			
-			//call appropriate methods in board
-			//probably a single method to handle the rest of the turn
-			
 		}
-		
+
+		//call appropriate methods in board
+		//probably a single method to handle the rest of the turn
+
+	}
+
 	private class accusationListener implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			System.out.println("make accusation button pressed");
-			
+
 			//call appropriate methods in board
 		}
-		
+
 	}
 
 

@@ -109,6 +109,7 @@ public class ComputerPlayer extends Player{
 
 	//the computer player needs to be able to select its next target, so we will return that target given 
 	//the set of boardcells that are available targets 
+	@Override
 	public BoardCell selectTarget(Set<BoardCell> targets, Board board) {
 		//loop through the target list 
 		for(BoardCell target : targets) {
@@ -126,7 +127,7 @@ public class ComputerPlayer extends Player{
 				}
 			}
 		}
-		//if we loop through the whole target list, and there gitare no rooms, then pick a random cell from target list 
+		//if we loop through the whole target list, and there are no rooms, then pick a random cell from target list 
 		Random random = new Random(); 
 		//generates a random number between 0 and the last element of the set
 		int randomTargetCell = random.nextInt(targets.size() - 1); 
@@ -140,14 +141,6 @@ public class ComputerPlayer extends Player{
 			counter++; 
 		}
 		return null; 
-	}
-	
-	@Override
-	public void handleCPUTurn() {
-		doAccusation();
-		//do move
-		
-		makeSuggestion();
 	}
 	
 	private void doAccusation() {

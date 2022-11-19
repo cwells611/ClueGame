@@ -109,6 +109,8 @@ public class BoardPanel extends JPanel {
 
 		//drawing the players
 		for(Player player : board.getPlayers()) {
+			//System.out.print(player.getPlayerName() + " Row: " + player.getRow());
+			//System.out.println(" Col: " + player.getCol());
 			player.draw(g, CELL_WIDTH);
 		}
 	}

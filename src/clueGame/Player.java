@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Set;
 
 public abstract class Player {
 	private String name;
@@ -118,7 +119,8 @@ public abstract class Player {
 		g.setColor(Color.BLACK);
 		g.drawOval((diameter * col) + 1, (diameter * row) + 1, diameter - 2, diameter - 2);
 	}
-	
-	
-	public void handleCPUTurn() {}
+
+	public BoardCell selectTarget(Set<BoardCell> targets, Board board) {
+		return null;
+	}
 }
