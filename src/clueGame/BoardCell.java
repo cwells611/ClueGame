@@ -149,11 +149,13 @@ public class BoardCell{
 		
 		//check for walkways and unused spaces 
 		if(this.character ==  'W') {
+			g.setColor(Color.yellow);
 			g.fillRect(xOffset, yOffset, width, height);
 			g.setColor(Color.black);
 			g.drawRect(xOffset, yOffset, width, height);
 		}
 		if(this.character ==  'X') {
+			g.setColor(Color.black);
 			g.fillRect(xOffset, yOffset, width, height);
 		}
 		

@@ -42,12 +42,6 @@ public class BoardPanel extends JPanel {
 		for(int row = 0; row < board.getNumRows(); row++) {
 			for(int col = 0; col < board.getNumColumns(); col++) {
 				BoardCell cell = grid[row][col];  
-				if(cell.getCharacter() == 'W') {
-					g.setColor(Color.yellow); 
-				}
-				else if(cell.getCharacter() ==  'X') {
-					g.setColor(Color.black); 
-				}
 				cell.draw(g, CELL_WIDTH, CELL_HEIGHT, xCoord, yCoord); 
 				//after a board cell is draw, we want to increase the xCoord by cellWidth 
 				//so the next cell will be drawn right next to it 
@@ -107,15 +101,14 @@ public class BoardPanel extends JPanel {
 					for(BoardCell roomCell : targetRoom.getRoomCells()) { 
 						xCoord = roomCell.getCol() * CELL_WIDTH; 
 						yCoord = roomCell.getRow() * CELL_WIDTH;
-						roomCell.draw(g, CELL_WIDTH, CELL_HEIGHT, xCoord, yCoord);
-						System.out.println("room cell drawn");
+						roomCell.draw(g, CELL_WIDTH, CELL_HEIGHT, xCoord, yCoord); 
 					}
 				}
 				else {
 					//redraws target cells 
 					target.draw(g, CELL_WIDTH, CELL_HEIGHT, xCoord, yCoord); 
-					System.out.println("target cell drawn");
 				}
+				
 			}
 		}
 	}
