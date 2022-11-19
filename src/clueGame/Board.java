@@ -678,8 +678,8 @@ public class Board {
 	public void processBoardClick(int x, int y, int width) {
 		//seeing if it is  the human player's turn
 		if(currentPlayer == players.get(0)) {
-			clickedRow = x/width;
-			clickedCol = y/width;
+			clickedRow = y/width;
+			clickedCol = x/width;
 			//initially assuming not clicked on target, trying to prove wrong
 			clickedOnTarget = false;
 			for(BoardCell target : targets) {
