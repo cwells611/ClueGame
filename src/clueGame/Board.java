@@ -705,6 +705,7 @@ public class Board {
 			}
 			//flagging that the human player has finished their turn
 			humanPlayerFinishedTurn = true; 
+			targets.clear();
 		}
 	}
 	
