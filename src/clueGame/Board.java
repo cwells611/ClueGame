@@ -684,6 +684,10 @@ public class Board {
 					clickedOnTarget = true;
 					break;
 				}
+				if(target.isRoomCenter()) {
+					
+					break;
+				}
 			}
 
 			if(!clickedOnTarget) {
