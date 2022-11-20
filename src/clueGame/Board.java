@@ -53,6 +53,10 @@ public class Board {
 	private int clickedRow;
 	private int clickedCol;
 	private boolean clickedOnTarget;
+	private Room clickedRoom;
+	private BoardCell topLeftRoomCell;
+	private BoardCell bottomRightRoomCell;
+	private boolean clickedOnRoom;
 	//instance variables that will determine the size of each board cell
 	int cellWidth = 0; 
 	int cellHeight = 0;
@@ -679,14 +683,31 @@ public class Board {
 			clickedCol = x/width;
 			//initially assuming not clicked on target, trying to prove wrong
 			clickedOnTarget = false;
+			//initially assuming that the player did not click on a room
+			clickedOnRoom = false;
 			for(BoardCell target : targets) {
 				if(target.getRow() == clickedRow && target.getCol() == clickedCol) {
 					clickedOnTarget = true;
 					break;
 				}
-				if(target.isRoomCenter()) {
-					
-					break;
+				if(target.isRoomCenter()) { //checking if a room is clicked on
+					//associating the the room center back to the room
+					clickedRoom = roomMap.get(target.getCharacter());
+					//getting the top left cell from the room, the first cell in the arraylist
+					topLeftRoomCell = clickedRoom.getRoomCells().get(0);
+					//getting the bottom right cell from the room, the last cell in the arraylist
+					bottomRightRoomCell = clickedRoom.getRoomCells().get(clickedRoom.getRoomCells().size()-1);
+					//defining the boundaries that can be clicked on for the room
+					int leftX = topLeftRoomCell.getCol() * width;
+					int rightX = (bottomRightRoomCell.getCol()+1) * width;
+					int topY = topLeftRoomCell.getRow() * width;
+					int bottomY = (bottomRightRoomCell.getRow()+1) * width;
+					//checking to see if the click falls within both the x and y parameters
+					if(x >= leftX && x <= rightX && y >= topY && y <= bottomY) {
+						clickedOnTarget = true;
+						clickedOnRoom = true;
+						break;
+					}
 				}
 			}
 
@@ -695,11 +716,16 @@ public class Board {
 				return;
 			}else {
 				//moving the player
+				if(clickedOnRoom) {
+					clickedRow = clickedRoom.getCenterCell().getRow();
+					clickedCol = clickedRoom.getCenterCell().getCol();
+				}
+				
 				currentPlayer.setRow(clickedRow);
 				currentPlayer.setCol(clickedCol);
 				currentPlayerCell = grid[clickedRow][clickedCol];
 				//seeing if the player moved to a room
-				if(currentPlayerCell.getIsRoom()) {
+				if(clickedOnRoom) {
 					//handling suggestion
 					//update result
 				}
