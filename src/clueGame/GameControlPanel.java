@@ -76,7 +76,7 @@ public class GameControlPanel extends JPanel {
 
 		return upperPanel; 
 	}
-
+	
 	private JPanel whoseTurnPanel() {
 		JPanel turnPanel = new JPanel();
 		turnPanel.setLayout(new GridLayout(2, 1));
@@ -227,7 +227,7 @@ public class GameControlPanel extends JPanel {
 			//processing the next turn
 			theBoard.processNextTurn();
 			//make suggestion
-			repaint();
+			BoardPanel.getTheBoardPanel().repaint();
 		}
 
 		//call appropriate methods in board

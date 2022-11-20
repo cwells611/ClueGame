@@ -670,7 +670,6 @@ public class Board {
 	}
 
 	public void processBoardClick(int x, int y, int width) {
-		System.out.println(currentPlayer.getPlayerName());
 		//seeing if it is  the human player's turn
 		if(currentPlayer == players.get(0)) {
 			clickedRow = y/width;

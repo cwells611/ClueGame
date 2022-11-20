@@ -16,6 +16,7 @@ public class BoardPanel extends JPanel {
 	int yCoord = 0; 
 	BoardCell[][] grid; 
 	Player human; 
+	private static BoardPanel theBoardPanel = new BoardPanel();
 
 	public BoardPanel() {
 		board = Board.getInstance();  
@@ -113,6 +114,10 @@ public class BoardPanel extends JPanel {
 			//System.out.println(" Col: " + player.getCol());
 			player.draw(g, CELL_WIDTH);
 		}
+	}
+
+	public static BoardPanel getTheBoardPanel() {
+		return theBoardPanel;
 	}
 
 	//class for mouse click 
