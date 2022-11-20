@@ -20,7 +20,7 @@ public class BoardCell{
 	private int doorXOffset;
 	private int doorYOffset;
 	private Room currentRoom;
-	Set<BoardCell> targets;
+	private Set<BoardCell> targets;
 	
 	
 	public BoardCell(int row, int col, char initial) {
@@ -152,7 +152,13 @@ public class BoardCell{
 		
 		//check for walkways and unused spaces 
 		
-		targets = Board.getInstance().getTargets();
+		//if it is the human player's turn
+		if(Board.getInstance().getCurrentPlayer() == Board.getInstance().getHumanPlayer()) {
+			targets = Board.getInstance().getTargets();
+		}else {
+			targets = new HashSet<BoardCell>();
+		}
+		
 		
 		if(this.character ==  'W') {
 			//checking if the cell is a target cell
