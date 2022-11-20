@@ -42,7 +42,7 @@ public class Board {
 	private Card card; 
 	private static Board theInstance = new Board();
 	private Solution theAnswer;
-	private boolean humanPlayerFinishedTurn;
+	private boolean humanPlayerFinishedTurn = true;
 	private int currentPlayerIdx;
 	private Player currentPlayer;
 	private int roll;
@@ -631,42 +631,44 @@ public class Board {
 
 	public void processNextTurn() {
 		//at the beginning of each turn we want to assume the human player is not up 
-		isHumanPlayer = false;
+		if(humanPlayerFinishedTurn) {
+			isHumanPlayer = false;
 
-		//updating the current player
-		//making sure the current player index is not the last index
-		if(currentPlayerIdx == players.size()-1) {
-			//if so, setting it to 0 to go back to the first player in the list
-			currentPlayerIdx = 0;
+			//updating the current player
+			//making sure the current player index is not the last index
+			if(currentPlayerIdx == players.size()-1) {
+				//if so, setting it to 0 to go back to the first player in the list
+				currentPlayerIdx = 0;
+			}
+			currentPlayer = players.get(currentPlayerIdx);
+
+			roll = rollDie();
+
+			currentPlayerRow = currentPlayer.getRow();
+			currentPlayerCol = currentPlayer.getCol();
+			currentPlayerCell = grid[currentPlayerRow][currentPlayerCol];
+			calcTargets(currentPlayerCell, roll);
+
+			//setting the GUI elements in game control panel
+			//sets the new player and the roll
+			GameControlPanel.getGCPanel().setTurn(currentPlayer, roll);
+
+			//checking to see if the player is the human player
+			if(currentPlayer == players.get(0)) {
+				isHumanPlayer = true; 
+				humanPlayerFinishedTurn = false;
+			}else {//if it is a computer player's turn
+				//get the board cell of the target selected by the select target method
+				BoardCell compTarget = currentPlayer.selectTarget(targets, this);
+				//set the row and col of the current player to the row and col of the target cell
+				currentPlayer.setRow(compTarget.getRow());
+				currentPlayer.setCol(compTarget.getCol());
+				currentPlayerCell = grid[currentPlayer.getRow()][currentPlayer.getCol()]; 
+
+			}
+			//after an entire turn has been processed, we increment the player index 
+			currentPlayerIdx++; 
 		}
-		currentPlayer = players.get(currentPlayerIdx);
-
-		roll = rollDie();
-
-		currentPlayerRow = currentPlayer.getRow();
-		currentPlayerCol = currentPlayer.getCol();
-		currentPlayerCell = grid[currentPlayerRow][currentPlayerCol];
-		calcTargets(currentPlayerCell, roll);
-
-		//setting the GUI elements in game control panel
-		//sets the new player and the roll
-		GameControlPanel.getGCPanel().setTurn(currentPlayer, roll);
-
-		//checking to see if the player is the human player
-		if(currentPlayer == players.get(0)) {
-			isHumanPlayer = true; 
-			humanPlayerFinishedTurn = false;
-		}else {//if it is a computer player's turn
-			//get the board cell of the target selected by the select target method
-			BoardCell compTarget = currentPlayer.selectTarget(targets, this);
-			//set the row and col of the current player to the row and col of the target cell
-			currentPlayer.setRow(compTarget.getRow());
-			currentPlayer.setCol(compTarget.getCol());
-			currentPlayerCell = grid[currentPlayer.getRow()][currentPlayer.getCol()]; 
-
-		}
-		//after an entire turn has been processed, we increment the player index 
-		currentPlayerIdx++; 
 	}
 
 	public void processBoardClick(int x, int y, int width) {
