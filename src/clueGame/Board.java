@@ -687,7 +687,7 @@ public class Board {
 			}
 
 			if(!clickedOnTarget) {
-				JOptionPane.showMessageDialog(BoardPanel.getTheBoardPanel(), "Please select a valid target.");
+				JOptionPane.showMessageDialog(BoardPanel.getTheBoardPanel(), "Please select a valid target.", "Invalid Target", JOptionPane.INFORMATION_MESSAGE);
 				return;
 			}else {
 				//moving the player
