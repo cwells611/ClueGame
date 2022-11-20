@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Set;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class BoardPanel extends JPanel {
@@ -39,6 +40,7 @@ public class BoardPanel extends JPanel {
 		//that same value 
 		CELL_WIDTH = Math.min(CELL_WIDTH, CELL_HEIGHT); 
 		CELL_HEIGHT = CELL_WIDTH; 
+
 		//loops through the grid and calls the draw board cell function for each cell
 		for(int row = 0; row < board.getNumRows(); row++) {
 			for(int col = 0; col < board.getNumColumns(); col++) {

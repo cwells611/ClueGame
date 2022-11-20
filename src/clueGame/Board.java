@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.*;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Board {
@@ -686,7 +687,7 @@ public class Board {
 			}
 
 			if(!clickedOnTarget) {
-				System.out.println("Please click a valid target");
+				JOptionPane.showMessageDialog(BoardPanel.getTheBoardPanel(), "Please select a valid target.");
 				return;
 			}else {
 				//moving the player
@@ -719,6 +720,11 @@ public class Board {
 	}
 	public boolean isHumanPlayer() {
 		return isHumanPlayer;
+	}
+	
+	public boolean getClickedOnTarget() {
+		return this.clickedOnTarget; 
+				
 	}
 }
 
