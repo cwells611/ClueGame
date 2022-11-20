@@ -112,8 +112,6 @@ public class BoardPanel extends JPanel {
 
 		//drawing the players
 		for(Player player : board.getPlayers()) {
-			//System.out.print(player.getPlayerName() + " Row: " + player.getRow());
-			//System.out.println(" Col: " + player.getCol());
 			player.draw(g, CELL_WIDTH);
 		}
 	}
@@ -131,7 +129,6 @@ public class BoardPanel extends JPanel {
 		public void mouseExited(MouseEvent e) {}
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			System.out.println("Board clicked");
 			//handling mouse click in Board instead of in BoardPanel
 			board.processBoardClick(e.getX(), e.getY(), CELL_WIDTH);
 			repaint();
