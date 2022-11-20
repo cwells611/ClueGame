@@ -219,9 +219,7 @@ public class GameControlPanel extends JPanel {
 	private class nextListener implements ActionListener{
 
 		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			System.out.println("next button pressed");
+		public void actionPerformed(ActionEvent e) {;
 			//refreshing the board each time next button is pressed
 			theBoard = Board.getInstance();
 			//processing the next turn
@@ -240,7 +238,6 @@ public class GameControlPanel extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			System.out.println("make accusation button pressed");
 
 			//call appropriate methods in board
 		}
