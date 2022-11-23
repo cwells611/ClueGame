@@ -11,8 +11,8 @@ import javax.swing.JPanel;
 
 public class BoardPanel extends JPanel {
 	Board board; 
-	int CELL_WIDTH; 
-	int CELL_HEIGHT; 
+	static int CELL_WIDTH = 0; 
+	static int CELL_HEIGHT = 0; 
 	int xCoord = 0; 
 	int yCoord = 0; 
 	BoardCell[][] grid; 
