@@ -162,7 +162,7 @@ public class BoardCell{
 		
 		if(this.character ==  'W') {
 			//checking if the cell is a target cell
-			if(targets.contains(this)) {
+			if(targets.contains(this) && !this.isOccupied) {
 				g.setColor(Color.cyan);
 			}else {
 				g.setColor(Color.yellow);

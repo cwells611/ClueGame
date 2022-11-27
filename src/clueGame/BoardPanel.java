@@ -63,7 +63,7 @@ public class BoardPanel extends JPanel {
 			//loop through the target list and and re-draw each cell in target list
 			for(BoardCell target : targets) {
 				xCoord = target.getCol() * CELL_WIDTH; 
-				yCoord = target.getRow() * CELL_WIDTH; 
+				yCoord = target.getRow() * CELL_WIDTH;				
 				//if cell is a room, loop through the set of cells in that room and re-draw the cells 
 				if(target.getIsRoom()) {
 					//gets the room that the cell is 
