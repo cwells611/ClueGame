@@ -545,6 +545,24 @@ public class Board {
 	public Card handleSuggestion(Player suggestingPlayer, ArrayList<Player> players, Solution solution) {
 		//get start index
 		int startIndex = players.indexOf(suggestingPlayer);
+		
+		//moving the suggested player into the room
+		
+		//finding the player who was suggested
+		int suggestingPlayerRow = suggestingPlayer.getRow();
+		int suggestingPlayerCol = suggestingPlayer.getCol();
+		Card suggestedPerson = solution.getPerson();
+		Player suggestedPlayer = null;
+		for(Player player : players) {
+			if(player.getPlayerName() == suggestedPerson.getName()) {
+				suggestedPlayer = player;
+				break;
+			}
+		}
+		//moving the suggestedPlayer to the same location as the suggestingPlayer
+		suggestedPlayer.setRow(suggestingPlayerRow);
+		suggestedPlayer.setCol(suggestingPlayerCol);
+		
 		//processing all players
 		//loop starts at the next player in line from the suggesting player
 		//i.e. the player to the left of the suggesting player
