@@ -18,7 +18,7 @@ public class Room {
 	private Set<BoardCell> doors;
 	private ArrayList<BoardCell> roomCells; 
 	private CardType cardType; 
-
+	
 	public Room(String name, char label) {
 		this.name = name; 
 		this.label = label;

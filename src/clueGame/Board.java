@@ -545,9 +545,7 @@ public class Board {
 	public Card handleSuggestion(Player suggestingPlayer, ArrayList<Player> players, Solution solution) {
 		//get start index
 		int startIndex = players.indexOf(suggestingPlayer);
-		
-		//moving the suggested player into the room
-		
+		String guessResult;
 		//finding the player who was suggested
 		int suggestingPlayerRow = suggestingPlayer.getRow();
 		int suggestingPlayerCol = suggestingPlayer.getCol();
@@ -575,10 +573,23 @@ public class Board {
 			Card disprovedCard = players.get(playersIndex).disproveSuggestion(solution.getRoom(), solution.getPerson(), solution.getWeapon());
 			if(disprovedCard != null) {
 				//returns the disproved card the first time it sees one
+				
+				if(suggestingPlayer == players.get(0)) {// if the suggesting player is the human player
+					//show the disproving card and the player it came from
+					guessResult = disprovedCard.getName() + " was disproved by " + players.get(playersIndex).getPlayerName();	
+				}else{ //if the suggesting player is a computer player
+					//showing that the suggestion was disproven and the player it came from
+					//not showing the card itself
+					guessResult = "A card was disproved by " + players.get(playersIndex).getPlayerName();
+				}
+				//TODO draw the guess result in the appropriate color
+				GameControlPanel.getGCPanel().SetGuessResult(guessResult);
 				return disprovedCard;
 			}
 		}
 		//returns null if a disproved card is never found
+		guessResult = "No cards were disproven";
+		GameControlPanel.getGCPanel().SetGuessResult(guessResult);
 		return null;
 	}
 
@@ -746,6 +757,9 @@ public class Board {
 				//seeing if the player moved to a room
 				if(clickedOnRoom) {
 					//handling suggestion
+					//TODO pop up dialog to get suggestion from player
+					
+					//Card handledCard = handleSuggestion(currentPlayer, players, solution);
 					//update result
 				}
 				//flagging that the human player has finished their turn

@@ -113,6 +113,7 @@ public abstract class Player {
 	
 	
 	public void draw(Graphics g, int diameter) {
+		
 		//setting the color
 		g.setColor(this.color); 
 		g.fillOval((diameter * col) + 1, (diameter * row) + 1, diameter - 2, diameter - 2);
