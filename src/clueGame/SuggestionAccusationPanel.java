@@ -33,7 +33,6 @@ public class SuggestionAccusationPanel extends JDialog {
 	private ArrayList<String> rooms;
 	private ArrayList<String> people;
 	private ArrayList<String> weapons;
-	private JLabel addLabel;
 	
 	
 	public SuggestionAccusationPanel(boolean isSuggestion) {
@@ -46,7 +45,7 @@ public class SuggestionAccusationPanel extends JDialog {
 		allCards.add(Board.getInstance().getTheAnswer().getRoom());
 		allCards.add(Board.getInstance().getTheAnswer().getPerson());
 		allCards.add(Board.getInstance().getTheAnswer().getWeapon());
-		//iterating
+		//iterating through all cards to fill out all possible options
 		for(Card card : allCards) {
 			switch(card.getType()) {
 			case ROOM:
@@ -86,7 +85,10 @@ public class SuggestionAccusationPanel extends JDialog {
 		add(weaponLabel);
 		weaponOption = createComboBox(weapons);
 		add(weaponOption);
-		
+		submitButton = button("Submit");
+		add(submitButton);
+		cancelButton = button("Cancel");
+		add(cancelButton);
 		
 	}
 	
@@ -98,12 +100,13 @@ public class SuggestionAccusationPanel extends JDialog {
 		return combo;
 	}
 	
-	private JButton submitButton() {
-		JButton submitButton = new JButton();
-		addLabel = nextLabel(); 
-		addLabel.setText("NEXT!");
-		submitButton.add(addLabel); 
-		return submitButton;
+	//default button constructor
+	private JButton button(String text) {
+		JButton button = new JButton();
+		JLabel label = new JLabel();
+		label.setText(text);
+		button.add(label); 
+		return button;
 	}
 	
 }
