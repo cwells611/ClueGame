@@ -33,6 +33,7 @@ public class SuggestionAccusationPanel extends JDialog {
 	private ArrayList<String> rooms;
 	private ArrayList<String> people;
 	private ArrayList<String> weapons;
+	private JLabel addLabel;
 	
 	
 	public SuggestionAccusationPanel(boolean isSuggestion) {
@@ -69,18 +70,25 @@ public class SuggestionAccusationPanel extends JDialog {
 		setSize(300,200);
 		setLayout(new GridLayout(4,2));
 		currentRoomLabel = new JLabel("Current room");
+		add(currentRoomLabel);
 		if(isSuggestion) {
 			roomTextField = new JTextField("TEMP");
+			add(roomTextField);
 		}else{
-			//getting the room options
-			
-			//roomOption = new JComboBox;
+			roomOption = createComboBox(rooms);
+			add(roomOption);
 		}
 		personLabel = new JLabel("Person");
+		add(personLabel);
+		personOption = createComboBox(people);
+		add(personOption);
 		weaponLabel = new JLabel("Weapon");
+		add(weaponLabel);
+		weaponOption = createComboBox(weapons);
+		add(weaponOption);
+		
 		
 	}
-	
 	
 	private JComboBox<String> createComboBox(ArrayList<String> options){
 		JComboBox<String> combo = new JComboBox<String>();
@@ -88,6 +96,14 @@ public class SuggestionAccusationPanel extends JDialog {
 			combo.addItem(option);
 		}
 		return combo;
+	}
+	
+	private JButton submitButton() {
+		JButton submitButton = new JButton();
+		addLabel = nextLabel(); 
+		addLabel.setText("NEXT!");
+		submitButton.add(addLabel); 
+		return submitButton;
 	}
 	
 }
