@@ -11,6 +11,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -76,7 +77,7 @@ public class GameControlPanel extends JPanel {
 
 		return upperPanel; 
 	}
-	
+
 	private JPanel whoseTurnPanel() {
 		JPanel turnPanel = new JPanel();
 		turnPanel.setLayout(new GridLayout(2, 1));
@@ -220,12 +221,17 @@ public class GameControlPanel extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {;
-			//refreshing the board each time next button is pressed
-			theBoard = Board.getInstance();
-			//processing the next turn
-			theBoard.processNextTurn();
-			//make suggestion
-			BoardPanel.getTheBoardPanel().repaint();
+		//refreshing the board each time next button is pressed
+		theBoard = Board.getInstance();
+		//processing the next turn
+		//before we process the next turn, check to see if the human player is finished
+		if(!theBoard.getHumanFinished()) {
+			JOptionPane.showMessageDialog(BoardPanel.getTheBoardPanel(), "Please Finish Turn.", 
+					"Turn Not Finished", JOptionPane.INFORMATION_MESSAGE);
+		}
+		theBoard.processNextTurn();
+		//make suggestion
+		BoardPanel.getTheBoardPanel().repaint();
 		}
 
 		//call appropriate methods in board

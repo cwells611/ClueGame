@@ -17,7 +17,8 @@ public abstract class Player {
 	private String playerType; 
 	private CardType type; 
 	private ArrayList<Card> seenCards;
-	
+	private int playerRadius = 0; 
+
 	//constructor 
 	public Player(String name, String color, int startRow, int startCol) {
 		this.name = name; 
@@ -33,7 +34,7 @@ public abstract class Player {
 		hand = new ArrayList<Card>();
 		seenCards = new ArrayList<Card>(); 
 	}
-	
+
 	public ArrayList<Card> getSeenCards() {
 		return seenCards;
 	}
@@ -48,19 +49,19 @@ public abstract class Player {
 	public CardType getCardType() {
 		return this.type; 
 	}
-	
+
 	public String getPlayerType() {
 		return this.playerType;
 	}
-	
+
 	public String getPlayerName() {
 		return this.name; 
 	}
-	
+
 	public ArrayList<Card> getHand(){
 		return this.hand;
 	}
-	
+
 	public void updateHand(Card card) {
 		hand.add(card);
 	}
@@ -109,16 +110,28 @@ public abstract class Player {
 		//returning null if no matching cards
 		return null;
 	}
-	
-	
-	
+
+
+
 	public void draw(Graphics g, int diameter) {
-		
-		//setting the color
-		g.setColor(this.color); 
-		g.fillOval((diameter * col) + 1, (diameter * row) + 1, diameter - 2, diameter - 2);
-		g.setColor(Color.BLACK);
-		g.drawOval((diameter * col) + 1, (diameter * row) + 1, diameter - 2, diameter - 2);
+		playerRadius = diameter/2; 
+
+		//if there are more than one character in the room, draw each character with an 
+		//offset of playerRadius 
+		if(Board.getInstance().getRoom(Board.getInstance().getCell(row, col)).getCharacterCounter() >= 1) {
+			g.setColor(this.color); 
+			g.fillOval((diameter * col) + playerRadius + Board.getInstance().getRoom(Board.getInstance().getCell(row, col)).getCharacterCounter(), (diameter * row) + 1, diameter - 2, diameter - 2);
+			g.setColor(Color.BLACK);
+			g.drawOval((diameter * col) + playerRadius + Board.getInstance().getRoom(Board.getInstance().getCell(row, col)).getCharacterCounter(), (diameter * row) + 1, diameter - 2, diameter - 2);
+
+		}
+		else {
+			//setting the color
+			g.setColor(this.color); 
+			g.fillOval((diameter * col) + 1, (diameter * row) + 1, diameter - 2, diameter - 2);
+			g.setColor(Color.BLACK);
+			g.drawOval((diameter * col) + 1, (diameter * row) + 1, diameter - 2, diameter - 2);
+		}
 	}
 
 	public BoardCell selectTarget(Set<BoardCell> targets, Board board) {

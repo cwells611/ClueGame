@@ -18,6 +18,7 @@ public class Room {
 	private Set<BoardCell> doors;
 	private ArrayList<BoardCell> roomCells; 
 	private CardType cardType; 
+	private int characterCounter = 0; 
 	
 	public Room(String name, char label) {
 		this.name = name; 
@@ -91,6 +92,14 @@ public class Room {
 	}
 	public CardType getCardType() {
 		return this.cardType;
+	}
+	
+	//getter and setter for counter 
+	public int getCharacterCounter() {
+		return this.characterCounter; 
+	}
+	public void incrementCharacterCounter() {
+		this.characterCounter++; 
 	}
 
 	public void draw(Graphics g, int width) {

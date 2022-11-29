@@ -786,8 +786,10 @@ public class Board {
 	}
 	
 	public boolean getClickedOnTarget() {
-		return this.clickedOnTarget; 
-				
+		return this.clickedOnTarget; 		
+	}
+	public boolean getHumanFinished() {
+		return this.humanPlayerFinishedTurn; 		
 	}
 }
 
