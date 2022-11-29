@@ -550,10 +550,14 @@ public class Board {
 		int suggestingPlayerRow = suggestingPlayer.getRow();
 		int suggestingPlayerCol = suggestingPlayer.getCol();
 		Card suggestedPerson = solution.getPerson();
+		
+		System.out.println(suggestedPerson.getName());
 		Player suggestedPlayer = null;
 		for(Player player : players) {
-			if(player.getPlayerName() == suggestedPerson.getName()) {
+			System.out.println(player.getPlayerName());
+			if(player.getPlayerName().equals(suggestedPerson.getName())) {
 				suggestedPlayer = player;
+				System.out.println("TEST");
 				break;
 			}
 		}
@@ -589,7 +593,10 @@ public class Board {
 		}
 		//returns null if a disproved card is never found
 		guessResult = "No cards were disproven";
-		
+		if(currentPlayer != players.get(0)) { //if a computer player
+			//setting that the computer player is ready to make an accusation
+			suggestingPlayer.setComputerReady(true);
+		}
 		GameControlPanel.getGCPanel().SetGuessResult(guessResult);
 		return null;
 	}

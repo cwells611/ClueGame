@@ -376,10 +376,11 @@ public class GameSolutionTest {
 	@Test
 	void onlyHumanCanDisprove(){
 		//creating 4 players, the human player and 3 cpus
-		Player humanPlayer = new HumanPlayer("Human", "color", 0 , 0);
-		Player cpu1 = new ComputerPlayer("cpu1", "color", 1, 1);
-		Player cpu2 = new ComputerPlayer("cpu2", "color", 2, 2);
-		Player cpu3 = new ComputerPlayer("cpu3", "color", 3, 3);
+		Player humanPlayer = new HumanPlayer("Nigel Thomas", "pink", 0 , 0);
+		Player cpu1 = new ComputerPlayer("Bobby Long", "green", 1, 1);
+		Player cpu2 = new ComputerPlayer("Craig Downs", "blue", 2, 2);
+		Player cpu3 = new ComputerPlayer("Edna Dickson", "red", 3, 3);
+		Player cpu4 = new ComputerPlayer("Judas Watkins", "orange", 4, 4);
 
 		//creating 14 cards, so each player can have 3 cards, and 2 extra cards
 		Card roofCard = new Card("Roof", CardType.ROOM);
