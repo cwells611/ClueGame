@@ -756,7 +756,6 @@ public class Board {
 				if(clickedOnRoom) {
 					clickedRow = clickedRoom.getCenterCell().getRow();
 					clickedCol = clickedRoom.getCenterCell().getCol();
-					System.out.println("Clicked on a room 1");
 				}
 				
 				currentPlayer.setRow(clickedRow);
@@ -766,7 +765,6 @@ public class Board {
 				if(clickedOnRoom) {
 					//handling suggestion
 					//TODO pop up dialog to get suggestion from player
-					System.out.println("clicked on room");
 					SuggestionAccusationPanel saPanel = new SuggestionAccusationPanel(true);
 					saPanel.setVisible(true);
 					System.out.println(saPanel.getSelectedRoom());

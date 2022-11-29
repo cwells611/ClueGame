@@ -153,6 +153,7 @@ public class KnownCardsPanel extends JPanel {
 		if(vector.size() == 0 || b == false) {
 			JTextField none = new JTextField();
 			none.setText("None");
+			none.setEditable(false);
 			panel.add(none);
 		}else {
 			for(Card card : vector) {
@@ -161,6 +162,7 @@ public class KnownCardsPanel extends JPanel {
 					addLabel.setText(card.getName());
 					//set the background of the text field to the color of the player 
 					addLabel.setBackground(player.getColor());
+					addLabel.setEditable(false);
 					panel.add(addLabel);
 				}
 			}
