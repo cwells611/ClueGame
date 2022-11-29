@@ -2,6 +2,7 @@ package clueGame;
 
 import javax.swing.JDialog;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
@@ -77,7 +78,12 @@ public class SuggestionAccusationPanel extends JDialog {
 		currentRoomLabel = new JLabel("Current room");
 		add(currentRoomLabel);
 		if(isSuggestion) {
-			roomTextField = new JTextField("TEMP");
+			//getting the name of the room that the human player is in
+			Player suggestingPlayer = Board.getInstance().getHumanPlayer();
+			BoardCell suggestingRoomCenterCell = Board.getInstance().getGrid()[suggestingPlayer.getRow()][suggestingPlayer.getCol()];
+			Room suggestingRoom = Board.getInstance().getRoom(suggestingRoomCenterCell);
+			//setting the text field as the room that the suggesting player is in
+			roomTextField = new JTextField(suggestingRoom.getName());
 			add(roomTextField);
 		}else{
 			roomOption = createComboBox(rooms);
