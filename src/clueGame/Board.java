@@ -551,10 +551,10 @@ public class Board {
 		int suggestingPlayerCol = suggestingPlayer.getCol();
 		Card suggestedPerson = solution.getPerson();
 		
-		System.out.println(suggestedPerson.getName());
+		System.out.println("Suggested Person: "+suggestedPerson.getName());
 		Player suggestedPlayer = null;
 		for(Player player : players) {
-			System.out.println(player.getPlayerName());
+			System.out.println("Player in players: "+player.getPlayerName());
 			if(player.getPlayerName().equals(suggestedPerson.getName())) {
 				suggestedPlayer = player;
 				System.out.println("TEST");

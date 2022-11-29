@@ -260,10 +260,11 @@ public class GameSolutionTest {
 	@Test
 	void noDisproves() {
 		//creating 4 players, the human player and 3 cpus
-		Player humanPlayer = new HumanPlayer("Human", "color", 0 , 0);
-		Player cpu1 = new ComputerPlayer("cpu1", "color", 1, 1);
-		Player cpu2 = new ComputerPlayer("cpu2", "color", 2, 2);
-		Player cpu3 = new ComputerPlayer("cpu3", "color", 3, 3);
+		Player humanPlayer = new HumanPlayer("Nigel Thomas", "pink", 0 , 0);
+		Player cpu1 = new ComputerPlayer("Bobby Long", "green", 1, 1);
+		Player cpu2 = new ComputerPlayer("Craig Downs", "blue", 2, 2);
+		Player cpu3 = new ComputerPlayer("Edna Dickson", "red", 3, 3);
+		Player cpu4 = new ComputerPlayer("Judas Watkins", "orange", 4, 4);
 		
 		//creating 15 cards, so each player can have 3 cards, and 3 extra cards
 		Card roofCard = new Card("Roof", CardType.ROOM);
@@ -302,6 +303,7 @@ public class GameSolutionTest {
 		players.add(cpu1);
 		players.add(cpu2);
 		players.add(cpu3);
+		players.add(cpu4);
 		
 		//creating a suggestion with cards that the 3 cards that are not in anyone's hand
 		Solution solution = new Solution();
@@ -319,10 +321,11 @@ public class GameSolutionTest {
 	@Test
 	void onlySuggestingPlayerCanDisprove() {
 		//creating 4 players, the human player and 3 cpus
-		Player humanPlayer = new HumanPlayer("Human", "color", 0 , 0);
-		Player cpu1 = new ComputerPlayer("cpu1", "color", 1, 1);
-		Player cpu2 = new ComputerPlayer("cpu2", "color", 2, 2);
-		Player cpu3 = new ComputerPlayer("cpu3", "color", 3, 3);
+		Player humanPlayer = new HumanPlayer("Nigel Thomas", "pink", 0 , 0);
+		Player cpu1 = new ComputerPlayer("Bobby Long", "green", 1, 1);
+		Player cpu2 = new ComputerPlayer("Craig Downs", "blue", 2, 2);
+		Player cpu3 = new ComputerPlayer("Edna Dickson", "red", 3, 3);
+		Player cpu4 = new ComputerPlayer("Judas Watkins", "orange", 4, 4);
 
 		//creating 14 cards, so each player can have 3 cards, and 2 extra cards
 		Card roofCard = new Card("Roof", CardType.ROOM);
@@ -360,6 +363,7 @@ public class GameSolutionTest {
 		players.add(cpu1);
 		players.add(cpu2);
 		players.add(cpu3);
+		players.add(cpu4);
 
 		//creating a solution with the 2 unused cards, and the weapon that the suggesting human player has
 		//only the human player would know that the pan card cannot be in the true answer
@@ -418,6 +422,7 @@ public class GameSolutionTest {
 		players.add(cpu1);
 		players.add(cpu2);
 		players.add(cpu3);
+		players.add(cpu4);
 
 		//creating a solution with cards that the 3 cards that are not in anyone's hand
 		Solution solution = new Solution();
@@ -434,10 +439,11 @@ public class GameSolutionTest {
 	@Test
 	void twoPlayersCanDisprove() {
 		//creating 4 players, the human player and 3 cpus
-		Player humanPlayer = new HumanPlayer("Human", "color", 0 , 0);
-		Player cpu1 = new ComputerPlayer("cpu1", "color", 1, 1);
-		Player cpu2 = new ComputerPlayer("cpu2", "color", 2, 2);
-		Player cpu3 = new ComputerPlayer("cpu3", "color", 3, 3);
+		Player humanPlayer = new HumanPlayer("Nigel Thomas", "pink", 0 , 0);
+		Player cpu1 = new ComputerPlayer("Bobby Long", "green", 1, 1);
+		Player cpu2 = new ComputerPlayer("Craig Downs", "blue", 2, 2);
+		Player cpu3 = new ComputerPlayer("Edna Dickson", "red", 3, 3);
+		Player cpu4 = new ComputerPlayer("Judas Watkins", "orange", 4, 4);
 
 		//creating 13 cards, so each player can have 3 cards, and 1 extra card
 		Card roofCard = new Card("Roof", CardType.ROOM);
@@ -474,6 +480,7 @@ public class GameSolutionTest {
 		players.add(cpu1);
 		players.add(cpu2);
 		players.add(cpu3);
+		players.add(cpu4);
 
 		//creating a solution with cpu2's sauna room card and cpu3's edna person card 
 		Solution solution = new Solution();
