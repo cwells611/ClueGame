@@ -4,6 +4,8 @@ import javax.swing.JDialog;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -35,6 +37,9 @@ public class SuggestionAccusationPanel extends JDialog {
 	private ArrayList<String> people;
 	private ArrayList<String> weapons;
 	private ArrayList<Card> allCards;
+	private String selectedRoom;
+	private String selectedPerson;
+	private String selectedWeapon;
 	
 	
 	public SuggestionAccusationPanel(boolean isSuggestion) {
@@ -75,6 +80,9 @@ public class SuggestionAccusationPanel extends JDialog {
 		}
 		setSize(300,200);
 		setLayout(new GridLayout(4,2));
+		//action listener for combo boxes
+		ComboListener comboListener = new ComboListener();
+		
 		currentRoomLabel = new JLabel("Current room");
 		add(currentRoomLabel);
 		if(isSuggestion) {
@@ -86,21 +94,27 @@ public class SuggestionAccusationPanel extends JDialog {
 			roomTextField = new JTextField(suggestingRoom.getName());
 			roomTextField.setEditable(false);
 			add(roomTextField);
+			selectedRoom = suggestingRoom.getName();
 		}else{
 			roomOption = createComboBox(rooms);
+			roomOption.addActionListener(comboListener);
 			add(roomOption);
 		}
 		personLabel = new JLabel("Person");
 		add(personLabel);
 		personOption = createComboBox(people);
+		personOption.addActionListener(comboListener);
 		add(personOption);
 		weaponLabel = new JLabel("Weapon");
 		add(weaponLabel);
 		weaponOption = createComboBox(weapons);
+		weaponOption.addActionListener(comboListener);
 		add(weaponOption);
 		submitButton = button("Submit");
+		submitButton.addActionListener(new submitListener());
 		add(submitButton);
 		cancelButton = button("Cancel");
+		cancelButton.addActionListener(new cancelListener());
 		add(cancelButton);
 		
 	}
@@ -122,6 +136,61 @@ public class SuggestionAccusationPanel extends JDialog {
 		return button;
 	}
 	
+	private class ComboListener implements ActionListener {
+		  public void actionPerformed(ActionEvent e)
+		  {
+		    if(e.getSource() == roomOption) {
+		    	selectedRoom = roomOption.getSelectedItem().toString();
+		    }else if(e.getSource() == personOption) {
+		    	selectedPerson = personOption.getSelectedItem().toString();
+		    }else {
+		    	selectedWeapon = weaponOption.getSelectedItem().toString();;
+		    }
+		  }
+		}
+	
+	private class submitListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			//checking to see if any options were not selected
+			//assuming the first item in the list to be the selected one
+			if(selectedRoom == null) {
+				selectedRoom = rooms.get(0);
+			}
+			if(selectedPerson == null) {
+				selectedPerson = people.get(0);
+			}
+			if(selectedWeapon == null) {
+				selectedWeapon = weapons.get(0);
+			}
+			
+			System.out.println("Selected Room: " + selectedRoom);
+			System.out.println("Selected Person: " + selectedPerson);
+			System.out.println("Selected Weapon: " + selectedWeapon);
+			
+			//closing the window
+			System.exit(0);
+		}
+	}
+	
+	private class cancelListener implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			System.exit(0);
+		}
+	}
+	
+	public String getSelectedRoom() {
+		return selectedRoom;
+	}
+
+	public String getSelectedPerson() {
+		return selectedPerson;
+	}
+
+	public String getSelectedWeapon() {
+		return selectedWeapon;
+	}
+	
 	public static void main(String[] args) {
 		Board gameBoard = Board.getInstance();
 		gameBoard.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
@@ -134,7 +203,7 @@ public class SuggestionAccusationPanel extends JDialog {
 		//deal out cards to the players 
 		gameBoard.deal();
 		
-		SuggestionAccusationPanel gui = new SuggestionAccusationPanel(true);	
+		SuggestionAccusationPanel gui = new SuggestionAccusationPanel(false);	
 		gui.setVisible(true);
 	}
 	
