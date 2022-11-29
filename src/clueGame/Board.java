@@ -589,6 +589,7 @@ public class Board {
 		}
 		//returns null if a disproved card is never found
 		guessResult = "No cards were disproven";
+		
 		GameControlPanel.getGCPanel().SetGuessResult(guessResult);
 		return null;
 	}

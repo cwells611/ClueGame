@@ -120,9 +120,9 @@ public abstract class Player {
 		//offset of playerRadius 
 		if(Board.getInstance().getRoom(Board.getInstance().getCell(row, col)).getCharacterCounter() >= 1) {
 			g.setColor(this.color); 
-			g.fillOval((diameter * col) + playerRadius + Board.getInstance().getRoom(Board.getInstance().getCell(row, col)).getCharacterCounter(), (diameter * row) + 1, diameter - 2, diameter - 2);
+			g.fillOval((diameter * col) + (playerRadius * Board.getInstance().getRoom(Board.getInstance().getCell(row, col)).getCharacterCounter()), (diameter * row) + 1, diameter - 2, diameter - 2);
 			g.setColor(Color.BLACK);
-			g.drawOval((diameter * col) + playerRadius + Board.getInstance().getRoom(Board.getInstance().getCell(row, col)).getCharacterCounter(), (diameter * row) + 1, diameter - 2, diameter - 2);
+			g.drawOval((diameter * col) + (playerRadius * Board.getInstance().getRoom(Board.getInstance().getCell(row, col)).getCharacterCounter()), (diameter * row) + 1, diameter - 2, diameter - 2);
 
 		}
 		else {

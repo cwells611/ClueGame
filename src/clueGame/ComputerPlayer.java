@@ -10,6 +10,7 @@ public class ComputerPlayer extends Player{
 	private ArrayList<Card> notSeen = new ArrayList<Card>(); 
 	private int numWeaponsSeen = 0; 
 	private int numPeopleSeen = 0; 
+	private boolean computerReady = false; 
 
 	public ComputerPlayer(String name, String color, int startRow, int startCol) {
 		super(name, color, startRow, startCol);
@@ -149,6 +150,15 @@ public class ComputerPlayer extends Player{
 	
 	private void makeSuggestion() {
 		GameControlPanel.getGCPanel().setGuess("I suggest that Edna used a car in the Atrium");
+	}
+	
+
+	public boolean isComputerReady() {
+		return computerReady;
+	}
+
+	public void setComputerReady(boolean computerReady) {
+		this.computerReady = computerReady;
 	}
 
 }
