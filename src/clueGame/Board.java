@@ -635,7 +635,7 @@ public class Board {
 
 	//Deck and Solution getters
 	public ArrayList<Card> getDeck() {
-		return deck; 
+		return this.deck; 
 	}
 
 	//theAnswer getters and setters

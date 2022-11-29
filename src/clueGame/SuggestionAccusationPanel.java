@@ -33,6 +33,7 @@ public class SuggestionAccusationPanel extends JDialog {
 	private ArrayList<String> rooms;
 	private ArrayList<String> people;
 	private ArrayList<String> weapons;
+	private ArrayList<Card> allCards;
 	
 	
 	public SuggestionAccusationPanel(boolean isSuggestion) {
@@ -40,8 +41,13 @@ public class SuggestionAccusationPanel extends JDialog {
 		rooms = new ArrayList<String>();
 		people = new ArrayList<String>();
 		weapons = new ArrayList<String>();
-		//defining all of the cards to be the deck, plus the 3 cards in the solution
-		ArrayList<Card> allCards = Board.getInstance().getDeck();
+		//adding all of the cards from each player's hand, plus the 3 cards in the solution
+		allCards = new ArrayList<Card>();
+		for(Player player : Board.getInstance().getPlayers()) {
+			for( Card card : player.getHand()) {
+				allCards.add(card);
+			}
+		}
 		allCards.add(Board.getInstance().getTheAnswer().getRoom());
 		allCards.add(Board.getInstance().getTheAnswer().getPerson());
 		allCards.add(Board.getInstance().getTheAnswer().getWeapon());
@@ -107,6 +113,22 @@ public class SuggestionAccusationPanel extends JDialog {
 		label.setText(text);
 		button.add(label); 
 		return button;
+	}
+	
+	public static void main(String[] args) {
+		Board gameBoard = Board.getInstance();
+		gameBoard.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
+		gameBoard.initialize();
+
+		//after the board gets initialized, but before we create the frame, set the solution
+		Solution solution = gameBoard.getTheAnswer(); 
+		//remove solution cards from the deck 
+		gameBoard.removeSolutionCards(solution);
+		//deal out cards to the players 
+		gameBoard.deal();
+		
+		SuggestionAccusationPanel gui = new SuggestionAccusationPanel(true);	
+		gui.setVisible(true);
 	}
 	
 }
