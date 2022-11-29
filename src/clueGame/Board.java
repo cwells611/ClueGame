@@ -725,7 +725,6 @@ public class Board {
 			for(BoardCell target : targets) {
 				if(target.getRow() == clickedRow && target.getCol() == clickedCol) {
 					clickedOnTarget = true;
-					break;
 				}
 				if(target.isRoomCenter()) { //checking if a room is clicked on
 					//associating the the room center back to the room
@@ -757,6 +756,7 @@ public class Board {
 				if(clickedOnRoom) {
 					clickedRow = clickedRoom.getCenterCell().getRow();
 					clickedCol = clickedRoom.getCenterCell().getCol();
+					System.out.println("Clicked on a room 1");
 				}
 				
 				currentPlayer.setRow(clickedRow);
@@ -766,7 +766,12 @@ public class Board {
 				if(clickedOnRoom) {
 					//handling suggestion
 					//TODO pop up dialog to get suggestion from player
-					
+					System.out.println("clicked on room");
+					SuggestionAccusationPanel saPanel = new SuggestionAccusationPanel(true);
+					saPanel.setVisible(true);
+					System.out.println(saPanel.getSelectedRoom());
+					System.out.println(saPanel.getSelectedPerson());
+					System.out.println(saPanel.getSelectedWeapon());
 					//Card handledCard = handleSuggestion(currentPlayer, players, solution);
 					//update result
 				}

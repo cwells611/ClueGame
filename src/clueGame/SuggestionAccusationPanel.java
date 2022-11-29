@@ -164,12 +164,12 @@ public class SuggestionAccusationPanel extends JDialog {
 				selectedWeapon = weapons.get(0);
 			}
 			
-			System.out.println("Selected Room: " + selectedRoom);
-			System.out.println("Selected Person: " + selectedPerson);
-			System.out.println("Selected Weapon: " + selectedWeapon);
+//			System.out.println("Selected Room: " + selectedRoom);
+//			System.out.println("Selected Person: " + selectedPerson);
+//			System.out.println("Selected Weapon: " + selectedWeapon);
 			
 			//closing the window
-			System.exit(0);
+			setVisible(false);
 		}
 	}
 	
