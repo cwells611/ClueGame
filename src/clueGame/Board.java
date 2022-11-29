@@ -766,17 +766,7 @@ public class Board {
 				currentPlayerCell = grid[clickedRow][clickedCol];
 				//seeing if the player moved to a room
 				if(clickedOnRoom) {
-					//handling suggestion
-					//popping up suggestion Dialog
-					SuggestionAccusationPanel saPanel = new SuggestionAccusationPanel(true);
-					saPanel.setVisible(true);
-					System.out.println(saPanel.getSelectedRoom());
-					System.out.println(saPanel.getSelectedPerson());
-					System.out.println(saPanel.getSelectedWeapon());
-					//if the suggestion was properly submitted
-					if(saPanel.getSelectedPerson() != null && saPanel.getSelectedRoom() != null && saPanel.getSelectedWeapon() != null) {
-						
-					}
+					Solution suggestion = createSuggestion();
 					//Card handledCard = handleSuggestion(currentPlayer, players, solution);
 					//update result
 				}
@@ -808,6 +798,37 @@ public class Board {
 	}
 	public boolean getHumanFinished() {
 		return this.humanPlayerFinishedTurn; 		
+	}
+	
+	private Solution createSuggestion() {
+		SuggestionAccusationPanel saPanel = new SuggestionAccusationPanel(true);
+		saPanel.setVisible(true);
+		System.out.println(saPanel.getSelectedRoom());
+		System.out.println(saPanel.getSelectedPerson());
+		System.out.println(saPanel.getSelectedWeapon());
+		//if the suggestion was properly submitted
+		if(saPanel.getSelectedPerson() != null && saPanel.getSelectedRoom() != null && saPanel.getSelectedWeapon() != null) {
+			Solution suggestion = new Solution();
+			Card selectedRoom = null;
+			Card selectedPerson = null;
+			Card selectedWeapon = null;
+			for(Card card : allCards) {
+				if(card.getName() == saPanel.getSelectedRoom()) {
+					selectedRoom = card;
+				}
+				if(card.getName() == saPanel.getSelectedRoom()) {
+					selectedPerson = card;
+				}
+				if(card.getName() == saPanel.getSelectedRoom()) {
+					selectedWeapon = card;
+				}
+			}
+			suggestion.setRoom(selectedRoom);
+			suggestion.setPerson(selectedPerson);
+			suggestion.setWeapon(selectedWeapon);
+			return suggestion;
+		}
+		return null;
 	}
 }
 
