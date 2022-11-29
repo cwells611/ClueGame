@@ -10,7 +10,6 @@ public class ComputerPlayer extends Player{
 	private ArrayList<Card> notSeen = new ArrayList<Card>(); 
 	private int numWeaponsSeen = 0; 
 	private int numPeopleSeen = 0; 
-	private boolean computerReady = false; 
 
 	public ComputerPlayer(String name, String color, int startRow, int startCol) {
 		super(name, color, startRow, startCol);
@@ -18,6 +17,7 @@ public class ComputerPlayer extends Player{
 
 	//even though we are creating a suggestion, since the solution class already utilizes creation 
 	//of a room, weapon, and person card, we will use this class for our suggestion
+	@Override
 	public Solution createSuggestion(Board board, Room currentRoom) {
 		//creates new solution object for suggestion 
 		Solution suggestion = new Solution(); 
@@ -150,15 +150,6 @@ public class ComputerPlayer extends Player{
 	
 	private void makeSuggestion() {
 		GameControlPanel.getGCPanel().setGuess("I suggest that Edna used a car in the Atrium");
-	}
-	
-
-	public boolean isComputerReady() {
-		return computerReady;
-	}
-
-	public void setComputerReady(boolean computerReady) {
-		this.computerReady = computerReady;
 	}
 
 }

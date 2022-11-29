@@ -18,6 +18,7 @@ public abstract class Player {
 	private CardType type; 
 	private ArrayList<Card> seenCards;
 	private int playerRadius = 0; 
+	private boolean computerReady = false; 
 
 	//constructor 
 	public Player(String name, String color, int startRow, int startCol) {
@@ -136,5 +137,17 @@ public abstract class Player {
 
 	public BoardCell selectTarget(Set<BoardCell> targets, Board board) {
 		return null;
+	}
+	
+	public Solution createSuggestion(Board board, Room currentRoom) {
+		return null; 
+	}
+	
+	public boolean isComputerReady() {
+		return computerReady;
+	}
+
+	public void setComputerReady(boolean computerReady) {
+		this.computerReady = computerReady;
 	}
 }
