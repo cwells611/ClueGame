@@ -84,6 +84,7 @@ public class SuggestionAccusationPanel extends JDialog {
 			Room suggestingRoom = Board.getInstance().getRoom(suggestingRoomCenterCell);
 			//setting the text field as the room that the suggesting player is in
 			roomTextField = new JTextField(suggestingRoom.getName());
+			roomTextField.setEditable(false);
 			add(roomTextField);
 		}else{
 			roomOption = createComboBox(rooms);
