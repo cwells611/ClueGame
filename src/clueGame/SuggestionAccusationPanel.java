@@ -4,6 +4,8 @@ import javax.swing.JDialog;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -75,6 +77,9 @@ public class SuggestionAccusationPanel extends JDialog {
 		}
 		setSize(300,200);
 		setLayout(new GridLayout(4,2));
+		//action listener for combo boxes
+		ComboListener comboListener = new ComboListener();
+		
 		currentRoomLabel = new JLabel("Current room");
 		add(currentRoomLabel);
 		if(isSuggestion) {
@@ -87,15 +92,18 @@ public class SuggestionAccusationPanel extends JDialog {
 			add(roomTextField);
 		}else{
 			roomOption = createComboBox(rooms);
+			roomOption.addActionListener(comboListener);
 			add(roomOption);
 		}
 		personLabel = new JLabel("Person");
 		add(personLabel);
 		personOption = createComboBox(people);
+		personOption.addActionListener(comboListener);
 		add(personOption);
 		weaponLabel = new JLabel("Weapon");
 		add(weaponLabel);
 		weaponOption = createComboBox(weapons);
+		weaponOption.addActionListener(comboListener);
 		add(weaponOption);
 		submitButton = button("Submit");
 		add(submitButton);
@@ -121,6 +129,19 @@ public class SuggestionAccusationPanel extends JDialog {
 		return button;
 	}
 	
+	private class ComboListener implements ActionListener {
+		  public void actionPerformed(ActionEvent e)
+		  {
+		    if(e.getSource() == roomOption) {
+		    	System.out.println(roomOption.getSelectedItem().toString());
+		    }else if(e.getSource() == personOption) {
+		    	System.out.println(personOption.getSelectedItem().toString());
+		    }else {
+		    	System.out.println(weaponOption.getSelectedItem().toString());
+		    }
+		  }
+		}
+	
 	public static void main(String[] args) {
 		Board gameBoard = Board.getInstance();
 		gameBoard.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
@@ -133,7 +154,7 @@ public class SuggestionAccusationPanel extends JDialog {
 		//deal out cards to the players 
 		gameBoard.deal();
 		
-		SuggestionAccusationPanel gui = new SuggestionAccusationPanel(true);	
+		SuggestionAccusationPanel gui = new SuggestionAccusationPanel(false);	
 		gui.setVisible(true);
 	}
 	
