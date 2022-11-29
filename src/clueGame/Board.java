@@ -57,6 +57,7 @@ public class Board {
 	private BoardCell topLeftRoomCell;
 	private BoardCell bottomRightRoomCell;
 	private boolean clickedOnRoom;
+	private ArrayList<Card> allCards;
 	//instance variables that will determine the size of each board cell
 	int cellWidth = 0; 
 	int cellHeight = 0;
@@ -180,6 +181,8 @@ public class Board {
 				throw new BadConfigFormatException("Setup text file not written properly, check spelling and spaces"); 
 			}
 		} 
+		//creating an arraylist of all of the cards, used later
+		allCards = deck;
 		//after the deck has been fully loaded in, we want to randomly pick 1 room, 1 weapon, and 1 person that is the solution
 		Solution solution = new Solution(); 
 		solution.createSolution(deck);
@@ -371,7 +374,7 @@ public class Board {
 	public int getNumColumns() {
 		return numColumns;
 	}
-
+	
 	public BoardCell getCell(int row, int col) {
 		return grid[row][col]; 
 	}
@@ -764,12 +767,16 @@ public class Board {
 				//seeing if the player moved to a room
 				if(clickedOnRoom) {
 					//handling suggestion
-					//TODO pop up dialog to get suggestion from player
+					//popping up suggestion Dialog
 					SuggestionAccusationPanel saPanel = new SuggestionAccusationPanel(true);
 					saPanel.setVisible(true);
 					System.out.println(saPanel.getSelectedRoom());
 					System.out.println(saPanel.getSelectedPerson());
 					System.out.println(saPanel.getSelectedWeapon());
+					//if the suggestion was properly submitted
+					if(saPanel.getSelectedPerson() != null && saPanel.getSelectedRoom() != null && saPanel.getSelectedWeapon() != null) {
+						
+					}
 					//Card handledCard = handleSuggestion(currentPlayer, players, solution);
 					//update result
 				}
