@@ -129,18 +129,21 @@ public class ComputerPlayer extends Player{
 				}
 			}
 		}
-		//if we loop through the whole target list, and there are no rooms, then pick a random cell from target list 
-		Random random = new Random(); 
-		//generates a random number between 0 and the last element of the set
-		int randomTargetCell = random.nextInt(targets.size() - 1); 
-		int counter = 0; 
-		//loop through set 
-		for(BoardCell target : targets) {
-			//if the counter is equal to the random number that was generated, return target 
-			if(counter == randomTargetCell) {
-				return target;
+		
+		if(targets.size() != 0) {
+			//if we loop through the whole target list, and there are no rooms, then pick a random cell from target list 
+			Random random = new Random(); 
+			//generates a random number between 0 and the last element of the set
+			int randomTargetCell = random.nextInt(targets.size() - 1); 
+			int counter = 0; 
+			//loop through set 
+			for(BoardCell target : targets) {
+				//if the counter is equal to the random number that was generated, return target 
+				if(counter == randomTargetCell) {
+					return target;
+				}
+				counter++; 
 			}
-			counter++; 
 		}
 		return null; 
 	}

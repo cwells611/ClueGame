@@ -40,6 +40,7 @@ public class SuggestionAccusationPanel extends JDialog {
 	private String selectedRoom;
 	private String selectedPerson;
 	private String selectedWeapon;
+	private Room suggestingRoom;
 	
 	
 	public SuggestionAccusationPanel(boolean isSuggestion) {
@@ -82,19 +83,17 @@ public class SuggestionAccusationPanel extends JDialog {
 		setLayout(new GridLayout(4,2));
 		//action listener for combo boxes
 		ComboListener comboListener = new ComboListener();
-		
 		currentRoomLabel = new JLabel("Current room");
 		add(currentRoomLabel);
 		if(isSuggestion) {
 			//getting the name of the room that the human player is in
 			Player suggestingPlayer = Board.getInstance().getHumanPlayer();
 			BoardCell suggestingRoomCenterCell = Board.getInstance().getGrid()[suggestingPlayer.getRow()][suggestingPlayer.getCol()];
-			Room suggestingRoom = Board.getInstance().getRoom(suggestingRoomCenterCell);
+			suggestingRoom = Board.getInstance().getRoom(suggestingRoomCenterCell);
 			//setting the text field as the room that the suggesting player is in
 			roomTextField = new JTextField(suggestingRoom.getName());
 			roomTextField.setEditable(false);
 			add(roomTextField);
-			selectedRoom = suggestingRoom.getName();
 		}else{
 			roomOption = createComboBox(rooms);
 			roomOption.addActionListener(comboListener);
@@ -116,7 +115,7 @@ public class SuggestionAccusationPanel extends JDialog {
 		cancelButton = button("Cancel");
 		cancelButton.addActionListener(new cancelListener());
 		add(cancelButton);
-		
+		setModal(true);
 	}
 	
 	private JComboBox<String> createComboBox(ArrayList<String> options){
@@ -155,7 +154,7 @@ public class SuggestionAccusationPanel extends JDialog {
 			//checking to see if any options were not selected
 			//assuming the first item in the list to be the selected one
 			if(selectedRoom == null) {
-				selectedRoom = rooms.get(0);
+				selectedRoom = suggestingRoom.getName();
 			}
 			if(selectedPerson == null) {
 				selectedPerson = people.get(0);
@@ -163,19 +162,14 @@ public class SuggestionAccusationPanel extends JDialog {
 			if(selectedWeapon == null) {
 				selectedWeapon = weapons.get(0);
 			}
-			
-			System.out.println("Selected Room: " + selectedRoom);
-			System.out.println("Selected Person: " + selectedPerson);
-			System.out.println("Selected Weapon: " + selectedWeapon);
-			
 			//closing the window
-			System.exit(0);
+			setVisible(false);
 		}
 	}
 	
 	private class cancelListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			System.exit(0);
+			setVisible(false);
 		}
 	}
 	

@@ -57,6 +57,7 @@ public class Board {
 	private BoardCell topLeftRoomCell;
 	private BoardCell bottomRightRoomCell;
 	private boolean clickedOnRoom;
+	private ArrayList<Card> allCards;
 	//instance variables that will determine the size of each board cell
 	int cellWidth = 0; 
 	int cellHeight = 0;
@@ -180,6 +181,8 @@ public class Board {
 				throw new BadConfigFormatException("Setup text file not written properly, check spelling and spaces"); 
 			}
 		} 
+		//creating an arraylist of all of the cards, used later
+		allCards = deck;
 		//after the deck has been fully loaded in, we want to randomly pick 1 room, 1 weapon, and 1 person that is the solution
 		Solution solution = new Solution(); 
 		solution.createSolution(deck);
@@ -371,7 +374,7 @@ public class Board {
 	public int getNumColumns() {
 		return numColumns;
 	}
-
+	
 	public BoardCell getCell(int row, int col) {
 		return grid[row][col]; 
 	}
@@ -550,14 +553,10 @@ public class Board {
 		int suggestingPlayerRow = suggestingPlayer.getRow();
 		int suggestingPlayerCol = suggestingPlayer.getCol();
 		Card suggestedPerson = solution.getPerson();
-		
-		System.out.println("Suggested Person: "+suggestedPerson.getName());
 		Player suggestedPlayer = null;
 		for(Player player : players) {
-			System.out.println("Player in players: "+player.getPlayerName());
 			if(player.getPlayerName().equals(suggestedPerson.getName())) {
 				suggestedPlayer = player;
-				System.out.println("TEST");
 				break;
 			}
 		}
@@ -683,12 +682,26 @@ public class Board {
 				currentPlayerIdx = 0;
 			}
 			currentPlayer = players.get(currentPlayerIdx);
-
-			roll = rollDie();
-
+			
 			currentPlayerRow = currentPlayer.getRow();
 			currentPlayerCol = currentPlayer.getCol();
 			currentPlayerCell = grid[currentPlayerRow][currentPlayerCol];
+			
+			//checking if the player is in a room
+			if(currentPlayerCell.isRoomCenter()) {
+				Solution suggestion = createHumanSuggestion();
+				if(suggestion != null) {
+					Card handledCard = handleSuggestion(currentPlayer, players, suggestion);
+					if(handledCard != null) {
+						//adding the handled card to the seen list of the player
+						currentPlayer.addSeenCard(handledCard);
+						//exit since a suggestion was made
+						return;
+					}
+				}
+			}
+
+			roll = rollDie();
 			calcTargets(currentPlayerCell, roll);
 
 			//setting the GUI elements in game control panel
@@ -725,7 +738,6 @@ public class Board {
 			for(BoardCell target : targets) {
 				if(target.getRow() == clickedRow && target.getCol() == clickedCol) {
 					clickedOnTarget = true;
-					break;
 				}
 				if(target.isRoomCenter()) { //checking if a room is clicked on
 					//associating the the room center back to the room
@@ -764,11 +776,7 @@ public class Board {
 				currentPlayerCell = grid[clickedRow][clickedCol];
 				//seeing if the player moved to a room
 				if(clickedOnRoom) {
-					//handling suggestion
-					//TODO pop up dialog to get suggestion from player
-					
-					//Card handledCard = handleSuggestion(currentPlayer, players, solution);
-					//update result
+					createAndHandleSuggestion();
 				}
 				//flagging that the human player has finished their turn
 				humanPlayerFinishedTurn = true; 
@@ -798,6 +806,44 @@ public class Board {
 	}
 	public boolean getHumanFinished() {
 		return this.humanPlayerFinishedTurn; 		
+	}
+	
+	private Solution createHumanSuggestion() {
+		SuggestionAccusationPanel saPanel = new SuggestionAccusationPanel(true);
+		saPanel.setVisible(true);
+		//if the suggestion was properly submitted
+		if(saPanel.getSelectedPerson() != null && saPanel.getSelectedRoom() != null && saPanel.getSelectedWeapon() != null) {
+			Solution suggestion = new Solution();
+			Card selectedRoom = null;
+			Card selectedPerson = null;
+			Card selectedWeapon = null;
+			for(Card card : allCards) {
+				if(card.getName() == saPanel.getSelectedRoom()) {
+					selectedRoom = card;
+				}
+				if(card.getName() == saPanel.getSelectedPerson()) {
+					selectedPerson = card;
+				}
+				if(card.getName() == saPanel.getSelectedWeapon()) {
+					selectedWeapon = card;
+				}
+			}
+			suggestion.setRoom(selectedRoom);
+			suggestion.setPerson(selectedPerson);
+			suggestion.setWeapon(selectedWeapon);
+			GameControlPanel.getGCPanel().setGuess("I suggest that " + selectedPerson.getName() + " used a " + selectedWeapon.getName() + " in the " + selectedRoom.getName() + ".");
+			return suggestion;
+		}
+		return null;
+	}
+	
+	private void createAndHandleSuggestion() {
+		Solution suggestion = createHumanSuggestion();
+		Card handledCard = handleSuggestion(currentPlayer, players, suggestion);
+		if(handledCard != null) {
+			//adding the handled card to the seen list of the player
+			currentPlayer.addSeenCard(handledCard);
+		}
 	}
 }
 
