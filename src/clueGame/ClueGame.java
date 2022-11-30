@@ -59,6 +59,9 @@ public class ClueGame extends JFrame {
 		Solution solution = gameBoard.getTheAnswer(); 
 		//remove solution cards from the deck 
 		gameBoard.removeSolutionCards(solution);
+		System.out.println(solution.getRoom().getName());
+		System.out.println(solution.getPerson().getName());
+		System.out.println(solution.getWeapon().getName());
 		//deal out cards to the players 
 		gameBoard.deal();
 

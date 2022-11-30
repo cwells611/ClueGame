@@ -867,7 +867,9 @@ public class Board {
 		Solution accusation;
 		// do not process if it's a computer player's turn
 		accusation = currentPlayer.doAccusation();
-		
+		System.out.println(accusation.getRoom());
+		System.out.println(accusation.getPerson());
+		System.out.println(accusation.getWeapon());
 		boolean correctSol = checkAccusation(accusation);
 		if(correctSol) {
 			//put up a splash screen saying the game was won
