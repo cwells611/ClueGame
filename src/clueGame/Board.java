@@ -867,6 +867,7 @@ public class Board {
 			suggestion.setRoom(selectedRoom);
 			suggestion.setPerson(selectedPerson);
 			suggestion.setWeapon(selectedWeapon);
+			GameControlPanel.getGCPanel().guess.setBackground(players.get(0).getColor());
 			GameControlPanel.getGCPanel().setGuess("I suggest that " + selectedPerson.getName() + " used a " + selectedWeapon.getName() + " in the " + selectedRoom.getName() + ".");
 			return suggestion;
 		}
