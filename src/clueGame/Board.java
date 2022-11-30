@@ -187,7 +187,7 @@ public class Board {
 			}
 		} 
 		//creating an arraylist of all of the cards, used later
-		
+
 		allCards = (ArrayList<Card>) deck.clone();
 		currentPlayer = players.get(0);
 		//after the deck has been fully loaded in, we want to randomly pick 1 room, 1 weapon, and 1 person that is the solution
@@ -384,7 +384,7 @@ public class Board {
 	public int getNumColumns() {
 		return numColumns;
 	}
-	
+
 	public BoardCell getCell(int row, int col) {
 		return grid[row][col]; 
 	}
@@ -392,7 +392,7 @@ public class Board {
 	public Set<BoardCell> getAdjList(int i, int j) {
 		return grid[i][j].getAdjList();
 	}
-	
+
 	public ArrayList<Card> getAllCards(){
 		return this.allCards;
 	}
@@ -580,7 +580,7 @@ public class Board {
 		suggestedPlayer.setCanSuggest(true);
 		suggestedPlayer.setRow(suggestingPlayerRow);
 		suggestedPlayer.setCol(suggestingPlayerCol);
-		
+
 		//processing all players
 		//loop starts at the next player in line from the suggesting player
 		//i.e. the player to the left of the suggesting player
@@ -593,7 +593,7 @@ public class Board {
 			Card disprovedCard = players.get(playersIndex).disproveSuggestion(solution.getRoom(), solution.getPerson(), solution.getWeapon());
 			if(disprovedCard != null) {
 				//returns the disproved card the first time it sees one
-				
+
 				if(suggestingPlayer == players.get(0)) {// if the suggesting player is the human player
 					//show the disproving card and the player it came from
 					guessResult = disprovedCard.getName() + " was disproved by " + players.get(playersIndex).getPlayerName();	
@@ -603,7 +603,7 @@ public class Board {
 					guessResult = "suggestion disproved by " + players.get(playersIndex).getPlayerName();
 				}
 				//TODO draw the guess result in the appropriate color
-				GameControlPanel.getGCPanel().guessResult.setBackground(players.get(playersIndex).getColor());
+				GameControlPanel.getGCPanel().guessResult.setBackground(players.get(playersIndex).getColor());;
 				GameControlPanel.getGCPanel().SetGuessResult(guessResult);
 				return disprovedCard;
 			}
@@ -703,11 +703,11 @@ public class Board {
 				currentPlayerIdx = 0;
 			}
 			currentPlayer = players.get(currentPlayerIdx);
-			
+
 			currentPlayerRow = currentPlayer.getRow();
 			currentPlayerCol = currentPlayer.getCol();
 			currentPlayerCell = grid[currentPlayerRow][currentPlayerCol];
-			
+
 			//checking if the player is in a room
 			if(currentPlayer.canSuggest()) {
 				Solution suggestion = createHumanSuggestion();
@@ -738,7 +738,7 @@ public class Board {
 				//get the board cell of the target selected by the select target method
 				BoardCell compTarget = currentPlayer.selectTarget(targets, this);
 				//set the row and col of the current player to the row and col of the target cell
-				
+
 				//moving the player
 				currentPlayerCell.setOccupied(false);
 				currentPlayer.setRow(compTarget.getRow());
@@ -832,18 +832,18 @@ public class Board {
 	public boolean isHumanPlayer() {
 		return isHumanPlayer;
 	}
-	
+
 	public boolean getClickedOnTarget() {
 		return this.clickedOnTarget; 		
 	}
 	public boolean getHumanFinished() {
 		return this.humanPlayerFinishedTurn; 		
 	}
-	
+
 	private Solution createHumanSuggestion() {
 		// do not process if it's a computer player's turn
 		if(currentPlayer != players.get(0)) {
-				return null;
+			return null;
 		}
 		SuggestionAccusationPanel saPanel = new SuggestionAccusationPanel(true);
 		saPanel.setVisible(true);
@@ -867,13 +867,13 @@ public class Board {
 			suggestion.setRoom(selectedRoom);
 			suggestion.setPerson(selectedPerson);
 			suggestion.setWeapon(selectedWeapon);
-			GameControlPanel.getGCPanel().guess.setBackground(players.get(0).getColor());
+			//GameControlPanel.getGCPanel().guess.setBackground(this.currentPlayer.getColor());
 			GameControlPanel.getGCPanel().setGuess("I suggest that " + selectedPerson.getName() + " used a " + selectedWeapon.getName() + " in the " + selectedRoom.getName() + ".");
 			return suggestion;
 		}
 		return null;
 	}
-	
+
 	private void createAndHandleSuggestion() {
 		// do not process if it's a computer player's turn
 		if(currentPlayer != players.get(0)) {
