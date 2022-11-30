@@ -67,7 +67,7 @@ public abstract class Player {
 	}
 
 	public void updateHand(Card card) {
-		hand.add(card); 
+		hand.add(card);
 	}
 	public Color getColor() {
 		return this.color; 
@@ -130,20 +130,26 @@ public abstract class Player {
 
 		//if there are more than one character in the room, draw each character with an 
 		//offset of playerRadius 
-		if(Board.getInstance().getRoom(Board.getInstance().getCell(row, col)).getCharacterCounter() >= 1 && this.numTimesDrawn <= 1) {
-			g.setColor(this.color); 
-			g.fillOval((diameter * col) + (playerRadius * Board.getInstance().getRoom(Board.getInstance().getCell(row, col)).getCharacterCounter()), (diameter * row) + 1, diameter - 2, diameter - 2);
-			g.setColor(Color.BLACK);
-			g.drawOval((diameter * col) + (playerRadius * Board.getInstance().getRoom(Board.getInstance().getCell(row, col)).getCharacterCounter()), (diameter * row) + 1, diameter - 2, diameter - 2);
-
-		}
-		else {
+		/*
+		 * if(Board.getInstance().getRoom(Board.getInstance().getCell(row,
+		 * col)).getCharacterCounter() >= 1 && this.numTimesDrawn <= 1) {
+		 * g.setColor(this.color); g.fillOval((diameter * col) + (playerRadius *
+		 * Board.getInstance().getRoom(Board.getInstance().getCell(row,
+		 * col)).getCharacterCounter()), (diameter * row) + 1, diameter - 2, diameter -
+		 * 2); g.setColor(Color.BLACK); g.drawOval((diameter * col) + (playerRadius *
+		 * Board.getInstance().getRoom(Board.getInstance().getCell(row,
+		 * col)).getCharacterCounter()), (diameter * row) + 1, diameter - 2, diameter -
+		 * 2);
+		 * 
+		 * }
+		 */
+		//else {
 			//setting the color
 			g.setColor(this.color); 
 			g.fillOval((diameter * col) + 1, (diameter * row) + 1, diameter - 2, diameter - 2);
 			g.setColor(Color.BLACK);
 			g.drawOval((diameter * col) + 1, (diameter * row) + 1, diameter - 2, diameter - 2);
-		}
+		//}
 	}
 
 	public BoardCell selectTarget(Set<BoardCell> targets, Board board) {
