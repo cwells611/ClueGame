@@ -718,9 +718,12 @@ public class Board {
 				//get the board cell of the target selected by the select target method
 				BoardCell compTarget = currentPlayer.selectTarget(targets, this);
 				//set the row and col of the current player to the row and col of the target cell
+				
+				currentPlayerCell.setOccupied(false);
 				currentPlayer.setRow(compTarget.getRow());
 				currentPlayer.setCol(compTarget.getCol());
 				currentPlayerCell = grid[currentPlayer.getRow()][currentPlayer.getCol()]; 
+				currentPlayerCell.setOccupied(true);
 
 			}
 			//after an entire turn has been processed, we increment the player index 
@@ -772,10 +775,11 @@ public class Board {
 					clickedRow = clickedRoom.getCenterCell().getRow();
 					clickedCol = clickedRoom.getCenterCell().getCol();
 				}
-				
+				currentPlayerCell.setOccupied(false);
 				currentPlayer.setRow(clickedRow);
 				currentPlayer.setCol(clickedCol);
 				currentPlayerCell = grid[clickedRow][clickedCol];
+				currentPlayerCell.setOccupied(true);
 				//seeing if the player moved to a room
 				if(clickedOnRoom) {
 					createAndHandleSuggestion();
@@ -811,6 +815,10 @@ public class Board {
 	}
 	
 	private Solution createHumanSuggestion() {
+		// do not process if it's a computer player's turn
+		if(currentPlayer != players.get(0)) {
+				return null;
+		}
 		SuggestionAccusationPanel saPanel = new SuggestionAccusationPanel(true);
 		saPanel.setVisible(true);
 		//if the suggestion was properly submitted
