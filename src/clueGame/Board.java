@@ -182,7 +182,8 @@ public class Board {
 			}
 		} 
 		//creating an arraylist of all of the cards, used later
-		allCards = deck;
+		
+		allCards = (ArrayList<Card>) deck.clone();
 		//after the deck has been fully loaded in, we want to randomly pick 1 room, 1 weapon, and 1 person that is the solution
 		Solution solution = new Solution(); 
 		solution.createSolution(deck);
@@ -541,7 +542,9 @@ public class Board {
 		Card accusedRoom = accusation.getRoom();
 		Card accusedPerson = accusation.getPerson();
 		Card accusedWeapon = accusation.getWeapon();
-
+		if(accusedRoom == null || accusedPerson == null || accusedWeapon == null) {
+			return false;
+		}
 		// returns true if and only if all the rooms, people, and weapons match
 		if(correctRoom == accusedRoom && correctPerson == accusedPerson && correctWeapon == accusedWeapon) {
 			return true;
@@ -869,9 +872,6 @@ public class Board {
 		Solution accusation;
 		// do not process if it's a computer player's turn
 		accusation = currentPlayer.doAccusation();
-		System.out.println(accusation.getRoom());
-		System.out.println(accusation.getPerson());
-		System.out.println(accusation.getWeapon());
 		boolean correctSol = checkAccusation(accusation);
 		if(correctSol) {
 			//put up a splash screen saying the game was won

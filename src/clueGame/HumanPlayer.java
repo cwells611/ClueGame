@@ -11,13 +11,20 @@ public class HumanPlayer extends Player {
 		SuggestionAccusationPanel saPanel = new SuggestionAccusationPanel(false);
 		saPanel.setVisible(true);
 		Solution accusation = new Solution();
-		Card selectedRoom = saPanel.getSelectedRoom();
+		Card selectedRoom = null;
 		Card selectedPerson = null;
 		Card selectedWeapon = null;
-		
-		System.out.println(selectedRoom.getName());
-		System.out.println(selectedPerson.getName());
-		System.out.println(selectedWeapon.getName());
+		for(Card card : Board.getInstance().getAllCards()) {
+			if(card.getName().equals(saPanel.getSelectedRoom())) {
+				selectedRoom = card;
+			}
+			if(card.getName().equals(saPanel.getSelectedPerson())) {
+				selectedPerson = card;
+			}
+			if(card.getName().equals(saPanel.getSelectedWeapon())) {
+				selectedWeapon = card;
+			}
+		}
 		accusation.setRoom(selectedRoom);
 		accusation.setPerson(selectedPerson);
 		accusation.setWeapon(selectedWeapon);

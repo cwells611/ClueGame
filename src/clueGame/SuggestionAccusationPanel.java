@@ -41,9 +41,11 @@ public class SuggestionAccusationPanel extends JDialog {
 	private String selectedPerson;
 	private String selectedWeapon;
 	private Room suggestingRoom;
+	private boolean isSuggestion;
 	
 	
 	public SuggestionAccusationPanel(boolean isSuggestion) {
+		this.isSuggestion = isSuggestion;
 		//creating array lists of strings corresponding to each card type
 		rooms = new ArrayList<String>();
 		people = new ArrayList<String>();
@@ -153,7 +155,7 @@ public class SuggestionAccusationPanel extends JDialog {
 		public void actionPerformed(ActionEvent e) {
 			//checking to see if any options were not selected
 			//assuming the first item in the list to be the selected one
-			if(selectedRoom == null) {
+			if(selectedRoom == null && isSuggestion) {
 				selectedRoom = suggestingRoom.getName();
 			}
 			if(selectedPerson == null) {
