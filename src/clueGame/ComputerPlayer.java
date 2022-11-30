@@ -92,7 +92,7 @@ public class ComputerPlayer extends Player{
 			//sets the weapon based on the random index
 			suggestion.setWeapon(notSeen.get(randomWeaponIndex));
 		}
-		
+
 		//if numPeopleSeen is not 5 and not 0 because we need to make sure we have see at least one person, 
 		//then we need to randomly pick from the unseen weapons for the suggestion 
 		if(numPeopleSeen != 5 && numPeopleSeen != 0) {
@@ -129,7 +129,7 @@ public class ComputerPlayer extends Player{
 				}
 			}
 		}
-		
+
 		if(targets.size() != 0) {
 			//if we loop through the whole target list, and there are no rooms, then pick a random cell from target list 
 			Random random = new Random(); 
@@ -147,8 +147,9 @@ public class ComputerPlayer extends Player{
 		}
 		return null; 
 	}
-	
-	private Solution doAccusation() {
+
+	@Override
+	public Solution doAccusation() {
 		Solution accusation = new Solution(); 
 		if(numRoomsSeen == 8 && numPeopleSeen == 5 && numWeaponsSeen == 5) {
 			for(Card notSeenCard : notSeen) {
@@ -167,7 +168,7 @@ public class ComputerPlayer extends Player{
 		}
 		return accusation; 
 	}
-	
+
 	private void makeSuggestion() {
 		GameControlPanel.getGCPanel().setGuess("I suggest that Edna used a car in the Atrium");
 	}

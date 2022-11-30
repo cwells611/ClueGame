@@ -382,6 +382,10 @@ public class Board {
 	public Set<BoardCell> getAdjList(int i, int j) {
 		return grid[i][j].getAdjList();
 	}
+	
+	public ArrayList<Card> getAllCards(){
+		return this.allCards;
+	}
 
 	public void calcTargets(BoardCell startCell, int pathLength) {
 		//clears both visited and targets list to make sure both are empty before calculating new targets
@@ -561,6 +565,7 @@ public class Board {
 			}
 		}
 		//moving the suggestedPlayer to the same location as the suggestingPlayer
+		suggestedPlayer.setCanSuggest(true);
 		suggestedPlayer.setRow(suggestingPlayerRow);
 		suggestedPlayer.setCol(suggestingPlayerCol);
 		
@@ -688,13 +693,14 @@ public class Board {
 			currentPlayerCell = grid[currentPlayerRow][currentPlayerCol];
 			
 			//checking if the player is in a room
-			if(currentPlayerCell.isRoomCenter()) {
+			if(currentPlayer.canSuggest()) {
 				Solution suggestion = createHumanSuggestion();
 				if(suggestion != null) {
 					Card handledCard = handleSuggestion(currentPlayer, players, suggestion);
 					if(handledCard != null) {
 						//adding the handled card to the seen list of the player
 						currentPlayer.addSeenCard(handledCard);
+						currentPlayer.setCanSuggest(false);
 						//exit since a suggestion was made
 						return;
 					}
@@ -716,9 +722,12 @@ public class Board {
 				//get the board cell of the target selected by the select target method
 				BoardCell compTarget = currentPlayer.selectTarget(targets, this);
 				//set the row and col of the current player to the row and col of the target cell
+				
+				currentPlayerCell.setOccupied(false);
 				currentPlayer.setRow(compTarget.getRow());
 				currentPlayer.setCol(compTarget.getCol());
 				currentPlayerCell = grid[currentPlayer.getRow()][currentPlayer.getCol()]; 
+				currentPlayerCell.setOccupied(true);
 
 			}
 			//after an entire turn has been processed, we increment the player index 
@@ -770,10 +779,11 @@ public class Board {
 					clickedRow = clickedRoom.getCenterCell().getRow();
 					clickedCol = clickedRoom.getCenterCell().getCol();
 				}
-				
+				currentPlayerCell.setOccupied(false);
 				currentPlayer.setRow(clickedRow);
 				currentPlayer.setCol(clickedCol);
 				currentPlayerCell = grid[clickedRow][clickedCol];
+				currentPlayerCell.setOccupied(true);
 				//seeing if the player moved to a room
 				if(clickedOnRoom) {
 					createAndHandleSuggestion();
@@ -809,6 +819,10 @@ public class Board {
 	}
 	
 	private Solution createHumanSuggestion() {
+		// do not process if it's a computer player's turn
+		if(currentPlayer != players.get(0)) {
+				return null;
+		}
 		SuggestionAccusationPanel saPanel = new SuggestionAccusationPanel(true);
 		saPanel.setVisible(true);
 		//if the suggestion was properly submitted
@@ -838,6 +852,10 @@ public class Board {
 	}
 	
 	private void createAndHandleSuggestion() {
+		// do not process if it's a computer player's turn
+		if(currentPlayer != players.get(0)) {
+			return;
+		}
 		Solution suggestion = createHumanSuggestion();
 		Card handledCard = handleSuggestion(currentPlayer, players, suggestion);
 		if(handledCard != null) {
@@ -846,6 +864,27 @@ public class Board {
 			//after adding card to the player's seen list we need to update the known cards panel 
 			KnownCardsPanel.getKCPanel().updateDisplay();
 		}
+	}
+	public void processAccusation() {
+		Solution accusation;
+		// do not process if it's a computer player's turn
+		accusation = currentPlayer.doAccusation();
+		
+		boolean correctSol = checkAccusation(accusation);
+		if(correctSol) {
+			//put up a splash screen saying the game was won
+			JOptionPane.showMessageDialog(null, "Congrats! You won the game!");
+			System.exit(0);
+		}else {
+			//if human player
+			if(currentPlayer == players.get(0)) {
+				JOptionPane.showMessageDialog(null, "You lost the game. Loser!" );
+				System.exit(0);
+			}else {// if CPU
+				players.remove(currentPlayer);
+			}
+		}
+		
 	}
 }
 

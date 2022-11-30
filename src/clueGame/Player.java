@@ -20,6 +20,8 @@ public abstract class Player {
 	private int playerRadius = 0; 
 	private boolean computerReady = false; 
 	private int numTimesDrawn = 0; 
+	private boolean canSuggest = false;
+
 
 	//constructor 
 	public Player(String name, String color, int startRow, int startCol) {
@@ -84,6 +86,14 @@ public abstract class Player {
 
 	public void setCol(int col) {
 		this.col = col;
+	}
+	
+	public boolean canSuggest() {
+		return canSuggest;
+	}
+
+	public void setCanSuggest(boolean canSuggest) {
+		this.canSuggest = canSuggest;
 	}
 
 	public Card disproveSuggestion(Card room, Card person, Card weapon) {
@@ -157,5 +167,8 @@ public abstract class Player {
 	}
 	public int getNumTimesDrawn() {
 		return this.numTimesDrawn; 
+	}
+	public Solution doAccusation() {
+		return null;
 	}
 }
