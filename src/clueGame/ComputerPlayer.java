@@ -10,6 +10,7 @@ public class ComputerPlayer extends Player{
 	private ArrayList<Card> notSeen = new ArrayList<Card>(); 
 	private int numWeaponsSeen = 0; 
 	private int numPeopleSeen = 0; 
+	private int numRoomsSeen = 0; 
 
 	public ComputerPlayer(String name, String color, int startRow, int startCol) {
 		super(name, color, startRow, startCol);
@@ -144,8 +145,24 @@ public class ComputerPlayer extends Player{
 		return null; 
 	}
 	
-	private void doAccusation() {
-		System.out.println("accusation test");
+	private Solution doAccusation() {
+		Solution accusation = new Solution(); 
+		if(numRoomsSeen == 8 && numPeopleSeen == 5 && numWeaponsSeen == 5) {
+			for(Card notSeenCard : notSeen) {
+				switch(notSeenCard.getType()) {
+				case ROOM:
+					accusation.setRoom(notSeenCard);
+					break; 
+				case WEAPON:
+					accusation.setWeapon(notSeenCard);
+					break; 
+				case PERSON:
+					accusation.setPerson(notSeenCard);
+					break; 
+				}
+			}
+		}
+		return accusation; 
 	}
 	
 	private void makeSuggestion() {
