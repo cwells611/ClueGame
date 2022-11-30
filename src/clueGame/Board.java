@@ -184,6 +184,7 @@ public class Board {
 		//creating an arraylist of all of the cards, used later
 		
 		allCards = (ArrayList<Card>) deck.clone();
+		currentPlayer = players.get(0);
 		//after the deck has been fully loaded in, we want to randomly pick 1 room, 1 weapon, and 1 person that is the solution
 		Solution solution = new Solution(); 
 		solution.createSolution(deck);
@@ -680,6 +681,8 @@ public class Board {
 
 	public void processNextTurn() {
 		//at the beginning of each turn we want to assume the human player is not up 
+		GameControlPanel.getGCPanel().setGuess("");
+		GameControlPanel.getGCPanel().SetGuessResult("");
 		if(humanPlayerFinishedTurn) {
 			isHumanPlayer = false;
 
@@ -726,11 +729,16 @@ public class Board {
 				BoardCell compTarget = currentPlayer.selectTarget(targets, this);
 				//set the row and col of the current player to the row and col of the target cell
 				
+				//moving the player
 				currentPlayerCell.setOccupied(false);
 				currentPlayer.setRow(compTarget.getRow());
 				currentPlayer.setCol(compTarget.getCol());
 				currentPlayerCell = grid[currentPlayer.getRow()][currentPlayer.getCol()]; 
 				currentPlayerCell.setOccupied(true);
+				//if the CPU is in a room, make a suggestion
+				if(compTarget.isRoomCenter()) {
+					
+				}
 
 			}
 			//after an entire turn has been processed, we increment the player index 
@@ -804,7 +812,7 @@ public class Board {
 	}
 	public Player getCurrentPlayer() {
 		// TODO Auto-generated method stub
-		return currentPlayer;
+		return this.currentPlayer;
 	}
 	public int getRoll() {
 		// TODO Auto-generated method stub
@@ -872,21 +880,24 @@ public class Board {
 		Solution accusation;
 		// do not process if it's a computer player's turn
 		accusation = currentPlayer.doAccusation();
+		if(accusation == null) {
+			return;
+		}
 		boolean correctSol = checkAccusation(accusation);
 		if(correctSol) {
 			//put up a splash screen saying the game was won
 			JOptionPane.showMessageDialog(null, "Congrats! You won the game!");
-			System.exit(0);
 		}else {
 			//if human player
 			if(currentPlayer == players.get(0)) {
 				JOptionPane.showMessageDialog(null, "You lost the game. Loser!" );
-				System.exit(0);
 			}else {// if CPU
 				players.remove(currentPlayer);
+				return;
 			}
 		}
-		
+		JOptionPane.showMessageDialog(null, "The correct solution was " + theAnswer.getRoom().getName() + " " + theAnswer.getPerson().getName() + " " + theAnswer.getWeapon().getName());
+		System.exit(0);
 	}
 }
 
