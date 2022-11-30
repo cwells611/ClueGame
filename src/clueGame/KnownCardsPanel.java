@@ -101,42 +101,23 @@ public class KnownCardsPanel extends JPanel {
 
 
 
-	public void addCard(Card card, Player player) {
-		JLabel label = new JLabel();
-		label.setText(card.getName());
-		switch(card.getType()) {
-		case ROOM:
-			if(player.getHand().contains(card)) {
-				inHandCards.add(card);
-				//recall the constructor, now that the arrayList is updated
-				roomsPanel = roomsPanel(player);
-			}else if(player.getSeenCards().contains(card)) {
-				player.addSeenCard(card);
-				roomsPanel = roomsPanel(player);
-			}
-			break;
-		case PERSON:
-			if(player.getHand().contains(card)) {
-				inHandCards.add(card);
-				//recall the constructor, now that the arrayList is updated
-				peoplePanel = peoplePanel(player);
-			}else if(player.getSeenCards().contains(card)) {
-				player.addSeenCard(card);
-				peoplePanel = peoplePanel(player);
-			}
-			break;
-		case WEAPON:
-			if(player.getHand().contains(card)) {
-				inHandCards.add(card);
-				//recall the constructor, now that the arrayList is updated
-				weaponsPanel = weaponsPanel(player);
-			}else if(player.getSeenCards().contains(card)) {
-				player.addSeenCard(card);
-				weaponsPanel = weaponsPanel(player);
-			}
-			break;
-		}
-	}
+	/*
+	 * public void addCard(Card card, Player player) { JLabel label = new JLabel();
+	 * label.setText(card.getName()); switch(card.getType()) { case ROOM:
+	 * if(player.getHand().contains(card)) { inHandCards.add(card); //recall the
+	 * constructor, now that the arrayList is updated roomsPanel =
+	 * roomsPanel(player); }else if(player.getSeenCards().contains(card) &&
+	 * !player.getHand().contains(card)) { //player.addSeenCard(card); roomsPanel =
+	 * roomsPanel(player); } break; case PERSON: if(player.getHand().contains(card))
+	 * { inHandCards.add(card); //recall the constructor, now that the arrayList is
+	 * updated peoplePanel = peoplePanel(player); }else
+	 * if(player.getSeenCards().contains(card)) { //player.addSeenCard(card);
+	 * peoplePanel = peoplePanel(player); } break; case WEAPON:
+	 * if(player.getHand().contains(card)) { inHandCards.add(card); //recall the
+	 * constructor, now that the arrayList is updated weaponsPanel =
+	 * weaponsPanel(player); }else if(player.getSeenCards().contains(card)) {
+	 * //player.addSeenCard(card); weaponsPanel = weaponsPanel(player); } break; } }
+	 */
 
 	public void updateDisplay() {
 		//in order to update the panel we are going to want to re-the constructor to redraw the panel
@@ -176,7 +157,7 @@ public class KnownCardsPanel extends JPanel {
 					JTextField addLabel = new JTextField();
 					addLabel.setText(card.getName());
 					//set the background of the text field to the color of the player 
-					addLabel.setBackground(player.getColor());
+					addLabel.setBackground(Board.getInstance().getCurrentPlayer().getColor());
 					addLabel.setEditable(false);
 					panel.add(addLabel);
 				}

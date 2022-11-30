@@ -123,9 +123,9 @@ public class ComputerPlayer extends Player{
 				for(Card card : board.getFullDeck()) {
 					if(card.getName().equals(board.getRoom(target).getName())) {
 						Card roomCard = card; 
-						//if computer has not seen roomCard, then then add that card to the player's 
+						//if computer has not seen roomCard and roomCard is not in the player's hand, then then add that card to the player's 
 						// seen list and return target 
-						if(!super.getSeenCards().contains(roomCard)) {
+						if(!super.getSeenCards().contains(roomCard) && !this.getHand().contains(roomCard)) {
 							super.addSeenCard(roomCard);
 							return target; 
 						}

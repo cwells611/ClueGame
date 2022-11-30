@@ -67,8 +67,7 @@ public abstract class Player {
 	}
 
 	public void updateHand(Card card) {
-		hand.add(card);
-		seenCards.add(card); 
+		hand.add(card); 
 	}
 	public Color getColor() {
 		return this.color; 

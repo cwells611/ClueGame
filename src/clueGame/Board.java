@@ -631,6 +631,7 @@ public class Board {
 				//giving the player the last card in the array
 				Card topCard = deck.get(deck.size()-1);
 				player.updateHand(topCard);
+				//player.addSeenCard(topCard);
 				deck.remove(topCard);
 			}
 		}
