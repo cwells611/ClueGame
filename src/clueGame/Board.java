@@ -840,6 +840,10 @@ public class Board {
 	}
 	
 	private void createAndHandleSuggestion() {
+		// do not process if it's a computer player's turn
+		if(currentPlayer != players.get(0)) {
+			return;
+		}
 		Solution suggestion = createHumanSuggestion();
 		Card handledCard = handleSuggestion(currentPlayer, players, suggestion);
 		if(handledCard != null) {
