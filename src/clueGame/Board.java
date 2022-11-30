@@ -561,6 +561,7 @@ public class Board {
 			}
 		}
 		//moving the suggestedPlayer to the same location as the suggestingPlayer
+		suggestedPlayer.setCanSuggest(true);
 		suggestedPlayer.setRow(suggestingPlayerRow);
 		suggestedPlayer.setCol(suggestingPlayerCol);
 		
@@ -688,13 +689,14 @@ public class Board {
 			currentPlayerCell = grid[currentPlayerRow][currentPlayerCol];
 			
 			//checking if the player is in a room
-			if(currentPlayerCell.isRoomCenter()) {
+			if(currentPlayer.canSuggest()) {
 				Solution suggestion = createHumanSuggestion();
 				if(suggestion != null) {
 					Card handledCard = handleSuggestion(currentPlayer, players, suggestion);
 					if(handledCard != null) {
 						//adding the handled card to the seen list of the player
 						currentPlayer.addSeenCard(handledCard);
+						currentPlayer.setCanSuggest(false);
 						//exit since a suggestion was made
 						return;
 					}
