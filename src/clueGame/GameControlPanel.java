@@ -243,9 +243,15 @@ public class GameControlPanel extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			theBoard = Board.getInstance();
-			theBoard.processAccusation();
-			BoardPanel.getTheBoardPanel().repaint();
+			if(theBoard.getCurrentPlayer() == theBoard.getHumanPlayer()) {
+				theBoard = Board.getInstance();
+				theBoard.processAccusation();
+				BoardPanel.getTheBoardPanel().repaint();
+			}else {
+				JOptionPane.showMessageDialog(BoardPanel.getTheBoardPanel(), "Accusations can only be made during the player's turn", 
+						"Invalid Accusation", JOptionPane.INFORMATION_MESSAGE);
+			}
+			
 			//call appropriate methods in board
 		}
 
