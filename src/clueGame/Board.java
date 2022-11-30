@@ -600,7 +600,7 @@ public class Board {
 				}else{ //if the suggesting player is a computer player
 					//showing that the suggestion was disproven and the player it came from
 					//not showing the card itself
-					guessResult = "A card was disproved by " + players.get(playersIndex).getPlayerName();
+					guessResult = "suggestion disproved by " + players.get(playersIndex).getPlayerName();
 				}
 				//TODO draw the guess result in the appropriate color
 				GameControlPanel.getGCPanel().SetGuessResult(guessResult);
@@ -608,7 +608,7 @@ public class Board {
 			}
 		}
 		//returns null if a disproved card is never found
-		guessResult = "No cards were disproven";
+		guessResult = "No new clue";
 		if(currentPlayer != players.get(0)) { //if a computer player
 			//setting that the computer player is ready to make an accusation
 			suggestingPlayer.setComputerReady(true);

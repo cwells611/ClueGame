@@ -88,7 +88,6 @@ public class ClueGame extends JFrame {
 		
 		//initially process the first turn of the game (the human's first turn)
 		gameBoard.processNextTurn();
-		System.out.println(Board.getInstance().getPlayers().size());
 		//after we process the turn, we want to repaint the board panel 
 		game.boardPanel.repaint();
 	}
