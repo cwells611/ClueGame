@@ -682,12 +682,26 @@ public class Board {
 				currentPlayerIdx = 0;
 			}
 			currentPlayer = players.get(currentPlayerIdx);
-
-			roll = rollDie();
-
+			
 			currentPlayerRow = currentPlayer.getRow();
 			currentPlayerCol = currentPlayer.getCol();
 			currentPlayerCell = grid[currentPlayerRow][currentPlayerCol];
+			
+			//checking if the player is in a room
+			if(currentPlayerCell.isRoomCenter()) {
+				Solution suggestion = createHumanSuggestion();
+				if(suggestion != null) {
+					Card handledCard = handleSuggestion(currentPlayer, players, suggestion);
+					if(handledCard != null) {
+						//adding the handled card to the seen list of the player
+						currentPlayer.addSeenCard(handledCard);
+						//exit since a suggestion was made
+						return;
+					}
+				}
+			}
+
+			roll = rollDie();
 			calcTargets(currentPlayerCell, roll);
 
 			//setting the GUI elements in game control panel
@@ -762,14 +776,7 @@ public class Board {
 				currentPlayerCell = grid[clickedRow][clickedCol];
 				//seeing if the player moved to a room
 				if(clickedOnRoom) {
-					Solution suggestion = createHumanSuggestion();
-					Card handledCard = handleSuggestion(currentPlayer, players, suggestion);
-					if(handledCard != null) {
-						//adding the handled card to the seen list of the player
-						currentPlayer.addSeenCard(handledCard);
-					}
-					
-					//update result
+					createAndHandleSuggestion();
 				}
 				//flagging that the human player has finished their turn
 				humanPlayerFinishedTurn = true; 
@@ -828,6 +835,15 @@ public class Board {
 			return suggestion;
 		}
 		return null;
+	}
+	
+	private void createAndHandleSuggestion() {
+		Solution suggestion = createHumanSuggestion();
+		Card handledCard = handleSuggestion(currentPlayer, players, suggestion);
+		if(handledCard != null) {
+			//adding the handled card to the seen list of the player
+			currentPlayer.addSeenCard(handledCard);
+		}
 	}
 }
 
