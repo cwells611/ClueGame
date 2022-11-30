@@ -861,6 +861,8 @@ public class Board {
 		if(handledCard != null) {
 			//adding the handled card to the seen list of the player
 			currentPlayer.addSeenCard(handledCard);
+			//after adding card to the player's seen list we need to update the known cards panel 
+			KnownCardsPanel.getKCPanel().updateDisplay();
 		}
 	}
 	public void processAccusation() {

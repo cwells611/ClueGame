@@ -19,7 +19,9 @@ public abstract class Player {
 	private ArrayList<Card> seenCards;
 	private int playerRadius = 0; 
 	private boolean computerReady = false; 
+	private int numTimesDrawn = 0; 
 	private boolean canSuggest = false;
+
 
 	//constructor 
 	public Player(String name, String color, int startRow, int startCol) {
@@ -128,7 +130,7 @@ public abstract class Player {
 
 		//if there are more than one character in the room, draw each character with an 
 		//offset of playerRadius 
-		if(Board.getInstance().getRoom(Board.getInstance().getCell(row, col)).getCharacterCounter() >= 1) {
+		if(Board.getInstance().getRoom(Board.getInstance().getCell(row, col)).getCharacterCounter() >= 1 && this.numTimesDrawn <= 1) {
 			g.setColor(this.color); 
 			g.fillOval((diameter * col) + (playerRadius * Board.getInstance().getRoom(Board.getInstance().getCell(row, col)).getCharacterCounter()), (diameter * row) + 1, diameter - 2, diameter - 2);
 			g.setColor(Color.BLACK);
@@ -160,8 +162,13 @@ public abstract class Player {
 		this.computerReady = computerReady;
 	}
 	
+	public void incrementNumTimesDrawn() {
+		this.numTimesDrawn++; 
+	}
+	public int getNumTimesDrawn() {
+		return this.numTimesDrawn; 
+	}
 	public Solution doAccusation() {
 		return null;
-		
 	}
 }

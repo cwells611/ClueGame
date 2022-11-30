@@ -41,7 +41,7 @@ public class ClueGame extends JFrame {
 		add(controlPanel, BorderLayout.SOUTH); 
 		//for initial testing, just adds the known cards panel for the first person 
 		//in the board's player list, will change to dynamically update each player 
-		this.cardsPanel = new KnownCardsPanel(Board.getInstance().getPlayers().get(0));
+		this.cardsPanel = KnownCardsPanel.getKCPanel();
 		add(cardsPanel, BorderLayout.EAST);
 		//adds game panel to the center of the JFrame 
 		add(boardPanel, BorderLayout.CENTER); 

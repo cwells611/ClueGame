@@ -26,17 +26,16 @@ public class KnownCardsPanel extends JPanel {
 	JPanel peoplePanel;
 	JPanel roomsPanel;
 	JPanel weaponsPanel;
-	Player player; 
-
+	Player player;
 	private ArrayList<Card> inHandCards = new ArrayList<Card>();
+	private static KnownCardsPanel KCPanel = new KnownCardsPanel(); 
 
+	private KnownCardsPanel() {
+		player = Board.getInstance().getHumanPlayer(); 
 
-	public KnownCardsPanel(Player player) {
-		//defining the player as the human player
-		this.player = Board.getInstance().getPlayers().get(0); 
 		//Create a layout with 3 rows
 		inHandCards = player.getHand();
-		
+
 		setLayout(new GridLayout(3,0));
 		Border blackline = BorderFactory.createTitledBorder("Known Cards");
 		setBorder(blackline);
@@ -46,7 +45,10 @@ public class KnownCardsPanel extends JPanel {
 		add(roomsPanel);
 		weaponsPanel = weaponsPanel(player);
 		add(weaponsPanel);
-		//need to add people rooms and weapons panels
+	}
+
+	public static KnownCardsPanel getKCPanel() {
+		return KCPanel; 
 	}
 
 	private JPanel peoplePanel(Player player) {
@@ -135,11 +137,23 @@ public class KnownCardsPanel extends JPanel {
 			break;
 		}
 	}
-	
-	public KnownCardsPanel updateDisplay(Player player, KnownCardsPanel panel) {
+
+	public void updateDisplay() {
 		//in order to update the panel we are going to want to re-the constructor to redraw the panel
-		panel = new KnownCardsPanel(player); 
-		return panel; 
+		System.out.println("updateDisplay method called");
+		this.KCPanel.remove(roomsPanel);
+		this.KCPanel.remove(peoplePanel);
+		this.KCPanel.remove(weaponsPanel);
+		this.KCPanel.revalidate();
+		setLayout(new GridLayout(3,0));
+		Border blackline = BorderFactory.createTitledBorder("Known Cards");
+		setBorder(blackline);
+		peoplePanel = peoplePanel(player);
+		add(peoplePanel);
+		roomsPanel = roomsPanel(player);
+		add(roomsPanel);
+		weaponsPanel = weaponsPanel(player);
+		add(weaponsPanel);
 	}
 
 	public void setCardTextFields(CardType type, JPanel panel, ArrayList<Card> vector) {
@@ -169,7 +183,7 @@ public class KnownCardsPanel extends JPanel {
 			}
 		}
 	}
-	
+
 	/**
 	 * Main to test the panel
 	 * 
@@ -178,13 +192,16 @@ public class KnownCardsPanel extends JPanel {
 	public static void main(String[] args) {
 		Player humanPlayer = new HumanPlayer("Col. Mustard", "orange", 0, 0);
 		Player comp1Player = new ComputerPlayer("jim", "pink", 0, 0);
-		KnownCardsPanel panel = new KnownCardsPanel(humanPlayer); // create the panel
+		ArrayList<Player> players = new ArrayList<Player>(); 
+		players.add(humanPlayer); 
+		players.add(comp1Player); 
+		KnownCardsPanel panel = new KnownCardsPanel(); // create the panel
 		JFrame frame = new JFrame(); // create the frame
 		frame.setContentPane(panel); // put the panel in the frame
 		frame.setSize(180, 570); // size the frame
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
 		frame.setVisible(true); // make it visible
-		
+
 		//Makes 3 people, 3 weapons, and 3 rooms cards for testing purposes 
 		Card person1 = new Card("person1", CardType.PERSON); 
 		Card person2 = new Card("person2", CardType.PERSON); 
@@ -199,12 +216,12 @@ public class KnownCardsPanel extends JPanel {
 		humanPlayer.updateHand(room2);
 		humanPlayer.updateHand(room3);
 		humanPlayer.updateHand(weapon3);
-		
+
 		comp1Player.updateHand(room1);
 		comp1Player.updateHand(weapon2);
 		comp1Player.updateHand(person3);
-		
-		panel = new KnownCardsPanel(humanPlayer); 
+
+		panel = new KnownCardsPanel(); 
 		//adds the remaining cards to the players seen list 
 		humanPlayer.addSeenCard(person1);
 		humanPlayer.addSeenCard(person2);
@@ -212,9 +229,9 @@ public class KnownCardsPanel extends JPanel {
 		humanPlayer.addSeenCard(room1);
 		humanPlayer.addSeenCard(weapon1);
 		humanPlayer.addSeenCard(weapon2);
-		panel = new KnownCardsPanel(humanPlayer);
+		panel = new KnownCardsPanel();
 		frame.setContentPane(panel);
-		
+
 		panel.revalidate();
 
 	}
