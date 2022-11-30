@@ -159,4 +159,9 @@ public abstract class Player {
 	public void setComputerReady(boolean computerReady) {
 		this.computerReady = computerReady;
 	}
+	
+	public Solution doAccusation() {
+		return null;
+		
+	}
 }

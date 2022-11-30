@@ -147,8 +147,10 @@ public class ComputerPlayer extends Player{
 		return null; 
 	}
 	
-	private void doAccusation() {
+	@Override
+	public Solution doAccusation() {
 		System.out.println("accusation test");
+		return null;
 	}
 	
 	private void makeSuggestion() {

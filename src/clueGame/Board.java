@@ -382,6 +382,10 @@ public class Board {
 	public Set<BoardCell> getAdjList(int i, int j) {
 		return grid[i][j].getAdjList();
 	}
+	
+	public ArrayList<Card> getAllCards(){
+		return this.allCards;
+	}
 
 	public void calcTargets(BoardCell startCell, int pathLength) {
 		//clears both visited and targets list to make sure both are empty before calculating new targets
@@ -858,6 +862,27 @@ public class Board {
 			//adding the handled card to the seen list of the player
 			currentPlayer.addSeenCard(handledCard);
 		}
+	}
+	public void processAccusation() {
+		Solution accusation;
+		// do not process if it's a computer player's turn
+		accusation = currentPlayer.doAccusation();
+		
+		boolean correctSol = checkAccusation(accusation);
+		if(correctSol) {
+			//put up a splash screen saying the game was won
+			JOptionPane.showMessageDialog(null, "Congrats! You won the game!");
+			System.exit(0);
+		}else {
+			//if human player
+			if(currentPlayer == players.get(0)) {
+				JOptionPane.showMessageDialog(null, "You lost the game. Loser!" );
+				System.exit(0);
+			}else {// if CPU
+				players.remove(currentPlayer);
+			}
+		}
+		
 	}
 }
 
