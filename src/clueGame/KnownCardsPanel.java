@@ -32,7 +32,8 @@ public class KnownCardsPanel extends JPanel {
 
 
 	public KnownCardsPanel(Player player) {
-		this.player = player; 
+		//defining the player as the human player
+		this.player = Board.getInstance().getPlayers().get(0); 
 		//Create a layout with 3 rows
 		inHandCards = player.getHand();
 		

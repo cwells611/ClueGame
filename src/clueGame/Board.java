@@ -553,14 +553,10 @@ public class Board {
 		int suggestingPlayerRow = suggestingPlayer.getRow();
 		int suggestingPlayerCol = suggestingPlayer.getCol();
 		Card suggestedPerson = solution.getPerson();
-		
-		System.out.println("Suggested Person: "+suggestedPerson.getName());
 		Player suggestedPlayer = null;
 		for(Player player : players) {
-			System.out.println("Player in players: "+player.getPlayerName());
 			if(player.getPlayerName().equals(suggestedPerson.getName())) {
 				suggestedPlayer = player;
-				System.out.println("TEST");
 				break;
 			}
 		}
@@ -766,8 +762,13 @@ public class Board {
 				currentPlayerCell = grid[clickedRow][clickedCol];
 				//seeing if the player moved to a room
 				if(clickedOnRoom) {
-					Solution suggestion = createSuggestion();
-					//Card handledCard = handleSuggestion(currentPlayer, players, solution);
+					Solution suggestion = createHumanSuggestion();
+					Card handledCard = handleSuggestion(currentPlayer, players, suggestion);
+					if(handledCard != null) {
+						//adding the handled card to the seen list of the player
+						currentPlayer.addSeenCard(handledCard);
+					}
+					
 					//update result
 				}
 				//flagging that the human player has finished their turn
@@ -800,12 +801,9 @@ public class Board {
 		return this.humanPlayerFinishedTurn; 		
 	}
 	
-	private Solution createSuggestion() {
+	private Solution createHumanSuggestion() {
 		SuggestionAccusationPanel saPanel = new SuggestionAccusationPanel(true);
 		saPanel.setVisible(true);
-		System.out.println(saPanel.getSelectedRoom());
-		System.out.println(saPanel.getSelectedPerson());
-		System.out.println(saPanel.getSelectedWeapon());
 		//if the suggestion was properly submitted
 		if(saPanel.getSelectedPerson() != null && saPanel.getSelectedRoom() != null && saPanel.getSelectedWeapon() != null) {
 			Solution suggestion = new Solution();
@@ -816,16 +814,17 @@ public class Board {
 				if(card.getName() == saPanel.getSelectedRoom()) {
 					selectedRoom = card;
 				}
-				if(card.getName() == saPanel.getSelectedRoom()) {
+				if(card.getName() == saPanel.getSelectedPerson()) {
 					selectedPerson = card;
 				}
-				if(card.getName() == saPanel.getSelectedRoom()) {
+				if(card.getName() == saPanel.getSelectedWeapon()) {
 					selectedWeapon = card;
 				}
 			}
 			suggestion.setRoom(selectedRoom);
 			suggestion.setPerson(selectedPerson);
 			suggestion.setWeapon(selectedWeapon);
+			GameControlPanel.getGCPanel().setGuess("I suggest that " + selectedPerson.getName() + " used a " + selectedWeapon.getName() + " in the " + selectedRoom.getName() + ".");
 			return suggestion;
 		}
 		return null;
