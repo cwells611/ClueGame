@@ -156,8 +156,14 @@ public class KnownCardsPanel extends JPanel {
 				if(card.getType() == type) {
 					JTextField addLabel = new JTextField();
 					addLabel.setText(card.getName());
-					//set the background of the text field to the color of the player 
-					addLabel.setBackground(Board.getInstance().getCurrentPlayer().getColor());
+					//loop through the list of player 
+					for(Player player : Board.getInstance().getPlayers()) {
+						//see if player's hand contains card 
+						if(player.getHand().contains(card)) {
+							//set the background color of the label to that player's color 
+							addLabel.setBackground(player.getColor());
+						}
+					}
 					addLabel.setEditable(false);
 					panel.add(addLabel);
 				}
