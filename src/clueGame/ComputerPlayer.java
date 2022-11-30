@@ -23,9 +23,9 @@ public class ComputerPlayer extends Player{
 		//creates new solution object for suggestion 
 		Solution suggestion = new Solution(); 
 		//calls createSoltion that will randomly create suggestion based on deck 
-		suggestion.createSolution(board.getDeck());
+		suggestion.createSolution(board.getFullDeck());
 		//gets the card in the deck associated with the room 
-		for(Card card : board.getDeck()) {
+		for(Card card : board.getFullDeck()) {
 			if(card.getName().equals(currentRoom.getName())) {
 				//sets the room in the randomly generated suggestion to be the current room 
 				suggestion.setRoom(card); 
@@ -45,7 +45,7 @@ public class ComputerPlayer extends Player{
 		}
 		//determine which cards the computer has and has not seen
 		//loop through the deck 
-		for(Card card : board.getDeck()) {
+		for(Card card : board.getFullDeck()) {
 			//loop through seen list 
 			for(Card seenCard : super.getSeenCards()) {
 				//if we have seen the card and the card is a weapon or a person then continue then we want to remove it from the seen list
@@ -114,16 +114,19 @@ public class ComputerPlayer extends Player{
 	//the set of boardcells that are available targets 
 	@Override
 	public BoardCell selectTarget(Set<BoardCell> targets, Board board) {
+		System.out.println("select target called");
 		//loop through the target list 
 		for(BoardCell target : targets) {
 			//if target is a room and the computer has not seen that room, then return that cell as the selected target of the player
 			if(target.getIsRoom()) {
 				//loop through the deck in order to find the card that corresponds to the room that is a potential target
-				for(Card card : board.getDeck()) {
+				for(Card card : board.getFullDeck()) {
 					if(card.getName().equals(board.getRoom(target).getName())) {
 						Card roomCard = card; 
-						//if computer has not seen roomCard, then return target 
+						//if computer has not seen roomCard, then then add that card to the player's 
+						// seen list and return target 
 						if(!super.getSeenCards().contains(roomCard)) {
+							super.addSeenCard(roomCard);
 							return target; 
 						}
 					}

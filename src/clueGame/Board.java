@@ -27,7 +27,8 @@ public class Board {
 	private Set<BoardCell> doors;
 	private ArrayList<Player> players; 
 	private ArrayList<String> weapons; 
-	private ArrayList<Card> deck; 
+	private ArrayList<Card> deck;
+	private ArrayList<Card> fullDeck; 
 	//private ArrayList<Card> solutionDeck; 
 	private char label;
 	private Room room;
@@ -90,6 +91,7 @@ public class Board {
 			players = new ArrayList<Player>(); 
 			weapons = new ArrayList<String>(); 
 			deck = new ArrayList<Card>(); 
+			fullDeck = new ArrayList<Card>(); 
 			//solution = new ArrayList<Card>(); 
 			loadSetupConfig(); 
 			loadLayoutConfig(); 
@@ -134,7 +136,8 @@ public class Board {
 					//create a card that corresponds to the room and add it to the deck 
 					card = new Card(lineInfo[1], room.getCardType());
 					//add card to arraylist 
-					deck.add(card); 
+					deck.add(card);
+					fullDeck.add(card); 
 				}
 				//adds label and room to the map 
 				roomMap.put(label, room);
@@ -164,6 +167,7 @@ public class Board {
 				card = new Card(lineInfo[1], player.getCardType()); 
 				//add card to deck 
 				deck.add(card); 
+				fullDeck.add(card); 
 			}
 			else if(lineInfo[0].equals("Weapon")) {
 				//add weapon to arraylist of weapons
@@ -176,6 +180,7 @@ public class Board {
 				card = new Card(lineInfo[1], cardType); 
 				//add card to deck
 				deck.add(card); 
+				fullDeck.add(card); 
 			}
 			else {
 				throw new BadConfigFormatException("Setup text file not written properly, check spelling and spaces"); 
@@ -190,6 +195,9 @@ public class Board {
 		solution.createSolution(deck);
 	}
 
+	public ArrayList<Card> getFullDeck() {
+		return fullDeck;
+	}
 	public void loadLayoutConfig() throws FileNotFoundException, BadConfigFormatException {
 		//load in ClueLayout.txt and then add the room character and room name to the map 
 		FileReader layoutReader = new FileReader(layoutConfigFile);  
