@@ -603,6 +603,7 @@ public class Board {
 					guessResult = "suggestion disproved by " + players.get(playersIndex).getPlayerName();
 				}
 				//TODO draw the guess result in the appropriate color
+				GameControlPanel.getGCPanel().guessResult.setBackground(players.get(playersIndex).getColor());
 				GameControlPanel.getGCPanel().SetGuessResult(guessResult);
 				return disprovedCard;
 			}

@@ -118,7 +118,6 @@ public class BoardPanel extends JPanel {
 				//increment the room's character 
 				player.draw(g, CELL_WIDTH); 
 				player.incrementNumTimesDrawn(); 
-				System.out.println(player.getPlayerName() + " drawn " + player.getNumTimesDrawn() + " times");
 				board.getRoom(board.getCell(player.getRow(), player.getCol())).incrementCharacterCounter(); 
 			}
 			else {
