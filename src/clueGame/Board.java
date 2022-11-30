@@ -688,7 +688,7 @@ public class Board {
 
 			//updating the current player
 			//making sure the current player index is not the last index
-			if(currentPlayerIdx == players.size()-1) {
+			if(currentPlayerIdx == players.size()) {
 				//if so, setting it to 0 to go back to the first player in the list
 				currentPlayerIdx = 0;
 			}
@@ -737,7 +737,8 @@ public class Board {
 				currentPlayerCell.setOccupied(true);
 				//if the CPU is in a room, make a suggestion
 				if(compTarget.isRoomCenter()) {
-					
+					System.out.println( currentPlayer.getPlayerName() + " just entered a room");
+					currentPlayer.createSuggestion(theInstance, roomMap.get(compTarget.getCharacter()));
 				}
 
 			}
