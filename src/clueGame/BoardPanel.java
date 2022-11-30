@@ -112,18 +112,7 @@ public class BoardPanel extends JPanel {
 
 		//drawing the players
 		for(Player player : board.getPlayers()) {
-			//checks to see if the player is being drawn in a room 
-			if(board.getCell(player.getRow(), player.getCol()).getIsRoom()) {
-				//if the player is being drawn in a room, draw the player, and then 
-				//increment the room's character 
-				player.draw(g, CELL_WIDTH); 
-				player.incrementNumTimesDrawn(); 
-				board.getRoom(board.getCell(player.getRow(), player.getCol())).incrementCharacterCounter(); 
-			}
-			else {
-				//if not being drawn in a room, just draw the player normally 
-				player.draw(g, CELL_WIDTH);
-			}
+			player.draw(g, CELL_WIDTH);
 		}
 	}
 

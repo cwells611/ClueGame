@@ -87,7 +87,7 @@ public abstract class Player {
 	public void setCol(int col) {
 		this.col = col;
 	}
-	
+
 	public boolean canSuggest() {
 		return canSuggest;
 	}
@@ -127,14 +127,27 @@ public abstract class Player {
 
 	public void draw(Graphics g, int diameter) {
 		playerRadius = diameter/2; 
-
-		//if there are more than one character in the room, draw each character with an 
-		//offset of playerRadius 
-		if(Board.getInstance().getRoom(Board.getInstance().getCell(row, col)).getCharacterCounter() > 1 && this.numTimesDrawn == 1) {
-			g.setColor(this.color); 
-			g.fillOval((diameter * col) + (playerRadius * Board.getInstance().getRoom(Board.getInstance().getCell(row, col)).getCharacterCounter()), (diameter * row) + 1, diameter - 2, diameter - 2);
-			g.setColor(Color.BLACK);
-			g.drawOval((diameter * col) + (playerRadius * Board.getInstance().getRoom(Board.getInstance().getCell(row, col)).getCharacterCounter()), (diameter * row) + 1, diameter - 2, diameter - 2);
+		//check to see if the player is being drawn in a room 
+		if(Board.getInstance().getCell(row, col).getIsRoom()) {
+			//loop through the players 
+			for(Player player: Board.getInstance().getPlayers()) {
+				if(player == this) {
+					continue; 
+				}
+				//check of any of the other players are at the same location 
+				else if(this.row == player.row && this.col == player.col) { 
+					g.setColor(player.color); 
+					g.fillOval((diameter * col) + playerRadius, (diameter * row) + 1, diameter - 2, diameter - 2);
+					g.setColor(Color.BLACK);
+					g.drawOval((diameter * col) + playerRadius, (diameter * row) + 1, diameter - 2, diameter - 2);
+				}
+				else {
+					g.setColor(this.color); 
+					g.fillOval((diameter * col) + 1, (diameter * row) + 1, diameter - 2, diameter - 2);
+					g.setColor(Color.BLACK);
+					g.drawOval((diameter * col) + 1, (diameter * row) + 1, diameter - 2, diameter - 2);
+				}
+			}
 		}
 		else {
 			//setting the color
@@ -148,11 +161,11 @@ public abstract class Player {
 	public BoardCell selectTarget(Set<BoardCell> targets, Board board) {
 		return null;
 	}
-	
+
 	public Solution createSuggestion(Board board, Room currentRoom) {
 		return null; 
 	}
-	
+
 	public boolean isComputerReady() {
 		return computerReady;
 	}
@@ -160,7 +173,7 @@ public abstract class Player {
 	public void setComputerReady(boolean computerReady) {
 		this.computerReady = computerReady;
 	}
-	
+
 	public void incrementNumTimesDrawn() {
 		this.numTimesDrawn++; 
 	}
