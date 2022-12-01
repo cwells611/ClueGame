@@ -562,6 +562,7 @@ public class Board {
 	}
 
 	public Card handleSuggestion(Player suggestingPlayer, ArrayList<Player> players, Solution solution) {
+		System.out.println("handle suggestion called");
 		//get start index
 		int startIndex = players.indexOf(suggestingPlayer);
 		String guessResult;
@@ -591,7 +592,7 @@ public class Board {
 			int playersIndex = i % players.size();
 			//checking if each player can disprove a card
 			Card disprovedCard = players.get(playersIndex).disproveSuggestion(solution.getRoom(), solution.getPerson(), solution.getWeapon());
-			System.out.println("Disproved Card = " + disprovedCard);
+			//System.out.println("Disproved Card = " + disprovedCard.getName());
 			if(disprovedCard != null) {
 				//returns the disproved card the first time it sees one
 
@@ -758,8 +759,8 @@ public class Board {
 				currentPlayerCell.setOccupied(true);
 				//if the CPU is in a room, make a suggestion
 				if(compTarget.isRoomCenter()) {
-					System.out.println( currentPlayer.getPlayerName() + " just entered a room");
-					currentPlayer.createSuggestion(theInstance, roomMap.get(compTarget.getCharacter()));
+					Solution compSuggestion = currentPlayer.createSuggestion(theInstance, roomMap.get(compTarget.getCharacter()));
+					this.handleSuggestion(currentPlayer, players, compSuggestion); 
 				}
 
 			}

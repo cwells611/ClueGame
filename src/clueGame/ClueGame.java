@@ -62,22 +62,6 @@ public class ClueGame extends JFrame {
 		//deal out cards to the players 
 		gameBoard.deal();
 		
-		System.out.println(gameBoard.getFullDeck().size());
-
-		for(Player player : gameBoard.getPlayers()) {
-			System.out.println(player.getPlayerName()+ " Hand's:");
-			for(Card card : player.getHand()) {
-				System.out.println(card.getName());
-			}
-			System.out.println();
-			System.out.println(player.getPlayerName() + " Seen List");
-			for(Card _card : player.getSeenCards()) {
-				System.out.println(_card.getName());
-			}
-			System.out.println();
-		}
-		
-		
 		//creates an instance of a ClueGame object which is a JFrame
 		ClueGame game = new ClueGame(700, 900); 
 		game.setVisible(true);
