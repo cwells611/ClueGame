@@ -712,7 +712,14 @@ public class Board {
 
 			//checking if the player is in a room
 			if(currentPlayer.canSuggest()) {
-				Solution suggestion = createHumanSuggestion();
+				Solution suggestion;;
+				if(currentPlayer == players.get(0)) {
+					suggestion = createHumanSuggestion();
+				}else {
+					Room cpuRoom = roomMap.get(currentPlayerCell.getCharacter());
+					suggestion = currentPlayer.createSuggestion(theInstance, cpuRoom);
+				}
+				
 				if(suggestion != null) {
 					Card handledCard = handleSuggestion(currentPlayer, players, suggestion);
 					System.out.println("Handled card = " + handledCard);
@@ -746,6 +753,7 @@ public class Board {
 				currentPlayerCell.setOccupied(false);
 				currentPlayer.setRow(compTarget.getRow());
 				currentPlayer.setCol(compTarget.getCol());
+				currentPlayer.setCanSuggest(true);
 				currentPlayerCell = grid[currentPlayer.getRow()][currentPlayer.getCol()]; 
 				currentPlayerCell.setOccupied(true);
 				//if the CPU is in a room, make a suggestion
