@@ -37,6 +37,52 @@ public class BoardCell{
 		adjList = new HashSet<BoardCell>(); 
 	}
 	
+	//method to allow each board cell to draw itself 
+	//parameters will be the graphics object to be able to call paint method, 
+	//the width of the cell, the height of the cell, and the offset 
+	public void draw(Graphics g, int width, int height, int xOffset, int yOffset) {
+		//with all the info the board cell needs passed in as parameters, we can just call 
+		//drawRect to draw the rectangle at the coordinates (xOffset, yOffset) with a width 
+		//of width and a height of height 
+		
+		//check for walkways and unused spaces 
+		
+		//if it is the human player's turn
+		if(Board.getInstance().getCurrentPlayer() == Board.getInstance().getHumanPlayer()) {
+			targets = Board.getInstance().getTargets();
+		}else {
+			targets = new HashSet<BoardCell>();
+		}
+		
+		
+		if(this.character ==  'W') {
+			//checking if the cell is a target cell
+			if(targets.contains(this) && !this.isOccupied) {
+				g.setColor(Color.cyan);
+			}else {
+				g.setColor(Color.yellow);
+			}
+			g.fillRect(xOffset, yOffset, width, height);
+			g.setColor(Color.black);
+			g.drawRect(xOffset, yOffset, width, height);
+		}
+		if(this.character ==  'X') {
+			g.setColor(Color.black);
+			g.fillRect(xOffset, yOffset, width, height);
+		}
+		
+		//check if its a room, have no lines between cells 
+		if(this.isRoom) {
+			currentRoom = Board.getInstance().getRoom(this);
+			if(targets.contains(currentRoom.getCenterCell())) {
+				g.setColor(Color.cyan);
+			}else {
+				g.setColor(Color.gray);
+			}
+			g.fillRect(xOffset, yOffset, width, height);
+		}
+	}
+	
 	//door getters and setters 
 	public void setDoorDirection(DoorDirection d) {
 		this.doorDirection = d;
@@ -140,51 +186,5 @@ public class BoardCell{
 
 	public boolean getOccupied() {
 		return this.isOccupied;
-	}
-	
-	//method to allow each board cell to draw itself 
-	//parameters will be the graphics object to be able to call paint method, 
-	//the width of the cell, the height of the cell, and the offset 
-	public void draw(Graphics g, int width, int height, int xOffset, int yOffset) {
-		//with all the info the board cell needs passed in as parameters, we can just call 
-		//drawRect to draw the rectangle at the coordinates (xOffset, yOffset) with a width 
-		//of width and a height of height 
-		
-		//check for walkways and unused spaces 
-		
-		//if it is the human player's turn
-		if(Board.getInstance().getCurrentPlayer() == Board.getInstance().getHumanPlayer()) {
-			targets = Board.getInstance().getTargets();
-		}else {
-			targets = new HashSet<BoardCell>();
-		}
-		
-		
-		if(this.character ==  'W') {
-			//checking if the cell is a target cell
-			if(targets.contains(this) && !this.isOccupied) {
-				g.setColor(Color.cyan);
-			}else {
-				g.setColor(Color.yellow);
-			}
-			g.fillRect(xOffset, yOffset, width, height);
-			g.setColor(Color.black);
-			g.drawRect(xOffset, yOffset, width, height);
-		}
-		if(this.character ==  'X') {
-			g.setColor(Color.black);
-			g.fillRect(xOffset, yOffset, width, height);
-		}
-		
-		//check if its a room, have no lines between cells 
-		if(this.isRoom) {
-			currentRoom = Board.getInstance().getRoom(this);
-			if(targets.contains(currentRoom.getCenterCell())) {
-				g.setColor(Color.cyan);
-			}else {
-				g.setColor(Color.gray);
-			}
-			g.fillRect(xOffset, yOffset, width, height);
-		}
 	}
 }

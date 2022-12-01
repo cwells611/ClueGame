@@ -55,10 +55,6 @@ public class GameControlPanel extends JPanel {
 		return theGCPanel;
 	}
 
-	public String test() {
-		return "test";
-	}
-
 	private JPanel upperPanel() {
 		JPanel upperPanel = new JPanel();
 		upperPanel.setLayout(new GridLayout(1, 4)); 
@@ -256,25 +252,5 @@ public class GameControlPanel extends JPanel {
 			//call appropriate methods in board
 		}
 
-	}
-
-
-	/**
-	 * Main to test the panel
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		GameControlPanel panel = GameControlPanel.getGCPanel();  // create the panel
-		JFrame frame = new JFrame();  // create the frame 
-		frame.setContentPane(panel); // put the panel in the frame
-		frame.setSize(750, 180);  // size the frame
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
-		frame.setVisible(true); // make it visible
-
-		// test filling in the data
-		panel.setTurn(new ComputerPlayer( "Col. Mustard", "orange", 0, 0), 5);
-		panel.setGuess("I have no guess!"); 
-		panel.SetGuessResult("So you have nothing?");
 	}
 }

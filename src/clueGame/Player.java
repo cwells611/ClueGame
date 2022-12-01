@@ -18,8 +18,7 @@ public abstract class Player {
 	private CardType type; 
 	private ArrayList<Card> seenCards;
 	private int playerRadius = 0; 
-	private boolean computerReady = false; 
-	private int numTimesDrawn = 0; 
+	private boolean computerReady = false;  
 	private boolean canSuggest = false;
 
 
@@ -40,63 +39,6 @@ public abstract class Player {
 		for(Card card : hand) {
 			seenCards.add(card);
 		}
-	}
-
-	public ArrayList<Card> getSeenCards() {
-		return seenCards;
-	}
-
-	public void addSeenCard(Card card) {
-		this.seenCards.add(card);
-	}
-
-	public void setCardType(CardType cardType) {
-		this.type = cardType; 
-	}
-	public CardType getCardType() {
-		return this.type; 
-	}
-
-	public String getPlayerType() {
-		return this.playerType;
-	}
-
-	public String getPlayerName() {
-		return this.name; 
-	}
-
-	public ArrayList<Card> getHand(){
-		return this.hand;
-	}
-
-	public void updateHand(Card card) {
-		hand.add(card);
-	}
-	public Color getColor() {
-		return this.color; 
-	}
-	public int getRow() {
-		return row;
-	}
-
-	public void setRow(int row) {
-		this.row = row;
-	}
-
-	public int getCol() {
-		return col;
-	}
-
-	public void setCol(int col) {
-		this.col = col;
-	}
-
-	public boolean canSuggest() {
-		return canSuggest;
-	}
-
-	public void setCanSuggest(boolean canSuggest) {
-		this.canSuggest = canSuggest;
 	}
 
 	public Card disproveSuggestion(Card room, Card person, Card weapon) {
@@ -164,6 +106,63 @@ public abstract class Player {
 		}
 	}
 
+	//Getters and Setters 
+	public ArrayList<Card> getSeenCards() {
+		return seenCards;
+	}
+
+	public void addSeenCard(Card card) {
+		this.seenCards.add(card);
+	}
+
+	public void setCardType(CardType cardType) {
+		this.type = cardType; 
+	}
+	public CardType getCardType() {
+		return this.type; 
+	}
+
+	public String getPlayerType() {
+		return this.playerType;
+	}
+
+	public String getPlayerName() {
+		return this.name; 
+	}
+
+	public ArrayList<Card> getHand(){
+		return this.hand;
+	}
+
+	public void updateHand(Card card) {
+		hand.add(card);
+	}
+	public Color getColor() {
+		return this.color; 
+	}
+	public int getRow() {
+		return row;
+	}
+
+	public void setRow(int row) {
+		this.row = row;
+	}
+
+	public int getCol() {
+		return col;
+	}
+
+	public void setCol(int col) {
+		this.col = col;
+	}
+
+	public boolean canSuggest() {
+		return canSuggest;
+	}
+
+	public void setCanSuggest(boolean canSuggest) {
+		this.canSuggest = canSuggest;
+	}
 	public BoardCell selectTarget(Set<BoardCell> targets, Board board) {
 		return null;
 	}
@@ -178,13 +177,6 @@ public abstract class Player {
 
 	public void setComputerReady(boolean computerReady) {
 		this.computerReady = computerReady;
-	}
-
-	public void incrementNumTimesDrawn() {
-		this.numTimesDrawn++; 
-	}
-	public int getNumTimesDrawn() {
-		return this.numTimesDrawn; 
 	}
 	public Solution doAccusation() {
 		return null;

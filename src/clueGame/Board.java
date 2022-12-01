@@ -29,7 +29,6 @@ public class Board {
 	private ArrayList<String> weapons; 
 	private ArrayList<Card> deck;
 	private ArrayList<Card> fullDeck; 
-	//private ArrayList<Card> solutionDeck; 
 	private char label;
 	private Room room;
 	private String playerName; 
@@ -363,28 +362,6 @@ public class Board {
 		}
 	}
 
-	public void setConfigFiles(String csvFile, String txtFile) {
-		this.layoutConfigFile = csvFile; 
-		this.setupConfigFile = txtFile; 
-	}
-
-	public Room getRoom(char Room) {
-		return roomMap.get(Room); 
-	}
-
-	public Room getRoom(BoardCell cell) {
-		char roomLabel = cell.getCharacter(); 
-		return roomMap.get(roomLabel); 
-	}
-
-	public int getNumRows() {
-		return numRows;
-	}
-
-	public int getNumColumns() {
-		return numColumns;
-	}
-
 	public BoardCell getCell(int row, int col) {
 		return grid[row][col]; 
 	}
@@ -562,7 +539,6 @@ public class Board {
 	}
 
 	public Card handleSuggestion(Player suggestingPlayer, ArrayList<Player> players, Solution solution) {
-		System.out.println("handle suggestion called");
 		//get start index
 		int startIndex = players.indexOf(suggestingPlayer);
 		String guessResult;
@@ -592,10 +568,8 @@ public class Board {
 			int playersIndex = i % players.size();
 			//checking if each player can disprove a card
 			Card disprovedCard = players.get(playersIndex).disproveSuggestion(solution.getRoom(), solution.getPerson(), solution.getWeapon());
-			//System.out.println("Disproved Card = " + disprovedCard.getName());
 			if(disprovedCard != null) {
 				//returns the disproved card the first time it sees one
-
 				if(suggestingPlayer == players.get(0)) {// if the suggesting player is the human player
 					//show the disproving card and the player it came from
 					guessResult = disprovedCard.getName() + " was disproved by " + players.get(playersIndex).getPlayerName();	
@@ -603,9 +577,7 @@ public class Board {
 					//showing that the suggestion was disproven and the player it came from
 					//not showing the card itself
 					guessResult = "suggestion disproved by " + players.get(playersIndex).getPlayerName();
-					System.out.println(guessResult);
 				}
-				//TODO draw the guess result in the appropriate color
 				GameControlPanel.getGCPanel().guessResult.setForeground(players.get(playersIndex).getColor());
 				GameControlPanel.getGCPanel().SetGuessResult(guessResult);
 				return disprovedCard;
@@ -641,51 +613,6 @@ public class Board {
 			}
 		}
 
-	}
-
-	//Player getters 
-	public int getNumHumanPlayers() {
-		return numHumanPlayers; 
-	}
-
-	public int getNumComputerPlayers() {
-		return numComputerPlayers; 
-	}
-	public ArrayList<Player> getPlayers() {
-		return players; 
-	}
-
-	//Weapon getters
-	public int getNumWeapons() {
-		return numWeapons; 
-	}
-	public ArrayList<String> getWeapons() {
-		return weapons; 
-	}
-
-	//Deck and Solution getters
-	public ArrayList<Card> getDeck() {
-		return this.deck; 
-	}
-
-	//theAnswer getters and setters
-	public Solution getTheAnswer() {
-		return theAnswer;
-	}
-	public void setTheAnswer(Solution theAnswer) {
-		this.theAnswer = theAnswer;
-	}
-	public BoardCell[][] getGrid() {
-		return grid;
-	}
-	public Set<BoardCell> getDoors() {
-		return doors;
-	}
-	public Map<Character, Room> getRoomMap() {
-		return roomMap;
-	}
-	public Player getHumanPlayer() {
-		return humanPlayer;
 	}
 
 	public int rollDie() {
@@ -727,7 +654,6 @@ public class Board {
 				
 				if(suggestion != null) {
 					Card handledCard = handleSuggestion(currentPlayer, players, suggestion);
-					System.out.println("Handled card = " + handledCard);
 					if(handledCard != null) {
 						//adding the handled card to the seen list of the player
 						currentPlayer.addSeenCard(handledCard);
@@ -829,29 +755,6 @@ public class Board {
 		}
 	}
 
-
-	public void setCurrentPlayer(Player player) {
-		this.currentPlayer = player; 
-	}
-	public Player getCurrentPlayer() {
-		// TODO Auto-generated method stub
-		return this.currentPlayer;
-	}
-	public int getRoll() {
-		// TODO Auto-generated method stub
-		return roll;
-	}
-	public boolean isHumanPlayer() {
-		return isHumanPlayer;
-	}
-
-	public boolean getClickedOnTarget() {
-		return this.clickedOnTarget; 		
-	}
-	public boolean getHumanFinished() {
-		return this.humanPlayerFinishedTurn; 		
-	}
-
 	private Solution createHumanSuggestion() {
 		// do not process if it's a computer player's turn
 		if(currentPlayer != players.get(0)) {
@@ -922,6 +825,92 @@ public class Board {
 		}
 		JOptionPane.showMessageDialog(null, "The correct solution was " + theAnswer.getRoom().getName() + " " + theAnswer.getPerson().getName() + " " + theAnswer.getWeapon().getName());
 		System.exit(0);
+	}
+	
+	//Setters and Getters 
+	public void setConfigFiles(String csvFile, String txtFile) {
+		this.layoutConfigFile = csvFile; 
+		this.setupConfigFile = txtFile; 
+	}
+
+	public Room getRoom(char Room) {
+		return roomMap.get(Room); 
+	}
+
+	public Room getRoom(BoardCell cell) {
+		char roomLabel = cell.getCharacter(); 
+		return roomMap.get(roomLabel); 
+	}
+
+	public int getNumRows() {
+		return numRows;
+	}
+
+	public int getNumColumns() {
+		return numColumns;
+	}
+	public void setCurrentPlayer(Player player) {
+		this.currentPlayer = player; 
+	}
+	public Player getCurrentPlayer() {
+		return this.currentPlayer;
+	}
+	public int getRoll() {
+		return roll;
+	}
+	public boolean isHumanPlayer() {
+		return isHumanPlayer;
+	}
+
+	public boolean getClickedOnTarget() {
+		return this.clickedOnTarget; 		
+	}
+	public boolean getHumanFinished() {
+		return this.humanPlayerFinishedTurn; 		
+	}
+	
+	//Player getters 
+	public int getNumHumanPlayers() {
+		return numHumanPlayers; 
+	}
+	public int getNumComputerPlayers() {
+		return numComputerPlayers; 
+	}
+	public ArrayList<Player> getPlayers() {
+		return players; 
+	}
+
+	//Weapon getters
+	public int getNumWeapons() {
+		return numWeapons; 
+	}
+	public ArrayList<String> getWeapons() {
+		return weapons; 
+	}
+
+	//Deck and Solution getters
+	public ArrayList<Card> getDeck() {
+		return this.deck; 
+	}
+
+	//theAnswer getters and setters
+	public Solution getTheAnswer() {
+		return theAnswer;
+	}
+	public void setTheAnswer(Solution theAnswer) {
+		this.theAnswer = theAnswer;
+	}
+	public BoardCell[][] getGrid() {
+		return grid;
+	}
+	public Set<BoardCell> getDoors() {
+		return doors;
+	}
+	public Map<Character, Room> getRoomMap() {
+		return roomMap;
+	}
+	public Player getHumanPlayer() {
+		return humanPlayer;
 	}
 }
 
