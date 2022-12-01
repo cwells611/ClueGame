@@ -106,7 +106,7 @@ public class ComputerPlayer extends Player{
 			//sets the person based on the random index
 			suggestion.setPerson(notSeen.get(randomPersonIndex));
 		}
-		GameControlPanel.getGCPanel().setGuess("I suggest that " + suggestion.getPerson() + " used a " + suggestion.getWeapon() + " in the " + suggestion.getRoom());
+		GameControlPanel.getGCPanel().setGuess("I suggest that " + suggestion.getPerson().getName() + " used a " + suggestion.getWeapon().getName() + " in the " + suggestion.getRoom().getName());
 		return suggestion; 
 	}
 

@@ -591,6 +591,7 @@ public class Board {
 			int playersIndex = i % players.size();
 			//checking if each player can disprove a card
 			Card disprovedCard = players.get(playersIndex).disproveSuggestion(solution.getRoom(), solution.getPerson(), solution.getWeapon());
+			System.out.println("Disproved Card = " + disprovedCard);
 			if(disprovedCard != null) {
 				//returns the disproved card the first time it sees one
 
@@ -601,9 +602,10 @@ public class Board {
 					//showing that the suggestion was disproven and the player it came from
 					//not showing the card itself
 					guessResult = "suggestion disproved by " + players.get(playersIndex).getPlayerName();
+					System.out.println(guessResult);
 				}
 				//TODO draw the guess result in the appropriate color
-				GameControlPanel.getGCPanel().guessResult.setBackground(players.get(playersIndex).getColor());;
+				GameControlPanel.getGCPanel().guessResult.setForeground(players.get(playersIndex).getColor());
 				GameControlPanel.getGCPanel().SetGuessResult(guessResult);
 				return disprovedCard;
 			}
@@ -614,6 +616,7 @@ public class Board {
 			//setting that the computer player is ready to make an accusation
 			suggestingPlayer.setComputerReady(true);
 		}
+		
 		GameControlPanel.getGCPanel().SetGuessResult(guessResult);
 		return null;
 	}
@@ -695,7 +698,6 @@ public class Board {
 		GameControlPanel.getGCPanel().SetGuessResult("");
 		if(humanPlayerFinishedTurn) {
 			isHumanPlayer = false;
-
 			//updating the current player
 			//making sure the current player index is not the last index
 			if(currentPlayerIdx == players.size()) {
@@ -713,6 +715,7 @@ public class Board {
 				Solution suggestion = createHumanSuggestion();
 				if(suggestion != null) {
 					Card handledCard = handleSuggestion(currentPlayer, players, suggestion);
+					System.out.println("Handled card = " + handledCard);
 					if(handledCard != null) {
 						//adding the handled card to the seen list of the player
 						currentPlayer.addSeenCard(handledCard);
