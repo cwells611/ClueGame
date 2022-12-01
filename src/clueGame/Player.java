@@ -37,6 +37,9 @@ public abstract class Player {
 		}
 		hand = new ArrayList<Card>();
 		seenCards = new ArrayList<Card>(); 
+		for(Card card : hand) {
+			seenCards.add(card);
+		}
 	}
 
 	public ArrayList<Card> getSeenCards() {
