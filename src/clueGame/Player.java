@@ -140,6 +140,9 @@ public abstract class Player {
 				//check of any of the other players are at the same location 
 				else if(this.row == player.row && this.col == player.col) { 
 					g.setColor(player.color); 
+					if(Board.getInstance().getRoom(Board.getInstance().getCell(row, col)).getCharacterCounter() > 1) {
+						playerRadius += playerRadius; 
+					}
 					g.fillOval((diameter * col) + playerRadius, (diameter * row) + 1, diameter - 2, diameter - 2);
 					g.setColor(Color.BLACK);
 					g.drawOval((diameter * col) + playerRadius, (diameter * row) + 1, diameter - 2, diameter - 2);

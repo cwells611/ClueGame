@@ -710,6 +710,10 @@ public class Board {
 			currentPlayerRow = currentPlayer.getRow();
 			currentPlayerCol = currentPlayer.getCol();
 			currentPlayerCell = grid[currentPlayerRow][currentPlayerCol];
+			
+			//setting the GUI elements in game control panel
+			//sets the new player and the roll
+			GameControlPanel.getGCPanel().setTurn(currentPlayer, roll);
 
 			//checking if the player is in a room
 			if(currentPlayer.canSuggest()) {
@@ -735,11 +739,7 @@ public class Board {
 			}
 
 			roll = rollDie();
-			calcTargets(currentPlayerCell, roll);
-
-			//setting the GUI elements in game control panel
-			//sets the new player and the roll
-			GameControlPanel.getGCPanel().setTurn(currentPlayer, roll);
+			calcTargets(currentPlayerCell, roll); 
 
 			//checking to see if the player is the human player
 			if(currentPlayer == players.get(0)) {
