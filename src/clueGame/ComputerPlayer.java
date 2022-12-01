@@ -108,7 +108,7 @@ public class ComputerPlayer extends Player{
 			//the beginning of the list and the number of people not seen
 			int randomPersonIndex = random.nextInt(numPeopleNotSeen); 
 			//sets the person based on the random index
-			suggestion.setPerson(notSeen.get(randomPersonIndex));f
+			suggestion.setPerson(notSeen.get(randomPersonIndex));
 		}
 		GameControlPanel.getGCPanel().guess.setForeground(this.getColor());
 		GameControlPanel.getGCPanel().setGuess("I suggest that " + suggestion.getPerson().getName() + " used a " + suggestion.getWeapon().getName() + " in the " + suggestion.getRoom().getName());
