@@ -112,6 +112,9 @@ public class BoardPanel extends JPanel {
 
 		//drawing the players
 		for(Player player : board.getPlayers()) {
+			if(Board.getInstance().getCell(player.getRow(), player.getCol()).getIsRoom()) {
+				Board.getInstance().getRoom(Board.getInstance().getCell(player.getRow(), player.getCol())).incrementCharacterCounter(); 
+			}
 			player.draw(g, CELL_WIDTH);
 		}
 	}
