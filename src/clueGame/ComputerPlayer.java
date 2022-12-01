@@ -42,6 +42,10 @@ public class ComputerPlayer extends Player{
 			if(card.getType() == CardType.PERSON) {
 				numPeopleSeen++; 
 			}
+			//count number of rooms seen 
+			if(card.getType() == CardType.ROOM) {
+				numRoomsSeen++;
+			}
 		}
 		//determine which cards the computer has and has not seen
 		//loop through the deck 
@@ -104,7 +108,7 @@ public class ComputerPlayer extends Player{
 			//the beginning of the list and the number of people not seen
 			int randomPersonIndex = random.nextInt(numPeopleNotSeen); 
 			//sets the person based on the random index
-			suggestion.setPerson(notSeen.get(randomPersonIndex));
+			suggestion.setPerson(notSeen.get(randomPersonIndex));f
 		}
 		GameControlPanel.getGCPanel().guess.setForeground(this.getColor());
 		GameControlPanel.getGCPanel().setGuess("I suggest that " + suggestion.getPerson().getName() + " used a " + suggestion.getWeapon().getName() + " in the " + suggestion.getRoom().getName());
@@ -157,7 +161,12 @@ public class ComputerPlayer extends Player{
 	@Override
 	public Solution doAccusation() {
 		Solution accusation = new Solution(); 
-		if(numRoomsSeen == 8 && numPeopleSeen == 5 && numWeaponsSeen == 5) {
+		notSeen = Board.getInstance().getAllCards();
+		for(Card card : this.getSeenCards()) {
+			notSeen.remove(card);
+		}
+		// if there are only 3 cards the CPU hasn't seen
+		if(notSeen.size() == 3) {
 			for(Card notSeenCard : notSeen) {
 				switch(notSeenCard.getType()) {
 				case ROOM:
